@@ -9,28 +9,75 @@ import XCTest
 @testable import KosherSwift
 
 class KosherSwiftTests: XCTestCase {
+    
+    var jewishCalendar = JewishCalendar()
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        jewishCalendar.setUseModernHolidays(bool: true)
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        jewishCalendar = JewishCalendar()
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testBoolsBeingSet() throws {
+        XCTAssertEqual(jewishCalendar.useModernHolidays, true)
+        XCTAssertEqual(jewishCalendar.isUseModernHolidays(), true)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testGregorianDateChange() {
+        jewishCalendar.setGregorianDate(year: 2023, month: 9, dayOfMonth: 25)
+        XCTAssertEqual(jewishCalendar.getGregorianYear(), 2023)
+        XCTAssertEqual(jewishCalendar.getGregorianMonth(), 9)
+        XCTAssertEqual(jewishCalendar.getGregorianDayOfMonth(), 25)
+    }
+    
+    func testHebrewDateChange() {
+        jewishCalendar.setJewishDate(year: 5784, month: JewishCalendar.TEVES, dayOfMonth: 5)
+        XCTAssertEqual(jewishCalendar.getJewishYear(), 5784)
+        XCTAssertEqual(jewishCalendar.getJewishMonth(), 4)
+        XCTAssertEqual(jewishCalendar.getJewishDayOfMonth(), 5)
+    }
+    
+    func testIsErevPesach() {
+        jewishCalendar.setJewishDate(year: 5784, month: JewishCalendar.NISSAN, dayOfMonth: 14)
+        XCTAssertEqual(jewishCalendar.getYomTovIndex(), JewishCalendar.EREV_PESACH)
+    }
+    
+    func testIsPesach() {
+        jewishCalendar.setJewishDate(year: 5784, month: JewishCalendar.NISSAN, dayOfMonth: 15)
+        XCTAssertEqual(jewishCalendar.isPesach(), true)
+    }
+    
+    func testInternalHebrewCalendarMonths() {
+        var arrayOfHebrewMonthsLeapYear = [8,9,10,11,12,13,1,2,3,4,5,6,7]
+        jewishCalendar.setJewishDate(year: 5784, month: JewishCalendar.TISHREI, dayOfMonth: 1)//leap year
+        while jewishCalendar.getJewishYear() == 5784 {
+            XCTAssertEqual(arrayOfHebrewMonthsLeapYear.contains(jewishCalendar.getJewishMonth()), true)
+            jewishCalendar.forward()
         }
+        
+        var arrayOfHebrewMonths = [8,9,10,11,12,13,1,2,3,4,5,7]//ADAR is skipped on non leap years
+        jewishCalendar.setJewishDate(year: 5783, month: JewishCalendar.TISHREI, dayOfMonth: 1)
+        while jewishCalendar.getJewishYear() == 5783 {
+            XCTAssertEqual(arrayOfHebrewMonths.contains(jewishCalendar.getJewishMonth()), true)
+            jewishCalendar.forward()
+        }
+
     }
+    
+    func testAdarInNonLeapYears() {
+        jewishCalendar.setJewishDate(year: 5783, month: JewishCalendar.ADAR, dayOfMonth: 1)
+        XCTAssertEqual(jewishCalendar.getJewishMonth(), 7)
+        //Test will return 7 even though adar is 6 since adar II is used instead on non leap years
+    }
+
+//    func testPerformanceExample() throws {
+//        // This is an example of a performance test case.
+//        self.measure {
+//            // Put the code you want to measure the time of here.
+//        }
+//    }
 
 }

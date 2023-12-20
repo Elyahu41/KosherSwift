@@ -1,6 +1,6 @@
 # ``KosherSwift``
 
-<!--@START_MENU_TOKEN@-->Summary<!--@END_MENU_TOKEN@-->
+KosherJava Zmanim API / Library ported to Swift. KosherJava is a library used to calculate astronomical and religious dates and times based on your location.
 
 ## Overview
 
