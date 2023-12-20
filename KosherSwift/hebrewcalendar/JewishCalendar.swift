@@ -2,12 +2,22 @@
 //  JewishCalendar.swift
 //  KosherSwift
 //
-//  Created by User on 12/19/23.
+//  Created by Elyahu Jacobi on 12/19/23.
 //
 
 import Foundation
 
-class JewishCalendar {
+/**
+ This class is a recreated port of KosherJava's JewishCalendar class. Note how not every method could be ported over as I have decided to rely on the built in hebrew calendar in swift. However, most methods that are not too technical are available. Most notably, the hebrew months are in a different order in swift, and the swift calendar class does not remember time itself, it just contains tools to create new dates. Therefore, the working date is the main basis for this classes day calculations. This calendar is not time sensitive, just date sensitive.
+ 
+ * This open source Java code was originally ported by <a href="http://www.facebook.com/avromf">Avrom Finkelstien</a> from his C++ code. It was refactored to fit the KosherJava Zmanim API with simplification of the code, enhancements and some bug fixing. The class allows setting whether the holiday and <em>parsha</em> scheme follows the Israel scheme or outside Israel scheme. The default is the outside Israel scheme.
+ * The parsha code was ported by Y. Paritcher from his <a href="https://github.com/yparitcher/libzmanim">libzmanim</a> code.
+ * @author &copy; Y. Paritcher 2019 - 2022
+ * @author &copy; Avrom Finkelstien 2002
+ * @author &copy; Eliyahu Hershfeld 2011 - 2023
+ * @author &copy; Elyahu Jacobi 2023
+ */
+public class JewishCalendar {
     
     /**
      * In Swift the value for the month of Nissan is always 8 as swift uses Tishrei as the 1st month.

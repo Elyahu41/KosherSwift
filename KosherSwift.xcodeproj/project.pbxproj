@@ -11,6 +11,7 @@
 		CE278A272B338C6200A692AC /* Daf.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE278A262B338C6200A692AC /* Daf.swift */; };
 		CE278A292B338C8900A692AC /* YomiCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE278A282B338C8900A692AC /* YomiCalculator.swift */; };
 		CE278A2B2B338C9E00A692AC /* YerushalmiYomiCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE278A2A2B338C9E00A692AC /* YerushalmiYomiCalculator.swift */; };
+		CE278A2D2B339C5900A692AC /* TefilaRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE278A2C2B339C5900A692AC /* TefilaRules.swift */; };
 		CEDE8FB32B3272B700D74115 /* KosherSwift.docc in Sources */ = {isa = PBXBuildFile; fileRef = CEDE8FB22B3272B700D74115 /* KosherSwift.docc */; };
 		CEDE8FB92B3272B700D74115 /* KosherSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDE8FAE2B3272B700D74115 /* KosherSwift.framework */; };
 		CEDE8FBE2B3272B700D74115 /* KosherSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE8FBD2B3272B700D74115 /* KosherSwiftTests.swift */; };
@@ -33,6 +34,7 @@
 		CE278A262B338C6200A692AC /* Daf.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daf.swift; sourceTree = "<group>"; };
 		CE278A282B338C8900A692AC /* YomiCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiCalculator.swift; sourceTree = "<group>"; };
 		CE278A2A2B338C9E00A692AC /* YerushalmiYomiCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YerushalmiYomiCalculator.swift; sourceTree = "<group>"; };
+		CE278A2C2B339C5900A692AC /* TefilaRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TefilaRules.swift; sourceTree = "<group>"; };
 		CEDE8FAE2B3272B700D74115 /* KosherSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KosherSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDE8FB12B3272B700D74115 /* KosherSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KosherSwift.h; sourceTree = "<group>"; };
 		CEDE8FB22B3272B700D74115 /* KosherSwift.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = KosherSwift.docc; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				CE278A262B338C6200A692AC /* Daf.swift */,
 				CE278A282B338C8900A692AC /* YomiCalculator.swift */,
 				CE278A2A2B338C9E00A692AC /* YerushalmiYomiCalculator.swift */,
+				CE278A2C2B339C5900A692AC /* TefilaRules.swift */,
 			);
 			path = hebrewcalendar;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				CE278A292B338C8900A692AC /* YomiCalculator.swift in Sources */,
 				CE278A2B2B338C9E00A692AC /* YerushalmiYomiCalculator.swift in Sources */,
 				CEDE8FB32B3272B700D74115 /* KosherSwift.docc in Sources */,
+				CE278A2D2B339C5900A692AC /* TefilaRules.swift in Sources */,
 				CEDE8FCF2B327BED00D74115 /* JewishCalendar.swift in Sources */,
 				CE278A272B338C6200A692AC /* Daf.swift in Sources */,
 			);

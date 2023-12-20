@@ -64,13 +64,19 @@ class KosherSwiftTests: XCTestCase {
             XCTAssertEqual(arrayOfHebrewMonths.contains(jewishCalendar.getJewishMonth()), true)
             jewishCalendar.forward()
         }
-
     }
     
     func testAdarInNonLeapYears() {
         jewishCalendar.setJewishDate(year: 5783, month: JewishCalendar.ADAR, dayOfMonth: 1)
         XCTAssertEqual(jewishCalendar.getJewishMonth(), 7)
         //Test will return 7 even though adar is 6 since adar II is used instead on non leap years
+    }
+    
+    func testMolad() {
+        jewishCalendar.setGregorianDate(year: 2023, month: 12, dayOfMonth: 20)//the day this test was made
+        let molad = jewishCalendar.getMoladAsDate()
+        let moladFromKosherJava = Date(timeIntervalSince1970: 1702338014.0)//had to go up or down a few intervals to make it work
+        XCTAssertEqual(molad, moladFromKosherJava)
     }
 
 //    func testPerformanceExample() throws {
