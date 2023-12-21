@@ -10,6 +10,6 @@ import Foundation
 class YerushalmiYomiCalculator {
     
     public static func getDafYomiYerushalmi(jewishCalendar:JewishCalendar) -> Daf {
-        return Daf()
+        return Daf(masechtaNumber: 0, daf: 0)
     }
 }
