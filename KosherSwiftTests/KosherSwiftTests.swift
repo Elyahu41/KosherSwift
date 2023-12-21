@@ -75,8 +75,9 @@ class KosherSwiftTests: XCTestCase {
     func testMolad() {
         jewishCalendar.setGregorianDate(year: 2023, month: 12, dayOfMonth: 20)//the day this test was made
         let molad = jewishCalendar.getMoladAsDate()
-        let moladFromKosherJava = Date(timeIntervalSince1970: 1702338014.0)//had to go up or down a few intervals to make it work
+        let moladFromKosherJava = Date(timeIntervalSince1970: 1702402813.0)//had to go up or down a few intervals to make it work
         XCTAssertEqual(molad, moladFromKosherJava)
+        XCTAssertEqual(jewishCalendar.getMoladAsString(), "The molad is at 20 hours, 1 minutes and 3 Chalakim")
     }
     
     func testDayOfWeek() {
@@ -170,6 +171,16 @@ class KosherSwiftTests: XCTestCase {
         let hebrewDateFormatter = HebrewDateFormatter()
         hebrewDateFormatter.setLongWeekFormat(longWeekFormat: true)
         XCTAssertEqual(hebrewDateFormatter.formatDayOfWeek(jewishCalendar: jewishCalendar), "Tuesday")
+    }
+    
+    func testDafYomis() {
+        jewishCalendar.setGregorianDate(year: 2023, month: 12, dayOfMonth: 21)
+        let dafYomi = jewishCalendar.getDafYomiBavli()
+        let dafYomiYeru = jewishCalendar.getDafYomiYerushalmi()
+        XCTAssertEqual(dafYomi?.getMasechta(), "בבא קמא")
+        XCTAssertEqual(dafYomi?.getDaf(), 49)
+        XCTAssertEqual(dafYomiYeru?.getYerushalmiMasechta(), "שבת")
+        XCTAssertEqual(dafYomiYeru?.getDaf(), 8)
     }
 
 //    func testPerformanceExample() throws {

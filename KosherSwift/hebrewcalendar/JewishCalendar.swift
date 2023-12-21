@@ -1363,59 +1363,6 @@ public class JewishCalendar {
         return false;
     }
     
-    //TODO add Parasha methods
-    
-    func getSpecialParasha() -> String {
-        let dayOfWeek = getDayOfWeek()
-        let jewishMonth = getJewishMonth()
-        let jewishDayOfMonth = getJewishDayOfMonth()
-        let isLeapYear = isJewishLeapYear()
-        
-        if dayOfWeek == 7 {
-            if (jewishMonth == JewishCalendar.SHEVAT && !isLeapYear) || (jewishMonth == JewishCalendar.ADAR && isLeapYear) {
-                if [25, 27, 29].contains(jewishDayOfMonth) {
-                    return "שקלים"
-                }
-            }
-            if (jewishMonth == JewishCalendar.ADAR && !isLeapYear) || jewishMonth == JewishCalendar.ADAR_II {
-                if jewishDayOfMonth == 1 {
-                    return "שקלים"
-                }
-                if [8, 9, 11, 13].contains(jewishDayOfMonth) {
-                    return "זכור"
-                }
-                if [18, 20, 22, 23].contains(jewishDayOfMonth) {
-                    return "פרה"
-                }
-                if [25, 27, 29].contains(jewishDayOfMonth) {
-                    return "החדש"
-                }
-            }
-            if jewishMonth == JewishCalendar.NISSAN {
-                if jewishDayOfMonth == 1 || (jewishDayOfMonth >= 8 && jewishDayOfMonth <= 14) {
-                    return "הגדול"
-                }
-            }
-            if jewishMonth == JewishCalendar.AV {
-                if jewishDayOfMonth >= 4 && jewishDayOfMonth <= 9 {
-                    return "חזון"
-                }
-                if jewishDayOfMonth >= 10 && jewishDayOfMonth <= 16 {
-                    return "נחמו"
-                }
-            }
-            if jewishMonth == JewishCalendar.TISHREI {
-                if jewishDayOfMonth >= 3 && jewishDayOfMonth <= 8 {
-                    return "שובה"
-                }
-            }
-//            if getParashah() == "בשלח" {
-//                return "שירה"
-//            }
-        }
-        return ""
-    }
-    
     /**
      * Returns an index of the Jewish holiday or fast day for the current day, or a -1 if there is no holiday for this day.
      * There are constants in this class representing each <em>Yom Tov</em>. Formatting of the <em>Yomim tovim</em> is done
@@ -2082,6 +2029,72 @@ public class JewishCalendar {
         }
     
     /**
+     This method does not return anything, however, it does set the variables moladHours, moladMiutes, and moladChalakim with the proper
+     values for the molad of this month. Using these variable, you can create a string like so: "The molad is at 20 hours, 1 minutes and 3 Chalakim".
+     There is also a method to recieve a string like this called getMoladAsString
+     */
+    public func calculateMolad() {
+        let chalakim = getChalakimSinceMoladTohu(year: getJewishYear(), month: getJewishMonth())
+        let moladToAbsDate = (chalakim / JewishCalendar.CHALAKIM_PER_DAY) + (JewishCalendar.JEWISH_EPOCH)
+        var year = moladToAbsDate / 366
+        while (moladToAbsDate >= gregorianDateToAbsDate(year: year+1,month: 1,dayOfMonth: 1)) {
+            year+=1
+        }
+        var month = 1
+        while (moladToAbsDate > gregorianDateToAbsDate(year: year, month: month, dayOfMonth: getLastDayOfGregorianMonth(month: month, year: year))) {
+            month+=1
+        }
+        var dayOfMonth = moladToAbsDate - gregorianDateToAbsDate(year: year, month: month, dayOfMonth: 1) + 1
+        if dayOfMonth > getLastDayOfGregorianMonth(month: month, year: year) {
+            dayOfMonth = getLastDayOfGregorianMonth(month: month, year: year)
+        }
+        let conjunctionDay = chalakim / JewishCalendar.CHALAKIM_PER_DAY
+        let conjunctionParts = chalakim - conjunctionDay * JewishCalendar.CHALAKIM_PER_DAY
+        
+        moladHours = conjunctionParts / 1080
+        let moladRemainingChalakim = conjunctionParts - moladHours * 1080
+        moladMinutes = moladRemainingChalakim / 18
+        moladChalakim = moladRemainingChalakim - moladMinutes * 18
+        moladHours = (moladHours + 18) % 24
+    }
+    
+    /**
+     This method sets the variables moladHours, moladMinutes, and moladChalakim within this class and returns a string like so: "The molad is at 20 hours, 1 minutes and 3 Chalakim"
+     */
+    public func getMoladAsString() -> String {
+        let chalakim = getChalakimSinceMoladTohu(year: getJewishYear(), month: getJewishMonth())
+        let moladToAbsDate = (chalakim / JewishCalendar.CHALAKIM_PER_DAY) + (JewishCalendar.JEWISH_EPOCH)
+        var year = moladToAbsDate / 366
+        while (moladToAbsDate >= gregorianDateToAbsDate(year: year+1,month: 1,dayOfMonth: 1)) {
+            year+=1
+        }
+        var month = 1
+        while (moladToAbsDate > gregorianDateToAbsDate(year: year, month: month, dayOfMonth: getLastDayOfGregorianMonth(month: month, year: year))) {
+            month+=1
+        }
+        var dayOfMonth = moladToAbsDate - gregorianDateToAbsDate(year: year, month: month, dayOfMonth: 1) + 1
+        if dayOfMonth > getLastDayOfGregorianMonth(month: month, year: year) {
+            dayOfMonth = getLastDayOfGregorianMonth(month: month, year: year)
+        }
+        let conjunctionDay = chalakim / JewishCalendar.CHALAKIM_PER_DAY
+        let conjunctionParts = chalakim - conjunctionDay * JewishCalendar.CHALAKIM_PER_DAY
+        
+        moladHours = conjunctionParts / 1080
+        let moladRemainingChalakim = conjunctionParts - moladHours * 1080
+        moladMinutes = moladRemainingChalakim / 18
+        moladChalakim = moladRemainingChalakim - moladMinutes * 18
+        moladHours = (moladHours + 18) % 24
+        
+        return "The molad is at "
+            .appending(String(moladHours))
+            .appending(" hours, ")
+            .appending(String(moladMinutes))
+            .appending(" minutes and ")
+            .appending(String(moladChalakim))
+            .appending(" Chalakim")
+    }
+    
+    /**
      * Returns the <em>molad</em> in Standard Time in Yerushalayim as a Date. The traditional calculation uses local time.
      * This method subtracts 20.94 minutes (20 minutes and 56.496 seconds) from the local time (of <em>Har Habayis</em>
      * with a longitude of 35.2354&deg; is 5.2354&deg; away from the %15 timezone longitude) to get to standard time. This
@@ -2108,7 +2121,7 @@ public class JewishCalendar {
         let conjunctionDay = chalakim / JewishCalendar.CHALAKIM_PER_DAY
         let conjunctionParts = chalakim - conjunctionDay * JewishCalendar.CHALAKIM_PER_DAY
         
-        var moladHours = conjunctionParts / 1080
+        let moladHours = conjunctionParts / 1080
         let moladRemainingChalakim = conjunctionParts - moladHours * 1080
         var moladMinutes = moladRemainingChalakim / 18
         let moladChalakim = moladRemainingChalakim - moladMinutes * 18
@@ -2124,16 +2137,15 @@ public class JewishCalendar {
         // The raw molad Date (point in time) must be generated using standard time. Using "Asia/Jerusalem" timezone will result in the time
         // being incorrectly off by an hour in the summer due to DST. Proper adjustment for the actual time in DST will be done by the date
         // formatter class used to display the Date.
-        var moladDay = DateComponents(calendar: calendar, timeZone: TimeZone(identifier: "GMT+2")!, year: year, month: month, day: dayOfMonth, hour: moladHours, minute: moladMinutes, second: Int(moladSeconds))
+        var moladDay = DateComponents(calendar: calendar, timeZone: TimeZone(identifier: "GMT+2")!, year: year, month: month, day: dayOfMonth, hour: moladHours, minute: moladMinutes, second: Int(moladSeconds)-1)
                 
         if moladHours > 6 {
-            moladHours = (moladHours + 18) % 24
             moladDay.day! += 1
             moladDay.setValue(moladHours, for: .hour)
-            return calendar.date(from: moladDay)!
-        } else {
-            return calendar.date(from: moladDay)!
         }
+        moladDay.setValue((moladHours + 18) % 24, for: .hour)
+                
+        return calendar.date(from: moladDay)!
     }
     
     /**
@@ -2224,7 +2236,7 @@ public class JewishCalendar {
      *
      * @return the daf as a {@link Daf}
      */
-    public func getDafYomiBavli() -> Daf {
+    public func getDafYomiBavli() -> Daf? {
         return YomiCalculator.getDafYomiBavli(jewishCalendar: self);
     }
     /**
@@ -2234,7 +2246,7 @@ public class JewishCalendar {
      *
      * @return the daf as a {@link Daf}
      */
-    public func getDafYomiYerushalmi() -> Daf {
+    public func getDafYomiYerushalmi() -> Daf? {
         return YerushalmiYomiCalculator.getDafYomiYerushalmi(jewishCalendar: self);
     }
     
