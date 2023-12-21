@@ -388,8 +388,8 @@ public class JewishCalendar {
         };
     
     /**
-         * An array of <em>parshiyos</em> in the 17 possible combinations.
-         */
+     An array of <em>parshiyos</em> in the 17 possible combinations.
+    */
     public static let parshalist = [
             [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
             [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NONE, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS_BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
@@ -544,7 +544,7 @@ public class JewishCalendar {
             } else {
                 clone.forward()
             }
-            while(clone.getParshah() == .NONE) { //Yom Kippur / Sukkos or Pesach with 2 potential non-parsha Shabbosim in a row
+            while (clone.getParshah() == .NONE) { //Yom Kippur / Sukkos or Pesach with 2 potential non-parsha Shabbosim in a row
                 clone.forward()
             }
             return clone.getParshah();
@@ -606,7 +606,7 @@ public class JewishCalendar {
                     }
                     
                 }
-                if(getParshah() == Parsha.BESHALACH) {
+                if (getParshah() == Parsha.BESHALACH) {
                     return Parsha.SHIRA;
                 }
             }
@@ -684,7 +684,7 @@ public class JewishCalendar {
     }
     
     /**
-     * The internal date object that all the calculations are dependant on. Change this date to effect all the other methods of the class.
+     * The internal date object that all the calculations are dependant on. Change this date to effect all the other methods of the class. By default the date is set to the system's current time.
      */
     var workingDate:Date = Date()
     
@@ -709,9 +709,7 @@ public class JewishCalendar {
         workingDate = workingDate.advanced(by: -86400)
     }
     
-    init() {
-        workingDate = Date()
-    }
+    init() {}
     
     /**
      * A constructor that initializes the date to the Date parameter. useModernHolidays and inIsrael will be set to false
@@ -1126,7 +1124,7 @@ public class JewishCalendar {
      * @see #isCheshvanLong()
      * @see #isKislevShort()
      */
-    public func getCheshvanKislevKviah() -> Int{
+    public func getCheshvanKislevKviah() -> Int {
         if (isCheshvanLong() && !isKislevShort()) {
             return JewishCalendar.SHELAIMIM;
         } else if (!isCheshvanLong() && isKislevShort()) {
@@ -1137,15 +1135,15 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns the last month of a given Jewish year. This will be 12 on a non {@link #isJewishLeapYear(int) leap year}
-     * or 13 on a leap year.
+     * Returns the last month of a given Jewish year. This will be 6 on a non {@link #isJewishLeapYear(int) leap year}
+     * or 7 on a leap year.
      *
      * @param year
      *            the Jewish year.
-     * @return 12 on a non leap year or 13 on a leap year
+     * @return 6 on a non leap year or 7 on a leap year
      * @see #isJewishLeapYear(int)
      */
-    private func getLastMonthOfJewishYear(year:Int) -> Int{
+    private func getLastMonthOfJewishYear(year:Int) -> Int {
         return isJewishLeapYear(year: year) ? JewishCalendar.ADAR_II : JewishCalendar.ADAR;
     }
     
@@ -1235,7 +1233,7 @@ public class JewishCalendar {
      *         Jewish year. BeHaRaD is 23:11:20 on Sunday night(5 hours 204/1080 chalakim after sunset on Sunday
      *         evening).
      */
-    public func getJewishCalendarElapsedDays(year:Int) -> Int{
+    public func getJewishCalendarElapsedDays(year:Int) -> Int {
         // The number of chalakim (25,920) in a 24 hour day.
         let CHALAKIM_PER_DAY: Int = 25920 // 24 * 1080
         let chalakimSince = getChalakimSinceMoladTohu(year: year, month: JewishCalendar.TISHREI)
@@ -2001,7 +1999,7 @@ public class JewishCalendar {
          *
          * @return The <em>Omer</em> count as an int or -1 if it is not a day of the <em>Omer</em>.
          */
-        public func getDayOfOmer() -> Int{
+        public func getDayOfOmer() -> Int {
             var omer = -1; // not a day of the Omer
             let month = getJewishMonth();
             let day = getJewishDayOfMonth();
