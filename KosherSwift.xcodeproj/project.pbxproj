@@ -12,6 +12,16 @@
 		CE278A292B338C8900A692AC /* YomiCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE278A282B338C8900A692AC /* YomiCalculator.swift */; };
 		CE278A2B2B338C9E00A692AC /* YerushalmiYomiCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE278A2A2B338C9E00A692AC /* YerushalmiYomiCalculator.swift */; };
 		CE278A2D2B339C5900A692AC /* TefilaRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE278A2C2B339C5900A692AC /* TefilaRules.swift */; };
+		CE4E71112B34F79D007D6BC6 /* AstronomicalCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E71102B34F79D007D6BC6 /* AstronomicalCalendar.swift */; };
+		CE4E71132B34F7CA007D6BC6 /* ZmanimCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E71122B34F7CA007D6BC6 /* ZmanimCalendar.swift */; };
+		CE4E71152B34F7DD007D6BC6 /* ComplexZmanimCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E71142B34F7DD007D6BC6 /* ComplexZmanimCalendar.swift */; };
+		CE4E71182B34F82C007D6BC6 /* AstronomicalCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E71172B34F82C007D6BC6 /* AstronomicalCalculator.swift */; };
+		CE4E711A2B34F839007D6BC6 /* NOAACalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E71192B34F839007D6BC6 /* NOAACalculator.swift */; };
+		CE4E711C2B34F855007D6BC6 /* GeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E711B2B34F855007D6BC6 /* GeoLocation.swift */; };
+		CE4E711E2B34F8E4007D6BC6 /* SunTimesCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E711D2B34F8E4007D6BC6 /* SunTimesCalculator.swift */; };
+		CE4E71202B34F913007D6BC6 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E711F2B34F913007D6BC6 /* Time.swift */; };
+		CE4E71222B34F91D007D6BC6 /* Zman.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E71212B34F91D007D6BC6 /* Zman.swift */; };
+		CE4E71242B34F930007D6BC6 /* ZmanimFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E71232B34F930007D6BC6 /* ZmanimFormatter.swift */; };
 		CEDE8FB32B3272B700D74115 /* KosherSwift.docc in Sources */ = {isa = PBXBuildFile; fileRef = CEDE8FB22B3272B700D74115 /* KosherSwift.docc */; };
 		CEDE8FB92B3272B700D74115 /* KosherSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDE8FAE2B3272B700D74115 /* KosherSwift.framework */; };
 		CEDE8FBE2B3272B700D74115 /* KosherSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE8FBD2B3272B700D74115 /* KosherSwiftTests.swift */; };
@@ -35,6 +45,16 @@
 		CE278A282B338C8900A692AC /* YomiCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YomiCalculator.swift; sourceTree = "<group>"; };
 		CE278A2A2B338C9E00A692AC /* YerushalmiYomiCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YerushalmiYomiCalculator.swift; sourceTree = "<group>"; };
 		CE278A2C2B339C5900A692AC /* TefilaRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TefilaRules.swift; sourceTree = "<group>"; };
+		CE4E71102B34F79D007D6BC6 /* AstronomicalCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstronomicalCalendar.swift; sourceTree = "<group>"; };
+		CE4E71122B34F7CA007D6BC6 /* ZmanimCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZmanimCalendar.swift; sourceTree = "<group>"; };
+		CE4E71142B34F7DD007D6BC6 /* ComplexZmanimCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplexZmanimCalendar.swift; sourceTree = "<group>"; };
+		CE4E71172B34F82C007D6BC6 /* AstronomicalCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AstronomicalCalculator.swift; sourceTree = "<group>"; };
+		CE4E71192B34F839007D6BC6 /* NOAACalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOAACalculator.swift; sourceTree = "<group>"; };
+		CE4E711B2B34F855007D6BC6 /* GeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocation.swift; sourceTree = "<group>"; };
+		CE4E711D2B34F8E4007D6BC6 /* SunTimesCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunTimesCalculator.swift; sourceTree = "<group>"; };
+		CE4E711F2B34F913007D6BC6 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
+		CE4E71212B34F91D007D6BC6 /* Zman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zman.swift; sourceTree = "<group>"; };
+		CE4E71232B34F930007D6BC6 /* ZmanimFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZmanimFormatter.swift; sourceTree = "<group>"; };
 		CEDE8FAE2B3272B700D74115 /* KosherSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KosherSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDE8FB12B3272B700D74115 /* KosherSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KosherSwift.h; sourceTree = "<group>"; };
 		CEDE8FB22B3272B700D74115 /* KosherSwift.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = KosherSwift.docc; sourceTree = "<group>"; };
@@ -75,6 +95,20 @@
 			path = hebrewcalendar;
 			sourceTree = "<group>";
 		};
+		CE4E71162B34F804007D6BC6 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				CE4E71172B34F82C007D6BC6 /* AstronomicalCalculator.swift */,
+				CE4E71192B34F839007D6BC6 /* NOAACalculator.swift */,
+				CE4E711B2B34F855007D6BC6 /* GeoLocation.swift */,
+				CE4E711D2B34F8E4007D6BC6 /* SunTimesCalculator.swift */,
+				CE4E711F2B34F913007D6BC6 /* Time.swift */,
+				CE4E71212B34F91D007D6BC6 /* Zman.swift */,
+				CE4E71232B34F930007D6BC6 /* ZmanimFormatter.swift */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
 		CEDE8FA42B3272B700D74115 = {
 			isa = PBXGroup;
 			children = (
@@ -97,8 +131,12 @@
 			isa = PBXGroup;
 			children = (
 				CE278A232B338A4C00A692AC /* hebrewcalendar */,
+				CE4E71162B34F804007D6BC6 /* util */,
 				CEDE8FB12B3272B700D74115 /* KosherSwift.h */,
 				CEDE8FB22B3272B700D74115 /* KosherSwift.docc */,
+				CE4E71102B34F79D007D6BC6 /* AstronomicalCalendar.swift */,
+				CE4E71122B34F7CA007D6BC6 /* ZmanimCalendar.swift */,
+				CE4E71142B34F7DD007D6BC6 /* ComplexZmanimCalendar.swift */,
 			);
 			path = KosherSwift;
 			sourceTree = "<group>";
@@ -222,10 +260,20 @@
 			files = (
 				CE278A252B338BFE00A692AC /* HebrewDateFormatter.swift in Sources */,
 				CE278A292B338C8900A692AC /* YomiCalculator.swift in Sources */,
+				CE4E71152B34F7DD007D6BC6 /* ComplexZmanimCalendar.swift in Sources */,
 				CE278A2B2B338C9E00A692AC /* YerushalmiYomiCalculator.swift in Sources */,
+				CE4E71242B34F930007D6BC6 /* ZmanimFormatter.swift in Sources */,
+				CE4E71112B34F79D007D6BC6 /* AstronomicalCalendar.swift in Sources */,
+				CE4E711E2B34F8E4007D6BC6 /* SunTimesCalculator.swift in Sources */,
+				CE4E71132B34F7CA007D6BC6 /* ZmanimCalendar.swift in Sources */,
 				CEDE8FB32B3272B700D74115 /* KosherSwift.docc in Sources */,
 				CE278A2D2B339C5900A692AC /* TefilaRules.swift in Sources */,
+				CE4E711C2B34F855007D6BC6 /* GeoLocation.swift in Sources */,
+				CE4E711A2B34F839007D6BC6 /* NOAACalculator.swift in Sources */,
+				CE4E71222B34F91D007D6BC6 /* Zman.swift in Sources */,
 				CEDE8FCF2B327BED00D74115 /* JewishCalendar.swift in Sources */,
+				CE4E71202B34F913007D6BC6 /* Time.swift in Sources */,
+				CE4E71182B34F82C007D6BC6 /* AstronomicalCalculator.swift in Sources */,
 				CE278A272B338C6200A692AC /* Daf.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

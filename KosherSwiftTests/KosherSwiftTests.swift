@@ -182,6 +182,16 @@ class KosherSwiftTests: XCTestCase {
         XCTAssertEqual(dafYomiYeru?.getYerushalmiMasechta(), "שבת")
         XCTAssertEqual(dafYomiYeru?.getDaf(), 8)
     }
+    
+    func testSunrise() {
+        let geoLocaion = GeoLocation(locationName: "Denver, CO", latitude: 39.624004100000001, longitude: -104.87095119999999, elevation: 1721.3333333333, timeZone: TimeZone.current)
+        let astronomicalCalendar = AstronomicalCalendar(geoLocation: geoLocaion)
+        let formatter = DateFormatter()
+        formatter.timeStyle = .full
+        print(formatter.string(from: astronomicalCalendar.getSeaLevelSunrise()!))
+        print(formatter.string(from: astronomicalCalendar.getSeaLevelSunset()!))
+        //XCTAssertEqual(astronomicalCalendar.getSeaLevelSunrise(), Date())
+    }
 
 //    func testPerformanceExample() throws {
 //        // This is an example of a performance test case.
