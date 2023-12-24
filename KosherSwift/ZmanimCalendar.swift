@@ -1104,8 +1104,8 @@ public class ZmanimCalendar : AstronomicalCalendar {
      *         {@link AstronomicalCalendar} documentation.
      */
     public func getShaahZmanisBasedZman(startOfDay:Date?, endOfDay:Date?, hours:Double) -> Date? {
-        let shaahZmanis = getTemporalHour(startOfDay: startOfDay, endOfDay: endOfDay);
-        return ZmanimCalendar.getTimeOffset(time: startOfDay, offset: shaahZmanis * Int64(hours));
+        let shaahZmanis = Double(getTemporalHour(startOfDay: startOfDay, endOfDay: endOfDay));
+        return ZmanimCalendar.getTimeOffset(time: startOfDay, offset: shaahZmanis * Double(hours));
     }
     
     /**
