@@ -33,6 +33,20 @@ class KosherSwiftTests: XCTestCase {
         XCTAssertEqual(jewishCalendar.getGregorianDayOfMonth(), 25)
     }
     
+    func testGregorianDateChangeWithTimzone() {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "America/New_York")!
+        var comp = DateComponents()
+        comp.setValue(2023, for: .year)
+        comp.setValue(12, for: .month)
+        comp.setValue(24, for: .day)
+        jewishCalendar.workingDate = calendar.date(from: comp)!
+        jewishCalendar.timeZone = TimeZone(identifier: "America/New_York")!
+        XCTAssertEqual(jewishCalendar.getGregorianYear(), 2023)
+        XCTAssertEqual(jewishCalendar.getGregorianMonth(), 12)
+        XCTAssertEqual(jewishCalendar.getGregorianDayOfMonth(), 24)
+    }
+    
     func testHebrewDateChange() {
         jewishCalendar.setJewishDate(year: 5784, month: JewishCalendar.TEVES, dayOfMonth: 5)
         XCTAssertEqual(jewishCalendar.getJewishYear(), 5784)

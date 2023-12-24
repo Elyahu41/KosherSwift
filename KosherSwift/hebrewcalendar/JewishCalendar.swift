@@ -684,9 +684,14 @@ public class JewishCalendar {
     }
     
     /**
-     * The internal date object that all the calculations are dependant on. Change this date to effect all the other methods of the class. By default the date is set to the system's current time.
+     * The internal date object that all the calculations are dependant on. Change this date to effect all the other methods of the class. By default the date is set to the system's current time with the system's current timezone.
      */
     var workingDate:Date = Date()
+    
+    /**
+     * By default the date is set to the system's current time with the system's current timezone. However, if you are using this class for a working date in another time zone. You must set the timezone as well as the date can change.
+     */
+    var timeZone:TimeZone = TimeZone.current
     
     /**
      * Resets this date to the current system date.
@@ -722,6 +727,17 @@ public class JewishCalendar {
     }
     
     /**
+     * A constructor that initializes the date to the Date parameter. useModernHolidays and inIsrael will be set to false
+     *
+     * @param date
+     *            the <code>Date</code> to set the calendar to
+     */
+    init(workingDate:Date, timezone:TimeZone) {
+        self.workingDate = workingDate
+        self.timeZone = timezone
+    }
+    
+    /**
      * A constructor that initializes the date to the Date parameter.
      *
      * @param date the <code>Date</code> to set the calendar to
@@ -735,6 +751,20 @@ public class JewishCalendar {
     }
     
     /**
+     * A constructor that initializes the date to the Date parameter.
+     *
+     * @param date the <code>Date</code> to set the calendar to
+     * @param inIsrael a bool to determine whether or not the methods should use in Israel calculations
+     * @param shouldUseModernHolidays a bool to determine to use modern holidays in the methods or not
+     */
+    init(workingDate:Date, timezone:TimeZone, inIsrael:Bool, useModernHolidays:Bool) {
+        self.workingDate = workingDate
+        self.inIsrael = inIsrael
+        self.useModernHolidays = useModernHolidays
+        self.timeZone = timezone
+    }
+    
+    /**
      * A constructor that initializes the date to the Date parameter. useModernHolidays and inIsrael will be set to false
      *
      * @param date the <code>Date</code> to set the calendar to
@@ -742,7 +772,8 @@ public class JewishCalendar {
      * @param shouldUseModernHolidays a bool to determine to use modern holidays in the methods or not
      */
     init(jewishYear:Int, jewishMonth:Int, jewishDayOfMonth:Int) {//Test this
-        let hebrewCalendar = Calendar(identifier: .hebrew)
+        var hebrewCalendar = Calendar(identifier: .hebrew)
+        hebrewCalendar.timeZone = timeZone
         workingDate = hebrewCalendar.date(from: DateComponents(calendar: hebrewCalendar, year: jewishYear, month: jewishMonth, day: jewishDayOfMonth))!
     }
     
@@ -755,7 +786,8 @@ public class JewishCalendar {
      * @param isInIsrael a bool to determine whether or not the methods should use in Israel calculations
      */
     init(jewishYear:Int, jewishMonth:Int, jewishDayOfMonth:Int, isInIsrael:Bool) {//Test this
-        let hebrewCalendar = Calendar(identifier: .hebrew)
+        var hebrewCalendar = Calendar(identifier: .hebrew)
+        hebrewCalendar.timeZone = timeZone
         workingDate = hebrewCalendar.date(from: DateComponents(calendar: hebrewCalendar, year: jewishYear, month: jewishMonth, day: jewishDayOfMonth))!
         inIsrael = isInIsrael
     }
@@ -768,7 +800,9 @@ public class JewishCalendar {
      *            and goes to 13 for Adar II
      */
     public func setJewishMonth(month:Int) {
-        workingDate = Calendar(identifier: .hebrew).date(bySetting: .month, value: month, of: workingDate)!
+        var hebrewCalendar = Calendar(identifier: .hebrew)
+        hebrewCalendar.timeZone = timeZone
+        workingDate = hebrewCalendar.date(bySetting: .month, value: month, of: workingDate)!
     }
     
     /**
@@ -778,7 +812,9 @@ public class JewishCalendar {
      *            the Jewish year
      */
     public func setJewishYear(year:Int) {
-        workingDate = Calendar(identifier: .hebrew).date(bySetting: .year, value: year, of: workingDate)!
+        var hebrewCalendar = Calendar(identifier: .hebrew)
+        hebrewCalendar.timeZone = timeZone
+        workingDate = hebrewCalendar.date(bySetting: .year, value: year, of: workingDate)!
     }
     
     /**
@@ -788,7 +824,9 @@ public class JewishCalendar {
      *            the Jewish day of month
      */
     public func setJewishDayOfMonth(dayOfMonth:Int) {
-        workingDate = Calendar(identifier: .hebrew).date(bySetting: .day, value: dayOfMonth, of: workingDate)!
+        var hebrewCalendar = Calendar(identifier: .hebrew)
+        hebrewCalendar.timeZone = timeZone
+        workingDate = hebrewCalendar.date(bySetting: .day, value: dayOfMonth, of: workingDate)!
     }
     
     /**
@@ -799,7 +837,9 @@ public class JewishCalendar {
      *         goes to 13 for Adar II
      */
     public func getJewishMonth() -> Int {
-        return Calendar(identifier: .hebrew).component(.month, from: workingDate);
+        var hebrewCalendar = Calendar(identifier: .hebrew)
+        hebrewCalendar.timeZone = timeZone
+        return hebrewCalendar.component(.month, from: workingDate);
     }
     
     /**
@@ -808,7 +848,9 @@ public class JewishCalendar {
      * @return the Jewish day of the month
      */
     public func getJewishDayOfMonth() -> Int {
-        return Calendar(identifier: .hebrew).component(.day, from: workingDate);
+        var hebrewCalendar = Calendar(identifier: .hebrew)
+        hebrewCalendar.timeZone = timeZone
+        return hebrewCalendar.component(.day, from: workingDate);
     }
     
     /**
@@ -817,7 +859,9 @@ public class JewishCalendar {
      * @return the Jewish year
      */
     public func getJewishYear() -> Int {
-        return Calendar(identifier: .hebrew).component(.year, from: workingDate);
+        var hebrewCalendar = Calendar(identifier: .hebrew)
+        hebrewCalendar.timeZone = timeZone
+        return hebrewCalendar.component(.year, from: workingDate);
     }
     
     /**
@@ -825,7 +869,9 @@ public class JewishCalendar {
      * @param amount the number of months to roll the month forward
      */
     private func forwardJewishMonth(amount:Int) {
-        workingDate = Calendar(identifier: .hebrew).date(byAdding: .month, value: amount, to: workingDate)!
+        var hebrewCalendar = Calendar(identifier: .hebrew)
+        hebrewCalendar.timeZone = timeZone
+        workingDate = hebrewCalendar.date(byAdding: .month, value: amount, to: workingDate)!
     }
     
     /**
@@ -834,7 +880,9 @@ public class JewishCalendar {
      * @return the Gregorian month (between 0-11).
      */
     public func getGregorianMonth() -> Int {
-        return Calendar(identifier: .gregorian).component(.month, from: workingDate)
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
+        return gregCalendar.component(.month, from: workingDate)
     }
     
     /**
@@ -843,7 +891,9 @@ public class JewishCalendar {
      * @return the Gregorian day of the mont
      */
     public func getGregorianDayOfMonth() -> Int {
-        return Calendar(identifier: .gregorian).component(.day, from: workingDate)
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
+        return gregCalendar.component(.day, from: workingDate)
     }
     
     /**
@@ -852,7 +902,9 @@ public class JewishCalendar {
      * @return the Gregorian year
      */
     public func getGregorianYear() -> Int {
-        return Calendar(identifier: .gregorian).component(.year, from: workingDate)
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
+        return gregCalendar.component(.year, from: workingDate)
     }
     
     /**
@@ -863,7 +915,9 @@ public class JewishCalendar {
      *
      */
     public func setGregorianMonth(month:Int) {
-        workingDate = Calendar(identifier: .gregorian).date(bySetting: .month, value: month, of: workingDate)!
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
+        workingDate = gregCalendar.date(bySetting: .month, value: month, of: workingDate)!
     }
     
     /**
@@ -873,7 +927,9 @@ public class JewishCalendar {
      *            the Gregorian year.
      */
     public func setGregorianYear(year:Int) {
-        workingDate = Calendar(identifier: .gregorian).date(bySetting: .year, value: year, of: workingDate)!
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
+        workingDate = gregCalendar.date(bySetting: .year, value: year, of: workingDate)!
     }
     
     /**
@@ -883,7 +939,9 @@ public class JewishCalendar {
      *            the Gregorian Day of month.
      */
     public func setGregorianDayOfMonth(dayOfMonth:Int) {
-        workingDate = Calendar(identifier: .gregorian).date(bySetting: .day, value: dayOfMonth, of: workingDate)!
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
+        workingDate = gregCalendar.date(bySetting: .day, value: dayOfMonth, of: workingDate)!
     }
     
     /**
@@ -898,7 +956,9 @@ public class JewishCalendar {
      *            the month will be set
      */
     public func setGregorianDate(year:Int, month:Int, dayOfMonth:Int) {
-        workingDate = Calendar(identifier: .gregorian).date(from: DateComponents(year: year, month: month, day: dayOfMonth))!
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
+        workingDate = gregCalendar.date(from: DateComponents(year: year, month: month, day: dayOfMonth))!
     }
 
     /**
@@ -915,7 +975,9 @@ public class JewishCalendar {
      *            has 29 days, the day will be set as 29.
      */
     public func setJewishDate(year:Int, month:Int, dayOfMonth:Int) {
-        workingDate = Calendar(identifier: .hebrew).date(from: DateComponents(year: year, month: month, day: dayOfMonth))!
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
+        workingDate = gregCalendar.date(from: DateComponents(year: year, month: month, day: dayOfMonth))!
     }
 
     /**
@@ -941,7 +1003,9 @@ public class JewishCalendar {
      *
      */
     public func setJewishDate(year:Int, month:Int, dayOfMonth:Int, hours:Int, minutes:Int, chalakim:Int) {
-        workingDate = Calendar(identifier: .hebrew).date(from: DateComponents(year: year, month: month, day: dayOfMonth, hour: hours, minute: minutes + (chalakim / 18)))!//Need to test the chalakim
+        var hebrewCalendar = Calendar(identifier: .hebrew)
+        hebrewCalendar.timeZone = timeZone
+        workingDate = hebrewCalendar.date(from: DateComponents(year: year, month: month, day: dayOfMonth, hour: hours, minute: minutes + (chalakim / 18)))!//Need to test the chalakim
     }
     
     /**
@@ -950,7 +1014,9 @@ public class JewishCalendar {
      * @return the day of the week as a number between 1-7.
      */
     public func getDayOfWeek() -> Int {
-        return Calendar(identifier: .gregorian).component(.weekday, from: workingDate);
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
+        return gregCalendar.component(.weekday, from: workingDate);
     }
     
     /**
@@ -1155,7 +1221,9 @@ public class JewishCalendar {
      * @return the last day of the Gregorian month
      */
     func getLastDayOfGregorianMonth(month:Int) -> Int {
-        return getLastDayOfGregorianMonth(month: month, year: Calendar(identifier: .gregorian).component(.year, from: workingDate));
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
+        return getLastDayOfGregorianMonth(month: month, year: gregCalendar.component(.year, from: workingDate));
     }
     
     /**
@@ -2158,7 +2226,9 @@ public class JewishCalendar {
      */
     public func getTchilasZmanKidushLevana3Days() -> Date {
         let molad = getMoladAsDate();
-        return Calendar(identifier: .gregorian).date(byAdding: .day, value: 3, to: molad)!
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
+        return gregCalendar.date(byAdding: .day, value: 3, to: molad)!
     }
     
     /**
@@ -2175,7 +2245,9 @@ public class JewishCalendar {
      */
     public func getTchilasZmanKidushLevana7Days() -> Date {
         let molad = getMoladAsDate();
-        return Calendar(identifier: .gregorian).date(byAdding: .day, value: 7, to: molad)!
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
+        return gregCalendar.date(byAdding: .day, value: 7, to: molad)!
     }
     
     /**
@@ -2195,7 +2267,8 @@ public class JewishCalendar {
      */
     public func getSofZmanKidushLevanaBetweenMoldos() -> Date {
         let molad = getMoladAsDate();
-        let gregCalendar = Calendar(identifier: .gregorian)
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
         // add half the time between molad and molad (half of 29 days, 12 hours and 793 chalakim (44 minutes, 3.3
         // seconds), or 14 days, 18 hours, 22 minutes and 666 milliseconds). Add it as hours, not days, to avoid
         // DST/ST crossover issues.
@@ -2224,7 +2297,9 @@ public class JewishCalendar {
      */
     public func getSofZmanKidushLevana15Days() -> Date {
         let molad = getMoladAsDate();
-        return Calendar(identifier: .gregorian).date(byAdding: .day, value: 7, to: molad)!
+        var gregCalendar = Calendar(identifier: .gregorian)
+        gregCalendar.timeZone = timeZone
+        return gregCalendar.date(byAdding: .day, value: 7, to: molad)!
     }
     
     /**
