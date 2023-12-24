@@ -537,7 +537,7 @@ public class JewishCalendar {
          * @return the upcoming <em>parsha</em>.
          */
         public func getUpcomingParshah() -> Parsha{
-            let clone = JewishCalendar(date: workingDate, isInIsrael: inIsrael, shouldUseModernHolidays: useModernHolidays)
+            let clone = JewishCalendar(workingDate: workingDate, inIsrael: inIsrael, useModernHolidays: useModernHolidays)
             let daysToShabbos = (7 - getDayOfWeek() + 7) % 7;
             if (getDayOfWeek() != 7) {
                 clone.workingDate.addTimeInterval(TimeInterval(86400 * daysToShabbos))
@@ -634,8 +634,8 @@ public class JewishCalendar {
      *
      * @see #isUseModernHolidays()
      */
-    public func setUseModernHolidays(bool:Bool) {
-        useModernHolidays = bool;
+    public func setUseModernHolidays(useModernHolidays:Bool) {
+        self.useModernHolidays = useModernHolidays;
     }
     
     /**
@@ -646,8 +646,8 @@ public class JewishCalendar {
      *
      * @see #getInIsrael()
      */
-    public func setInIsrael(b:Bool) {
-        inIsrael = b;
+    public func setInIsrael(inIsrael:Bool) {
+        self.inIsrael = inIsrael;
     }
     
     /**
@@ -679,8 +679,8 @@ public class JewishCalendar {
      *
      * @see #getIsMukafChoma()
      */
-    public func setIsMukafChoma(b: Bool) {
-        isMukafChoma = b;
+    public func setIsMukafChoma(isMukafChoma: Bool) {
+        self.isMukafChoma = isMukafChoma;
     }
     
     /**
@@ -717,8 +717,8 @@ public class JewishCalendar {
      * @param date
      *            the <code>Date</code> to set the calendar to
      */
-    init(date:Date) {
-        workingDate = date
+    init(workingDate:Date) {
+        self.workingDate = workingDate
     }
     
     /**
@@ -728,10 +728,10 @@ public class JewishCalendar {
      * @param inIsrael a bool to determine whether or not the methods should use in Israel calculations
      * @param shouldUseModernHolidays a bool to determine to use modern holidays in the methods or not
      */
-    init(date:Date, isInIsrael:Bool, shouldUseModernHolidays:Bool) {
-        workingDate = date
-        inIsrael = isInIsrael
-        useModernHolidays = shouldUseModernHolidays
+    init(workingDate:Date, inIsrael:Bool, useModernHolidays:Bool) {
+        self.workingDate = workingDate
+        self.inIsrael = inIsrael
+        self.useModernHolidays = useModernHolidays
     }
     
     /**

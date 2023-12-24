@@ -31,6 +31,16 @@ public class NOAACalculator : AstronomicalCalculator {
      * Julian days per century.
      */
     private static let JULIAN_DAYS_PER_CENTURY = 36525.0;
+    
+    private static var geoLocation: GeoLocation = GeoLocation()
+    
+    override init() {
+        NOAACalculator.geoLocation.setTimeZone(timeZone: TimeZone.current)
+    }
+    
+    init(geoLocation: GeoLocation) {
+        NOAACalculator.geoLocation = geoLocation
+    }
 
     /**
          * Returns the name of the algorithm.
@@ -126,7 +136,8 @@ public class NOAACalculator : AstronomicalCalculator {
      *         should be added later.
      */
     private static func getJulianDay(date: Date) -> Double {
-        let calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = geoLocation.getTimeZone()
         var year = calendar.component(.year, from: date)
         var month = calendar.component(.month, from: date)
         let day = calendar.component(.day, from: date)
@@ -137,7 +148,7 @@ public class NOAACalculator : AstronomicalCalculator {
         let a = year / 100;
         let b = 2 - a + a / 4;
         let c = floor(365.25 * (Double(year) + 4716))
-        let d = floor(30.6001 * Double(month+1))
+        let d = floor(30.6001 * Double(month + 1))
         let e = Double(day) + Double(b) - 1524.5
         return Double(c + d + e);
     }
@@ -272,7 +283,7 @@ public class NOAACalculator : AstronomicalCalculator {
         let sunTrueLongitude = getSunTrueLongitude(julianCenturies: julianCenturies);
 
         let omega = 125.04 - 1934.136 * julianCenturies;
-        let lambda = sunTrueLongitude - 0.00569 - 0.00478 * sin(toDegrees(radians: omega));
+        let lambda = sunTrueLongitude - 0.00569 - 0.00478 * sin(toRadians(degrees: omega));
         return lambda; // in degrees
     }
 
@@ -413,7 +424,8 @@ public class NOAACalculator : AstronomicalCalculator {
 
         let eot = getEquationOfTime(julianCenturies: julianCenturies);
         
-        let cal = Calendar(identifier: .gregorian)
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = geoLocation.getTimeZone()
         
         let hour = Double(cal.component(.hour, from: date)) + 12.0
         let minuteSeconds = Double(cal.component(.minute, from: date)) + eot + Double(cal.component(.second, from: date))
@@ -449,7 +461,8 @@ public class NOAACalculator : AstronomicalCalculator {
 
         let eot = getEquationOfTime(julianCenturies: julianCenturies);
         
-        let cal = Calendar(identifier: .gregorian)
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = geoLocation.getTimeZone()
         
         let hour = Double(cal.component(.hour, from: date)) + 12.0
         let minuteSeconds = Double(cal.component(.minute, from: date)) + eot + Double(cal.component(.second, from: date))

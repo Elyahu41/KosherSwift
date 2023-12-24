@@ -13,7 +13,7 @@ class KosherSwiftTests: XCTestCase {
     var jewishCalendar = JewishCalendar()
 
     override func setUpWithError() throws {
-        jewishCalendar.setUseModernHolidays(bool: true)
+        jewishCalendar.setUseModernHolidays(useModernHolidays: true)
     }
 
     override func tearDownWithError() throws {
@@ -183,14 +183,202 @@ class KosherSwiftTests: XCTestCase {
         XCTAssertEqual(dafYomiYeru?.getDaf(), 8)
     }
     
-    func testSunrise() {
-        let geoLocaion = GeoLocation(locationName: "Denver, CO", latitude: 39.624004100000001, longitude: -104.87095119999999, elevation: 1721.3333333333, timeZone: TimeZone.current)
-        let astronomicalCalendar = AstronomicalCalendar(geoLocation: geoLocaion)
-        let formatter = DateFormatter()
-        formatter.timeStyle = .full
-        print(formatter.string(from: astronomicalCalendar.getSeaLevelSunrise()!))
-        print(formatter.string(from: astronomicalCalendar.getSeaLevelSunset()!))
-        //XCTAssertEqual(astronomicalCalendar.getSeaLevelSunrise(), Date())
+    func testCalculatorSunrise() throws {
+        var gregorianCalendar = Calendar(identifier: .gregorian)
+        gregorianCalendar.timeZone = TimeZone(identifier: "America/New_York")!
+        
+        let geoLocation = GeoLocation(locationName: "", latitude: 40.08213, longitude: -74.20970, timeZone: TimeZone(identifier: "America/New_York")!)
+        let lakewoodCalculator = NOAACalculator(geoLocation: geoLocation)
+        
+        var januaryFirst = DateComponents()
+        januaryFirst.year = 2023
+        januaryFirst.month = 1
+        januaryFirst.day = 1
+        
+        let calendar = AstronomicalCalendar(geoLocation: geoLocation)
+        calendar.setAstronomicalCalculator(astronomicalCalculator: lakewoodCalculator)
+        calendar.workingDate = gregorianCalendar.date(from: januaryFirst)!
+        var sunrise = calendar.getSunrise()
+        
+        januaryFirst.hour = 7
+        januaryFirst.minute = 18
+        januaryFirst.second = 57
+        
+        XCTAssertEqual(sunrise, gregorianCalendar.date(from: januaryFirst))
+        
+        var mayFirst = DateComponents()
+        mayFirst.year = 2023
+        mayFirst.month = 5
+        mayFirst.day = 1
+        
+        calendar.workingDate = gregorianCalendar.date(from: mayFirst)!
+        sunrise = calendar.getSunrise()
+        
+        mayFirst.hour = 5
+        mayFirst.minute = 56
+        mayFirst.second = 59
+        
+        XCTAssertEqual(sunrise, gregorianCalendar.date(from: mayFirst))
+        
+        var augustFirst = DateComponents()
+        augustFirst.year = 2023
+        augustFirst.month = 8
+        augustFirst.day = 1
+        
+        calendar.workingDate = gregorianCalendar.date(from: augustFirst)!
+        sunrise = calendar.getSunrise()
+        
+        augustFirst.hour = 5
+        augustFirst.minute = 54
+        augustFirst.second = 51
+        
+        XCTAssertEqual(sunrise, gregorianCalendar.date(from: augustFirst))
+        
+        var decFirst = DateComponents()
+        decFirst.year = 2023
+        decFirst.month = 12
+        decFirst.day = 1
+        
+        calendar.workingDate = gregorianCalendar.date(from: decFirst)!
+        sunrise = calendar.getSunrise()
+        
+        decFirst.hour = 6
+        decFirst.minute = 59
+        decFirst.second = 29
+        
+        XCTAssertEqual(sunrise, gregorianCalendar.date(from: decFirst))
+    }
+    
+    func testCalculatorSunset() throws {
+        var gregorianCalendar = Calendar(identifier: .gregorian)
+        gregorianCalendar.timeZone = TimeZone(identifier: "America/New_York")!
+        
+        let geoLocation = GeoLocation(locationName: "", latitude: 40.08213, longitude: -74.20970, timeZone: TimeZone(identifier: "America/New_York")!)
+        let lakewoodCalculator = NOAACalculator(geoLocation: geoLocation)
+
+        var januaryFirst = DateComponents()
+        januaryFirst.year = 2023
+        januaryFirst.month = 1
+        januaryFirst.day = 1
+        
+        let calendar = AstronomicalCalendar(geoLocation: geoLocation)
+        calendar.setAstronomicalCalculator(astronomicalCalculator: lakewoodCalculator)
+        calendar.workingDate = gregorianCalendar.date(from: januaryFirst)!
+        var sunset = calendar.getSunset()
+        
+        januaryFirst.hour = 16
+        januaryFirst.minute = 41
+        januaryFirst.second = 56
+        
+        XCTAssertEqual(sunset, gregorianCalendar.date(from: januaryFirst))
+        
+        var mayFirst = DateComponents()
+        mayFirst.year = 2023
+        mayFirst.month = 5
+        mayFirst.day = 1
+        
+        calendar.workingDate = gregorianCalendar.date(from: mayFirst)!
+        sunset = calendar.getSunset()
+        
+        mayFirst.hour = 19
+        mayFirst.minute = 51
+        mayFirst.second = 33
+        
+        XCTAssertEqual(sunset, gregorianCalendar.date(from: mayFirst))
+        
+        var augustFirst = DateComponents()
+        augustFirst.year = 2023
+        augustFirst.month = 8
+        augustFirst.day = 1
+        
+        calendar.workingDate = gregorianCalendar.date(from: augustFirst)!
+        sunset = calendar.getSunset()
+        
+        augustFirst.hour = 20
+        augustFirst.minute = 10
+        augustFirst.second = 57
+        
+        XCTAssertEqual(sunset, gregorianCalendar.date(from: augustFirst))
+        
+        var decFirst = DateComponents()
+        decFirst.year = 2023
+        decFirst.month = 12
+        decFirst.day = 1
+        
+        calendar.workingDate = gregorianCalendar.date(from: decFirst)!
+        sunset = calendar.getSunset()
+        
+        decFirst.hour = 16
+        decFirst.minute = 31
+        decFirst.second = 56
+        
+        XCTAssertEqual(sunset, gregorianCalendar.date(from: decFirst))
+    }
+    
+    func testZmanimCalendar() {
+        var gregorianCalendar = Calendar(identifier: .gregorian)
+        gregorianCalendar.timeZone = TimeZone(identifier: "America/New_York")!
+        
+        let geoLocation = GeoLocation(locationName: "", latitude: 40.08213, longitude: -74.20970, timeZone: TimeZone(identifier: "America/New_York")!)
+        let lakewoodCalculator = ZmanimCalendar(location: geoLocation)
+
+        var januaryFirst = DateComponents()
+        januaryFirst.year = 2023
+        januaryFirst.month = 12
+        januaryFirst.day = 24
+        
+        var alot = lakewoodCalculator.getAlos72()
+        let format = DateFormatter()
+        format.timeZone = gregorianCalendar.timeZone
+        format.timeStyle = .full
+        
+        januaryFirst.hour = 6
+        januaryFirst.minute = 04
+        januaryFirst.second = 42
+        
+        XCTAssertEqual(alot, gregorianCalendar.date(from: januaryFirst))
+        
+        var mayFirst = DateComponents()
+        mayFirst.year = 2023
+        mayFirst.month = 5
+        mayFirst.day = 1
+        
+        lakewoodCalculator.workingDate = gregorianCalendar.date(from: mayFirst)!
+        alot = lakewoodCalculator.getAlos72()
+        
+        mayFirst.hour = 4
+        mayFirst.minute = 44
+        mayFirst.second = 59
+        
+        XCTAssertEqual(alot, gregorianCalendar.date(from: mayFirst))
+        
+        var augustFirst = DateComponents()
+        augustFirst.year = 2024
+        augustFirst.month = 8
+        augustFirst.day = 1
+        
+        lakewoodCalculator.workingDate = gregorianCalendar.date(from: augustFirst)!
+        alot = lakewoodCalculator.getAlos72()
+        
+        augustFirst.hour = 4
+        augustFirst.minute = 43
+        augustFirst.second = 33
+        
+        XCTAssertEqual(alot, gregorianCalendar.date(from: augustFirst))
+        
+        var decFirst = DateComponents()
+        decFirst.year = 2024
+        decFirst.month = 12
+        decFirst.day = 1
+        
+        lakewoodCalculator.workingDate = gregorianCalendar.date(from: decFirst)!
+        alot = lakewoodCalculator.getAlos72()
+        
+        decFirst.hour = 5
+        decFirst.minute = 48
+        decFirst.second = 14
+        
+        XCTAssertEqual(alot, gregorianCalendar.date(from: decFirst))
     }
 
 //    func testPerformanceExample() throws {

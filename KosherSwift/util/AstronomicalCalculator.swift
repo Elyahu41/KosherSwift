@@ -66,13 +66,14 @@ public class AstronomicalCalculator {
 
     /**
      * Returns the default class for calculating sunrise and sunset. This is currently the {@link NOAACalculator},
-     * but this may change.
+     * but this may change. The NOAACalculator is the most accurate sunrise/sunset calculator that is currently available.
+     * It should be prefered over the SunTimesCalculator.
      *
      * @return AstronomicalCalculator the default class for calculating sunrise and sunset. In the current
      *         implementation the default calculator returned is the {@link NOAACalculator}.
      */
-    public static func getDefault() -> AstronomicalCalculator {
-        return NOAACalculator();
+    public static func getDefault(geoLocation: GeoLocation) -> AstronomicalCalculator {
+        return NOAACalculator(geoLocation: geoLocation);
     }
     
     /**
@@ -205,14 +206,21 @@ public class AstronomicalCalculator {
         self.solarRadius = solarRadius;
     }
     
+    /*
+     Do not use this method directly, it must be overrided by sub classes like the NOAACalculator class
+     */
     public func getUTCSunrise(date: Date, geoLocation: GeoLocation, zenith: Double, adjustForElevation: Bool) -> Double {
         return Double.nan
     }
-    
+    /*
+     Do not use this method directly, it must be overrided by sub classes like the NOAACalculator class
+     */
     public func getUTCSunset(date: Date, geoLocation: GeoLocation, zenith: Double, adjustForElevation: Bool) -> Double {
         return Double.nan
     }
-    
+    /*
+     Do not use this method directly, it must be overrided by sub classes like the NOAACalculator class
+     */
     public func getUTCNoon(date: Date, geoLocation: GeoLocation) -> Double {
         return Double.nan
     }

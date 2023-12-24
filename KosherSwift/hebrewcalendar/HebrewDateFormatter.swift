@@ -416,7 +416,7 @@ public class HebrewDateFormatter {
                     month = JewishCalendar.NISSAN;
                 }
             }
-        let tempJewishCalendar = JewishCalendar(date: jewishCalendar.workingDate, isInIsrael: jewishCalendar.getInIsrael(), shouldUseModernHolidays: jewishCalendar.isUseModernHolidays())
+        let tempJewishCalendar = JewishCalendar(workingDate: jewishCalendar.workingDate, inIsrael: jewishCalendar.getInIsrael(), useModernHolidays: jewishCalendar.isUseModernHolidays())
 
         tempJewishCalendar.setJewishMonth(month: month);
             formattedRoshChodesh = hebrewFormat ? hebrewHolidays[JewishCalendar.ROSH_CHODESH]

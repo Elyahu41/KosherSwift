@@ -22,28 +22,7 @@ import Foundation
  * reason that <code>Exception</code>s are not thrown in these cases is because the lack of a rise/set or twilight is
  * not an exception, but an expected condition in many parts of the world.
  *
- * Here is a simple example of how to use the API to calculate sunrise.
- * First create the Calendar for the location you would like to calculate sunrise or sunset times for:
- *
- * <pre>
- * String locationName = &quot;Lakewood, NJ&quot;;
- * double latitude = 40.0828; // Lakewood, NJ
- * double longitude = -74.2094; // Lakewood, NJ
- * double elevation = 20; // optional elevation correction in Meters
- * // the String parameter in getTimeZone() has to be a valid timezone listed in
- * // {@link java.util.TimeZone#getAvailableIDs()}
- * TimeZone timeZone = TimeZone.getTimeZone(&quot;America/New_York&quot;);
- * GeoLocation location = new GeoLocation(locationName, latitude, longitude, elevation, timeZone);
- * AstronomicalCalendar ac = new AstronomicalCalendar(location);
- * </pre>
- *
  * To get the time of sunrise, first set the date you want (if not set, the date will default to today):
- *
- * <pre>
- * ac.getCalendar().set(Calendar.MONTH, Calendar.FEBRUARY);
- * ac.getCalendar().set(Calendar.DAY_OF_MONTH, 8);
- * Date sunrise = ac.getSunrise();
- * </pre>
  *
  * @author &copy; Eliyahu Hershfeld 2004 - 2023
  */
@@ -74,9 +53,9 @@ public class AstronomicalCalendar {
     public static let HOUR_MILLIS = Double(MINUTE_MILLIS * 60);
 
     /**
-     * The Java Calendar encapsulated by this class to track the current date used by the class
+     * The Swift date encapsulated by this class to track the current date used by the class
      */
-    private var date:Date;
+    var workingDate:Date;
 
     /**
      * the {@link GeoLocation} used for calculations.
@@ -99,17 +78,17 @@ public class AstronomicalCalendar {
      *
      * @return the <code>Date</code> representing the exact sunrise time. If the calculation can't be computed such as
      *         in the Arctic Circle where there is at least one day a year where the sun does not rise, and one where it
-     *         does not set, a <code>null</code> will be returned. See detailed explanation on top of the page.
+     *         does not set, a <code>nil</code> will be returned. See detailed explanation on top of the page.
      * @see AstronomicalCalculator#adjustZenith
      * @see #getSeaLevelSunrise()
      * @see AstronomicalCalendar#getUTCSunrise
      */
     public func getSunrise() -> Date? {
         let sunrise = getUTCSunrise(zenith: AstronomicalCalendar.GEOMETRIC_ZENITH);
-        if (sunrise.isEqual(to: Double.nan)) {
+        if (sunrise.isNaN) {
             return nil;
         } else {
-            return getDateFromTime(time: sunrise, isSunrise: true);
+            return getDateFromTime(date: workingDate, time: sunrise, isSunrise: true);
         }
     }
 
@@ -121,17 +100,17 @@ public class AstronomicalCalendar {
      *
      * @return the <code>Date</code> representing the exact sea-level sunrise time. If the calculation can't be computed
      *         such as in the Arctic Circle where there is at least one day a year where the sun does not rise, and one
-     *         where it does not set, a <code>null</code> will be returned. See detailed explanation on top of the page.
+     *         where it does not set, a <code>nil</code> will be returned. See detailed explanation on top of the page.
      * @see AstronomicalCalendar#getSunrise
      * @see AstronomicalCalendar#getUTCSeaLevelSunrise
      * @see #getSeaLevelSunset()
      */
     public func getSeaLevelSunrise() -> Date? {
         let sunrise = getUTCSeaLevelSunrise(zenith: AstronomicalCalendar.GEOMETRIC_ZENITH);
-        if (sunrise.isEqual(to: Double.nan)) {
+        if (sunrise.isNaN) {
             return nil;
         } else {
-            return getDateFromTime(time: sunrise, isSunrise: true);
+            return getDateFromTime(date: workingDate, time: sunrise, isSunrise: true);
         }
     }
 
@@ -140,7 +119,7 @@ public class AstronomicalCalendar {
      * (dawn) using a zenith of {@link #CIVIL_ZENITH 96&deg;}.
      *
      * @return The <code>Date</code> of the beginning of civil twilight using a zenith of 96&deg;. If the calculation
-     *         can't be computed, <code>null</code> will be returned. See detailed explanation on top of the page.
+     *         can't be computed, <code>nil</code> will be returned. See detailed explanation on top of the page.
      * @see #CIVIL_ZENITH
      */
     public func getBeginCivilTwilight() -> Date? {
@@ -153,7 +132,7 @@ public class AstronomicalCalendar {
      * #NAUTICAL_ZENITH 102&deg;}.
      *
      * @return The <code>Date</code> of the beginning of nautical twilight using a zenith of 102&deg;. If the calculation
-     *         can't be computed <code>null</code> will be returned. See detailed explanation on top of the page.
+     *         can't be computed <code>nil</code> will be returned. See detailed explanation on top of the page.
      * @see #NAUTICAL_ZENITH
      */
     public func getBeginNauticalTwilight() -> Date? {
@@ -166,7 +145,7 @@ public class AstronomicalCalendar {
      * {@link #ASTRONOMICAL_ZENITH 108&deg;}.
      *
      * @return The <code>Date</code> of the beginning of astronomical twilight using a zenith of 108&deg;. If the calculation
-     *         can't be computed, <code>null</code> will be returned. See detailed explanation on top of the page.
+     *         can't be computed, <code>nil</code> will be returned. See detailed explanation on top of the page.
      * @see #ASTRONOMICAL_ZENITH
      */
     public func getBeginAstronomicalTwilight() -> Date? {
@@ -187,17 +166,17 @@ public class AstronomicalCalendar {
      *
      * @return the <code>Date</code> representing the exact sunset time. If the calculation can't be computed such as in
      *         the Arctic Circle where there is at least one day a year where the sun does not rise, and one where it
-     *         does not set, a <code>null</code> will be returned. See detailed explanation on top of the page.
+     *         does not set, a <code>nil</code> will be returned. See detailed explanation on top of the page.
      * @see AstronomicalCalculator#adjustZenith
      * @see #getSeaLevelSunset()
      * @see AstronomicalCalendar#getUTCSunset
      */
     public func getSunset() -> Date? {
         let sunset = getUTCSunset(zenith: AstronomicalCalendar.GEOMETRIC_ZENITH);
-        if (sunset.isEqual(to: Double.nan)) {
+        if (sunset.isNaN) {
             return nil;
         } else {
-            return getDateFromTime(time: sunset, isSunrise: false);
+            return getDateFromTime(date: workingDate, time: sunset, isSunrise: false);
         }
     }
 
@@ -209,16 +188,16 @@ public class AstronomicalCalendar {
      *
      * @return the <code>Date</code> representing the exact sea-level sunset time. If the calculation can't be computed
      *         such as in the Arctic Circle where there is at least one day a year where the sun does not rise, and one
-     *         where it does not set, a <code>null</code> will be returned. See detailed explanation on top of the page.
+     *         where it does not set, a <code>nil</code> will be returned. See detailed explanation on top of the page.
      * @see AstronomicalCalendar#getSunset
      * @see AstronomicalCalendar#getUTCSeaLevelSunset 2see {@link #getSunset()}
      */
     public func getSeaLevelSunset() -> Date? {
         let sunset = getUTCSeaLevelSunset(zenith: AstronomicalCalendar.GEOMETRIC_ZENITH);
-        if (sunset.isEqual(to: Double.nan)) {
+        if (sunset.isNaN) {
             return nil;
         } else {
-            return getDateFromTime(time: sunset, isSunrise: false);
+            return getDateFromTime(date: workingDate, time: sunset, isSunrise: false);
         }
     }
 
@@ -227,7 +206,7 @@ public class AstronomicalCalendar {
      * using a zenith of {@link #CIVIL_ZENITH 96&deg;}.
      *
      * @return The <code>Date</code> of the end of civil twilight using a zenith of {@link #CIVIL_ZENITH 96&deg;}. If the
-     *         calculation can't be computed, <code>null</code> will be returned. See detailed explanation on top of the page.
+     *         calculation can't be computed, <code>nil</code> will be returned. See detailed explanation on top of the page.
      * @see #CIVIL_ZENITH
      */
     public func getEndCivilTwilight() -> Date? {
@@ -238,7 +217,7 @@ public class AstronomicalCalendar {
      * A method that returns the end of nautical twilight using a zenith of {@link #NAUTICAL_ZENITH 102&deg;}.
      *
      * @return The <code>Date</code> of the end of nautical twilight using a zenith of {@link #NAUTICAL_ZENITH 102&deg;}. If
-     *         the calculation can't be computed, <code>null</code> will be returned. See detailed explanation on top of the
+     *         the calculation can't be computed, <code>nil</code> will be returned. See detailed explanation on top of the
      *         page.
      * @see #NAUTICAL_ZENITH
      */
@@ -250,12 +229,26 @@ public class AstronomicalCalendar {
      * A method that returns the end of astronomical twilight using a zenith of {@link #ASTRONOMICAL_ZENITH 108&deg;}.
      *
      * @return the <code>Date</code> of the end of astronomical twilight using a zenith of {@link #ASTRONOMICAL_ZENITH
-     *         108&deg;}. If the calculation can't be computed, <code>null</code> will be returned. See detailed
+     *         108&deg;}. If the calculation can't be computed, <code>nil</code> will be returned. See detailed
      *         explanation on top of the page.
      * @see #ASTRONOMICAL_ZENITH
      */
     public func getEndAstronomicalTwilight() -> Date? {
         return getSunsetOffsetByDegrees(offsetZenith: AstronomicalCalendar.ASTRONOMICAL_ZENITH);
+    }
+    
+    /**
+     * A utility method that returns a date offset by the offset time passed in as a parameter. This method casts the
+     * offset as a <code>long</code> and calls {@link #getTimeOffset(Date, long)}.
+     *
+     * @param time
+     *            the start time
+     * @param offset
+     *            the offset in seconds to add to the time
+     * @return the {@link java.util.Date}with the offset added to it
+     */
+    public static func getTimeOffset(time: Date?, offset: Double) -> Date? {
+        return getTimeOffset(time: time, offset: Int64(offset));
     }
 
     /**
@@ -267,14 +260,14 @@ public class AstronomicalCalendar {
      * @param time
      *            the start time
      * @param offset
-     *            the offset in milliseconds to add to the time.
-     * @return the {@link java.util.Date} with the offset in milliseconds added to it
+     *            the offset in seconds to add to the time.
+     * @return the {@link Date} with the offset in seconds added to it
      */
-    public static func getTimeOffset(time:Date?, offset:Double) -> Date? {
-        if (time == nil || offset == -Double.greatestFiniteMagnitude) {
+    public static func getTimeOffset(time:Date?, offset:Int64) -> Date? {
+        if (time == nil || offset == Int64.min) {
             return nil;
         }
-        return Foundation.Date(timeInterval: offset, since: time!);
+        return Date(timeInterval: TimeInterval(offset / 1000), since: time!);
     }
 
     /**
@@ -289,15 +282,15 @@ public class AstronomicalCalendar {
      *            parameter.
      * @return The {@link java.util.Date} of the offset after (or before) {@link #getSunrise()}. If the calculation
      *         can't be computed such as in the Arctic Circle where there is at least one day a year where the sun does
-     *         not rise, and one where it does not set, a <code>null</code> will be returned. See detailed explanation
+     *         not rise, and one where it does not set, a <code>nil</code> will be returned. See detailed explanation
      *         on top of the page.
      */
     public func getSunriseOffsetByDegrees(offsetZenith:Double) -> Date? {
         let dawn = getUTCSunrise(zenith: offsetZenith);
-        if (dawn.isEqual(to: Double.nan)) {
+        if (dawn.isNaN) {
             return nil;
         } else {
-            return getDateFromTime(time: dawn, isSunrise: true);
+            return getDateFromTime(date: workingDate, time: dawn, isSunrise: true);
         }
     }
 
@@ -312,15 +305,15 @@ public class AstronomicalCalendar {
      *            sunset, an offset of 14 + {@link #GEOMETRIC_ZENITH} = 104 would have to be passed as a parameter.
      * @return The {@link java.util.Date}of the offset after (or before) {@link #getSunset()}. If the calculation can't
      *         be computed such as in the Arctic Circle where there is at least one day a year where the sun does not
-     *         rise, and one where it does not set, a <code>null</code> will be returned. See detailed explanation on
+     *         rise, and one where it does not set, a <code>nil</code> will be returned. See detailed explanation on
      *         top of the page.
      */
     public func getSunsetOffsetByDegrees(offsetZenith:Double) -> Date? {
         let sunset = getUTCSunset(zenith: offsetZenith);
-        if (sunset.isEqual(to: Double.nan)) {
+        if (sunset.isNaN) {
             return nil;
         } else {
-            return getDateFromTime(time: sunset, isSunrise: false);
+            return getDateFromTime(date: workingDate, time: sunset, isSunrise: false);
         }
     }
 
@@ -329,9 +322,9 @@ public class AstronomicalCalendar {
      * {@link AstronomicalCalculator#getDefault() AstronomicalCalculator} and default the calendar to the current date.
      */
     init() {
-        self.date = Date()
+        self.workingDate = Date()
         self.geoLocation = GeoLocation()
-        self.astronomicalCalculator = AstronomicalCalculator.getDefault();
+        self.astronomicalCalculator = AstronomicalCalculator.getDefault(geoLocation: self.geoLocation);
     }
 
     /**
@@ -345,9 +338,9 @@ public class AstronomicalCalendar {
      * @see #setAstronomicalCalculator(AstronomicalCalculator) for changing the calculator class.
      */
     init(geoLocation:GeoLocation) {
-        self.date = Date()
+        self.workingDate = Date()
         self.geoLocation = geoLocation
-        self.astronomicalCalculator = AstronomicalCalculator.getDefault();
+        self.astronomicalCalculator = AstronomicalCalculator.getDefault(geoLocation: self.geoLocation);
     }
 
     /**
@@ -361,7 +354,7 @@ public class AstronomicalCalendar {
      *         not set, {@link Double#NaN} will be returned. See detailed explanation on top of the page.
      */
     public func getUTCSunrise(zenith:Double) -> Double {
-        return getAstronomicalCalculator().getUTCSunrise(date: date, geoLocation: getGeoLocation(), zenith: zenith, adjustForElevation: true);
+        return getAstronomicalCalculator().getUTCSunrise(date: workingDate, geoLocation: getGeoLocation(), zenith: zenith, adjustForElevation: true);
     }
 
     /**
@@ -379,7 +372,7 @@ public class AstronomicalCalendar {
      * @see AstronomicalCalendar#getUTCSeaLevelSunset
      */
     public func getUTCSeaLevelSunrise(zenith:Double) -> Double {
-        return getAstronomicalCalculator().getUTCSunrise(date: date, geoLocation: getGeoLocation(), zenith: zenith, adjustForElevation: false);
+        return getAstronomicalCalculator().getUTCSunrise(date: workingDate, geoLocation: getGeoLocation(), zenith: zenith, adjustForElevation: false);
     }
 
     /**
@@ -394,7 +387,7 @@ public class AstronomicalCalendar {
      * @see AstronomicalCalendar#getUTCSeaLevelSunset
      */
     public func getUTCSunset(zenith:Double) -> Double {
-        return getAstronomicalCalculator().getUTCSunset(date: date, geoLocation: getGeoLocation(), zenith: zenith, adjustForElevation: true);
+        return getAstronomicalCalculator().getUTCSunset(date: workingDate, geoLocation: getGeoLocation(), zenith: zenith, adjustForElevation: true);
     }
 
     /**
@@ -413,7 +406,7 @@ public class AstronomicalCalendar {
      * @see AstronomicalCalendar#getUTCSeaLevelSunrise
      */
     public func getUTCSeaLevelSunset(zenith:Double) -> Double {
-        return getAstronomicalCalculator().getUTCSunset(date: date, geoLocation: getGeoLocation(), zenith: zenith, adjustForElevation: false);
+        return getAstronomicalCalculator().getUTCSunset(date: workingDate, geoLocation: getGeoLocation(), zenith: zenith, adjustForElevation: false);
     }
 
     /**
@@ -454,7 +447,7 @@ public class AstronomicalCalendar {
         if (startOfDay == nil || endOfDay == nil) {
             return Int64.min;
         }
-        return Int64(endOfDay!.timeIntervalSince1970 - startOfDay!.timeIntervalSince1970) / 12;
+        return Int64((endOfDay!.timeIntervalSince1970 * 1000) - startOfDay!.timeIntervalSince1970 * 1000) / 12;
     }
 
     /**
@@ -473,15 +466,15 @@ public class AstronomicalCalendar {
      * @return the <code>Date</code> representing Sun's transit. If the calculation can't be computed such as when using
      *         the {@link com.kosherjava.zmanim.util.SunTimesCalculator USNO calculator} that does not support getting solar
      *         noon for the Arctic Circle (where there is at least one day a year where the sun does not rise, and one where
-     *         it does not set), a <code>null</code> will be returned. See detailed explanation on top of the page.
+     *         it does not set), a <code>nil</code> will be returned. See detailed explanation on top of the page.
      * @see #getSunTransit(Date, Date)
      * @see #getTemporalHour()
      * @see com.kosherjava.zmanim.util.NOAACalculator#getUTCNoon(Calendar, GeoLocation)
      * @see com.kosherjava.zmanim.util.SunTimesCalculator#getUTCNoon(Calendar, GeoLocation)
      */
     public func getSunTransit() -> Date? {
-        let noon = getAstronomicalCalculator().getUTCNoon(date: date, geoLocation: getGeoLocation());
-        return getDateFromTime(time: noon, isSunrise: false);
+        let noon = getAstronomicalCalculator().getUTCNoon(date: workingDate, geoLocation: getGeoLocation());
+        return getDateFromTime(date: workingDate, time: noon, isSunrise: false);
     }
     
     /**
@@ -498,9 +491,9 @@ public class AstronomicalCalendar {
      * @see com.kosherjava.zmanim.util.SunTimesCalculator#getUTCNoon(Calendar, GeoLocation)
      */
     public func getSolarMidnight() -> Date? {
-        let tomorrow = date.addingTimeInterval(86400)
+        let tomorrow = workingDate.addingTimeInterval(86400)
         let sunTransit = getSunTransit()
-        let sunTransitTomorrow = getDateFromTime(time: getAstronomicalCalculator().getUTCNoon(date: tomorrow, geoLocation: getGeoLocation()), isSunrise: false)
+        let sunTransitTomorrow = getDateFromTime(date: tomorrow, time: getAstronomicalCalculator().getUTCNoon(date: tomorrow, geoLocation: getGeoLocation()), isSunrise: false)
         
         if sunTransit == nil || sunTransitTomorrow == nil {
             return nil
@@ -527,7 +520,7 @@ public class AstronomicalCalendar {
      *
      * @return the <code>Date</code> representing Sun's transit. If the calculation can't be computed such as in the
      *         Arctic Circle where there is at least one day a year where the sun does not rise, and one where it does
-     *         not set, <code>null</code> will be returned. See detailed explanation on top of the page.
+     *         not set, <code>nil</code> will be returned. See detailed explanation on top of the page.
      */
     public func getSunTransit(startOfDay:Date?, endOfDay:Date?) -> Date? {
         let temporalHour = getTemporalHour(startOfDay: startOfDay, endOfDay: endOfDay);
@@ -543,17 +536,18 @@ public class AstronomicalCalendar {
      * @param isSunrise true if the
      * @return The Date.
      */
-    func getDateFromTime(time: Double, isSunrise:Bool) -> Date? {
-        if (time.isEqual(to: Double.nan)) {
+    func getDateFromTime(date:Date, time: Double, isSunrise:Bool) -> Date? {
+        if (time.isNaN) {
             return nil;
         }
         var calculatedTime = time;
         
-        let gregorianCalendar =  Calendar(identifier: .gregorian)
+        var gregorianCalendar =  Calendar(identifier: .gregorian)
+        gregorianCalendar.timeZone = geoLocation.getTimeZone()//this timezone is needed to make sure that the system's current timezone does not change the date object's date
         
         var components = gregorianCalendar.dateComponents([.era,.year,.month,.weekOfYear,.day,.hour,.minute,.second], from: date)
         
-        components.timeZone = TimeZone(identifier: "GMT")
+        components.timeZone = TimeZone.gmt
         
         let hours = Int(calculatedTime)
         calculatedTime -= Double(hours)
@@ -594,13 +588,12 @@ public class AstronomicalCalendar {
      */
     func getSunriseSolarDipFromOffset(minutes: Double) -> Double {
         var offsetByDegrees = getSeaLevelSunrise()
-        let offsetByTime = AstronomicalCalendar.getTimeOffset(time: getSeaLevelSunrise(), offset: -(minutes * Double(AstronomicalCalendar.MINUTE_MILLIS)))
+        let offsetByTime = AstronomicalCalendar.getTimeOffset(time: getSeaLevelSunrise(), offset: -(minutes * Double(AstronomicalCalendar.MINUTE_MILLIS / 1000)))
 
         var degrees = Decimal(0)
         let incrementor = Decimal(string: "0.0001")!
 
-        while offsetByDegrees == nil || ((minutes < 0.0 && offsetByDegrees!.timeIntervalSince1970 < offsetByTime!.timeIntervalSince1970) ||
-                                         (minutes > 0.0 && offsetByDegrees!.timeIntervalSince1970 > offsetByTime!.timeIntervalSince1970)) {
+        while offsetByDegrees == nil || ((minutes < 0.0 && offsetByDegrees!.timeIntervalSince1970 < offsetByTime!.timeIntervalSince1970) || (minutes > 0.0 && offsetByDegrees!.timeIntervalSince1970 > offsetByTime!.timeIntervalSince1970)) {
             
             if minutes > 0.0 {
                 degrees += incrementor
@@ -670,7 +663,7 @@ public class AstronomicalCalendar {
         if (hours < 0 || hours >= 24) {
             print("Hours must between 0 and 23.9999...");
         }
-        return AstronomicalCalendar.getTimeOffset(time: getDateFromTime(time: hours - Double(getGeoLocation().getTimeZone().secondsFromGMT()) / AstronomicalCalendar.HOUR_MILLIS, isSunrise: true), offset: -getGeoLocation().getLocalMeanTimeOffset());
+        return AstronomicalCalendar.getTimeOffset(time: getDateFromTime(date: workingDate, time: hours - Double(getGeoLocation().getTimeZone().secondsFromGMT()) / AstronomicalCalendar.HOUR_MILLIS, isSunrise: true), offset: -getGeoLocation().getLocalMeanTimeOffset());
     }
     
     /**
