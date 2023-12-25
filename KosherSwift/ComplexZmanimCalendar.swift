@@ -95,7 +95,7 @@ import Foundation
  * @author &copy; Eliyahu Hershfeld 2004 - 2023
  */
 public class ComplexZmanimCalendar : ZmanimCalendar {
-
+    
     /**
      * The zenith of 3.7&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> that <em>tzais</em> is the
@@ -106,7 +106,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getTzaisGeonim3Point7Degrees()
      */
     static let ZENITH_3_POINT_7 = Double(GEOMETRIC_ZENITH + 3.7);
-
+    
     /**
      * The zenith of 3.8&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> that <em>tzais</em> is the
@@ -117,7 +117,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getTzaisGeonim3Point8Degrees()
      */
     static let ZENITH_3_POINT_8 = Double(GEOMETRIC_ZENITH + 3.8);
-
+    
     /**
      * The zenith of 5.95&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>tzais</em> (nightfall) according to some opinions. This calculation is based on the position of
@@ -128,7 +128,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getTzaisGeonim5Point95Degrees()
      */
     static let ZENITH_5_POINT_95 = Double(GEOMETRIC_ZENITH + 5.95);
-
+    
     /**
      * The zenith of 7.083&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This is often referred to as
      * 7&deg;5' or 7&deg; and 5 minutes. This calculation is used for calculating <em>alos</em> (dawn) and
@@ -147,7 +147,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getBainHashmashosRT13Point5MinutesBefore7Point083Degrees()
      */
     static let ZENITH_7_POINT_083 = Double(GEOMETRIC_ZENITH + 7 + (5.0 / 60));
-
+    
     /**
      * The zenith of 10.2&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>misheyakir</em> according to some opinions. This calculation is based on the position of the sun
@@ -158,7 +158,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getMisheyakir10Point2Degrees()
      */
     static let ZENITH_10_POINT_2 = Double(GEOMETRIC_ZENITH + 10.2);
-
+    
     /**
      * The zenith of 11&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>misheyakir</em> according to some opinions. This calculation is based on the position of the sun
@@ -169,7 +169,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getMisheyakir11Degrees()
      */
     static let ZENITH_11_DEGREES = Double(GEOMETRIC_ZENITH + 11);
-
+    
     /**
      * The zenith of 11.5&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>misheyakir</em> according to some opinions. This calculation is based on the position of the sun
@@ -180,7 +180,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getMisheyakir11Point5Degrees()
      */
     static let ZENITH_11_POINT_5 = Double(GEOMETRIC_ZENITH + 11.5);
-
+    
     /**
      * The zenith of 13.24&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating Rabbeinu Tam's <em>bain hashmashos</em> according to some opinions.
@@ -199,7 +199,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #ZENITH_19_POINT_8
      */
     static let ZENITH_19_DEGREES = Double(GEOMETRIC_ZENITH + 19);
-
+    
     /**
      * The zenith of 19.8&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>alos</em> (dawn) and <em>tzais</em> (nightfall) according to some opinions. This calculation is
@@ -214,7 +214,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #ZENITH_19_DEGREES
      */
     static let ZENITH_19_POINT_8 = Double(GEOMETRIC_ZENITH + 19.8);
-
+    
     /**
      * The zenith of 26&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>alos</em> (dawn) and <em>tzais</em> (nightfall) according to some opinions. This calculation is
@@ -231,7 +231,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getTzais120()
      */
     static let ZENITH_26_DEGREES = Double(GEOMETRIC_ZENITH + 26.0);
-
+    
     /**
      * The zenith of 4.37&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>tzais</em> (nightfall) according to some opinions. This calculation is based on the position of
@@ -243,7 +243,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getTzaisGeonim4Point37Degrees()
      */
     static let ZENITH_4_POINT_37 = Double(GEOMETRIC_ZENITH + 4.37);
-
+    
     /**
      * The zenith of 4.61&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>tzais</em> (nightfall) according to some opinions. This calculation is based on the position of
@@ -255,14 +255,14 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getTzaisGeonim4Point61Degrees()
      */
     static let ZENITH_4_POINT_61 = Double(GEOMETRIC_ZENITH + 4.61);
-
+    
     /**
      * The zenith of 4.8&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;).
      * @todo Add more documentation.
      * @see #getTzaisGeonim4Point8Degrees()
      */
     static let ZENITH_4_POINT_8 = Double(GEOMETRIC_ZENITH + 4.8);
-
+    
     /**
      * The zenith of 3.65&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>tzais</em> (nightfall) according to some opinions. This calculation is based on the position of
@@ -278,7 +278,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
     static let ZENITH_3_POINT_65 = Double(GEOMETRIC_ZENITH + 3.65);
-
+    
     /**
      * The zenith of 3.676&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;).
      * @todo Add more documentation.
@@ -288,13 +288,13 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
     static let ZENITH_3_POINT_676 = Double(GEOMETRIC_ZENITH + 3.676);
-
+    
     /**
      * The zenith of 5.88&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;).
      * @todo Add more documentation.
      */
     static let ZENITH_5_POINT_88 = Double(GEOMETRIC_ZENITH + 5.88);
-
+    
     /**
      * The zenith of 1.583&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>netz amiti</em> (sunrise) and <em>shkiah amiti</em> (sunset) based on the opinion of the
@@ -304,7 +304,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getSunsetBaalHatanya()
      */
     static let ZENITH_1_POINT_583 = Double(GEOMETRIC_ZENITH + 1.583);
-
+    
     /**
      * The zenith of 16.9&deg; below geometric zenith (90&deg;). This calculation is used for determining <em>alos</em>
      * (dawn) based on the opinion of the Baal Hatanya. It is based on the calculation that the time between dawn
@@ -317,7 +317,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getAlosBaalHatanya()
      */
     static let ZENITH_16_POINT_9 = Double(GEOMETRIC_ZENITH + 16.9);
-
+    
     /**
      * The zenith of 6&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>tzais</em> / nightfall based on the opinion of the Baal Hatanya. This calculation is based on the
@@ -328,7 +328,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getTzaisBaalHatanya()
      */
     static let ZENITH_6_DEGREES = Double(GEOMETRIC_ZENITH + 6);
-
+    
     /**
      * The zenith of 6.45&deg; below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for
      * calculating <em>tzais</em> (nightfall) according to some opinions. This is based on the calculations of <a href=
@@ -413,7 +413,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getBainHashmashosYereim3Point05Degrees()
      */
     static let ZENITH_MINUS_3_POINT_05 = Double(GEOMETRIC_ZENITH - 3.05);
-
+    
     /**
      * The offset in minutes (defaults to 40) after sunset used for <em>tzeit</em> based on calculations of
      * <em>Chacham</em> Yosef Harari-Raful of Yeshivat Ateret Torah.
@@ -422,7 +422,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #setAteretTorahSunsetOffset(double)
      */
     var ateretTorahSunsetOffset = Double(40);
-
+    
     /**
      * A constructor that takes a {@link GeoLocation} as a parameter.
      *
@@ -434,7 +434,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     override init(location:GeoLocation) {
         super.init(location: location)
     }
-
+    
     /**
      * Default constructor will set a default {@link GeoLocation#GeoLocation()}, a default
      * {@link AstronomicalCalculator#getDefault() AstronomicalCalculator} and default the calendar to the current date.
@@ -444,7 +444,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     override init() {
         super.init();
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (temporal hour) calculated using a 19.8&deg; dip. This calculation
      * divides the day based on the opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen
@@ -460,7 +460,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanis19Point8Degrees() -> Int64 {
         return getTemporalHour(startOfDay: getAlos19Point8Degrees(), endOfDay: getTzais19Point8Degrees());
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (temporal hour) calculated using a 18&deg; dip. This calculation divides
      * the day based on the opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham
@@ -476,7 +476,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanis18Degrees() -> Int64 {
         return getTemporalHour(startOfDay: getAlos18Degrees(), endOfDay: getTzais18Degrees());
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (temporal hour) calculated using a dip of 26&deg;. This calculation
      * divides the day based on the opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen
@@ -497,7 +497,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanis26Degrees() -> Int64 {
         return getTemporalHour(startOfDay: getAlos26Degrees(), endOfDay: getTzais26Degrees());
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (temporal hour) calculated using a dip of 16.1&deg;. This calculation
      * divides the day based on the opinion that the day runs from dawn to dusk. Dawn for this calculation is when the
@@ -518,11 +518,11 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see #getMinchaKetana16Point1Degrees()
      * @see #getPlagHamincha16Point1Degrees()
      */
-
+    
     public func getShaahZmanis16Point1Degrees() -> Int64 {
         return getTemporalHour(startOfDay: getAlos16Point1Degrees(), endOfDay: getTzais16Point1Degrees());
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (solar hour) according to the opinion of the <a href=
      * "https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a>. This calculation
@@ -543,7 +543,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanis60Minutes() -> Int64 {
         return getTemporalHour(startOfDay: getAlos60(), endOfDay: getTzais60());
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (solar hour) according to the opinion of the <a href=
      * "https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a>. This calculation divides the day
@@ -560,7 +560,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanis72Minutes() -> Int64 {
         return getShaahZmanisMGA();
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (temporal hour) according to the opinion of the <a href=
      * "https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on <em>alos</em> being
@@ -580,7 +580,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanis72MinutesZmanis() -> Int64 {
         return getTemporalHour(startOfDay: getAlos72Zmanis(), endOfDay: getTzais72Zmanis());
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (temporal hour) calculated using a dip of 90 minutes. This calculation
      * divides the day based on the opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen
@@ -595,7 +595,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanis90Minutes() -> Int64 {
         return getTemporalHour(startOfDay: getAlos90(), endOfDay: getTzais90());
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (temporal hour) according to the opinion of the <a href=
      * "https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on <em>alos</em> being
@@ -615,7 +615,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanis90MinutesZmanis() -> Int64 {
         return getTemporalHour(startOfDay: getAlos90Zmanis(), endOfDay: getTzais90Zmanis());
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (temporal hour) according to the opinion of the <a href=
      * "https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on <em>alos</em> being {@link
@@ -635,7 +635,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanis96MinutesZmanis() -> Int64 {
         return getTemporalHour(startOfDay: getAlos96Zmanis(), endOfDay: getTzais96Zmanis());
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (temporal hour) according to the opinion of the
      * <em>Chacham</em> Yosef Harari-Raful of Yeshivat Ateret Torah calculated with <em>alos</em> being 1/10th
@@ -702,7 +702,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanisAlos16Point1ToTzais3Point7() -> Int64 {
         return getTemporalHour(startOfDay: getAlos16Point1Degrees(), endOfDay: getTzaisGeonim3Point7Degrees());
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (temporal hour) calculated using a dip of 96 minutes. This calculation
      * divides the day based on the opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen
@@ -718,7 +718,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanis96Minutes() -> Int64 {
         return getTemporalHour(startOfDay: getAlos96(), endOfDay: getTzais96());
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (temporal hour) calculated using a dip of 120 minutes. This calculation
      * divides the day based on the opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen
@@ -737,7 +737,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanis120Minutes() -> Int64 {
         return getTemporalHour(startOfDay: getAlos120(), endOfDay: getTzais120());
     }
-
+    
     /**
      * Method to return a <em>shaah zmanis</em> (temporal hour) according to the opinion of the <a href=
      * "https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on <em>alos</em> being {@link
@@ -760,7 +760,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanis120MinutesZmanis() -> Int64 {
         return getTemporalHour(startOfDay: getAlos120Zmanis(), endOfDay: getTzais120Zmanis());
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns the time of <em>plag hamincha</em> based on sunrise
      * being 120 minutes <em>zmaniyos</em> or 1/6th of the day before sunrise. This is calculated as 10.75 hours after
@@ -788,7 +788,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHamincha120MinutesZmanis() -> Date? {
         return getPlagHamincha(startOfDay: getAlos120Zmanis(), endOfDay: getTzais120Zmanis(), synchronous: true);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns the time of <em>plag hamincha</em> according to the
      * Magen Avraham with the day starting 120 minutes before sunrise and ending 120 minutes after sunset. This is
@@ -813,7 +813,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHamincha120Minutes() -> Date? {
         return getPlagHamincha(startOfDay: getAlos120(), endOfDay: getTzais120(), synchronous: true);
     }
-
+    
     /**
      * Method to return <em>alos</em> (dawn) calculated as 60 minutes before sunrise. This is the time to walk the
      * distance of 4 <em>Mil</em> at 15 minutes a <em>Mil</em>. This seems to be the opinion of the <a href=
@@ -847,7 +847,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAlos60() -> Date? {
         return ComplexZmanimCalendar.getTimeOffset(time: getSunrise(), offset: -60 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
-
+    
     /**
      * Method to return <em>alos</em> (dawn) calculated using 72 minutes <em>zmaniyos</em> or 1/10th of the day before
      * sunrise. This is based on an 18-minute <em>Mil</em> so the time for 4 <em>Mil</em> is 72 minutes which is 1/10th
@@ -867,7 +867,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAlos72Zmanis() -> Date? {
         return getZmanisBasedOffset(hours: -1.2);
     }
-
+    
     /**
      * Method to return <em>alos</em> (dawn) calculated using 96 minutes before before {@link #getSunrise() sunrise} or
      * {@link #getSeaLevelSunrise() sea level sunrise} (depending on the {@link #isUseElevation()} setting) that is based
@@ -884,7 +884,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAlos96() -> Date? {
         return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunrise(), offset: -96 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
-
+    
     /**
      * Method to return <em>alos</em> (dawn) calculated using 90 minutes <em>zmaniyos</em> or 1/8th of the day before
      * {@link #getSunrise() sunrise} or {@link #getSeaLevelSunrise() sea level sunrise} (depending on the {@link
@@ -903,7 +903,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAlos90Zmanis() -> Date? {
         return getZmanisBasedOffset(hours: -1.5);
     }
-
+    
     /**
      * This method returns <em>alos</em> (dawn) calculated using 96 minutes <em>zmaniyos</em> or 1/7.5th of the day before
      * {@link #getSunrise() sunrise} or {@link #getSeaLevelSunrise() sea level sunrise} (depending on the {@link
@@ -922,7 +922,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAlos96Zmanis() -> Date? {
         return getZmanisBasedOffset(hours: -1.6);
     }
-
+    
     /**
      * Method to return <em>alos</em> (dawn) calculated using 90 minutes before {@link #getSeaLevelSunrise() sea level
      * sunrise} based on the time to walk the distance of 4 <em>Mil</em> at 22.5 minutes a <em>Mil</em>. Time based
@@ -939,7 +939,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAlos90() -> Date? {
         return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunrise(), offset: -90 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns <em>alos</em> (dawn) calculated using 120 minutes
      * before {@link #getSeaLevelSunrise() sea level sunrise} (no adjustment for elevation is made) based on the time
@@ -967,7 +967,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAlos120() -> Date? {
         return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunrise(), offset: -120 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and  method returns <em>alos</em> (dawn) calculated using
      * 120 minutes <em>zmaniyos</em> or 1/6th of the day before {@link #getSunrise() sunrise} or {@link
@@ -996,7 +996,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAlos120Zmanis() -> Date? {
         return getZmanisBasedOffset(hours: -2.0);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns <em>alos</em> (dawn) calculated when the sun is {@link
      * #ZENITH_26_DEGREES 26&deg;} below the eastern geometric horizon before sunrise. This calculation is based on the same
@@ -1025,7 +1025,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAlos26Degrees() -> Date? {
         return getSunriseOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_26_DEGREES);
     }
-
+    
     /**
      * A method to return <em>alos</em> (dawn) calculated when the sun is {@link #ASTRONOMICAL_ZENITH 18&deg;} below the
      * eastern geometric horizon before sunrise.
@@ -1058,7 +1058,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAlos19Degrees() -> Date? {
         return getSunriseOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_19_DEGREES);
     }
-
+    
     /**
      * Method to return <em>alos</em> (dawn) calculated when the sun is {@link #ZENITH_19_POINT_8 19.8&deg;} below the
      * eastern geometric horizon before sunrise. This calculation is based on the same calculation of
@@ -1077,7 +1077,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAlos19Point8Degrees() -> Date? {
         return getSunriseOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_19_POINT_8);
     }
-
+    
     /**
      * Method to return <em>alos</em> (dawn) calculated when the sun is {@link #ZENITH_16_POINT_1 16.1&deg;} below the
      * eastern geometric horizon before sunrise. This calculation is based on the same calculation of
@@ -1096,7 +1096,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAlos16Point1Degrees() -> Date? {
         return getSunriseOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_16_POINT_1);
     }
-
+    
     /**
      * This method returns <em>misheyakir</em> based on the position of the sun when it is {@link #ZENITH_11_DEGREES
      * 11.5&deg;} below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for calculating
@@ -1115,7 +1115,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getMisheyakir11Point5Degrees() -> Date? {
         return getSunriseOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_11_POINT_5);
     }
-
+    
     /**
      * This method returns <em>misheyakir</em> based on the position of the sun when it is {@link #ZENITH_11_DEGREES
      * 11&deg;} below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for calculating
@@ -1133,7 +1133,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getMisheyakir11Degrees() -> Date? {
         return getSunriseOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_11_DEGREES);
     }
-
+    
     /**
      * This method returns <em>misheyakir</em> based on the position of the sun when it is {@link #ZENITH_10_POINT_2
      * 10.2&deg;} below {@link #GEOMETRIC_ZENITH geometric zenith} (90&deg;). This calculation is used for calculating
@@ -1211,7 +1211,14 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getMisheyakir9Point5Degrees() -> Date? {
         return getSunriseOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_9_POINT_5);
     }
+    
+    public func getMisheyakir66MinutesZmanit() -> Date? {
+        let shaahZmanit = getShaahZmanis72MinutesZmanis()
+        let dakahZmanit = shaahZmanit / 60
+        return ComplexZmanimCalendar.getTimeOffset(time: getAlos72Zmanis(), offset: 6 * Double(dakahZmanit))
+    }
 
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite Shema in the morning) according to the
      * opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on
@@ -1231,7 +1238,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaMGA19Point8Degrees() -> Date? {
         return getSofZmanShma(startOfDay: getAlos19Point8Degrees(), endOfDay: getTzais19Point8Degrees(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite Shema in the morning) according to the
      * opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based
@@ -1251,7 +1258,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaMGA16Point1Degrees() -> Date? {
         return getSofZmanShma(startOfDay: getAlos16Point1Degrees(), endOfDay: getTzais16Point1Degrees(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite Shema in the morning) according to the
      * opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based
@@ -1271,7 +1278,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaMGA18Degrees() -> Date? {
         return getSofZmanShma(startOfDay: getAlos18Degrees(), endOfDay: getTzais18Degrees(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite Shema in the morning) according to the
      * opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on
@@ -1294,7 +1301,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaMGA72Minutes() -> Date? {
         return getSofZmanShmaMGA();
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite <em>Shema</em> in the morning) according
      * to the opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based
@@ -1317,7 +1324,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaMGA72MinutesZmanis() -> Date? {
         return getSofZmanShma(startOfDay: getAlos72Zmanis(), endOfDay: getTzais72Zmanis(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite <em>Shema</em> in the morning) according
      * to the opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on
@@ -1338,7 +1345,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaMGA90Minutes() -> Date? {
         return getSofZmanShma(startOfDay: getAlos90(), endOfDay: getTzais90(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite Shema in the morning) according to the
      * opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based
@@ -1360,7 +1367,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaMGA90MinutesZmanis() -> Date? {
         return getSofZmanShma(startOfDay: getAlos90Zmanis(), endOfDay: getTzais90Zmanis(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite Shema in the morning) according to the
      * opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based
@@ -1381,7 +1388,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaMGA96Minutes() -> Date? {
         return getSofZmanShma(startOfDay: getAlos96(), endOfDay: getTzais96(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite Shema in the morning) according to the
      * opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based
@@ -1403,7 +1410,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaMGA96MinutesZmanis() -> Date? {
         return getSofZmanShma(startOfDay: getAlos96Zmanis(), endOfDay: getTzais96Zmanis(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite <em>Shema</em> in the morning) calculated
      * as 3 hours (regular clock hours and not <em>sha'os zmaniyos</em>) before {@link ZmanimCalendar#getChatzos()}.
@@ -1434,7 +1441,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShma3HoursBeforeChatzos() -> Date? {
         return ComplexZmanimCalendar.getTimeOffset(time: getChatzos(), offset: -180 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite Shema in the morning) according to the
      * opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based
@@ -1456,7 +1463,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaMGA120Minutes() -> Date? {
         return getSofZmanShma(startOfDay: getAlos120(), endOfDay: getTzais120(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite <em>Shema</em> in the morning) based
      * on the opinion that the day starts at {@link #getAlos16Point1Degrees() <em>alos</em> 16.1&deg;} and ends at
@@ -1482,7 +1489,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaAlos16Point1ToSunset() -> Date? {
         return getSofZmanShma(startOfDay: getAlos16Point1Degrees(), endOfDay: getElevationAdjustedSunset(), synchronous: false);
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite Shema in the morning) based on the
      * opinion that the day starts at {@link #getAlos16Point1Degrees() <em>alos</em> 16.1&deg;} and ends at
@@ -1505,7 +1512,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaAlos16Point1ToTzaisGeonim7Point083Degrees() -> Date? {
         return getSofZmanShma(startOfDay: getAlos16Point1Degrees(), endOfDay: getTzaisGeonim7Point083Degrees(), synchronous: false);
     }
-
+    
     /**
      * From the GRA in Kol Eliyahu on Berachos #173 that states that <em>zman krias shema</em> is calculated as half the
      * time from {@link #getSeaLevelSunrise() sea level sunrise} to {@link #getFixedLocalChatzos() fixed local chatzos}.
@@ -1528,10 +1535,10 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         if (chatzos == nil || getSunrise() == nil) {
             return nil;
         }
-        let diff = ((chatzos!.timeIntervalSince1970 - getElevationAdjustedSunrise()!.timeIntervalSince1970) * ZmanimCalendar.MINUTE_MILLIS) / 2;
+        let diff = ((chatzos!.timeIntervalSince1970 - getElevationAdjustedSunrise()!.timeIntervalSince1970) * 1000) / 2;
         return ComplexZmanimCalendar.getTimeOffset(time: chatzos, offset: -diff);
     }
-
+    
     /**
      * This method returns the latest <em>zman tfila</em> (time to recite the morning prayers) according to the opinion
      * of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on
@@ -1553,7 +1560,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfilaMGA19Point8Degrees() -> Date? {
         return getSofZmanTfila(startOfDay: getAlos19Point8Degrees(), endOfDay: getTzais19Point8Degrees(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman tfila</em> (time to recite the morning prayers) according to the opinion
      * of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on
@@ -1574,7 +1581,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfilaMGA16Point1Degrees() -> Date? {
         return getSofZmanTfila(startOfDay: getAlos16Point1Degrees(), endOfDay: getTzais16Point1Degrees(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman tfila</em> (time to recite the morning prayers) according to the opinion
      * of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on
@@ -1595,7 +1602,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfilaMGA18Degrees() -> Date? {
         return getSofZmanTfila(startOfDay: getAlos18Degrees(), endOfDay: getTzais18Degrees(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman tfila</em> (time to recite the morning prayers) according to the opinion
      * of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on
@@ -1617,7 +1624,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfilaMGA72Minutes() -> Date? {
         return getSofZmanTfilaMGA();
     }
-
+    
     /**
      * This method returns the latest <em>zman tfila</em> (time to the morning prayers) according to the opinion of the
      * <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on <em>alos</em>
@@ -1637,7 +1644,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfilaMGA72MinutesZmanis() -> Date? {
         return getSofZmanTfila(startOfDay: getAlos72Zmanis(), endOfDay: getTzais72Zmanis(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman tfila</em> (time to recite the morning prayers) according to the opinion
      * of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on
@@ -1657,7 +1664,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfilaMGA90Minutes() -> Date? {
         return getSofZmanTfila(startOfDay: getAlos90(), endOfDay: getTzais90(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman tfila</em> (time to the morning prayers) according to the opinion of the
      * <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on <em>alos</em>
@@ -1678,7 +1685,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfilaMGA90MinutesZmanis() -> Date? {
         return getSofZmanTfila(startOfDay: getAlos90Zmanis(), endOfDay: getTzais90Zmanis(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman tfila</em> (time to recite the morning prayers) according to the opinion
      * of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on
@@ -1698,7 +1705,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfilaMGA96Minutes() -> Date? {
         return getSofZmanTfila(startOfDay: getAlos96(), endOfDay: getTzais96(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman tfila</em> (time to the morning prayers) according to the opinion of the
      * <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on <em>alos</em>
@@ -1719,7 +1726,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfilaMGA96MinutesZmanis() -> Date? {
         return getSofZmanTfila(startOfDay: getAlos96Zmanis(), endOfDay: getTzais96Zmanis(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman tfila</em> (time to recite the morning prayers) according to the opinion
      * of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on
@@ -1740,7 +1747,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfilaMGA120Minutes() -> Date? {
         return getSofZmanTfila(startOfDay: getAlos120(), endOfDay: getTzais120(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman tfila</em> (time to recite the morning prayers) calculated as 2 hours
      * before {@link ZmanimCalendar#getChatzos()}. This is based on the opinions that calculate
@@ -1757,7 +1764,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfila2HoursBeforeChatzos() -> Date? {
         return ComplexZmanimCalendar.getTimeOffset(time: getChatzos(), offset: -120 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
-
+    
     /**
      * This method returns <em>mincha gedola</em> calculated as 30 minutes after {@link #getChatzos() <em>chatzos</em>}
      * and not 1/2 of a {@link #getShaahZmanisGra() <em>shaah zmanis</em>} after {@link #getChatzos() <em>chatzos</em>} as
@@ -1784,7 +1791,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getMinchaGedola30Minutes() -> Date? {
         return ComplexZmanimCalendar.getTimeOffset(time: getChatzos(), offset: ComplexZmanimCalendar.MINUTE_MILLIS * 30);
     }
-
+    
     /**
      * This method returns the time of <em>mincha gedola</em> according to the Magen Avraham with the day starting 72
      * minutes before sunrise and ending 72 minutes after sunset. This is the earliest time to pray <em>mincha</em>. For
@@ -1813,7 +1820,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
             return getMinchaGedola(startOfDay: getAlos72(), endOfDay: getTzais72(), synchronous: true);
         }
     }
-
+    
     /**
      * This method returns the time of <em>mincha gedola</em> according to the Magen Avraham with the day starting and
      * ending 16.1&deg; below the horizon. This is the earliest time to pray <em>mincha</em>. For more information on
@@ -1873,7 +1880,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
             }
         }
     }
-
+    
     /**
      * FIXME check for syncronous
      * This is a convenience method that returns the later of {@link #getMinchaGedola()} and
@@ -1903,7 +1910,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
             }
         }
     }
-
+    
     /**
      * This method returns the time of <em>mincha ketana</em> according to the Magen Avraham with the day starting and
      * ending 16.1&deg; below the horizon. This is the preferred earliest time to pray <em>mincha</em> according to the
@@ -1948,7 +1955,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
             time: getTzaisGeonim3Point8Degrees(),
             offset: -Double(getShaahZmanisAlos16Point1ToTzais3Point8()) * 2.5);
     }
-
+    
     /**
      * This method returns the time of <em>mincha ketana</em> according to the Magen Avraham with the day
      * starting 72 minutes before sunrise and ending 72 minutes after sunset. This is the preferred earliest time to pray
@@ -1968,7 +1975,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getMinchaKetana72Minutes() -> Date? {
         return getMinchaKetana(startOfDay: getAlos72(), endOfDay: getTzais72(), synchronous: true);
     }
-
+    
     /**
      * This method returns the time of <em>plag hamincha</em> according to the Magen Avraham with the day starting 60
      * minutes before sunrise and ending 60 minutes after sunset. This is calculated as 10.75 hours after
@@ -1986,7 +1993,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHamincha60Minutes() -> Date? {
         return getPlagHamincha(startOfDay: getAlos60(), endOfDay: getTzais60(), synchronous: true);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns the time of <em>plag hamincha</em> according to the
      * Magen Avraham with the day starting 72 minutes before sunrise and ending 72 minutes after sunset. This is calculated
@@ -2010,7 +2017,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHamincha72Minutes() -> Date? {
         return getPlagHamincha(startOfDay: getAlos72(), endOfDay: getTzais72(), synchronous: true);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns the time of <em>plag hamincha</em> according to the
      * Magen Avraham with the day starting 90 minutes before sunrise and ending 90 minutes after sunset. This is calculated
@@ -2034,7 +2041,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHamincha90Minutes() -> Date? {
         return getPlagHamincha(startOfDay: getAlos90(), endOfDay: getTzais90(), synchronous: true);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns the time of <em>plag hamincha</em> according to the Magen
      * Avraham with the day starting 96 minutes before sunrise and ending 96 minutes after sunset. This is calculated as 10.75
@@ -2057,7 +2064,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHamincha96Minutes() -> Date? {
         return getPlagHamincha(startOfDay: getAlos96(), endOfDay: getTzais96(), synchronous: true);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns the time of <em>plag hamincha</em>. This is calculated
      * as 10.75 hours after {@link #getAlos96Zmanis() dawn}. The formula used is 10.75 * {@link
@@ -2078,7 +2085,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHamincha96MinutesZmanis() -> Date? {
         return getPlagHamincha(startOfDay: getAlos96Zmanis(), endOfDay: getTzais96Zmanis(), synchronous: true);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns the time of <em>plag hamincha</em>. This is calculated
      * as 10.75 hours after {@link #getAlos90Zmanis() dawn}. The formula used is 10.75 * {@link
@@ -2099,7 +2106,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHamincha90MinutesZmanis() -> Date? {
         return getPlagHamincha(startOfDay: getAlos90Zmanis(), endOfDay: getTzais90Zmanis(), synchronous: true);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns the time of <em>plag hamincha</em>. This is calculated as
      * 10.75 hours after {@link #getAlos72Zmanis()}. The formula used is 10.75 * {@link #getShaahZmanis72MinutesZmanis()} after
@@ -2120,7 +2127,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHamincha72MinutesZmanis() -> Date? {
         return getPlagHamincha(startOfDay: getAlos72Zmanis(), endOfDay: getTzais72Zmanis(), synchronous: true);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns the time of <em>plag hamincha</em> based on the
      * opinion that the day starts at {@link #getAlos16Point1Degrees() <em>alos</em> 16.1&deg;} and ends at {@link
@@ -2145,7 +2152,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHamincha16Point1Degrees() -> Date? {
         return getPlagHamincha(startOfDay: getAlos16Point1Degrees(), endOfDay: getTzais16Point1Degrees(), synchronous: true);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns the time of <em>plag hamincha</em> based on the
      * opinion that the day starts at {@link #getAlos19Point8Degrees() <em>alos</em> 19.8&deg;} and ends at {@link
@@ -2170,7 +2177,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHamincha19Point8Degrees() -> Date? {
         return getPlagHamincha(startOfDay: getAlos19Point8Degrees(), endOfDay: getTzais19Point8Degrees(), synchronous: true);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns the time of <em>plag hamincha</em> based on the
      * opinion that the day starts at {@link #getAlos26Degrees() <em>alos</em> 26&deg;} and ends at {@link
@@ -2196,7 +2203,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHamincha26Degrees() -> Date? {
         return getPlagHamincha(startOfDay: getAlos26Degrees(), endOfDay: getTzais26Degrees(), synchronous: true);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns the time of <em>plag hamincha</em> based on the
      * opinion that the day starts at {@link #getAlos18Degrees() <em>alos</em> 18&deg;} and ends at {@link
@@ -2221,7 +2228,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHamincha18Degrees() -> Date? {
         return getPlagHamincha(startOfDay: getAlos18Degrees(), endOfDay: getTzais18Degrees(), synchronous: true);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns the time of <em>plag hamincha</em> based on the opinion
      * that the day starts at {@link #getAlos16Point1Degrees() <em>alos</em> 16.1&deg;} and ends at {@link #getSunset() sunset}.
@@ -2245,7 +2252,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagAlosToSunset() -> Date? {
         return getPlagHamincha(startOfDay: getAlos16Point1Degrees(), endOfDay: getElevationAdjustedSunset(), synchronous: false);
     }
-
+    
     /**
      * This method returns the time of <em>plag hamincha</em> based on the opinion that the day starts at
      * {@link #getAlos16Point1Degrees() <em>alos</em> 16.1&deg;} and ends at {@link #getTzaisGeonim7Point083Degrees()
@@ -2288,7 +2295,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagAhavatShalom() -> Date? {
         return ComplexZmanimCalendar.getTimeOffset(time: getTzaisGeonim3Point8Degrees(), offset: -Double(getShaahZmanisAlos16Point1ToTzais3Point8()) * 1.25);
     }
-
+    
     /**
      * Method to return the beginning of <em>bain hashmashos</em> of Rabbeinu Tam calculated when the sun is
      * {@link #ZENITH_13_POINT_24 13.24&deg;} below the western {@link #GEOMETRIC_ZENITH geometric horizon} (90&deg;)
@@ -2317,7 +2324,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_13_POINT_24);
     }
     
-
+    
     /**
      * Misspelled method name that should be {@link #getBainHashmashosRT13Point24Degrees()}.
      * @return the properly spelled version.
@@ -2326,7 +2333,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getBainHasmashosRT13Point24Degrees() -> Date? {
         return getBainHashmashosRT13Point24Degrees();
     }
-
+    
     /**
      * This method returns the beginning of <em>Bain hashmashos</em> of Rabbeinu Tam calculated as a 58.5
      * minute offset after sunset. <em>bain hashmashos</em> is 3/4 of a <em>Mil</em> before <em>tzais</em> or 3 1/4
@@ -2350,7 +2357,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getBainHasmashosRT58Point5Minutes() -> Date? {
         return getBainHashmashosRT58Point5Minutes();
     }
-
+    
     /**
      * This method returns the beginning of <em>bain hashmashos</em> based on the calculation of 13.5 minutes (3/4 of an
      * 18-minute <em>Mil</em>) before <em>shkiah</em> calculated as {@link #getTzaisGeonim7Point083Degrees() 7.083&deg;}.
@@ -2376,7 +2383,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getBainHasmashosRT13Point5MinutesBefore7Point083Degrees() -> Date? {
         return getBainHashmashosRT13Point5MinutesBefore7Point083Degrees();
     }
-
+    
     /**
      * This method returns the beginning of <em>bain hashmashos</em> of Rabbeinu Tam calculated according to the
      * opinion of the <em>Divrei Yosef</em> (see Yisrael Vehazmanim) calculated 5/18th (27.77%) of the time between
@@ -2395,7 +2402,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         if (alos19Point8 == nil || sunrise == nil) {
             return nil;
         }
-        return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: ((sunrise!.timeIntervalSince1970 - alos19Point8!.timeIntervalSince1970) * ComplexZmanimCalendar.MINUTE_MILLIS) * (5 / 18));
+        return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: ((sunrise!.timeIntervalSince1970 - alos19Point8!.timeIntervalSince1970) * 1000) * (5 / 18));
     }
     
     /**
@@ -2469,7 +2476,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * Misspelled method name that should be {@link #getBainHashmashosYereim3Point05Degrees()}.
      * @return the properly spelled version.
      */
-   // //@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
+    // //@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
     public func getBainHasmashosYereim3Point05Degrees() -> Date?  {
         return getBainHashmashosYereim3Point05Degrees();
     }
@@ -2604,7 +2611,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzaisGeonim3Point7Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_3_POINT_7);
     }
-
+    
     /**
      * This method returns the <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> calculated at the
      * sun's position at {@link #ZENITH_3_POINT_8 3.8&deg;} below the western horizon.
@@ -2615,7 +2622,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzaisGeonim3Point8Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_3_POINT_8);
     }
-
+    
     /**
      * This method returns the <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> calculated at the
      * sun's position at {@link #ZENITH_5_POINT_95 5.95&deg;} below the western horizon.
@@ -2630,7 +2637,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzaisGeonim5Point95Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_5_POINT_95);
     }
-
+    
     /**
      * This method returns the <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> calculated as 3/4
      * of a <a href= "https://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement" >Mil</a> based on an 18
@@ -2651,7 +2658,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzaisGeonim3Point65Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_3_POINT_65);
     }
-
+    
     /**
      * This method returns the <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> calculated as 3/4
      * of a <a href= "https://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement" >Mil</a> based on an 18
@@ -2673,7 +2680,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzaisGeonim3Point676Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_3_POINT_676);
     }
-
+    
     /**
      * This method returns the <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> calculated as 3/4
      * of a <em><a href= "https://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement" >mil</a></em> based
@@ -2690,7 +2697,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzaisGeonim4Point61Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_4_POINT_61);
     }
-
+    
     /**
      * This method returns the <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> calculated as 3/4
      * of a <a href= "https://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement" >Mil</a>, based on a 22.5
@@ -2707,7 +2714,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzaisGeonim4Point37Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_4_POINT_37);
     }
-
+    
     /**
      * This method returns the <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> calculated as 3/4
      * of a 24-minute <em><a href= "https://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement" >Mil</a></em>,
@@ -2726,7 +2733,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzaisGeonim5Point88Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_5_POINT_88);
     }
-
+    
     /**
      * This method returns the <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> calculated as 3/4
      * of a <a href= "https://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement" >Mil</a> based on the
@@ -2765,7 +2772,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzaisGeonim6Point45Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_6_POINT_45);
     }
-
+    
     /**
      * This method returns the <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> calculated when the
      * sun's position {@link #ZENITH_7_POINT_083 7.083&deg; (or 7&deg; 5\u2032}) below the western horizon. This is often
@@ -2823,7 +2830,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzaisGeonim7Point67Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_7_POINT_67);
     }
-
+    
     /**
      * This method returns the <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> calculated at the
      * sun's position at {@link #ZENITH_8_POINT_5 8.5&deg;} below the western horizon.
@@ -2876,7 +2883,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzaisGeonim9Point75Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_9_POINT_75);
     }
-
+    
     /**
      * This method returns the <em>tzais</em> (nightfall) based on the opinion of the <a href=
      * "https://en.wikipedia.org/wiki/Yair_Bacharach">Chavas Yair</a> and <a href=
@@ -2897,7 +2904,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzais60() -> Date?  {
         return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: 60 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
-
+    
     /**
      * This method returns <em>tzais</em> usually calculated as 40 minutes (configurable to any offset via
      * {@link #setAteretTorahSunsetOffset(double)}) after sunset. Please note that <em>Chacham</em> Yosef Harari-Raful
@@ -2917,7 +2924,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzaisAteretTorah() -> Date?  {
         return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: getAteretTorahSunsetOffset() * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
-
+    
     /**
      * Returns the offset in minutes after sunset used to calculate <em>tzais</em> based on the calculations of
      * <em>Chacham</em> Yosef Harari-Raful of Yeshivat Ateret Torah calculations. The default value is 40 minutes.
@@ -2929,7 +2936,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAteretTorahSunsetOffset() -> Double {
         return ateretTorahSunsetOffset;
     }
-
+    
     /**
      * Allows setting the offset in minutes after sunset for the Ateret Torah <em>zmanim</em>. The default if unset is
      * 40 minutes. <em>Chacham</em> Yosef Harari-Raful of Yeshivat Ateret Torah uses 40 minutes globally with the exception
@@ -2943,7 +2950,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func setAteretTorahSunsetOffset(ateretTorahSunsetOffset:Double) {
         self.ateretTorahSunsetOffset = ateretTorahSunsetOffset;
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite Shema in the morning) based on the
      * calculation of <em>Chacham</em> Yosef Harari-Raful of Yeshivat Ateret Torah, that the day starts
@@ -2968,7 +2975,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaAteretTorah() -> Date?  {
         return getSofZmanShma(startOfDay: getAlos72Zmanis(), endOfDay: getTzaisAteretTorah(), synchronous: false);
     }
-
+    
     /**
      * This method returns the latest <em>zman tfila</em> (time to recite the morning prayers) based on the calculation
      * of <em>Chacham</em> Yosef Harari-Raful of Yeshivat Ateret Torah, that the day starts {@link #getAlos72Zmanis()
@@ -3004,7 +3011,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfilahAteretTorah() -> Date?  {
         return getSofZmanTfila(startOfDay: getAlos72Zmanis(), endOfDay: getTzaisAteretTorah(), synchronous: false);
     }
-
+    
     /**
      * This method returns the time of <em>mincha gedola</em> based on the calculation of <em>Chacham</em> Yosef
      * Harari-Raful of Yeshivat Ateret Torah, that the day starts {@link #getAlos72Zmanis() 1/10th of the day}
@@ -3032,7 +3039,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getMinchaGedolaAteretTorah() -> Date?  {
         return getMinchaGedola(startOfDay: getAlos72Zmanis(), endOfDay: getTzaisAteretTorah(), synchronous: false);
     }
-
+    
     /**
      * This method returns the time of <em>mincha ketana</em> based on the calculation of
      * <em>Chacham</em> Yosef Harari-Raful of Yeshivat Ateret Torah, that the day starts
@@ -3059,7 +3066,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getMinchaKetanaAteretTorah() -> Date?  {
         return getMinchaKetana(startOfDay: getAlos72Zmanis(), endOfDay: getTzaisAteretTorah(), synchronous: false);
     }
-
+    
     /**
      * This method returns the time of <em>plag hamincha</em> based on the calculation of <em>Chacham</em> Yosef Harari-Raful
      * of Yeshivat Ateret Torah, that the day starts {@link #getAlos72Zmanis() 1/10th of the day} before sunrise and is
@@ -3081,7 +3088,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHaminchaAteretTorah() -> Date?  {
         return getPlagHamincha(startOfDay: getAlos72Zmanis(), endOfDay: getTzaisAteretTorah(), synchronous: false);
     }
-
+    
     /**
      * Method to return <em>tzais</em> (dusk) calculated as 72 minutes zmaniyos, or 1/10th of the day after
      * {@link #getSeaLevelSunset() sea level sunset}. This is the way that the <a href=
@@ -3120,14 +3127,14 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         if (shaahZmanis == Int64.min || hours == 0) {
             return nil;
         }
-
+        
         if (hours > 0) {
             return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: Double(shaahZmanis) * hours);
         } else {
             return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunrise(), offset: Double(shaahZmanis) * hours);
         }
     }
-
+    
     /**
      * Method to return <em>tzais</em> (dusk) calculated using 90 minutes zmaniyos or 1/8th of the day after {@link
      * #getSeaLevelSunset() sea level sunset}. This time is known in Yiddish as the <em>achtel</em> (an eighth)
@@ -3142,7 +3149,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzais90Zmanis() -> Date?  {
         return getZmanisBasedOffset(hours: 1.5);
     }
-
+    
     /**
      * Method to return <em>tzais</em> (dusk) calculated using 96 minutes <em>zmaniyos</em> or 1/7.5 of the day after
      * {@link #getSeaLevelSunset() sea level sunset}.
@@ -3156,7 +3163,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzais96Zmanis() -> Date?  {
         return getZmanisBasedOffset(hours: 1.6);
     }
-
+    
     /**
      * Method to return <em>tzais</em> (dusk) calculated as 90 minutes after sea level sunset. This method returns
      * <em>tzais</em> (nightfall) based on the opinion of the Magen Avraham that the time to walk the distance of a
@@ -3175,7 +3182,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzais90() -> Date?  {
         return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: 90 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns <em>tzais</em> (nightfall) based on the calculations
      * of <a href="https://en.wikipedia.org/wiki/Avraham_Chaim_Naeh">Rav Chaim Naeh</a> that the time to walk the
@@ -3201,7 +3208,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzais120() -> Date?  {
         return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: 120 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns <em>tzais</em> (dusk) calculated using 120 minutes
      * <em>zmaniyos</em> after {@link #getSeaLevelSunset() sea level sunset}. Since the <em>zman</em>
@@ -3224,7 +3231,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzais120Zmanis() -> Date?  {
         return getZmanisBasedOffset(hours: 2.0);
     }
-
+    
     /**
      * This calculates the time of <em>tzais</em> at the point when the sun is 16.1&deg; below the horizon. This is
      * the sun's dip below the horizon 72 minutes after sunset according Rabbeinu Tam's calculation of <em>tzais</em>
@@ -3248,7 +3255,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzais16Point1Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_16_POINT_1);
     }
-
+    
     /**
      * This method should be used <em>lechumra</em> only and returns <em>tzais</em> based on when the sun is 26&deg;
      * below the horizon.For information on how this is calculated see the comments on {@link #getAlos26Degrees()}.
@@ -3271,7 +3278,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzais26Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_26_DEGREES);
     }
-
+    
     /**
      * For information on how this is calculated see the comments on {@link #getAlos18Degrees()}
      *
@@ -3284,7 +3291,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzais18Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ASTRONOMICAL_ZENITH);
     }
-
+    
     /**
      * For information on how this is calculated see the comments on {@link #getAlos19Point8Degrees()}
      *
@@ -3298,7 +3305,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzais19Point8Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_19_POINT_8);
     }
-
+    
     /**
      * A method to return <em>tzais</em> (dusk) calculated as 96 minutes after sea level sunset. For information on how
      * this is calculated see the comments on {@link #getAlos96()}.
@@ -3312,7 +3319,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzais96() -> Date?  {
         return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: 96 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
-
+    
     /**
      * A method that returns the local time for fixed <em>chatzos</em>. This time is noon and midnight adjusted from
      * standard time to account for the local latitude. The 360&deg; of the globe divided by 24 calculates to 15&deg;
@@ -3335,7 +3342,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getFixedLocalChatzos() -> Date?  {
         return getLocalMeanTime(hours: 12.0);
     }
-
+    
     /**
      * A method that returns the latest <em>zman krias shema</em> (time to recite Shema in the morning) calculated as 3
      * clock hours before {@link #getFixedLocalChatzos()}. Note that there are opinions brought down in Yisrael Vehazmanim
@@ -3366,7 +3373,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaFixedLocal() -> Date?  {
         return ComplexZmanimCalendar.getTimeOffset(time: getFixedLocalChatzos(), offset: -180 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
-
+    
     /**
      * This method returns the latest <em>zman tfila</em> (time to recite the morning prayers) calculated as 2 hours
      * before {@link #getFixedLocalChatzos()}. See the documentation on {@link #getSofZmanShmaFixedLocal()} showing
@@ -3393,7 +3400,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfilaFixedLocal() -> Date? {
         return ComplexZmanimCalendar.getTimeOffset(time: getFixedLocalChatzos(), offset: -120 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
-
+    
     /**
      * Returns the latest time of <em>Kidush Levana</em> according to the <a
      * href="https://en.wikipedia.org/wiki/Yaakov_ben_Moshe_Levi_Moelin">Maharil's</a> opinion that it is calculated as
@@ -3423,7 +3430,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         var gregorianCalendar = Calendar(identifier: .gregorian)
         gregorianCalendar.timeZone = getGeoLocation().getTimeZone()
         jewishCalendar.setGregorianDate(year: gregorianCalendar.component(.year, from: workingDate), month: gregorianCalendar.component(.month, from: workingDate), dayOfMonth: gregorianCalendar.component(.day, from: workingDate));
-
+        
         // Do not calculate for impossible dates, but account for extreme cases. In the extreme case of Rapa Iti in French
         // Polynesia on Dec 2027 when kiddush Levana 3 days can be said on <em>Rosh Chodesh</em>, the sof zman Kiddush Levana
         // will be on the 12th of the Teves. In the case of Anadyr, Russia on Jan, 2071, sof zman Kiddush Levana between the
@@ -3469,7 +3476,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         }
         return nil;
     }
-
+    
     /**
      * Returns the latest time of Kiddush Levana according to the <a
      * href="https://en.wikipedia.org/wiki/Yaakov_ben_Moshe_Levi_Moelin">Maharil's</a> opinion that it is calculated as
@@ -3488,7 +3495,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanKidushLevanaBetweenMoldos() -> Date? {
         return getSofZmanKidushLevanaBetweenMoldos(alos: nil, tzais: nil);
     }
-
+    
     /**
      * Returns the latest time of <em>Kiddush Levana</em> calculated as 15 days after the <em>molad</em>. This is the
      * opinion brought down in the Shulchan Aruch (Orach Chaim 426). It should be noted that some opinions hold that the
@@ -3531,7 +3538,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         }
         return getMoladBasedTime(moladBasedTime: jewishCalendar.getSofZmanKidushLevana15Days(), alos: alos, tzais: tzais, techila: false);
     }
-
+    
     /**
      * Returns the latest time of <em>Kiddush Levana</em> calculated as 15 days after the molad. This is the opinion of
      * the Shulchan Aruch (Orach Chaim 426). It should be noted that some opinions hold that the
@@ -3571,7 +3578,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTchilasZmanKidushLevana3Days() -> Date? {
         return getTchilasZmanKidushLevana3Days(alos: nil, tzais: nil);
     }
-
+    
     /**
      * Returns the earliest time of <em>Kiddush Levana</em> according to <a href=
      * "https://en.wikipedia.org/wiki/Yonah_Gerondi">Rabbeinu Yonah</a>'s opinion that it can be said 3 days after the <em>molad</em>.
@@ -3600,7 +3607,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         var gregorianCalendar = Calendar(identifier: .gregorian)
         gregorianCalendar.timeZone = getGeoLocation().getTimeZone()
         jewishCalendar.setGregorianDate(year: gregorianCalendar.component(.year, from: workingDate), month: gregorianCalendar.component(.month, from: workingDate), dayOfMonth: gregorianCalendar.component(.day, from: workingDate));
-
+        
         // Do not calculate for impossible dates, but account for extreme cases. Tchilas zman kiddush Levana 3 days for
         // the extreme case of Rapa Iti in French Polynesia on Dec 2027 when kiddush Levana 3 days can be said on the evening
         // of the 30th, the second night of Rosh Chodesh. The 3rd day after the <em>molad</em> will be on the 4th of the month.
@@ -3647,7 +3654,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
             return nil;
         }
         var molad = getMoladBasedTime(moladBasedTime: jewishCalendar.getMoladAsDate(), alos: nil, tzais: nil, techila: true);
-
+        
         // deal with molad that happens on the end of the previous month
         if (molad == nil && jewishCalendar.getJewishDayOfMonth() > 26) {
             jewishCalendar.forward()
@@ -3693,7 +3700,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
                                   second: 0)
         return gregorianCalendar.date(from: comp)!;
     }
-
+    
     /**
      * Returns the earliest time of <em>Kiddush Levana</em> according to the opinions that it should not be said until 7
      * days after the <em>molad</em>. If the time of <em>tchilas zman Kiddush Levana</em> occurs during the day (between
@@ -3733,7 +3740,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         
         return getMoladBasedTime(moladBasedTime: jewishCalendar.getTchilasZmanKidushLevana7Days(), alos: alos, tzais: tzais, techila: true);
     }
-
+    
     /**
      * Returns the earliest time of <em>Kiddush Levana</em> according to the opinions that it should not be said until 7
      * days after the <em>molad</em>. The time will be returned even if it occurs during the day when <em>Kiddush Levana</em>
@@ -3748,7 +3755,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTchilasZmanKidushLevana7Days() -> Date? {
         return getTchilasZmanKidushLevana7Days(alos: nil, tzais: nil);
     }
-
+    
     /**
      * This method returns the latest time one is allowed eating <em>chametz</em> on <em>Erev Pesach</em> according to
      * the opinion of the<a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a>. This time is identical to the {@link
@@ -3768,16 +3775,16 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getSofZmanAchilasChametzGRA() -> Date? {
         /*JewishCalendar jewishCalendar = new JewishCalendar();
-        jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-                getCalendar().get(Calendar.DAY_OF_MONTH));
-        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return getSofZmanTfilaGRA();
-        } else {
-            return nil;
-        }*/
+         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
+         getCalendar().get(Calendar.DAY_OF_MONTH));
+         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+         return getSofZmanTfilaGRA();
+         } else {
+         return nil;
+         }*/
         return getSofZmanTfilaGRA();
     }
-
+    
     /**
      * This method returns the latest time one is allowed eating <em>chametz</em> on <em>Erev Pesach</em> according to the
      * opinion of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on <em>alos</em>
@@ -3799,16 +3806,16 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getSofZmanAchilasChametzMGA72Minutes() -> Date? {
         /*JewishCalendar jewishCalendar = new JewishCalendar();
-        jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-                getCalendar().get(Calendar.DAY_OF_MONTH));
-        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return getSofZmanTfilaMGA72Minutes();
-        } else {
-            return nil;
-        }*/
+         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
+         getCalendar().get(Calendar.DAY_OF_MONTH));
+         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+         return getSofZmanTfilaMGA72Minutes();
+         } else {
+         return nil;
+         }*/
         return getSofZmanTfilaMGA72Minutes();
     }
-
+    
     /**
      * This method returns the latest time one is allowed eating <em>chametz</em> on <em>Erev Pesach</em> according to the
      * opinion of the<a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on <em>alos</em>
@@ -3829,16 +3836,16 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getSofZmanAchilasChametzMGA16Point1Degrees() -> Date? {
         /*JewishCalendar jewishCalendar = new JewishCalendar();
-        jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-                getCalendar().get(Calendar.DAY_OF_MONTH));
-        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return getSofZmanTfilaMGA16Point1Degrees();
-        } else {
-            return nil;
-        }*/
+         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
+         getCalendar().get(Calendar.DAY_OF_MONTH));
+         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+         return getSofZmanTfilaMGA16Point1Degrees();
+         } else {
+         return nil;
+         }*/
         return getSofZmanTfilaMGA16Point1Degrees();
     }
-
+    
     /**
      * FIXME adjust for syncronous
      * This method returns the latest time for burning <em>chametz</em> on <em>Erev Pesach</em> according to the opinion
@@ -3855,16 +3862,16 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getSofZmanBiurChametzGRA() -> Date? {
         /*JewishCalendar jewishCalendar = new JewishCalendar();
-        jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-                getCalendar().get(Calendar.DAY_OF_MONTH));
-        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return getTimeOffset(getElevationAdjustedSunrise(), getShaahZmanisGra() * 5);
-        } else {
-            return nil;
-        }*/
+         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
+         getCalendar().get(Calendar.DAY_OF_MONTH));
+         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+         return getTimeOffset(getElevationAdjustedSunrise(), getShaahZmanisGra() * 5);
+         } else {
+         return nil;
+         }*/
         return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunrise(), offset: getShaahZmanisGra() * 5);
     }
-
+    
     /**
      * FIXME adjust for syncronous
      * This method returns the latest time for burning <em>chametz</em> on <em>Erev Pesach</em> according to the opinion of
@@ -3884,16 +3891,16 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getSofZmanBiurChametzMGA72Minutes() -> Date? {
         /*JewishCalendar jewishCalendar = new JewishCalendar();
-        jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-                getCalendar().get(Calendar.DAY_OF_MONTH));
-        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return getTimeOffset(getAlos72(), getShaahZmanisMGA() * 5);
-        } else {
-            return nil;
-        }*/
+         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
+         getCalendar().get(Calendar.DAY_OF_MONTH));
+         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+         return getTimeOffset(getAlos72(), getShaahZmanisMGA() * 5);
+         } else {
+         return nil;
+         }*/
         return ComplexZmanimCalendar.getTimeOffset(time: getAlos72(), offset: getShaahZmanisMGA() * 5);
     }
-
+    
     /**
      * FIXME adjust for syncronous
      * This method returns the latest time for burning <em>chametz</em> on <em>Erev Pesach</em> according to the opinion
@@ -3915,16 +3922,16 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getSofZmanBiurChametzMGA16Point1Degrees() -> Date? {
         /*JewishCalendar jewishCalendar = new JewishCalendar();
-        jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-                getCalendar().get(Calendar.DAY_OF_MONTH));
-        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees() * 5);
-        } else {
-            return nil;
-        }*/
+         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
+         getCalendar().get(Calendar.DAY_OF_MONTH));
+         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+         return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees() * 5);
+         } else {
+         return nil;
+         }*/
         return ComplexZmanimCalendar.getTimeOffset(time: getAlos16Point1Degrees(), offset: getShaahZmanis16Point1Degrees() * 5);
     }
-
+    
     /**
      * A method that returns the <a href="https://en.wikipedia.org/wiki/Shneur_Zalman_of_Liadi">Baal Hatanya</a>'s
      * <em>netz amiti</em> (sunrise) without {@link AstronomicalCalculator#getElevationAdjustment(double)
@@ -3962,7 +3969,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     private func getSunriseBaalHatanya() -> Date? {
         return getSunriseOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_1_POINT_583);
     }
-
+    
     /**
      * A method that returns the <a href="https://en.wikipedia.org/wiki/Shneur_Zalman_of_Liadi">Baal Hatanya</a>'s
      * <em>shkiah amiti</em> (sunset) without {@link AstronomicalCalculator#getElevationAdjustment(double)
@@ -3993,7 +4000,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     private func getSunsetBaalHatanya() -> Date? {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_1_POINT_583);
     }
-
+    
     /**
      * A method that returns the <a href="https://en.wikipedia.org/wiki/Shneur_Zalman_of_Liadi">Baal Hatanya</a>'s
      * a <em>shaah zmanis</em> ({@link #getTemporalHour(Date, Date) temporal hour}). This forms the base for the
@@ -4023,7 +4030,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getShaahZmanisBaalHatanya() -> Int64 {
         return getTemporalHour(startOfDay: getSunriseBaalHatanya(), endOfDay: getSunsetBaalHatanya());
     }
-
+    
     /**
      * Returns the <a href="https://en.wikipedia.org/wiki/Shneur_Zalman_of_Liadi">Baal Hatanya</a>'s <em>alos</em>
      * (dawn) calculated as the time when the sun is 16.9&deg; below the eastern {@link #GEOMETRIC_ZENITH geometric horizon}
@@ -4038,7 +4045,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getAlosBaalHatanya() -> Date? {
         return getSunriseOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_16_POINT_9);
     }
-
+    
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite Shema in the morning). This time is 3
      * {@link #getShaahZmanisBaalHatanya() <em>shaos zmaniyos</em>} (solar hours) after {@link #getSunriseBaalHatanya()
@@ -4056,7 +4063,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaBaalHatanya() -> Date? {
         return getSofZmanShma(startOfDay: getSunriseBaalHatanya(), endOfDay: getSunsetBaalHatanya(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest <em>zman tfilah</em> (time to recite the morning prayers). This time is 4
      * hours into the day based on the opinion of the Baal Hatanya that the day is
@@ -4073,7 +4080,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanTfilaBaalHatanya() -> Date? {
         return getSofZmanTfila(startOfDay: getSunriseBaalHatanya(), endOfDay: getSunsetBaalHatanya(), synchronous: true);
     }
-
+    
     /**
      * This method returns the latest time one is allowed eating <em>chametz</em> on <em>Erev Pesach</em> according to the
      * opinion of the Baal Hatanya. This time is identical to the {@link #getSofZmanTfilaBaalHatanya() <em>Sof zman
@@ -4091,16 +4098,16 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getSofZmanAchilasChametzBaalHatanya() -> Date? {
         /*JewishCalendar jewishCalendar = new JewishCalendar();
-        jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-                getCalendar().get(Calendar.DAY_OF_MONTH));
-        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return getSofZmanTfilaBaalHatanya();
-        } else {
-            return nil;
-        }*/
+         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
+         getCalendar().get(Calendar.DAY_OF_MONTH));
+         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+         return getSofZmanTfilaBaalHatanya();
+         } else {
+         return nil;
+         }*/
         return getSofZmanTfilaBaalHatanya();
     }
-
+    
     /**
      * This method returns the latest time for burning <em>chametz</em> on <em>Erev Pesach</em> according to the opinion of
      * the Baal Hatanya. This time is 5 hours into the day based on the opinion of the Baal Hatanya that the day is calculated
@@ -4115,16 +4122,16 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getSofZmanBiurChametzBaalHatanya() -> Date? {
         /*JewishCalendar jewishCalendar = new JewishCalendar();
-        jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-                getCalendar().get(Calendar.DAY_OF_MONTH));
-        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return getTimeOffset(getSunriseBaalHatanya(), getShaahZmanisBaalHatanya() * 5);
-        } else {
-            return nil;
-        }*/
+         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
+         getCalendar().get(Calendar.DAY_OF_MONTH));
+         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+         return getTimeOffset(getSunriseBaalHatanya(), getShaahZmanisBaalHatanya() * 5);
+         } else {
+         return nil;
+         }*/
         return ComplexZmanimCalendar.getTimeOffset(time: getSunriseBaalHatanya(), offset: getShaahZmanisBaalHatanya() * 5);
     }
-
+    
     /**
      * This method returns the time of <em>mincha gedola</em>. <em>Mincha gedola</em> is the earliest time one can pray
      * <em>mincha</em>. The <a href="https://en.wikipedia.org/wiki/Maimonides">Rambam</a> is of the opinion that it is
@@ -4150,7 +4157,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getMinchaGedolaBaalHatanya() -> Date? {
         return getMinchaGedola(startOfDay: getSunriseBaalHatanya(), endOfDay: getSunsetBaalHatanya(), synchronous: true);
     }
-
+    
     /**
      * FIXME syncronous
      * This is a convenience method that returns the later of {@link #getMinchaGedolaBaalHatanya()} and
@@ -4176,7 +4183,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
             }
         }
     }
-
+    
     /**
      * This method returns the time of <em>mincha ketana</em>. This is the preferred earliest time to pray
      * <em>mincha</em> in the opinion of the <a href="https://en.wikipedia.org/wiki/Maimonides">Rambam</a> and others.
@@ -4197,7 +4204,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getMinchaKetanaBaalHatanya() -> Date? {
         return getMinchaKetana(startOfDay: getSunriseBaalHatanya(), endOfDay: getSunsetBaalHatanya(), synchronous: true);
     }
-
+    
     /**
      * This method returns the time of <em>plag hamincha</em>. This is calculated as 10.75 hours after sunrise. This
      * calculation is based on the opinion of the Baal Hatanya that the day is calculated
@@ -4213,7 +4220,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getPlagHaminchaBaalHatanya() -> Date? {
         return getPlagHamincha(startOfDay: getSunriseBaalHatanya(), endOfDay: getSunsetBaalHatanya(), synchronous: true);
     }
-
+    
     /**
      * A method that returns <em>tzais</em> (nightfall) when the sun is 6&deg; below the western geometric horizon
      * (90&deg;) after {@link #getSunset sunset}. For information on the source of this calculation see
@@ -4342,7 +4349,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanShmaMGA72MinutesToFixedLocalChatzos() -> Date? {
         return getHalfDayBasedZman(startOfHalfDay: getAlos72(), endOfHalfDay: getFixedLocalChatzos(), hours: 3);
     }
-        
+    
     /**
      * This method returns <a href="https://en.wikipedia.org/wiki/Moshe_Feinstein">Rav Moshe Feinstein's</a> opinion of the
      * calculation of <em>sof zman krias shema</em> (latest time to recite <em>Shema</em> in the morning) according to the

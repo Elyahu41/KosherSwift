@@ -60,7 +60,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * @see #isUseElevation()
      * @see #setUseElevation(boolean)
      */
-    private var useElevation:Bool;
+    var useElevation:Bool;
 
     /**
      * Is elevation above sea level calculated for times besides sunrise and sunset. According to Rabbi Dovid Yehuda
@@ -110,7 +110,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * @see #getChatzosAsHalfDay()
      * @see #useAstronomicalChatzosForOtherZmanim
      */
-    private var useAstronomicalChatzos = true;
+    var useAstronomicalChatzos = true;
     
     /**
      * Is {@link #getSunTransit() astronomical <em>chatzos</em>} used for {@link #getChatzos()} for enhanced accuracy. For
@@ -162,7 +162,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * @see #setUseAstronomicalChatzos(boolean)
      * @see #getChatzos()
      */
-    private var useAstronomicalChatzosForOtherZmanim = false;
+    var useAstronomicalChatzosForOtherZmanim = false;
     
     /**
      * Is astronomical <em>chatzos</em> used for <em>zmanim</em> calculations besides <em>chatzos</em> itself for enhanced
@@ -239,7 +239,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * The default <em>Shabbos</em> candle lighting offset is 18 minutes. This can be changed via the
      * {@link #setCandleLightingOffset(double)} and retrieved by the {@link #getCandleLightingOffset()}.
      */
-    private var candleLightingOffset = 18;
+    var candleLightingOffset = 18;
     
     /**
      * This method will return {@link #getSeaLevelSunrise() sea level sunrise} if {@link #isUseElevation()} is false (the
@@ -1187,9 +1187,9 @@ public class ZmanimCalendar : AstronomicalCalendar {
             return nil;
         }
         if (hours >= 0) { // forward from start a day
-            return ZmanimCalendar.getTimeOffset(time: startOfHalfDay, offset: Double(shaahZmanis) * hours);
+            return ZmanimCalendar.getTimeOffset(time: startOfHalfDay, offset: (Double(shaahZmanis) * hours) * 1000);
         } else { // subtract from end of day
-            return ZmanimCalendar.getTimeOffset(time: endOfHalfDay, offset: Double(shaahZmanis) * hours);
+            return ZmanimCalendar.getTimeOffset(time: endOfHalfDay, offset: (Double(shaahZmanis) * hours) * 1000);
         }
     }
     

@@ -260,8 +260,8 @@ public class AstronomicalCalendar {
      * @param time
      *            the start time
      * @param offset
-     *            the offset in seconds to add to the time.
-     * @return the {@link Date} with the offset in seconds added to it
+     *            the offset in milliseconds to add to the time.
+     * @return the {@link Date} with the offset in milliseconds added to it
      */
     public static func getTimeOffset(time:Date?, offset:Int64) -> Date? {
         if (time == nil || offset == Int64.min) {
@@ -498,10 +498,12 @@ public class AstronomicalCalendar {
         if sunTransit == nil || sunTransitTomorrow == nil {
             return nil
         }
+        
+        let offset = ((sunTransitTomorrow!.timeIntervalSince1970 - sunTransit!.timeIntervalSince1970) / 2) * 1000
 
         return AstronomicalCalendar.getTimeOffset(
             time: sunTransit,
-            offset: (sunTransitTomorrow!.timeIntervalSince1970 - sunTransit!.timeIntervalSince1970) / 2)
+            offset: offset)
     }
 
     /**

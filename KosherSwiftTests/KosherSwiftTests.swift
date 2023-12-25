@@ -400,20 +400,8 @@ class KosherSwiftTests: XCTestCase {
         let calculator = ComplexZmanimCalendar(location: geoLocation)
         let format = DateFormatter()
         format.timeStyle = .full
-        print(format.string(from: calculator.getAlos72Zmanis()!))
-        print(format.string(from: calculator.getAlosHashachar()!))
-        print(format.string(from: calculator.getSunrise()!))
-        print(format.string(from: calculator.getSofZmanShmaMGA()!))
-        print(format.string(from: calculator.getSofZmanShmaGRA()!))
-        print(format.string(from: calculator.getSofZmanTfilaMGA()!))
-        print(format.string(from: calculator.getSofZmanTfilaGRA()!))
-        print(format.string(from: calculator.getChatzos()!))
-        print(format.string(from: calculator.getMinchaGedola()!))
-        print(format.string(from: calculator.getMinchaKetana()!))
-        print(format.string(from: calculator.getPlagHamincha()!))
-        print(format.string(from: calculator.getSeaLevelSunset()!))
-        print(format.string(from: calculator.getTzais72()!))
-        print(format.string(from: calculator.getTzais()!))
+        calculator.useAstronomicalChatzosForOtherZmanim = true
+        print(format.string(from: calculator.getMinchaGedola72Minutes()!))
     }
 
 //    func testPerformanceExample() throws {
