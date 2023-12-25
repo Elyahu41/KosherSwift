@@ -337,19 +337,18 @@ class KosherSwiftTests: XCTestCase {
         let lakewoodCalculator = ZmanimCalendar(location: geoLocation)
 
         var januaryFirst = DateComponents()
+        januaryFirst.timeZone = gregorianCalendar.timeZone
         januaryFirst.year = 2023
         januaryFirst.month = 12
         januaryFirst.day = 24
-        
-        var alot = lakewoodCalculator.getAlos72()
-        let format = DateFormatter()
-        format.timeZone = gregorianCalendar.timeZone
-        format.timeStyle = .full
         
         januaryFirst.hour = 6
         januaryFirst.minute = 04
         januaryFirst.second = 42
         
+        lakewoodCalculator.workingDate = gregorianCalendar.date(from: januaryFirst)!
+        var alot = lakewoodCalculator.getAlos72()
+
         XCTAssertEqual(alot, gregorianCalendar.date(from: januaryFirst))
         
         var mayFirst = DateComponents()

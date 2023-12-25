@@ -235,22 +235,22 @@ public class JewishCalendar {
      * the Jewish epoch using the RD (Rata Die/Fixed Date or Reingold Dershowitz) day used in Calendrical Calculations.
      * Day 1 is January 1, 0001 Gregorian
      */
-    static let JEWISH_EPOCH = -1373429;
+    static let JEWISH_EPOCH:Int64 = -1373429;
     
     /** The number  of <em>chalakim</em> (18) in a minute.*/
     public static let CHALAKIM_PER_MINUTE = 18;
     /** The number  of <em>chalakim</em> (1080) in an hour.*/
     public static let CHALAKIM_PER_HOUR = 1080;
     /** The number of <em>chalakim</em> (25,920) in a 24 hour day .*/
-    public static let CHALAKIM_PER_DAY = 25920; // 24 * 1080
+    public static let CHALAKIM_PER_DAY:Int64 = 25920; // 24 * 1080
     /** The number  of <em>chalakim</em> in an average Jewish month. A month has 29 days, 12 hours and 793
      * <em>chalakim</em> (44 minutes and 3.3 seconds) for a total of 765,433 <em>chalakim</em>*/
-    public static let CHALAKIM_PER_MONTH = 765433; // (29 * 24 + 12) * 1080 + 793
+    public static let CHALAKIM_PER_MONTH:Int64 = 765433; // (29 * 24 + 12) * 1080 + 793
     /**
      * Days from the beginning of Sunday till molad BaHaRaD. Calculated as 1 day, 5 hours and 204 chalakim = (24 + 5) *
      * 1080 + 204 = 31524
      */
-    public static let CHALAKIM_MOLAD_TOHU = 31524;
+    public static let CHALAKIM_MOLAD_TOHU:Int64 = 31524;
     
     /** the internal count of <em>molad</em> hours.*/
     public var moladHours:Int = 0;
@@ -975,7 +975,7 @@ public class JewishCalendar {
      *            has 29 days, the day will be set as 29.
      */
     public func setJewishDate(year:Int, month:Int, dayOfMonth:Int) {
-        var gregCalendar = Calendar(identifier: .gregorian)
+        var gregCalendar = Calendar(identifier: .hebrew)
         gregCalendar.timeZone = timeZone
         workingDate = gregCalendar.date(from: DateComponents(year: year, month: month, day: dayOfMonth))!
     }
@@ -1302,13 +1302,11 @@ public class JewishCalendar {
      *         evening).
      */
     public func getJewishCalendarElapsedDays(year:Int) -> Int {
-        // The number of chalakim (25,920) in a 24 hour day.
-        let CHALAKIM_PER_DAY: Int = 25920 // 24 * 1080
         let chalakimSince = getChalakimSinceMoladTohu(year: year, month: JewishCalendar.TISHREI)
-        let moladDay = Int(chalakimSince / CHALAKIM_PER_DAY)
-        let moladParts = Int(chalakimSince - chalakimSince / CHALAKIM_PER_DAY * CHALAKIM_PER_DAY)
+        let moladDay = Int64(chalakimSince / JewishCalendar.CHALAKIM_PER_DAY)
+        let moladParts = Int64(chalakimSince - chalakimSince / JewishCalendar.CHALAKIM_PER_DAY * JewishCalendar.CHALAKIM_PER_DAY)
         // delay Rosh Hashana for the 4 dechiyos
-        return addDechiyos(year: year, moladDay: moladDay, moladParts: moladParts)
+        return addDechiyos(year: year, moladDay: Int(moladDay), moladParts: Int(moladParts))
     }
 
     /**
@@ -1361,12 +1359,7 @@ public class JewishCalendar {
      *            constants such as {@link JewishDate#TISHREI}.
      * @return the number of chalakim (parts - 1080 to the hour) from the original hypothetical Molad Tohu
      */
-    func getChalakimSinceMoladTohu(year: Int, month: Int) -> Int {
-        // The number  of chalakim in an average Jewish month. A month has 29 days, 12 hours and 793 chalakim (44 minutes and 3.3 seconds) for a total of 765,433 chalakim
-        let CHALAKIM_PER_MONTH: Int = 765433 // (29 * 24 + 12) * 1080 + 793
-
-        // Days from the beginning of Sunday till molad BaHaRaD. Calculated as 1 day, 5 hours and 204 chalakim = (24 + 5) * 1080 + 204 = 31524
-        let CHALAKIM_MOLAD_TOHU: Int = 31524
+    func getChalakimSinceMoladTohu(year: Int, month: Int) -> Int64 {
         // Jewish lunar month = 29 days, 12 hours and 793 chalakim
         // chalakim since Molad Tohu BeHaRaD - 1 day, 5 hours and 204 chalakim
         var monthOfYear = month
@@ -1378,7 +1371,7 @@ public class JewishCalendar {
         monthsElapsed = monthsElapsed + ((7 * ((year - 1) % 19) + 1) / 19)
         monthsElapsed = monthsElapsed + (monthOfYear - 1)
         // return chalakim prior to BeHaRaD + number of chalakim since
-        return Int(CHALAKIM_MOLAD_TOHU + (CHALAKIM_PER_MONTH * Int(monthsElapsed)))
+        return Int64(JewishCalendar.CHALAKIM_MOLAD_TOHU + (JewishCalendar.CHALAKIM_PER_MONTH * Int64(monthsElapsed)))
     }
 
     /**
@@ -1387,7 +1380,7 @@ public class JewishCalendar {
      *
      * @return the number of chalakim (parts - 1080 to the hour) from the original hypothetical Molad Tohu
      */
-    public func getChalakimSinceMoladTohu() -> Int {
+    public func getChalakimSinceMoladTohu() -> Int64 {
         return getChalakimSinceMoladTohu(year: getJewishYear(), month: getJewishMonth());
     }
 
@@ -2103,25 +2096,25 @@ public class JewishCalendar {
         let chalakim = getChalakimSinceMoladTohu(year: getJewishYear(), month: getJewishMonth())
         let moladToAbsDate = (chalakim / JewishCalendar.CHALAKIM_PER_DAY) + (JewishCalendar.JEWISH_EPOCH)
         var year = moladToAbsDate / 366
-        while (moladToAbsDate >= gregorianDateToAbsDate(year: year+1,month: 1,dayOfMonth: 1)) {
+        while (moladToAbsDate >= gregorianDateToAbsDate(year: Int(year)+1,month: 1,dayOfMonth: 1)) {
             year+=1
         }
         var month = 1
-        while (moladToAbsDate > gregorianDateToAbsDate(year: year, month: month, dayOfMonth: getLastDayOfGregorianMonth(month: month, year: year))) {
+        while (moladToAbsDate > gregorianDateToAbsDate(year: Int(year), month: month, dayOfMonth: getLastDayOfGregorianMonth(month: month, year: Int(year)))) {
             month+=1
         }
-        var dayOfMonth = moladToAbsDate - gregorianDateToAbsDate(year: year, month: month, dayOfMonth: 1) + 1
-        if dayOfMonth > getLastDayOfGregorianMonth(month: month, year: year) {
-            dayOfMonth = getLastDayOfGregorianMonth(month: month, year: year)
+        var dayOfMonth = Int(moladToAbsDate) - gregorianDateToAbsDate(year: Int(year), month: month, dayOfMonth: 1) + 1
+        if dayOfMonth > getLastDayOfGregorianMonth(month: month, year: Int(year)) {
+            dayOfMonth = getLastDayOfGregorianMonth(month: month, year: Int(year))
         }
         let conjunctionDay = chalakim / JewishCalendar.CHALAKIM_PER_DAY
         let conjunctionParts = chalakim - conjunctionDay * JewishCalendar.CHALAKIM_PER_DAY
         
-        moladHours = conjunctionParts / 1080
-        let moladRemainingChalakim = conjunctionParts - moladHours * 1080
-        moladMinutes = moladRemainingChalakim / 18
-        moladChalakim = moladRemainingChalakim - moladMinutes * 18
-        moladHours = (moladHours + 18) % 24
+        self.moladHours = Int(conjunctionParts / 1080)
+        let moladRemainingChalakim = Int(conjunctionParts) - moladHours * 1080
+        self.moladMinutes = moladRemainingChalakim / 18
+        self.moladChalakim = moladRemainingChalakim - moladMinutes * 18
+        self.moladHours = (Int(moladHours) + 18) % 24
     }
     
     /**
@@ -2131,25 +2124,25 @@ public class JewishCalendar {
         let chalakim = getChalakimSinceMoladTohu(year: getJewishYear(), month: getJewishMonth())
         let moladToAbsDate = (chalakim / JewishCalendar.CHALAKIM_PER_DAY) + (JewishCalendar.JEWISH_EPOCH)
         var year = moladToAbsDate / 366
-        while (moladToAbsDate >= gregorianDateToAbsDate(year: year+1,month: 1,dayOfMonth: 1)) {
+        while (moladToAbsDate >= gregorianDateToAbsDate(year: Int(year)+1,month: 1,dayOfMonth: 1)) {
             year+=1
         }
         var month = 1
-        while (moladToAbsDate > gregorianDateToAbsDate(year: year, month: month, dayOfMonth: getLastDayOfGregorianMonth(month: month, year: year))) {
+        while (moladToAbsDate > gregorianDateToAbsDate(year: Int(year), month: month, dayOfMonth: getLastDayOfGregorianMonth(month: month, year: Int(year)))) {
             month+=1
         }
-        var dayOfMonth = moladToAbsDate - gregorianDateToAbsDate(year: year, month: month, dayOfMonth: 1) + 1
-        if dayOfMonth > getLastDayOfGregorianMonth(month: month, year: year) {
-            dayOfMonth = getLastDayOfGregorianMonth(month: month, year: year)
+        var dayOfMonth = Int(moladToAbsDate) - gregorianDateToAbsDate(year: Int(year), month: month, dayOfMonth: 1) + 1
+        if dayOfMonth > getLastDayOfGregorianMonth(month: month, year: Int(year)) {
+            dayOfMonth = getLastDayOfGregorianMonth(month: month, year: Int(year))
         }
         let conjunctionDay = chalakim / JewishCalendar.CHALAKIM_PER_DAY
         let conjunctionParts = chalakim - conjunctionDay * JewishCalendar.CHALAKIM_PER_DAY
         
-        moladHours = conjunctionParts / 1080
-        let moladRemainingChalakim = conjunctionParts - moladHours * 1080
-        moladMinutes = moladRemainingChalakim / 18
-        moladChalakim = moladRemainingChalakim - moladMinutes * 18
-        moladHours = (moladHours + 18) % 24
+        self.moladHours = Int(conjunctionParts / 1080)
+        let moladRemainingChalakim = Int(conjunctionParts) - moladHours * 1080
+        self.moladMinutes = moladRemainingChalakim / 18
+        self.moladChalakim = moladRemainingChalakim - moladMinutes * 18
+        self.moladHours = (Int(moladHours) + 18) % 24
         
         return "The molad is at "
             .appending(String(moladHours))
@@ -2173,16 +2166,16 @@ public class JewishCalendar {
         let chalakim = getChalakimSinceMoladTohu(year: getJewishYear(), month: getJewishMonth())
         let moladToAbsDate = (chalakim / JewishCalendar.CHALAKIM_PER_DAY) + (JewishCalendar.JEWISH_EPOCH)
         var year = moladToAbsDate / 366
-        while (moladToAbsDate >= gregorianDateToAbsDate(year: year+1,month: 1,dayOfMonth: 1)) {
+        while (moladToAbsDate >= gregorianDateToAbsDate(year: Int(year)+1,month: 1,dayOfMonth: 1)) {
             year+=1
         }
         var month = 1
-        while (moladToAbsDate > gregorianDateToAbsDate(year: year, month: month, dayOfMonth: getLastDayOfGregorianMonth(month: month, year: year))) {
+        while (moladToAbsDate > gregorianDateToAbsDate(year: Int(year), month: month, dayOfMonth: getLastDayOfGregorianMonth(month: month, year: Int(year)))) {
             month+=1
         }
-        var dayOfMonth = moladToAbsDate - gregorianDateToAbsDate(year: year, month: month, dayOfMonth: 1) + 1
-        if dayOfMonth > getLastDayOfGregorianMonth(month: month, year: year) {
-            dayOfMonth = getLastDayOfGregorianMonth(month: month, year: year)
+        var dayOfMonth = Int(moladToAbsDate) - gregorianDateToAbsDate(year: Int(year), month: month, dayOfMonth: 1) + 1
+        if dayOfMonth > getLastDayOfGregorianMonth(month: month, year: Int(year)) {
+            dayOfMonth = getLastDayOfGregorianMonth(month: month, year: Int(year))
         }
         let conjunctionDay = chalakim / JewishCalendar.CHALAKIM_PER_DAY
         let conjunctionParts = chalakim - conjunctionDay * JewishCalendar.CHALAKIM_PER_DAY
@@ -2203,13 +2196,13 @@ public class JewishCalendar {
         // The raw molad Date (point in time) must be generated using standard time. Using "Asia/Jerusalem" timezone will result in the time
         // being incorrectly off by an hour in the summer due to DST. Proper adjustment for the actual time in DST will be done by the date
         // formatter class used to display the Date.
-        var moladDay = DateComponents(calendar: calendar, timeZone: TimeZone(identifier: "GMT+2")!, year: year, month: month, day: dayOfMonth, hour: moladHours, minute: moladMinutes, second: Int(moladSeconds)-1)
+        var moladDay = DateComponents(calendar: calendar, timeZone: TimeZone(identifier: "GMT+2")!, year: Int(year), month: Int(month), day: Int(dayOfMonth), hour: Int(moladHours), minute: Int(moladMinutes), second: Int(moladSeconds)-1)
                 
         if moladHours > 6 {
             moladDay.day! += 1
-            moladDay.setValue(moladHours, for: .hour)
+            moladDay.setValue(Int(moladHours), for: .hour)
         }
-        moladDay.setValue((moladHours + 18) % 24, for: .hour)
+        moladDay.setValue((Int(moladHours) + 18) % 24, for: .hour)
                 
         return calendar.date(from: moladDay)!
     }
