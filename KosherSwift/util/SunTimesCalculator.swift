@@ -20,6 +20,16 @@ import Foundation
  * @author &copy; Kevin Boone 2000
  */
 public class SunTimesCalculator : AstronomicalCalculator {
+    
+    static var geoLocation: GeoLocation = GeoLocation()
+    
+    override init() {
+        SunTimesCalculator.geoLocation.setTimeZone(timeZone: TimeZone.current)
+    }
+    
+    init(geoLocation: GeoLocation) {
+        SunTimesCalculator.geoLocation = geoLocation
+    }
 
     /**
      * @see com.kosherjava.zmanim.util.AstronomicalCalculator#getCalculatorName()
@@ -53,7 +63,7 @@ public class SunTimesCalculator : AstronomicalCalculator {
     /**
      * The number of degrees of longitude that corresponds to one hour time difference.
      */
-    private static let DEG_PER_HOUR = 360.0 / 24.0;
+    private static let DEG_PER_HOUR = Double(360.0 / 24.0);
 
     /**
      * @param deg the degrees
@@ -217,17 +227,19 @@ public class SunTimesCalculator : AstronomicalCalculator {
      *         {@link Double#NaN} will be returned.
      */
     private static func getTimeUTC(date:Date, geoLocation:GeoLocation, zenith:Double, isSunrise:Bool) -> Double {
-        let dayOfYear = Calendar(identifier: .gregorian).component(.day, from: date)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = geoLocation.timeZone
+        let dayOfYear = calendar.ordinality(of: .day, in: .year, for: date)!
         let sunMeanAnomaly = getMeanAnomaly(dayOfYear: dayOfYear, longitude: geoLocation.getLongitude(), isSunrise: isSunrise);
         let sunTrueLong = getSunTrueLongitude(sunMeanAnomaly: sunMeanAnomaly);
         let sunRightAscensionHours = getSunRightAscensionHours(sunTrueLongitude: sunTrueLong);
         let cosLocalHourAngle = getCosLocalHourAngle(sunTrueLongitude: sunTrueLong, latitude: geoLocation.getLatitude(), zenith: zenith);
 
-        var localHourAngle = 0;
+        var localHourAngle = Double(0);
         if (isSunrise) {
-            localHourAngle = Int(360.0 - acosDeg(x: cosLocalHourAngle));
+            localHourAngle = Double(360.0 - acosDeg(x: cosLocalHourAngle));
         } else { // sunset
-            localHourAngle = Int(acosDeg(x: cosLocalHourAngle));
+            localHourAngle = Double(acosDeg(x: cosLocalHourAngle));
         }
         let localHour = Double(localHourAngle) / DEG_PER_HOUR;
 

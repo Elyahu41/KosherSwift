@@ -8,7 +8,7 @@
 import Foundation
 
 /**
- * <p>This class extends ZmanimCalendar and provides many more <em>zmanim</em> than available in the ZmanimCalendar. The basis
+ * This class extends ZmanimCalendar and provides many more <em>zmanim</em> than available in the ZmanimCalendar. The basis
  * for most <em>zmanim</em> in this class are from the <em>sefer</em> <b><a href="https://hebrewbooks.org/9765">Yisroel
  * Vehazmanim</a></b> by <b><a href="https://en.wikipedia.org/wiki/Yisroel_Dovid_Harfenes">Rabbi Yisrael Dovid Harfenes</a></b>.
  * As an example of the number of different <em>zmanim</em> made available by this class, there are methods to return 18
@@ -18,43 +18,24 @@ import Foundation
  * ``AstronomicalCalendar``, the base class of the calendars in our API since they are generic methods for calculating
  * time based on degrees or time before or after ``getSunrise()``  and ``getSunset()`` sunset and are of interest
  * for calculation beyond <em>zmanim</em> calculations. Here are some examples.
- * <p>First create the Calendar for the location you would like to calculate:
- *
- * <pre style="background:FEF0C9; display: inline-block;">
- * String locationName = &quot;Lakewood, NJ&quot;;
- * double latitude = 40.0828; // Lakewood, NJ
- * double longitude = -74.222; // Lakewood, NJ
- * double elevation = 20; // optional elevation correction in Meters
+ * First create the Calendar for the location you would like to calculate:
+ * let locationName = &quot;Lakewood, NJ&quot;;
+ * let latitude = 40.0828; // Lakewood, NJ
+ * let longitude = -74.222; // Lakewood, NJ
+ * let elevation = 20; // optional elevation correction in Meters
  * // the String parameter in getTimeZone() has to be a valid timezone listed in
  * // ``TimeZone.knownTimeZoneIdentifiers``
- * TimeZone timeZone = TimeZone.getTimeZone(&quot;America/New_York&quot;);
- * GeoLocation location = new GeoLocation(locationName, latitude, longitude, elevation, timeZone);
- * ComplexZmanimCalendar czc = new ComplexZmanimCalendar(location);
+ * let timeZone = TimeZone(identifier:&quot;America/New_York&quot;);
+ * let location = GeoLocation(locationName, latitude, longitude, elevation, timeZone);
+ * let czc = new ComplexZmanimCalendar(location);
  * // Optionally set the date or it will default to today's date
- * czc.getCalendar().set(Calendar.MONTH, Calendar.FEBRUARY);
- * czc.getCalendar().set(Calendar.DAY_OF_MONTH, 8);</pre>
- * <p>
- * <b>Note:</b> For locations such as Israel where the beginning and end of daylight savings time can fluctuate from
- * year to year, if your version of Java does not have an <a href=
- * "https://www.oracle.com/java/technologies/tzdata-versions.html">up to date timezone database</a>, create a
- * `` java.util.SimpleTimeZone`` with the known start and end of DST.
  * To get <em>alos</em> calculated as 14&deg; below the horizon (as calculated in the calendars published in Montreal),
  * add `` AstronomicalCalendar#GEOMETRIC_ZENITH`` (90) to the 14&deg; offset to get the desired time:
- * <br><br>
- * <pre style="background:FEF0C9; display: inline-block;">
- *  Date alos14 = czc.getSunriseOffsetByDegrees(`` AstronomicalCalendar#GEOMETRIC_ZENITH`` + 14);</pre>
- * <p>
- * To get <em>mincha gedola</em> calculated based on the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern"
- * >Magen Avraham (MGA)</a> using a <em>shaah zmanis</em> based on the day starting
+ * Date alos14 = czc.getSunriseOffsetByDegrees(`` AstronomicalCalendar#GEOMETRIC_ZENITH`` + 14);
+ * To get <em>mincha gedola</em> calculated based on the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> using a <em>shaah zmanis</em> based on the day starting
  * 16.1&deg; below the horizon (and ending 16.1&deg; after sunset) the following calculation can be used:
- *
- * <pre style="background:FEF0C9; display: inline-block;">
- * Date minchaGedola = czc.getTimeOffset(czc.getAlos16point1Degrees(), czc.getShaahZmanis16Point1Degrees() * 6.5);</pre>
- * <p>
  * or even simpler using the included convenience methods
- * <pre style="background:FEF0C9; display: inline-block;">
  * Date minchaGedola = czc.getMinchaGedola(czc.getAlos16point1Degrees(), czc.getShaahZmanis16Point1Degrees());</pre>
- * <p>
  * A little more complex example would be calculating <em>zmanim</em> that rely on a <em>shaah zmanis</em> that is
  * not present in this library. While a drop more complex, it is still rather easy. An example would be to calculate
  * the <a href="https://en.wikipedia.org/wiki/Israel_Isserlein">Trumas Hadeshen</a>'s <em>alos</em> to
@@ -64,30 +45,16 @@ import Foundation
  * do not use identical degree-based offsets, this leads to <em>chatzos</em> being at a time other than the
  * ``getSunTransit()`` solar transit(solar midday). To calculate this <em>zman</em>, use the following steps. Note
  * that <em>plag hamincha</em> is 10.75 hours after the start of the day, and the following steps are all that it takes.
- * <br>
- * <pre style="background:FEF0C9; display: inline-block;">
  * Date plag = czc.getPlagHamincha(czc.getSunriseOffsetByDegrees(``AstronomicalCalendar#GEOMETRIC_ZENITH`` + 12),
- *                 czc.getSunsetOffsetByDegrees(``AstronomicalCalendar#GEOMETRIC_ZENITH`` + ZENITH_7_POINT_083));</pre>
- * <p>
+ *                 czc.getSunsetOffsetByDegrees(``AstronomicalCalendar#GEOMETRIC_ZENITH`` + ZENITH_7_POINT_083));
  * Something a drop more challenging, but still simple, would be calculating a <em>zman</em> using the same "complex"
  * offset day used in the above mentioned Manchester calendar, but for a <em>shaos zmaniyos</em> based <em>zman</em> not
  * supported by this library, such as calculating the point that one should be <em>makpid</em>
  * not to eat on <em>erev Shabbos</em> or <em>erev Yom Tov</em>. This is 9 <em>shaos zmaniyos</em> into the day.
- * <ol>
- *     <li>Calculate the <em>shaah zmanis</em> in milliseconds for this day</li>
- *     <li>Add 9 of these <em>shaos zmaniyos</em> to <em>alos</em> starting at 12&deg;</li>
- * </ol>
- * <br>
- * <pre style="background:FEF0C9; display: inline-block;">
- * long shaahZmanis = czc.getTemporalHour(czc.getSunriseOffsetByDegrees(`` AstronomicalCalendar#GEOMETRIC_ZENITH`` + 12),
- *                         czc.getSunsetOffsetByDegrees(`` AstronomicalCalendar#GEOMETRIC_ZENITH`` + ZENITH_7_POINT_083));
- * Date sofZmanAchila = getTimeOffset(czc.getSunriseOffsetByDegrees(`` AstronomicalCalendar#GEOMETRIC_ZENITH`` + 12),
- *                     shaahZmanis * 9);</pre>
- * <p>
+ * Calculate the <em>shaah zmanis</em> in milliseconds for this day.
+ * Add 9 of these <em>shaos zmaniyos</em> to <em>alos</em> starting at 12&deg;
  * Calculating this <em>sof zman achila</em> according to the <a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a>
- * is simplicity itself.
- * <pre style="background:FEF0C9; display: inline-block;">
- * Date sofZamnAchila = czc.getTimeOffset(czc.getSunrise(), czc.getShaahZmanisGra() * 9);</pre>
+ * is simplicity itself. Keep in mind that Swift does not use milliseconds for their date objects. If you get in a situation where you only have TimeIntervals (seconds), just multiply that amount by 1000 to get milliseconds.
  *
  * @author &copy; Eliyahu Hershfeld 2004 - 2023
  */

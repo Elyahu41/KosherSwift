@@ -549,7 +549,7 @@ public class AstronomicalCalendar {
         
         var components = gregorianCalendar.dateComponents([.era,.year,.month,.weekOfYear,.day,.hour,.minute,.second], from: date)
         
-        components.timeZone = TimeZone.gmt
+        components.timeZone = TimeZone(identifier: "GMT")
         
         let hours = Int(calculatedTime)
         calculatedTime -= Double(hours)
