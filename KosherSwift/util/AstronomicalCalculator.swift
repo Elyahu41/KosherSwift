@@ -38,7 +38,7 @@ public class AstronomicalCalculator {
      * @see #getEarthRadius()
      * @see #setEarthRadius(double)
      */
-    private var earthRadius = 6356.9; // in KM
+    var earthRadius = 6356.9; // in KM
 
     /**
      * A method that returns the earth radius in KM. The value currently defaults to 6356.9 KM if not set.

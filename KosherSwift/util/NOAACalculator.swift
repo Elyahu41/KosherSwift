@@ -32,7 +32,7 @@ public class NOAACalculator : AstronomicalCalculator {
      */
     private static let JULIAN_DAYS_PER_CENTURY = 36525.0;
     
-    private static var geoLocation: GeoLocation = GeoLocation()
+    static var geoLocation: GeoLocation = GeoLocation()
     
     override init() {
         NOAACalculator.geoLocation.setTimeZone(timeZone: TimeZone.current)

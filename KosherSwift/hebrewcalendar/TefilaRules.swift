@@ -30,91 +30,91 @@ public class TefilaRules {
      * @see #isTachanunRecitedEndOfTishrei()
      * @see #setTachanunRecitedEndOfTishrei(boolean)
      */
-    private var tachanunRecitedEndOfTishrei = true;
+    var tachanunRecitedEndOfTishrei = true;
     
     /**
      * The default value is <code>false</code>.
      * @see #isTachanunRecitedWeekAfterShavuos()
      * @see #setTachanunRecitedWeekAfterShavuos(boolean)
      */
-    private var tachanunRecitedWeekAfterShavuos = false;
+    var tachanunRecitedWeekAfterShavuos = false;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecited13SivanOutOfIsrael()
      * @see #setTachanunRecited13SivanOutOfIsrael(boolean)
      */
-    private var tachanunRecited13SivanOutOfIsrael = true;
+    var tachanunRecited13SivanOutOfIsrael = true;
     
     /**
      * The default value is <code>false</code>.
      * @see #isTachanunRecitedPesachSheni()
      * @see #setTachanunRecitedPesachSheni(boolean)
      */
-    private var tachanunRecitedPesachSheni = false;
+    var tachanunRecitedPesachSheni = false;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecited15IyarOutOfIsrael()
      * @see #setTachanunRecited15IyarOutOfIsrael(boolean)
      */
-    private var tachanunRecited15IyarOutOfIsrael = true;
+    var tachanunRecited15IyarOutOfIsrael = true;
     
     /**
      * The default value is <code>false</code>.
      * @see #isTachanunRecitedMinchaErevLagBaomer()
      * @see #setTachanunRecitedMinchaErevLagBaomer(boolean)
      */
-    private var tachanunRecitedMinchaErevLagBaomer = false;
+    var tachanunRecitedMinchaErevLagBaomer = false;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecitedShivasYemeiHamiluim()
      * @see #setTachanunRecitedShivasYemeiHamiluim(boolean)
      */
-    private var tachanunRecitedShivasYemeiHamiluim = true;
+    var tachanunRecitedShivasYemeiHamiluim = true;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecitedWeekOfHod()
      * @see #setTachanunRecitedWeekOfHod(boolean)
      */
-    private var tachanunRecitedWeekOfHod = true;
+    var tachanunRecitedWeekOfHod = true;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecitedWeekOfPurim()
      * @see #setTachanunRecitedWeekOfPurim(boolean)
      */
-    private var tachanunRecitedWeekOfPurim = true;
+    var tachanunRecitedWeekOfPurim = true;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecitedFridays()
      * @see #setTachanunRecitedFridays(boolean)
      */
-    private var tachanunRecitedFridays = true;
+    var tachanunRecitedFridays = true;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecitedSundays()
      * @see #setTachanunRecitedSundays(boolean)
      */
-    private var tachanunRecitedSundays = true;
+    var tachanunRecitedSundays = true;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecitedMinchaAllYear()
      * @see #setTachanunRecitedMinchaAllYear(boolean)
      */
-    private var tachanunRecitedMinchaAllYear = true;
+    var tachanunRecitedMinchaAllYear = true;
     
     /**
      * The default value is <code>false</code>.
      * @see #isMizmorLesodaRecited(JewishCalendar)
      * @see #setMizmorLesodaRecitedErevYomKippurAndPesach(boolean)
      */
-    private var mizmorLesodaRecitedErevYomKippurAndPesach = false;
+    var mizmorLesodaRecitedErevYomKippurAndPesach = false;
     
     /**
      * Returns if <em>tachanun</em> is recited during <em>shacharis</em> on the day in question. There are the many
@@ -402,7 +402,7 @@ public class TefilaRules {
         }
         return false;
     }
-
+    
     /**
      * Returns if <em>hallel shalem</em> is recited on the day in question. self will always return false if {@link
      * #isHallelRecited(JewishCalendar)} returns false.
@@ -417,7 +417,7 @@ public class TefilaRules {
         let inIsrael = jewishCalendar.getInIsrael();
         if (isHallelRecited(jewishCalendar: jewishCalendar)) {
             if ((jewishCalendar.isRoshChodesh() && !jewishCalendar.isChanukah())
-               || (month == JewishCalendar.NISSAN && ((inIsrael && day > 15) || (!inIsrael && day > 16)))) {
+                || (month == JewishCalendar.NISSAN && ((inIsrael && day > 15) || (!inIsrael && day > 16)))) {
                 return false;
             } else {
                 return true;
@@ -455,8 +455,8 @@ public class TefilaRules {
      */
     public func isYaalehVeyavoRecited(jewishCalendar:JewishCalendar) -> Bool {
         return jewishCalendar.isPesach() || jewishCalendar.isShavuos() || jewishCalendar.isRoshHashana() || jewishCalendar.isYomKippur()
-                || jewishCalendar.isSuccos() || jewishCalendar.isShminiAtzeres() || jewishCalendar.isSimchasTorah()
-                || jewishCalendar.isRoshChodesh();
+        || jewishCalendar.isSuccos() || jewishCalendar.isShminiAtzeres() || jewishCalendar.isSimchasTorah()
+        || jewishCalendar.isRoshChodesh();
     }
     
     /**
@@ -498,7 +498,7 @@ public class TefilaRules {
     public func isTachanunRecitedWeekOfPurim() -> Bool {
         return tachanunRecitedWeekOfPurim;
     }
-
+    
     /**
      * Sets if <em>tachanun</em> should be recited during the week of Purim from the 11th through the 17th of {@link
      * JewishCalendar#ADAR <em>Adar</em>} (on a non-leap year), or {@link JewishCalendar#ADAR_II <em>Adar II</em>} (on a leap year).
@@ -511,7 +511,7 @@ public class TefilaRules {
     public func setTachanunRecitedWeekOfPurim(tachanunRecitedWeekOfPurim:Bool) {
         self.tachanunRecitedWeekOfPurim = tachanunRecitedWeekOfPurim;
     }
-
+    
     /**
      * Is <em>tachanun</em> set to be recited during the <em>sefira</em> week of <em>Hod</em> (14 - 20 {@link
      * JewishCalendar#IYAR <em>Iyar</em>}, or the 29th - 35th of the {@link JewishCalendar#getDayOfOmer() <em>Omer</em>}). Some
@@ -523,7 +523,7 @@ public class TefilaRules {
     public func isTachanunRecitedWeekOfHod() -> Bool {
         return tachanunRecitedWeekOfHod;
     }
-
+    
     /**
      * Sets if <em>tachanun</em> should should be recited during the <em>sefira</em> week of <em>Hod</em> (14 - 20
      * {@link JewishCalendar#IYAR <em>Iyar</em>}, or the 29th - 35th of the {@link JewishCalendar#getDayOfOmer() <em>Omer</em>}).
@@ -534,7 +534,7 @@ public class TefilaRules {
     public func setTachanunRecitedWeekOfHod(tachanunRecitedWeekOfHod:Bool) {
         self.tachanunRecitedWeekOfHod = tachanunRecitedWeekOfHod;
     }
-
+    
     /**
      * Is <em>tachanun</em> set to be recited at the end Of {@link JewishCalendar#TISHREI <em>Tishrei</em>}.The Magen Avraham 669:1 and
      * the Pri Chadash 131:7 state that some places to not recite <em>tachanun</em> during self period. The Sh"UT Chasam Sofer on
@@ -549,7 +549,7 @@ public class TefilaRules {
     public func isTachanunRecitedEndOfTishrei() -> Bool {
         return tachanunRecitedEndOfTishrei;
     }
-
+    
     /**
      * Sets if <em>tachanun</em> should be recited at the end of {@link JewishCalendar#TISHREI <em>Tishrei</em>}.
      * @param tachanunRecitedEndOfTishrei is <em>tachanun</em> recited at the end of {@link JewishCalendar#TISHREI <em>Tishrei</em>}.
@@ -571,7 +571,7 @@ public class TefilaRules {
     public func isTachanunRecitedWeekAfterShavuos() -> Bool {
         return tachanunRecitedWeekAfterShavuos;
     }
-
+    
     /**
      * Sets if <em>tachanun</em> should be recited during the week after <em>Shavuos</em>.
      * @param tachanunRecitedWeekAfterShavuos is <em>tachanun</em> recited during the week after Shavuos.
@@ -600,7 +600,7 @@ public class TefilaRules {
     public func isTachanunRecited13SivanOutOfIsrael() -> Bool {
         return tachanunRecited13SivanOutOfIsrael;
     }
-
+    
     /**
      * Sets if <em>tachanun</em> should be recited on the 13th of {@link JewishCalendar#SIVAN <em>Sivan</em>} (<a href=
      * "https://en.wikipedia.org/wiki/Yom_tov_sheni_shel_galuyot"><em>Yom Tov Sheni shel Galuyos</em></a> of the 7th
@@ -630,13 +630,13 @@ public class TefilaRules {
     public func isTachanunRecitedPesachSheni() -> Bool {
         return tachanunRecitedPesachSheni;
     }
-
+    
     /**
      * Sets if <em>tachanun</em> should be recited on {@link JewishCalendar#PESACH_SHENI <em>Pesach Sheni</em>}.
      * @param tachanunRecitedPesachSheni sets if <em>tachanun</em> should be recited on <em>Pesach Sheni</em>.
      * @see #isTachanunRecitedPesachSheni()
      */
-public func setTachanunRecitedPesachSheni(tachanunRecitedPesachSheni:Bool) {
+    public func setTachanunRecitedPesachSheni(tachanunRecitedPesachSheni:Bool) {
         self.tachanunRecitedPesachSheni = tachanunRecitedPesachSheni;
     }
     
@@ -655,7 +655,7 @@ public func setTachanunRecitedPesachSheni(tachanunRecitedPesachSheni:Bool) {
     public func isTachanunRecited15IyarOutOfIsrael() -> Bool {
         return tachanunRecited15IyarOutOfIsrael;
     }
-
+    
     /**
      * Sets if <em>tachanun</em> should be recited on the 15th of {@link JewishCalendar#IYAR <em>Iyar</em>}  (<a href=
      * "https://en.wikipedia.org/wiki/Yom_tov_sheni_shel_galuyot"><em>Yom Tov Sheni shel Galuyos</em></a> of
@@ -680,7 +680,7 @@ public func setTachanunRecitedPesachSheni(tachanunRecitedPesachSheni:Bool) {
     public func isTachanunRecitedMinchaErevLagBaomer() -> Bool {
         return tachanunRecitedMinchaErevLagBaomer;
     }
-
+    
     /**
      * Sets if <em>tachanun</em> should be recited on <em>erev {@link JewishCalendar#LAG_BAOMER Lag Baomer}</em>.
      * @param tachanunRecitedMinchaErevLagBaomer sets if <em>tachanun</em> should be recited on <em>mincha</em>
@@ -705,7 +705,7 @@ public func setTachanunRecitedPesachSheni(tachanunRecitedPesachSheni:Bool) {
     public func isTachanunRecitedShivasYemeiHamiluim() -> Bool {
         return tachanunRecitedShivasYemeiHamiluim;
     }
-
+    
     /**
      * Sets if <em>tachanun</em> should be recited during the <em>Shivas Yemei Hamiluim</em>, from the 23 of
      * {@link JewishCalendar#ADAR <em>Adar</em>} on a non-leap-year or {@link JewishCalendar#ADAR_II <em>Adar II</em>}
@@ -717,7 +717,7 @@ public func setTachanunRecitedPesachSheni(tachanunRecitedPesachSheni:Bool) {
     public func setTachanunRecitedShivasYemeiHamiluim(tachanunRecitedShivasYemeiHamiluim:Bool) {
         self.tachanunRecitedShivasYemeiHamiluim = tachanunRecitedShivasYemeiHamiluim;
     }
-
+    
     /**
      * Is <em>tachanun</em> set to be recited on Fridays. Some <em>chasidishe</em> communities do not recite
      * <em>tachanun</em> on Fridays. See <a href="https://hebrewbooks.org/pdfpager.aspx?req=41190&st=&pgnum=10">Likutei
@@ -728,7 +728,7 @@ public func setTachanunRecitedPesachSheni(tachanunRecitedPesachSheni:Bool) {
     public func isTachanunRecitedFridays() -> Bool {
         return tachanunRecitedFridays;
     }
-
+    
     /**
      * Sets if <em>tachanun</em> should be recited on Fridays.
      * @param tachanunRecitedFridays sets if <em>tachanun</em> should be recited on Fridays. Some <em>chasidishe</em>
@@ -738,7 +738,7 @@ public func setTachanunRecitedPesachSheni(tachanunRecitedPesachSheni:Bool) {
     public func setTachanunRecitedFridays(tachanunRecitedFridays:Bool) {
         self.tachanunRecitedFridays = tachanunRecitedFridays;
     }
-
+    
     /**
      * Is <em>tachanun</em> set to be recited on Sundays. Some <em>chasidishe</em> communities do not recite
      * <em>tachanun</em> on Sundays. See <a href="https://hebrewbooks.org/pdfpager.aspx?req=41190&st=&pgnum=10">Likutei
@@ -749,7 +749,7 @@ public func setTachanunRecitedPesachSheni(tachanunRecitedPesachSheni:Bool) {
     public func isTachanunRecitedSundays() -> Bool {
         return tachanunRecitedSundays;
     }
-
+    
     /**
      * Sets if <em>tachanun</em> should be recited on Sundays.
      * @param tachanunRecitedSundays sets if <em>tachanun</em> should be recited on Sundays. Some <em>chasidishe</em>
@@ -770,7 +770,7 @@ public func setTachanunRecitedPesachSheni(tachanunRecitedPesachSheni:Bool) {
     public func isTachanunRecitedMinchaAllYear() -> Bool{
         return tachanunRecitedMinchaAllYear;
     }
-
+    
     /**
      * Sets if <em>tachanun</em> should be recited in <em>Mincha</em> the entire year.
      * @param tachanunRecitedMinchaAllYear sets if <em>tachanun</em> should be recited by <em>mincha</em> all year. If set
@@ -781,7 +781,7 @@ public func setTachanunRecitedPesachSheni(tachanunRecitedPesachSheni:Bool) {
     public func setTachanunRecitedMinchaAllYear(tachanunRecitedMinchaAllYear:Bool) {
         self.tachanunRecitedMinchaAllYear = tachanunRecitedMinchaAllYear;
     }
-
+    
     /**
      * Sets if <em>Mizmor Lesoda</em> should be recited on <em>Erev Yom Kippur</em>, <em>Erev Pesach</em> and <em>Chol
      * Hamoed Pesach</em>. Ashkenazi congregations do not recite it on these days, while Sephardi congregations do. The
@@ -806,5 +806,5 @@ public func setTachanunRecitedPesachSheni(tachanunRecitedPesachSheni:Bool) {
     public func isMizmorLesodaRecitedErevYomKippurAndPesach() -> Bool {
         return mizmorLesodaRecitedErevYomKippurAndPesach;
     }
-
+    
 }

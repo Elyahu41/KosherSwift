@@ -401,7 +401,7 @@ class KosherSwiftTests: XCTestCase {
         let format = DateFormatter()
         format.timeStyle = .full
         calculator.useAstronomicalChatzosForOtherZmanim = true
-        print(format.string(from: calculator.getMinchaGedola72Minutes()!))
+        print(format.string(from: calculator.getTzais13Point5Zmanis()!))
     }
 
 //    func testPerformanceExample() throws {

@@ -60,12 +60,12 @@ public class AstronomicalCalendar {
     /**
      * the {@link GeoLocation} used for calculations.
      */
-    private var geoLocation:GeoLocation;
+    var geoLocation:GeoLocation;
 
     /**
      * the internal {@link AstronomicalCalculator} used for calculating solar based times.
      */
-    private var astronomicalCalculator:AstronomicalCalculator;
+    var astronomicalCalculator:AstronomicalCalculator;
 
     /**
      * The getSunrise method Returns a <code>Date</code> representing the

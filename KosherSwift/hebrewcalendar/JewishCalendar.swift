@@ -23,7 +23,7 @@ public class JewishCalendar {
      * In Swift the value for the month of Nissan is always 8 as swift uses Tishrei as the 1st month.
      *
      * Value of the month field indicating Nissan, the first numeric month of the year in the Jewish calendar. With the
-     * year starting at {@link #TISHREI}, it would actually be the 7th (or 8th in a {@link #isJewishLeapYear() leap
+     * year starting at ``TISHREI``, it would actually be the 7th (or 8th in a {@link #isJewishLeapYear() leap
      * year}) month of the year.
      *
      */
@@ -33,7 +33,7 @@ public class JewishCalendar {
      * In Swift the value for the month of Iyar is always 9 as swift uses Tishrei as the 1st month.
      *
      * Value of the month field indicating Iyar, the second numeric month of the year in the Jewish calendar. With the
-     * year starting at {@link #TISHREI}, it would actually be the 8th (or 9th in a {@link #isJewishLeapYear() leap
+     * year starting at ``TISHREI``, it would actually be the 8th (or 9th in a {@link #isJewishLeapYear() leap
      * year}) month of the year.
      */
     static let IYAR = 9;
@@ -42,7 +42,7 @@ public class JewishCalendar {
      * In Swift the value for the month of Sivan is always 10 as swift uses Tishrei as the 1st month.
      *
      * Value of the month field indicating Sivan, the third numeric month of the year in the Jewish calendar. With the
-     * year starting at {@link #TISHREI}, it would actually be the 9th (or 10th in a {@link #isJewishLeapYear() leap
+     * year starting at ``TISHREI``, it would actually be the 9th (or 10th in a {@link #isJewishLeapYear() leap
      * year}) month of the year.
      */
     static let SIVAN = 10;
@@ -51,7 +51,7 @@ public class JewishCalendar {
      * In Swift the value for the month of Tammuz is always 11 as swift uses Tishrei as the 1st month.
      *
      * Value of the month field indicating Tammuz, the fourth numeric month of the year in the Jewish calendar. With the
-     * year starting at {@link #TISHREI}, it would actually be the 10th (or 11th in a {@link #isJewishLeapYear() leap
+     * year starting at ``TISHREI``, it would actually be the 10th (or 11th in a {@link #isJewishLeapYear() leap
      * year}) month of the year.
      */
     static let TAMMUZ = 11;
@@ -60,7 +60,7 @@ public class JewishCalendar {
      * In Swift the value for the month of Av is always 12 as swift uses Tishrei as the 1st month.
      *
      * Value of the month field indicating Av, the fifth numeric month of the year in the Jewish calendar. With the year
-     * starting at {@link #TISHREI}, it would actually be the 11th (or 12th in a {@link #isJewishLeapYear() leap year})
+     * starting at ``TISHREI``, it would actually be the 11th (or 12th in a ``isJewishLeapYear()``)
      * month of the year.
      */
     static let AV = 12;
@@ -69,7 +69,7 @@ public class JewishCalendar {
      * In Swift the value for the month of Elul is always 13 as swift uses Tishrei as the 1st month.
      *
      * Value of the month field indicating Elul, the sixth numeric month of the year in the Jewish calendar. With the
-     * year starting at {@link #TISHREI}, it would actually be the 12th (or 13th in a {@link #isJewishLeapYear() leap
+     * year starting at ``TISHREI``, it would actually be the 12th (or 13th in a {@link #isJewishLeapYear() leap
      * year}) month of the year.
      */
     static let ELUL = 13;
@@ -86,7 +86,7 @@ public class JewishCalendar {
      * In Swift the value for the month of Cheshvan is always 2 as swift uses Tishrei as the 1st month.
      *
      * Value of the month field indicating Cheshvan/marcheshvan, the eighth numeric month of the year in the Jewish
-     * calendar. With the year starting at {@link #TISHREI}, it would actually be the 2nd month of the year.
+     * calendar. With the year starting at ``TISHREI``, it would actually be the 2nd month of the year.
      */
     static let CHESHVAN = 2;
     
@@ -94,7 +94,7 @@ public class JewishCalendar {
      * In Swift the value for the month of Kislev is always 3 as swift uses Tishrei as the 1st month.
      *
      * Value of the month field indicating Kislev, the ninth numeric month of the year in the Jewish calendar. With the
-     * year starting at {@link #TISHREI}, it would actually be the 3rd month of the year.
+     * year starting at ``TISHREI``, it would actually be the 3rd month of the year.
      */
     static let KISLEV = 3;
     
@@ -102,7 +102,7 @@ public class JewishCalendar {
      * In Swift the value for the month of Teves is always 4 as swift uses Tishrei as the 1st month.
      *
      * Value of the month field indicating Teves, the tenth numeric month of the year in the Jewish calendar. With the
-     * year starting at {@link #TISHREI}, it would actually be the 4th month of the year.
+     * year starting at ``TISHREI``, it would actually be the 4th month of the year.
      */
     static let TEVES = 4;
     
@@ -110,7 +110,7 @@ public class JewishCalendar {
      * In Swift the value for the month of Shevat is always 5 as swift uses Tishrei as the 1st month.
      *
      * Value of the month field indicating Shevat, the eleventh numeric month of the year in the Jewish calendar. With
-     * the year starting at {@link #TISHREI}, it would actually be the 5th month of the year.
+     * the year starting at ``TISHREI``, it would actually be the 5th month of the year.
      */
     static let SHEVAT = 5;
     
@@ -119,8 +119,8 @@ public class JewishCalendar {
      * it will return the number 7, since Adar (the 6th month) is not used. Even though there is no Adar II on non leap years,
      * that is the way swift's hebrew calendar class is designed.
      *
-     * Value of the month field indicating Adar (or Adar I in a {@link #isJewishLeapYear() leap year}), the twelfth
-     * numeric month of the year in the Jewish calendar. With the year starting at {@link #TISHREI}, it would actually
+     * Value of the month field indicating Adar (or Adar I in a ``isJewishLeapYear()``), the twelfth
+     * numeric month of the year in the Jewish calendar. With the year starting at ``TISHREI``, it would actually
      * be the 6th month of the year.
      *
      */
@@ -130,8 +130,8 @@ public class JewishCalendar {
      * In Swift, Adar II is ALWAYS the 7th month and it will be returned on NON leap years during the month of Adar. Please keep this in mind.
      *
      * Value of the month field indicating Adar II, the leap (intercalary or embolismic) thirteenth (Undecimber) numeric
-     * month of the year added in Jewish {@link #isJewishLeapYear() leap year}). The leap years are years 3, 6, 8, 11,
-     * 14, 17 and 19 of a 19 year cycle. With the year starting at {@link #TISHREI}, it would actually be the 7th month
+     * month of the year added in Jewish ``isJewishLeapYear()``). The leap years are years 3, 6, 8, 11,
+     * 14, 17 and 19 of a 19 year cycle. With the year starting at ``TISHREI``, it would actually be the 7th month
      * of the year.
      */
     static let ADAR_II = 7;
@@ -508,7 +508,7 @@ public class JewishCalendar {
         }
 
         /**
-         * Returns this week's {@link Parsha <em>Parsha</em>} if it is <em>Shabbos</em>. It returns {@link Parsha#NONE} if the date
+         * Returns this week's ``Parsha`` if it is <em>Shabbos</em>. It returns {@link Parsha#NONE} if the date
          * is a weekday or if there is no <em>parsha</em> that week (for example <em>Yom Tov</em> that falls on a <em>Shabbos</em>).
          *
          * @return the current <em>parsha</em>.
@@ -529,14 +529,14 @@ public class JewishCalendar {
         }
         
         /**
-         * Returns the upcoming {@link Parsha <em>Parsha</em>} regardless of if it is the weekday or <em>Shabbos</em> (where next
+         * Returns the upcoming ``Parsha`` regardless of if it is the weekday or <em>Shabbos</em> (where next
          * Shabbos's <em>Parsha</em> will be returned. This is unlike {@link #getParshah()} that returns {@link Parsha#NONE} if
          * the date is not <em>Shabbos</em>. If the upcoming <em>Shabbos</em> is a <em>Yom Tov</em> and has no <em>Parsha</em>, the
          * following week's <em>Parsha</em> will be returned.
          *
          * @return the upcoming <em>parsha</em>.
          */
-        public func getUpcomingParshah() -> Parsha{
+        public func getUpcomingParshah() -> Parsha {
             let clone = JewishCalendar(workingDate: workingDate, inIsrael: inIsrael, useModernHolidays: useModernHolidays)
             let daysToShabbos = (7 - getDayOfWeek() + 7) % 7;
             if (getDayOfWeek() != 7) {
@@ -551,7 +551,7 @@ public class JewishCalendar {
         }
         
         /**
-         * Returns a {@link Parsha <em>Parsha</em>} enum if the <em>Shabbos</em> is one of the four <em>parshiyos</em> of {@link
+         * Returns a ``Parsha`` enum if the <em>Shabbos</em> is one of the four <em>parshiyos</em> of {@link
          * Parsha#SHKALIM <em>Shkalim</em>}, {@link Parsha#ZACHOR <em>Zachor</em>}, {@link Parsha#PARA <em>Para</em>}, {@link
          * Parsha#HACHODESH <em>Hachdesh</em>}, or five other special <em>Shabbasos</em> of {@link Parsha#HAGADOL <em>Hagadol</em>},
          * {@link Parsha#CHAZON <em>Chazon</em>}, {@link Parsha#NACHAMU <em>Nachamu</em>}, {@link Parsha#SHUVA <em>Shuva</em>},

@@ -16,12 +16,12 @@ public class Daf {
     /**
      * {@link #getMasechtaNumber()} and {@link #setMasechtaNumber(int)}.
      */
-    private var masechtaNumber:Int = 0
+    var masechtaNumber:Int = 0
     
     /**
      * See {@link #getDaf()} and {@link #setDaf(int)}.
      */
-    private var daf:Int = 0
+    var daf:Int = 0
 
     /**
      * See {@link #getMasechtaTransliterated()} and {@link #setMasechtaTransliterated(String[])}.

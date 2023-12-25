@@ -231,8 +231,7 @@ public class SunTimesCalculator : AstronomicalCalculator {
         }
         let localHour = Double(localHourAngle) / DEG_PER_HOUR;
 
-        let localMeanTime = getLocalMeanTime(localHour: localHour, sunRightAscensionHours: sunRightAscensionHours,
-                                             approxTimeDays: getApproxTimeDays(dayOfYear: dayOfYear, hoursFromMeridian: getHoursFromMeridian(longitude: geoLocation.getLongitude()), isSunrise: isSunrise));
+        let localMeanTime = getLocalMeanTime(localHour: localHour, sunRightAscensionHours: sunRightAscensionHours, approxTimeDays: getApproxTimeDays(dayOfYear: dayOfYear, hoursFromMeridian: getHoursFromMeridian(longitude: geoLocation.getLongitude()), isSunrise: isSunrise));
         var pocessedTime = localMeanTime - getHoursFromMeridian(longitude: geoLocation.getLongitude());
         while (pocessedTime < 0.0) {
             pocessedTime += 24.0;
