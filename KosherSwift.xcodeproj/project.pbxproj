@@ -109,10 +109,18 @@
 			path = util;
 			sourceTree = "<group>";
 		};
-		CEDE8FA42B3272B700D74115 = {
+		CE691CE92B3A48D400AAC606 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				CEDE8FB02B3272B700D74115 /* KosherSwift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		CEDE8FA42B3272B700D74115 = {
+			isa = PBXGroup;
+			children = (
+				CE691CE92B3A48D400AAC606 /* Sources */,
 				CEDE8FBC2B3272B700D74115 /* KosherSwiftTests */,
 				CEDE8FAF2B3272B700D74115 /* Products */,
 			);
