@@ -1002,7 +1002,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      *
      * @see AstronomicalCalendar#AstronomicalCalendar()
      */
-    override init() {
+    public override init() {
         self.useElevation = false
         super.init();
     }
@@ -1013,7 +1013,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * @param location
      *            the location
      */
-    init(location:GeoLocation) {
+    public init(location:GeoLocation) {
         self.useElevation = false
         super.init(geoLocation: location);
     }

@@ -130,7 +130,7 @@ public class Daf {
      * @param masechtaNumber the <em>masechta</em> number in the order of the Daf Yomi to set as the current <em>masechta</em>.
      * @param daf the <em>daf</em> (page) number to set.
      */
-    init(masechtaNumber: Int, daf: Int) {
+    public init(masechtaNumber: Int, daf: Int) {
         self.masechtaNumber = masechtaNumber
         self.daf = daf
     }

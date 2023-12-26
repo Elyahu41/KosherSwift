@@ -109,7 +109,7 @@ public class GeoLocation {
      * @param timeZone
      *            the <code>TimeZone</code> for the location.
      */
-    init(locationName: String, latitude: Double, longitude: Double, timeZone: TimeZone) {
+    public init(locationName: String, latitude: Double, longitude: Double, timeZone: TimeZone) {
         self.locationName = locationName
         self.latitude = latitude
         self.longitude = longitude
@@ -135,7 +135,7 @@ public class GeoLocation {
      * @param timeZone
      *            the <code>TimeZone</code> for the location.
      */
-    init(locationName: String, latitude: Double, longitude: Double, elevation:Double, timeZone: TimeZone) {
+    public init(locationName: String, latitude: Double, longitude: Double, elevation:Double, timeZone: TimeZone) {
         self.locationName = locationName
         self.latitude = latitude
         self.longitude = longitude
@@ -148,7 +148,7 @@ public class GeoLocation {
      * GMT. The longitude will be set to 0 and the latitude will be 51.4772 to match the location of the <a
      * href="https://www.rmg.co.uk/royal-observatory">Royal Observatory, Greenwich</a>. No daylight savings time will be used.
      */
-    init() {
+    public init() {
         locationName = "Greenwich, England"
         latitude = 51.4772
         longitude = 0

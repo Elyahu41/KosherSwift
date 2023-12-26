@@ -23,11 +23,11 @@ public class SunTimesCalculator : AstronomicalCalculator {
     
     static var geoLocation: GeoLocation = GeoLocation()
     
-    override init() {
+    public override init() {
         SunTimesCalculator.geoLocation.setTimeZone(timeZone: TimeZone.current)
     }
     
-    init(geoLocation: GeoLocation) {
+    public init(geoLocation: GeoLocation) {
         SunTimesCalculator.geoLocation = geoLocation
     }
 

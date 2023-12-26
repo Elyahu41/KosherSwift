@@ -34,11 +34,11 @@ public class NOAACalculator : AstronomicalCalculator {
     
     static var geoLocation: GeoLocation = GeoLocation()
     
-    override init() {
+    public override init() {
         NOAACalculator.geoLocation.setTimeZone(timeZone: TimeZone.current)
     }
     
-    init(geoLocation: GeoLocation) {
+    public init(geoLocation: GeoLocation) {
         NOAACalculator.geoLocation = geoLocation
     }
 

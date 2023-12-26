@@ -58,7 +58,7 @@ public class Time {
      * @param seconds the seconds to set
      * @param milliseconds the milliseconds to set
      */
-    init(hours: Int = 0, minutes: Int = 0, seconds: Int = 0, milliseconds: Int = 0) {
+    public init(hours: Int = 0, minutes: Int = 0, seconds: Int = 0, milliseconds: Int = 0) {
         self.hours = hours
         self.minutes = minutes
         self.seconds = seconds
@@ -70,7 +70,7 @@ public class Time {
      * calls {@link #Time(int)}
      * @param millis the milliseconds to set the object with.
      */
-    convenience init(millis:Double) {
+    public convenience init(millis:Double) {
         self.init(millis: Int(millis));
     }
 
@@ -79,7 +79,7 @@ public class Time {
      * and milliseconds. If the milliseconds are negative it will call {@link #setIsNegative(boolean)}.
      * @param millis the milliseconds to set.
      */
-    init(millis:Int) {
+    public init(millis:Int) {
         var adjustedMillis = millis;
         if (adjustedMillis < 0) {
             self.isNegative = true;

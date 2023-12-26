@@ -394,7 +394,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see  ZmanimCalendar#ZmanimCalendar(GeoLocation)
      */
-    override init(location:GeoLocation) {
+    public override init(location:GeoLocation) {
         super.init(location: location)
     }
     
@@ -404,7 +404,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see  AstronomicalCalendar#AstronomicalCalendar()
      */
-    override init() {
+    public override init() {
         super.init();
     }
     

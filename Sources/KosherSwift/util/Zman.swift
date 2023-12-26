@@ -77,7 +77,7 @@ public class Zman {
      * @param label the label of the  <em>zman</em> such as "<em>Sof Zman Krias Shema GRA</em>".
      * @see #Zman(long, String)
      */
-    init(label: String, zman: Date?) {
+    public init(label: String, zman: Date?) {
         self.label = label
         self.zman = zman
         self.duration = 0
@@ -93,7 +93,7 @@ public class Zman {
      * @param label the label of the  <em>zman</em> such as "<em>Shaah Zmanis GRA</em>".
      * @see #Zman(Date, String)
      */
-    init(label: String, duration: Int64) {
+    public init(label: String, duration: Int64) {
         self.label = label
         self.duration = duration
         self.description = ""

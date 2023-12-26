@@ -81,7 +81,7 @@ public class HebrewDateFormatter {
     /**
      * Default constructor sets the {@link EnumMap}s of Hebrew and default transliterated parshiyos.
      */
-    init() {
+    public init() {
         transliteratedParshaMap = [
             JewishCalendar.Parsha.NONE: "",
             JewishCalendar.Parsha.BERESHIS: "Bereshis",

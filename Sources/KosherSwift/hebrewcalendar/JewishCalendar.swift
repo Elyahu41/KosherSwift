@@ -714,7 +714,7 @@ public class JewishCalendar {
         workingDate = workingDate.advanced(by: -86400)
     }
     
-    init() {}
+    public init() {}
     
     /**
      * A constructor that initializes the date to the Date parameter. useModernHolidays and inIsrael will be set to false
@@ -722,7 +722,7 @@ public class JewishCalendar {
      * @param date
      *            the <code>Date</code> to set the calendar to
      */
-    init(workingDate:Date) {
+    public init(workingDate:Date) {
         self.workingDate = workingDate
     }
     
@@ -732,7 +732,7 @@ public class JewishCalendar {
      * @param date
      *            the <code>Date</code> to set the calendar to
      */
-    init(workingDate:Date, timezone:TimeZone) {
+    public init(workingDate:Date, timezone:TimeZone) {
         self.workingDate = workingDate
         self.timeZone = timezone
     }
@@ -744,7 +744,7 @@ public class JewishCalendar {
      * @param inIsrael a bool to determine whether or not the methods should use in Israel calculations
      * @param shouldUseModernHolidays a bool to determine to use modern holidays in the methods or not
      */
-    init(workingDate:Date, inIsrael:Bool, useModernHolidays:Bool) {
+    public init(workingDate:Date, inIsrael:Bool, useModernHolidays:Bool) {
         self.workingDate = workingDate
         self.inIsrael = inIsrael
         self.useModernHolidays = useModernHolidays
@@ -757,7 +757,7 @@ public class JewishCalendar {
      * @param inIsrael a bool to determine whether or not the methods should use in Israel calculations
      * @param shouldUseModernHolidays a bool to determine to use modern holidays in the methods or not
      */
-    init(workingDate:Date, timezone:TimeZone, inIsrael:Bool, useModernHolidays:Bool) {
+    public init(workingDate:Date, timezone:TimeZone, inIsrael:Bool, useModernHolidays:Bool) {
         self.workingDate = workingDate
         self.inIsrael = inIsrael
         self.useModernHolidays = useModernHolidays
@@ -771,7 +771,7 @@ public class JewishCalendar {
      * @param isInIsrael a bool to determine whether or not the methods should use in Israel calculations
      * @param shouldUseModernHolidays a bool to determine to use modern holidays in the methods or not
      */
-    init(jewishYear:Int, jewishMonth:Int, jewishDayOfMonth:Int) {//Test this
+    public init(jewishYear:Int, jewishMonth:Int, jewishDayOfMonth:Int) {//Test this
         var hebrewCalendar = Calendar(identifier: .hebrew)
         hebrewCalendar.timeZone = timeZone
         workingDate = hebrewCalendar.date(from: DateComponents(calendar: hebrewCalendar, year: jewishYear, month: jewishMonth, day: jewishDayOfMonth))!
@@ -785,7 +785,7 @@ public class JewishCalendar {
      * @param jewishDayOfMonth
      * @param isInIsrael a bool to determine whether or not the methods should use in Israel calculations
      */
-    init(jewishYear:Int, jewishMonth:Int, jewishDayOfMonth:Int, isInIsrael:Bool) {//Test this
+    public init(jewishYear:Int, jewishMonth:Int, jewishDayOfMonth:Int, isInIsrael:Bool) {//Test this
         var hebrewCalendar = Calendar(identifier: .hebrew)
         hebrewCalendar.timeZone = timeZone
         workingDate = hebrewCalendar.date(from: DateComponents(calendar: hebrewCalendar, year: jewishYear, month: jewishMonth, day: jewishDayOfMonth))!

@@ -321,7 +321,7 @@ public class AstronomicalCalendar {
      * Default constructor will set a default {@link GeoLocation#GeoLocation()}, a default
      * {@link AstronomicalCalculator#getDefault() AstronomicalCalculator} and default the calendar to the current date.
      */
-    init() {
+    public init() {
         self.workingDate = Date()
         self.geoLocation = GeoLocation()
         self.astronomicalCalculator = AstronomicalCalculator.getDefault(geoLocation: self.geoLocation);
@@ -337,7 +337,7 @@ public class AstronomicalCalendar {
      *
      * @see #setAstronomicalCalculator(AstronomicalCalculator) for changing the calculator class.
      */
-    init(geoLocation:GeoLocation) {
+    public init(geoLocation:GeoLocation) {
         self.workingDate = Date()
         self.geoLocation = geoLocation
         self.astronomicalCalculator = AstronomicalCalculator.getDefault(geoLocation: self.geoLocation);
