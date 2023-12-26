@@ -553,13 +553,19 @@ public class AstronomicalCalendar {
         
         let hours = Int(calculatedTime)
         calculatedTime -= Double(hours)
-        let minutes = Int(calculatedTime * 60)
-        calculatedTime -= Double(minutes) / 60
-        let seconds = Int(calculatedTime * 3600)
-        
+
+        calculatedTime = calculatedTime * 60
+        let minutes = Int(calculatedTime)
+        calculatedTime -= Double(minutes)
+
+        calculatedTime = calculatedTime * 60
+        let seconds = Int(calculatedTime)
+        calculatedTime -= Double(seconds)
+
         components.hour = hours
         components.minute = minutes
         components.second = seconds
+        components.nanosecond = Int(calculatedTime * 1000 * 1000000)
         
         var returnDate = gregorianCalendar.date(from: components)
         

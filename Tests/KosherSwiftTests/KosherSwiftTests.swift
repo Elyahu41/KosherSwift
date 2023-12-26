@@ -399,7 +399,6 @@ class KosherSwiftTests: XCTestCase {
         let calculator = ComplexZmanimCalendar(location: geoLocation)
         let format = DateFormatter()
         format.timeStyle = .full
-        calculator.astronomicalCalculator = SunTimesCalculator()
         print(format.string(from: calculator.getSeaLevelSunrise()!))
         print(format.string(from: calculator.getSeaLevelSunset()!))
     }

@@ -3048,8 +3048,8 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     }
     
     /**
-     * Method to return <em>tzais</em> (dusk) calculated as 13.5 minutes zmaniyos.
-     *
+     * Method to return <em>tzais</em> (dusk) calculated as 13.5 minutes zmaniyos after sunset.
+     * - Warning: This zman is EXTREMELY early! It is so early that it was removed from KosherJava since it caused a situation the developer, Eliyahu Hershfeld, was uncomfortable with. The situation was in Canada where a user using his phone saw that this time was listed as the time for nightfall, and he figured that he could end shabbos then. Whie there are no poskim that write to do that! The earliest time that I have found to end shabbos is 20 regular minutes after sunset and that is only in Israel and the surrounding areas. Every where else was recommended 30 minutes at the bare minimum. Therefore, someone who wants to use/include this time has an obligation to make sure that it does not get used for shabbos by dimming it or showing another time.
      * @return the <code>Date</code> representing the time. If the calculation can't be computed such as in the Arctic
      *         Circle where there is at least one day a year where the sun does not rise, and one where it does not set,
      *         a <code>nil</code> will be returned. See detailed explanation on top of the ``AstronomicalCalendar``
