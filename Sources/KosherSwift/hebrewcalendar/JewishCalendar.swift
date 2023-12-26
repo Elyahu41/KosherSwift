@@ -2345,7 +2345,7 @@ public class JewishCalendar {
     }
 
     /**
-     * returns true if the current hebrew year is a shmita year. Note that ccording to Rashi and other Rishonim, the year before is the year of shmita.
+     * returns true if the current hebrew year is a shmita year. Note that according to Rashi and other Rishonim, the year before is the year of shmita.
      */
     public func isShmitaYear() -> Bool {
         return (getJewishYear() % 7) == 0
