@@ -217,6 +217,7 @@ class KosherSwiftTests: XCTestCase {
         januaryFirst.hour = 7
         januaryFirst.minute = 18
         januaryFirst.second = 57
+        januaryFirst.nanosecond = 246436953
         
         XCTAssertEqual(sunrise, gregorianCalendar.date(from: januaryFirst))
         
@@ -231,7 +232,8 @@ class KosherSwiftTests: XCTestCase {
         mayFirst.hour = 5
         mayFirst.minute = 56
         mayFirst.second = 59
-        
+        mayFirst.nanosecond = 569128274
+
         XCTAssertEqual(sunrise, gregorianCalendar.date(from: mayFirst))
         
         var augustFirst = DateComponents()
@@ -245,7 +247,8 @@ class KosherSwiftTests: XCTestCase {
         augustFirst.hour = 5
         augustFirst.minute = 54
         augustFirst.second = 51
-        
+        augustFirst.nanosecond = 389472365
+
         XCTAssertEqual(sunrise, gregorianCalendar.date(from: augustFirst))
         
         var decFirst = DateComponents()
@@ -259,7 +262,8 @@ class KosherSwiftTests: XCTestCase {
         decFirst.hour = 6
         decFirst.minute = 59
         decFirst.second = 29
-        
+        decFirst.nanosecond = 396646857
+
         XCTAssertEqual(sunrise, gregorianCalendar.date(from: decFirst))
     }
     
@@ -283,6 +287,7 @@ class KosherSwiftTests: XCTestCase {
         januaryFirst.hour = 16
         januaryFirst.minute = 41
         januaryFirst.second = 56
+        januaryFirst.nanosecond = 964607357
         
         XCTAssertEqual(sunset, gregorianCalendar.date(from: januaryFirst))
         
@@ -297,6 +302,7 @@ class KosherSwiftTests: XCTestCase {
         mayFirst.hour = 19
         mayFirst.minute = 51
         mayFirst.second = 33
+        mayFirst.nanosecond = 476900577
         
         XCTAssertEqual(sunset, gregorianCalendar.date(from: mayFirst))
         
@@ -311,6 +317,7 @@ class KosherSwiftTests: XCTestCase {
         augustFirst.hour = 20
         augustFirst.minute = 10
         augustFirst.second = 57
+        augustFirst.nanosecond = 91935396
         
         XCTAssertEqual(sunset, gregorianCalendar.date(from: augustFirst))
         
@@ -325,6 +332,7 @@ class KosherSwiftTests: XCTestCase {
         decFirst.hour = 16
         decFirst.minute = 31
         decFirst.second = 56
+        decFirst.nanosecond = 779208540
         
         XCTAssertEqual(sunset, gregorianCalendar.date(from: decFirst))
     }
@@ -345,6 +353,7 @@ class KosherSwiftTests: XCTestCase {
         januaryFirst.hour = 6
         januaryFirst.minute = 04
         januaryFirst.second = 42
+        januaryFirst.nanosecond = 81163167
         
         lakewoodCalculator.workingDate = gregorianCalendar.date(from: januaryFirst)!
         var alot = lakewoodCalculator.getAlos72()
@@ -362,7 +371,8 @@ class KosherSwiftTests: XCTestCase {
         mayFirst.hour = 4
         mayFirst.minute = 44
         mayFirst.second = 59
-        
+        mayFirst.nanosecond = 569128274
+
         XCTAssertEqual(alot, gregorianCalendar.date(from: mayFirst))
         
         var augustFirst = DateComponents()
@@ -376,7 +386,8 @@ class KosherSwiftTests: XCTestCase {
         augustFirst.hour = 4
         augustFirst.minute = 43
         augustFirst.second = 33
-        
+        augustFirst.nanosecond = 827379941
+
         XCTAssertEqual(alot, gregorianCalendar.date(from: augustFirst))
         
         var decFirst = DateComponents()
@@ -390,7 +401,8 @@ class KosherSwiftTests: XCTestCase {
         decFirst.hour = 5
         decFirst.minute = 48
         decFirst.second = 14
-        
+        decFirst.nanosecond = 928505659
+
         XCTAssertEqual(alot, gregorianCalendar.date(from: decFirst))
     }
     
