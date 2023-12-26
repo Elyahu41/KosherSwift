@@ -37,7 +37,7 @@ print(jewishCalendar.getJewishMonth()) // This will print the jewish month as a 
 For sunrise and sunset times, you will need a GeoLocation object. Then, you will need to pass that into the AstronomicalCalendar class like so:
 ```Swift
 let geoLocation = GeoLocation(locationName: "Lakewood, NJ", latitude: 40.08213, longitude: -74.20970, timeZone: TimeZone(identifier: "America/New_York")!)
-// The locationName string can be left empty if you'd like.
+// The locationName string can be left empty if you'd like. There is also a constructor for elevation to be added.
 // There are two Sunrise/Sunset calculators in this API, the NOAA Calculator and the SunTimes Calculator. By default, the NOAA calculator is used as it is more accurate than the SunTimes calculator as it takes into account leap years and other things.
 let cal = AstronomicalCalendar(location: geoLocation)
 // To use the SunTimesCalculator:
@@ -82,11 +82,11 @@ tefilaRules.isVeseinTalUmatarRecited(jewishCalendar: jewishCalendar) // returns 
 ```
 Things To Keep In Mind
 -------
-KosherSwift is very similar to KosherJava as it has brought over almost all of it's methods to Swift. However, there are big differences as well in the inner workings of the classes. For starters, the Calendar class in Swift does not contain a time in milliseconds to keep track of time, it only contains functions that can create a date. So everywhere there would be need a use for a Calendar has been replaced with a Date. If you look inside the code of the classes, there is a workingDate variable that can be changed instead of a calendar class.
+KosherSwift is very similar to KosherJava as it has brought over almost all of it's methods to Swift. However, there are big differences as well in the inner workings of the classes. For starters, the Calendar class in Swift does not contain a time in milliseconds to keep track of time, it only contains functions that can create a date. So everywhere there would be a need to use a Calendar has been replaced with a Date. If you look inside the code of the classes, there is a workingDate variable that can be changed instead of a calendar class.
 
 Timezone issues are a big deal in Swift since Date objects are set to UTC by default and only afterwards are timezones taken into account, this leads to the date changing if the timezone for the Calendar class in Swift is not set to the same as timezone as the system. All objects that have a GeoLocation object take this into account, however, if you are using the JewishCalendar class in another timezone, use the JewishCalendar(workingDate: <Date>, timezone: <TimeZone>) constructor.
 
-Another issue that Swift has, is that it's Date objects do not keep track of time in milliseconds. This leads to less accurate results in general, however, I have been able to get the times (after much testing) to be within a second or two with kosherjava's times by multiplying the seconds by 1000 to get milliseconds. It is far from perfect, but zmanim are not supposed to be that accurate anyway, so I am happy with the current implementation.
+Otherwise, most methods have been tried and tested, however, if you come accross a method that is not working correctly, please create a issue or (more preferably) a pull request.
 
 License
 -------
