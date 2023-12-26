@@ -258,7 +258,7 @@ public class JewishCalendar {
     public var moladMinutes:Int = 0;
     /** the internal count of <em>molad</em> <em>chalakim</em>.*/
     public var moladChalakim:Int = 0;
-
+    
     /**
      * A short year where both {@link #CHESHVAN} and {@link #KISLEV} are 29 days.
      *
@@ -289,329 +289,329 @@ public class JewishCalendar {
      * @see #getInIsrael()
      * @see #setInIsrael(boolean)
      */
-    var inIsrael: Bool = false
+    public var inIsrael: Bool = false
     
     /**
      * Is the calendar set to use modern Israeli holidays such as Yom Haatzmaut.
      * @see #isUseModernHolidays()
      * @see #setUseModernHolidays(boolean)
      */
-    var useModernHolidays: Bool = false
+    public var useModernHolidays: Bool = false
     
     /**
      * Is the calendar set to have Purim <em>demukafim</em>, where Purim is celebrated on Shushan Purim.
      * @see #getIsMukafChoma()
      * @see #setIsMukafChoma(boolean)
      */
-    var isMukafChoma: Bool = false
+    public var isMukafChoma: Bool = false
     
     /**
-         * List of <em>parshiyos</em> or special <em>Shabasos</em>. {@link #NONE} indicates a week without a <em>parsha</em>, while the enum for
-         * the <em>parsha</em> of {@link #VZOS_HABERACHA} exists for consistency, but is not currently used. The special <em>Shabasos</em> of
-         * Shekalim, Zachor, Para, Hachodesh, as well as Shabbos Shuva, Shira, Hagadol, Chazon and Nachamu are also represented in this collection
-         * of <em>parshiyos</em>.
-         * @see #getSpecialShabbos()
-         * @see #getParshah()
-         */
-        public enum Parsha {
-            /**NONE A week without any <em>parsha</em> such as <em>Shabbos Chol Hamoed</em> */case NONE
-            /**BERESHIS*/case BERESHIS
-            /**NOACH*/case NOACH
-            /**LECH_LECHA*/case LECH_LECHA
-            /**VAYERA*/case VAYERA
-            /**CHAYEI_SARA*/case CHAYEI_SARA
-            /**TOLDOS*/case TOLDOS
-            /**VAYETZEI*/case VAYETZEI
-            /**VAYISHLACH*/case VAYISHLACH
-            /**VAYESHEV*/case VAYESHEV
-            /**MIKETZ*/case MIKETZ
-            /**VAYIGASH*/case VAYIGASH
-            /**VAYECHI*/case VAYECHI
-            /**SHEMOS*/case SHEMOS
-            /**VAERA*/case VAERA
-            /**BO*/case BO
-            /**BESHALACH*/case BESHALACH
-            /**YISRO*/case YISRO
-            /**MISHPATIM*/case MISHPATIM
-            /**TERUMAH*/case TERUMAH
-            /**TETZAVEH*/case TETZAVEH 
-            /**KI_SISA*/case KI_SISA
-            /**VAYAKHEL*/case VAYAKHEL
-            /**PEKUDEI*/case PEKUDEI
-            /**VAYIKRA*/case VAYIKRA
-            /**TZAV*/case TZAV
-            /**SHMINI*/case SHMINI
-            /**TAZRIA*/case TAZRIA 
-            /**METZORA*/case METZORA
-            /**ACHREI_MOS*/case ACHREI_MOS
-            /**KEDOSHIM*/case KEDOSHIM
-            /**EMOR*/case EMOR
-            /**BEHAR*/case BEHAR
-            /**BECHUKOSAI*/case BECHUKOSAI
-            /**BAMIDBAR*/case BAMIDBAR
-            /**NASSO*/case NASSO
-            /**BEHAALOSCHA*/case BEHAALOSCHA
-            /**SHLACH*/case SHLACH
-            /**KORACH*/case KORACH
-            /**CHUKAS*/case CHUKAS
-            /**BALAK*/case BALAK
-            /**PINCHAS*/case PINCHAS
-            /**MATOS*/case MATOS
-            /**MASEI*/case MASEI
-            /**DEVARIM*/case DEVARIM
-            /**VAESCHANAN*/case VAESCHANAN
-            /**EIKEV*/case EIKEV
-            /**REEH*/case REEH
-            /**SHOFTIM*/case SHOFTIM 
-            /**KI_SEITZEI*/case KI_SEITZEI
-            /**KI_SAVO*/case KI_SAVO
-            /**NITZAVIM*/case NITZAVIM
-            /**VAYEILECH*/case VAYEILECH
-            /**HAAZINU*/case HAAZINU
-            /**VZOS_HABERACHA*/case VZOS_HABERACHA
-            /**The double parsha of Vayakhel &amp; Peudei*/case VAYAKHEL_PEKUDEI
-            /**The double <em>parsha</em> of Tazria &amp; Metzora*/case TAZRIA_METZORA
-            /**The double <em>parsha</em> of Achrei Mos &amp; Kedoshim*/case ACHREI_MOS_KEDOSHIM
-            /**The double <em>parsha</em>of Behar &amp; Bechukosai*/case BEHAR_BECHUKOSAI
-            /**The double <em>parsha</em> of Chukas &amp; Balak*/case CHUKAS_BALAK
-            /**The double<em>parsha</em> of Matos &amp; Masei*/case MATOS_MASEI
-            /**The double <em>parsha</em> of Nitzavim &amp; Vayelech*/case NITZAVIM_VAYEILECH
-            /**The special <em>parsha</em> of Shekalim*/case SHKALIM
-            /** The special <em>parsha</em> of Zachor*/case ZACHOR
-            /**The special <em>parsha</em> of Para*/case PARA 
-            /** The special <em>parsha</em> of Hachodesh*/case HACHODESH
-            /**<em>Shabbos</em> Shuva*/case SHUVA
-            /**<em>Shabbos</em> Shira*/case SHIRA
-            /**<em>Shabbos</em> Hagadol*/case HAGADOL
-            /**<em>Shabbos</em> Chazon*/case CHAZON
-            /**<em>Shabbos</em> Nachamu*/case NACHAMU
-        };
+     * List of <em>parshiyos</em> or special <em>Shabasos</em>. {@link #NONE} indicates a week without a <em>parsha</em>, while the enum for
+     * the <em>parsha</em> of {@link #VZOS_HABERACHA} exists for consistency, but is not currently used. The special <em>Shabasos</em> of
+     * Shekalim, Zachor, Para, Hachodesh, as well as Shabbos Shuva, Shira, Hagadol, Chazon and Nachamu are also represented in this collection
+     * of <em>parshiyos</em>.
+     * @see #getSpecialShabbos()
+     * @see #getParshah()
+     */
+    public enum Parsha {
+        /**NONE A week without any <em>parsha</em> such as <em>Shabbos Chol Hamoed</em> */case NONE
+        /**BERESHIS*/case BERESHIS
+        /**NOACH*/case NOACH
+        /**LECH_LECHA*/case LECH_LECHA
+        /**VAYERA*/case VAYERA
+        /**CHAYEI_SARA*/case CHAYEI_SARA
+        /**TOLDOS*/case TOLDOS
+        /**VAYETZEI*/case VAYETZEI
+        /**VAYISHLACH*/case VAYISHLACH
+        /**VAYESHEV*/case VAYESHEV
+        /**MIKETZ*/case MIKETZ
+        /**VAYIGASH*/case VAYIGASH
+        /**VAYECHI*/case VAYECHI
+        /**SHEMOS*/case SHEMOS
+        /**VAERA*/case VAERA
+        /**BO*/case BO
+        /**BESHALACH*/case BESHALACH
+        /**YISRO*/case YISRO
+        /**MISHPATIM*/case MISHPATIM
+        /**TERUMAH*/case TERUMAH
+        /**TETZAVEH*/case TETZAVEH
+        /**KI_SISA*/case KI_SISA
+        /**VAYAKHEL*/case VAYAKHEL
+        /**PEKUDEI*/case PEKUDEI
+        /**VAYIKRA*/case VAYIKRA
+        /**TZAV*/case TZAV
+        /**SHMINI*/case SHMINI
+        /**TAZRIA*/case TAZRIA
+        /**METZORA*/case METZORA
+        /**ACHREI_MOS*/case ACHREI_MOS
+        /**KEDOSHIM*/case KEDOSHIM
+        /**EMOR*/case EMOR
+        /**BEHAR*/case BEHAR
+        /**BECHUKOSAI*/case BECHUKOSAI
+        /**BAMIDBAR*/case BAMIDBAR
+        /**NASSO*/case NASSO
+        /**BEHAALOSCHA*/case BEHAALOSCHA
+        /**SHLACH*/case SHLACH
+        /**KORACH*/case KORACH
+        /**CHUKAS*/case CHUKAS
+        /**BALAK*/case BALAK
+        /**PINCHAS*/case PINCHAS
+        /**MATOS*/case MATOS
+        /**MASEI*/case MASEI
+        /**DEVARIM*/case DEVARIM
+        /**VAESCHANAN*/case VAESCHANAN
+        /**EIKEV*/case EIKEV
+        /**REEH*/case REEH
+        /**SHOFTIM*/case SHOFTIM
+        /**KI_SEITZEI*/case KI_SEITZEI
+        /**KI_SAVO*/case KI_SAVO
+        /**NITZAVIM*/case NITZAVIM
+        /**VAYEILECH*/case VAYEILECH
+        /**HAAZINU*/case HAAZINU
+        /**VZOS_HABERACHA*/case VZOS_HABERACHA
+        /**The double parsha of Vayakhel &amp; Peudei*/case VAYAKHEL_PEKUDEI
+        /**The double <em>parsha</em> of Tazria &amp; Metzora*/case TAZRIA_METZORA
+        /**The double <em>parsha</em> of Achrei Mos &amp; Kedoshim*/case ACHREI_MOS_KEDOSHIM
+        /**The double <em>parsha</em>of Behar &amp; Bechukosai*/case BEHAR_BECHUKOSAI
+        /**The double <em>parsha</em> of Chukas &amp; Balak*/case CHUKAS_BALAK
+        /**The double<em>parsha</em> of Matos &amp; Masei*/case MATOS_MASEI
+        /**The double <em>parsha</em> of Nitzavim &amp; Vayelech*/case NITZAVIM_VAYEILECH
+        /**The special <em>parsha</em> of Shekalim*/case SHKALIM
+        /** The special <em>parsha</em> of Zachor*/case ZACHOR
+        /**The special <em>parsha</em> of Para*/case PARA
+        /** The special <em>parsha</em> of Hachodesh*/case HACHODESH
+        /**<em>Shabbos</em> Shuva*/case SHUVA
+        /**<em>Shabbos</em> Shira*/case SHIRA
+        /**<em>Shabbos</em> Hagadol*/case HAGADOL
+        /**<em>Shabbos</em> Chazon*/case CHAZON
+        /**<em>Shabbos</em> Nachamu*/case NACHAMU
+    };
     
     /**
      An array of <em>parshiyos</em> in the 17 possible combinations.
-    */
+     */
     public static let parshalist = [
-            [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
-            [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NONE, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS_BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
-            [Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
-            [Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
-            [Parsha.NONE, Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
-            [Parsha.NONE, Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
-            [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NONE, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS_BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
-            [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
-            [Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.ACHREI_MOS, Parsha.NONE, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS, Parsha.MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
-            [Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.ACHREI_MOS, Parsha.NONE, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS, Parsha.MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
-            [Parsha.NONE, Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
-            [Parsha.NONE, Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NONE, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS_BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
-            [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
-            [Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
-            [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
-            [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS, Parsha.MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
-            [Parsha.NONE, Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH]
-        ];
+        [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
+        [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NONE, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS_BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
+        [Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
+        [Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
+        [Parsha.NONE, Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
+        [Parsha.NONE, Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
+        [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NONE, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS_BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
+        [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
+        [Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.ACHREI_MOS, Parsha.NONE, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS, Parsha.MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
+        [Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.ACHREI_MOS, Parsha.NONE, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS, Parsha.MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
+        [Parsha.NONE, Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
+        [Parsha.NONE, Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NONE, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS_BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
+        [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR_BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
+        [Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL_PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.NONE, Parsha.SHMINI, Parsha.TAZRIA_METZORA, Parsha.ACHREI_MOS_KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
+        [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH],
+        [Parsha.NONE, Parsha.VAYEILECH, Parsha.HAAZINU, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS, Parsha.MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM],
+        [Parsha.NONE, Parsha.NONE, Parsha.HAAZINU, Parsha.NONE, Parsha.NONE, Parsha.BERESHIS, Parsha.NOACH, Parsha.LECH_LECHA, Parsha.VAYERA, Parsha.CHAYEI_SARA, Parsha.TOLDOS, Parsha.VAYETZEI, Parsha.VAYISHLACH, Parsha.VAYESHEV, Parsha.MIKETZ, Parsha.VAYIGASH, Parsha.VAYECHI, Parsha.SHEMOS, Parsha.VAERA, Parsha.BO, Parsha.BESHALACH, Parsha.YISRO, Parsha.MISHPATIM, Parsha.TERUMAH, Parsha.TETZAVEH, Parsha.KI_SISA, Parsha.VAYAKHEL, Parsha.PEKUDEI, Parsha.VAYIKRA, Parsha.TZAV, Parsha.SHMINI, Parsha.TAZRIA, Parsha.METZORA, Parsha.NONE, Parsha.ACHREI_MOS, Parsha.KEDOSHIM, Parsha.EMOR, Parsha.BEHAR, Parsha.BECHUKOSAI, Parsha.BAMIDBAR, Parsha.NASSO, Parsha.BEHAALOSCHA, Parsha.SHLACH, Parsha.KORACH, Parsha.CHUKAS, Parsha.BALAK, Parsha.PINCHAS, Parsha.MATOS_MASEI, Parsha.DEVARIM, Parsha.VAESCHANAN, Parsha.EIKEV, Parsha.REEH, Parsha.SHOFTIM, Parsha.KI_SEITZEI, Parsha.KI_SAVO, Parsha.NITZAVIM_VAYEILECH]
+    ];
     
     /**
-         * Return the type of year for <em>parsha</em> calculations. The algorithm follows the
-         * <a href="http://hebrewbooks.org/pdfpager.aspx?req=14268&amp;st=&amp;pgnum=222">Luach Arba'ah Shearim</a> in the Tur Ohr Hachaim.
-         * @return the type of year for <em>parsha</em> calculations.
-         */
-        private func getParshaYearType() -> Int {
-            var roshHashanaDayOfWeek = (getJewishCalendarElapsedDays(year: getJewishYear()) + 1) % 7; // plus one to the original Rosh Hashana of year 1 to get a week starting on Sunday
-            if (roshHashanaDayOfWeek == 0) {
-                roshHashanaDayOfWeek = 7; // convert 0 to 7 for Shabbos for readability
-            }
-            if (isJewishLeapYear()) {
-                switch (roshHashanaDayOfWeek) {
-                case 2:
-                    if (isKislevShort()) { //BaCh
-                        if (getInIsrael()) {
-                            return 14;
-                        }
-                        return 6;
+     * Return the type of year for <em>parsha</em> calculations. The algorithm follows the
+     * <a href="http://hebrewbooks.org/pdfpager.aspx?req=14268&amp;st=&amp;pgnum=222">Luach Arba'ah Shearim</a> in the Tur Ohr Hachaim.
+     * @return the type of year for <em>parsha</em> calculations.
+     */
+    private func getParshaYearType() -> Int {
+        var roshHashanaDayOfWeek = (getJewishCalendarElapsedDays(year: getJewishYear()) + 1) % 7; // plus one to the original Rosh Hashana of year 1 to get a week starting on Sunday
+        if (roshHashanaDayOfWeek == 0) {
+            roshHashanaDayOfWeek = 7; // convert 0 to 7 for Shabbos for readability
+        }
+        if (isJewishLeapYear()) {
+            switch (roshHashanaDayOfWeek) {
+            case 2:
+                if (isKislevShort()) { //BaCh
+                    if (getInIsrael()) {
+                        return 14;
                     }
-                    if (isCheshvanLong()) { //BaSh
-                        if (getInIsrael()) {
-                            return 15;
-                        }
-                        return 7;
-                    }
-                    break;
-                case 3: //Gak
+                    return 6;
+                }
+                if (isCheshvanLong()) { //BaSh
                     if (getInIsrael()) {
                         return 15;
                     }
                     return 7;
-                case 5:
-                    if (isKislevShort()) { //HaCh
-                        return 8;
-                    }
-                    if (isCheshvanLong()) { //HaSh
-                        return 9;
-                    }
-                    break;
-                case 7:
-                    if (isKislevShort()) { //ZaCh
-                        return 10;
-                    }
-                    if (isCheshvanLong()) { //ZaSh
-                        if (getInIsrael()) {
-                            return 16;
-                        }
-                        return 11;
-                    }
-                    break;
-                default:
-                    return -1
                 }
-            } else { //not a leap year
-                switch (roshHashanaDayOfWeek) {
-                case 2:
-                    if (isKislevShort()) { //BaCh
-                        return 0;
+                break;
+            case 3: //Gak
+                if (getInIsrael()) {
+                    return 15;
+                }
+                return 7;
+            case 5:
+                if (isKislevShort()) { //HaCh
+                    return 8;
+                }
+                if (isCheshvanLong()) { //HaSh
+                    return 9;
+                }
+                break;
+            case 7:
+                if (isKislevShort()) { //ZaCh
+                    return 10;
+                }
+                if (isCheshvanLong()) { //ZaSh
+                    if (getInIsrael()) {
+                        return 16;
                     }
-                    if (isCheshvanLong()) { //BaSh
-                        if (getInIsrael()) {
-                            return 12;
-                        }
-                        return 1;
-                    }
-                    break;
-                case 3: //GaK
+                    return 11;
+                }
+                break;
+            default:
+                return -1
+            }
+        } else { //not a leap year
+            switch (roshHashanaDayOfWeek) {
+            case 2:
+                if (isKislevShort()) { //BaCh
+                    return 0;
+                }
+                if (isCheshvanLong()) { //BaSh
                     if (getInIsrael()) {
                         return 12;
                     }
                     return 1;
-                case 5:
-                    if (isCheshvanLong()) { //HaSh
-                        return 3;
-                    }
-                    if (!isKislevShort()) { //Hak
-                        if (getInIsrael()) {
-                            return 13;
-                        }
-                        return 2;
-                    }
-                    break;
-                case 7:
-                    if (isKislevShort()) { //ZaCh
-                        return 4;
-                    }
-                    if (isCheshvanLong()) { //ZaSh
-                        return 5;
-                    }
-                    break;
-                default:
-                    return -1
                 }
+                break;
+            case 3: //GaK
+                if (getInIsrael()) {
+                    return 12;
+                }
+                return 1;
+            case 5:
+                if (isCheshvanLong()) { //HaSh
+                    return 3;
+                }
+                if (!isKislevShort()) { //Hak
+                    if (getInIsrael()) {
+                        return 13;
+                    }
+                    return 2;
+                }
+                break;
+            case 7:
+                if (isKislevShort()) { //ZaCh
+                    return 4;
+                }
+                if (isCheshvanLong()) { //ZaSh
+                    return 5;
+                }
+                break;
+            default:
+                return -1
             }
-            return -1; //keep the compiler happy
         }
-
-        /**
-         * Returns this week's ``Parsha`` if it is <em>Shabbos</em>. It returns {@link Parsha#NONE} if the date
-         * is a weekday or if there is no <em>parsha</em> that week (for example <em>Yom Tov</em> that falls on a <em>Shabbos</em>).
-         *
-         * @return the current <em>parsha</em>.
-         */
+        return -1; //keep the compiler happy
+    }
+    
+    /**
+     * Returns this week's ``Parsha`` if it is <em>Shabbos</em>. It returns {@link Parsha#NONE} if the date
+     * is a weekday or if there is no <em>parsha</em> that week (for example <em>Yom Tov</em> that falls on a <em>Shabbos</em>).
+     *
+     * @return the current <em>parsha</em>.
+     */
     public func getParshah() -> Parsha {
-            if (getDayOfWeek() != 7) {
-                return .NONE;
-            }
-            
-            let yearType = getParshaYearType();
-            let roshHashanaDayOfWeek = getJewishCalendarElapsedDays(year: getJewishYear()) % 7;
-            let day = roshHashanaDayOfWeek + getDaysSinceStartOfJewishYear();
-            
-            if (yearType >= 0) { // negative year should be impossible, but let's cover all bases
-                return JewishCalendar.parshalist[yearType][day/7];
-            }
+        if (getDayOfWeek() != 7) {
+            return .NONE;
+        }
+        
+        let yearType = getParshaYearType();
+        let roshHashanaDayOfWeek = getJewishCalendarElapsedDays(year: getJewishYear()) % 7;
+        let day = roshHashanaDayOfWeek + getDaysSinceStartOfJewishYear();
+        
+        if (yearType >= 0) { // negative year should be impossible, but let's cover all bases
+            return JewishCalendar.parshalist[yearType][day/7];
+        }
         return .NONE; //keep the compiler happy
+    }
+    
+    /**
+     * Returns the upcoming ``Parsha`` regardless of if it is the weekday or <em>Shabbos</em> (where next
+     * Shabbos's <em>Parsha</em> will be returned. This is unlike {@link #getParshah()} that returns {@link Parsha#NONE} if
+     * the date is not <em>Shabbos</em>. If the upcoming <em>Shabbos</em> is a <em>Yom Tov</em> and has no <em>Parsha</em>, the
+     * following week's <em>Parsha</em> will be returned.
+     *
+     * @return the upcoming <em>parsha</em>.
+     */
+    public func getUpcomingParshah() -> Parsha {
+        let clone = JewishCalendar(workingDate: workingDate, inIsrael: inIsrael, useModernHolidays: useModernHolidays)
+        let daysToShabbos = (7 - getDayOfWeek() + 7) % 7;
+        if (getDayOfWeek() != 7) {
+            clone.workingDate.addTimeInterval(TimeInterval(86400 * daysToShabbos))
+        } else {
+            clone.forward()
         }
-        
-        /**
-         * Returns the upcoming ``Parsha`` regardless of if it is the weekday or <em>Shabbos</em> (where next
-         * Shabbos's <em>Parsha</em> will be returned. This is unlike {@link #getParshah()} that returns {@link Parsha#NONE} if
-         * the date is not <em>Shabbos</em>. If the upcoming <em>Shabbos</em> is a <em>Yom Tov</em> and has no <em>Parsha</em>, the
-         * following week's <em>Parsha</em> will be returned.
-         *
-         * @return the upcoming <em>parsha</em>.
-         */
-        public func getUpcomingParshah() -> Parsha {
-            let clone = JewishCalendar(workingDate: workingDate, inIsrael: inIsrael, useModernHolidays: useModernHolidays)
-            let daysToShabbos = (7 - getDayOfWeek() + 7) % 7;
-            if (getDayOfWeek() != 7) {
-                clone.workingDate.addTimeInterval(TimeInterval(86400 * daysToShabbos))
-            } else {
-                clone.forward()
-            }
-            while (clone.getParshah() == .NONE) { //Yom Kippur / Sukkos or Pesach with 2 potential non-parsha Shabbosim in a row
-                clone.forward()
-            }
-            return clone.getParshah();
+        while (clone.getParshah() == .NONE) { //Yom Kippur / Sukkos or Pesach with 2 potential non-parsha Shabbosim in a row
+            clone.forward()
         }
-        
-        /**
-         * Returns a ``Parsha`` enum if the <em>Shabbos</em> is one of the four <em>parshiyos</em> of {@link
-         * Parsha#SHKALIM <em>Shkalim</em>}, {@link Parsha#ZACHOR <em>Zachor</em>}, {@link Parsha#PARA <em>Para</em>}, {@link
-         * Parsha#HACHODESH <em>Hachdesh</em>}, or five other special <em>Shabbasos</em> of {@link Parsha#HAGADOL <em>Hagadol</em>},
-         * {@link Parsha#CHAZON <em>Chazon</em>}, {@link Parsha#NACHAMU <em>Nachamu</em>}, {@link Parsha#SHUVA <em>Shuva</em>},
-         * {@link Parsha#SHIRA <em>Shira</em>}, or {@link Parsha#NONE Parsha.NONE} for a regular <em>Shabbos</em> (or any weekday).
-         *
-         * @return one of the four <em>parshiyos</em> of {@link    Parsha#SHKALIM <em>Shkalim</em>}, {@link Parsha#ZACHOR <em>Zachor</em>},
-         *         {@link Parsha#PARA <em>Para</em>}, {@link Parsha#HACHODESH <em>Hachdesh</em>}, or five other special <em>Shabbasos</em>
-         *         of {@link Parsha#HAGADOL <em>Hagadol</em>}, {@link Parsha#CHAZON <em>Chazon</em>}, {@link Parsha#NACHAMU <em>Nachamu</em>},
-         *         {@link Parsha#SHUVA <em>Shuva</em>}, {@link Parsha#SHIRA <em>Shira</em>}, or {@link Parsha#NONE Parsha.NONE} for a regular
-         *         <em>Shabbos</em> (or any weekday).
-         */
-        public func getSpecialShabbos() -> Parsha {
-            if (getDayOfWeek() == 7) {
-                if ((getJewishMonth() == JewishCalendar.SHEVAT && !isJewishLeapYear()) || (getJewishMonth() == JewishCalendar.ADAR && isJewishLeapYear())) {
-                    if (getJewishDayOfMonth() == 25 || getJewishDayOfMonth() == 27 || getJewishDayOfMonth() == 29) {
-                        return Parsha.SHKALIM;
-                    }
-                }
-                if ((getJewishMonth() == JewishCalendar.ADAR && !isJewishLeapYear()) || getJewishMonth() == JewishCalendar.ADAR_II) {
-                    if (getJewishDayOfMonth() == 1) {
-                        return Parsha.SHKALIM;
-                    }
-                    if (getJewishDayOfMonth() == 8 || getJewishDayOfMonth() == 9 || getJewishDayOfMonth() == 11 || getJewishDayOfMonth() == 13) {
-                        return Parsha.ZACHOR;
-                    }
-                    if (getJewishDayOfMonth() == 18 || getJewishDayOfMonth() == 20 || getJewishDayOfMonth() == 22 || getJewishDayOfMonth() == 23) {
-                        return Parsha.PARA;
-                    }
-                    if (getJewishDayOfMonth() == 25 || getJewishDayOfMonth() == 27 || getJewishDayOfMonth() == 29) {
-                        return Parsha.HACHODESH;
-                    }
-                }
-                if (getJewishMonth() == JewishCalendar.NISSAN) {
-                    if(getJewishDayOfMonth() == 1) {
-                        return Parsha.HACHODESH;
-                    }
-                    if(getJewishDayOfMonth() >= 8 && getJewishDayOfMonth() <= 14) {
-                        return Parsha.HAGADOL;
-                    }
-                }
-                if (getJewishMonth() == JewishCalendar.AV) {
-                    if(getJewishDayOfMonth() >= 4 && getJewishDayOfMonth() <= 9) {
-                        return Parsha.CHAZON;
-                    }
-                    if(getJewishDayOfMonth() >= 10 && getJewishDayOfMonth() <= 16) {
-                        return Parsha.NACHAMU;
-                    }
-                }
-                if (getJewishMonth() == JewishCalendar.TISHREI) {
-                    if(getJewishDayOfMonth() >= 3 && getJewishDayOfMonth() <= 8) {
-                        return Parsha.SHUVA;
-                    }
-                    
-                }
-                if (getParshah() == Parsha.BESHALACH) {
-                    return Parsha.SHIRA;
+        return clone.getParshah();
+    }
+    
+    /**
+     * Returns a ``Parsha`` enum if the <em>Shabbos</em> is one of the four <em>parshiyos</em> of {@link
+     * Parsha#SHKALIM <em>Shkalim</em>}, {@link Parsha#ZACHOR <em>Zachor</em>}, {@link Parsha#PARA <em>Para</em>}, {@link
+     * Parsha#HACHODESH <em>Hachdesh</em>}, or five other special <em>Shabbasos</em> of {@link Parsha#HAGADOL <em>Hagadol</em>},
+     * {@link Parsha#CHAZON <em>Chazon</em>}, {@link Parsha#NACHAMU <em>Nachamu</em>}, {@link Parsha#SHUVA <em>Shuva</em>},
+     * {@link Parsha#SHIRA <em>Shira</em>}, or {@link Parsha#NONE Parsha.NONE} for a regular <em>Shabbos</em> (or any weekday).
+     *
+     * @return one of the four <em>parshiyos</em> of {@link    Parsha#SHKALIM <em>Shkalim</em>}, {@link Parsha#ZACHOR <em>Zachor</em>},
+     *         {@link Parsha#PARA <em>Para</em>}, {@link Parsha#HACHODESH <em>Hachdesh</em>}, or five other special <em>Shabbasos</em>
+     *         of {@link Parsha#HAGADOL <em>Hagadol</em>}, {@link Parsha#CHAZON <em>Chazon</em>}, {@link Parsha#NACHAMU <em>Nachamu</em>},
+     *         {@link Parsha#SHUVA <em>Shuva</em>}, {@link Parsha#SHIRA <em>Shira</em>}, or {@link Parsha#NONE Parsha.NONE} for a regular
+     *         <em>Shabbos</em> (or any weekday).
+     */
+    public func getSpecialShabbos() -> Parsha {
+        if (getDayOfWeek() == 7) {
+            if ((getJewishMonth() == JewishCalendar.SHEVAT && !isJewishLeapYear()) || (getJewishMonth() == JewishCalendar.ADAR && isJewishLeapYear())) {
+                if (getJewishDayOfMonth() == 25 || getJewishDayOfMonth() == 27 || getJewishDayOfMonth() == 29) {
+                    return Parsha.SHKALIM;
                 }
             }
-            return Parsha.NONE;
+            if ((getJewishMonth() == JewishCalendar.ADAR && !isJewishLeapYear()) || getJewishMonth() == JewishCalendar.ADAR_II) {
+                if (getJewishDayOfMonth() == 1) {
+                    return Parsha.SHKALIM;
+                }
+                if (getJewishDayOfMonth() == 8 || getJewishDayOfMonth() == 9 || getJewishDayOfMonth() == 11 || getJewishDayOfMonth() == 13) {
+                    return Parsha.ZACHOR;
+                }
+                if (getJewishDayOfMonth() == 18 || getJewishDayOfMonth() == 20 || getJewishDayOfMonth() == 22 || getJewishDayOfMonth() == 23) {
+                    return Parsha.PARA;
+                }
+                if (getJewishDayOfMonth() == 25 || getJewishDayOfMonth() == 27 || getJewishDayOfMonth() == 29) {
+                    return Parsha.HACHODESH;
+                }
+            }
+            if (getJewishMonth() == JewishCalendar.NISSAN) {
+                if(getJewishDayOfMonth() == 1) {
+                    return Parsha.HACHODESH;
+                }
+                if(getJewishDayOfMonth() >= 8 && getJewishDayOfMonth() <= 14) {
+                    return Parsha.HAGADOL;
+                }
+            }
+            if (getJewishMonth() == JewishCalendar.AV) {
+                if(getJewishDayOfMonth() >= 4 && getJewishDayOfMonth() <= 9) {
+                    return Parsha.CHAZON;
+                }
+                if(getJewishDayOfMonth() >= 10 && getJewishDayOfMonth() <= 16) {
+                    return Parsha.NACHAMU;
+                }
+            }
+            if (getJewishMonth() == JewishCalendar.TISHREI) {
+                if(getJewishDayOfMonth() >= 3 && getJewishDayOfMonth() <= 8) {
+                    return Parsha.SHUVA;
+                }
+                
+            }
+            if (getParshah() == Parsha.BESHALACH) {
+                return Parsha.SHIRA;
+            }
         }
+        return Parsha.NONE;
+    }
     
     /**
      * Is this calendar set to return modern Israeli national holidays. By default this value is false. The holidays
@@ -686,12 +686,12 @@ public class JewishCalendar {
     /**
      * The internal date object that all the calculations are dependant on. Change this date to effect all the other methods of the class. By default the date is set to the system's current time with the system's current timezone.
      */
-    var workingDate:Date = Date()
+    public var workingDate:Date = Date()
     
     /**
      * By default the date is set to the system's current time with the system's current timezone. However, if you are using this class for a working date in another time zone. You must set the timezone as well as the date can change.
      */
-    var timeZone:TimeZone = TimeZone.current
+    public var timeZone:TimeZone = TimeZone.current
     
     /**
      * Resets this date to the current system date.
@@ -960,7 +960,7 @@ public class JewishCalendar {
         gregCalendar.timeZone = timeZone
         workingDate = gregCalendar.date(from: DateComponents(year: year, month: month, day: dayOfMonth))!
     }
-
+    
     /**
      * Sets the Jewish Date and updates the Gregorian date accordingly.
      *
@@ -979,7 +979,7 @@ public class JewishCalendar {
         gregCalendar.timeZone = timeZone
         workingDate = gregCalendar.date(from: DateComponents(year: year, month: month, day: dayOfMonth))!
     }
-
+    
     /**
      * Sets the Jewish Date and updates the Gregorian date accordingly.
      *
@@ -1068,7 +1068,7 @@ public class JewishCalendar {
         
         return elapsedDays
     }
-
+    
     /**
      * returns the number of days from Rosh Hashana of the date passed in, to the full date passed in.
      *
@@ -1096,7 +1096,7 @@ public class JewishCalendar {
             return 30;
         }
     }
-
+    
     /**
      * Returns the number of days of the Jewish month that the calendar is currently set to.
      *
@@ -1118,7 +1118,7 @@ public class JewishCalendar {
     public func getDaysInJewishYear(year:Int) -> Int {
         return getJewishCalendarElapsedDays(year: year + 1) - getJewishCalendarElapsedDays(year: year);
     }
-
+    
     /**
      * Returns the number of days for the current year that the calendar is set to.
      *
@@ -1130,7 +1130,7 @@ public class JewishCalendar {
     public func getDaysInJewishYear() -> Int {
         return getDaysInJewishYear(year: getJewishYear());
     }
-
+    
     /**
      * Returns if Cheshvan is long in a given Jewish year. The method name isLong is done since in a Kesidran (ordered)
      * year Cheshvan is short. ND+ER
@@ -1144,7 +1144,7 @@ public class JewishCalendar {
     private func isCheshvanLong(year:Int) -> Bool {
         return getDaysInJewishYear(year: year) % 10 == 5;
     }
-
+    
     /**
      * Returns if Cheshvan is long (30 days VS 29 days) for the current year that the calendar is set to. The method
      * name isLong is done since in a Kesidran (ordered) year Cheshvan is short.
@@ -1155,7 +1155,7 @@ public class JewishCalendar {
     public func isCheshvanLong() -> Bool {
         return isCheshvanLong(year: getJewishYear());
     }
-
+    
     /**
      * Returns if Kislev is short (29 days VS 30 days) in a given Jewish year. The method name isShort is done since in
      * a Kesidran (ordered) year Kislev is long. ND+ER
@@ -1169,7 +1169,7 @@ public class JewishCalendar {
     private func isKislevShort(year:Int) -> Bool {
         return getDaysInJewishYear(year: year) % 10 == 3;
     }
-
+    
     /**
      * Returns if the Kislev is short for the year that this class is set to. The method name isShort is done since in a
      * Kesidran (ordered) year Kislev is long.
@@ -1179,7 +1179,7 @@ public class JewishCalendar {
     public func isKislevShort() -> Bool{
         return isKislevShort(year: getJewishYear());
     }
-
+    
     /**
      * Returns the Cheshvan and Kislev kviah (whether a Jewish year is short, regular or long). It will return
      * {@link #SHELAIMIM} if both cheshvan and kislev are 30 days, {@link #KESIDRAN} if Cheshvan is 29 days and Kislev
@@ -1277,9 +1277,9 @@ public class JewishCalendar {
                 + 365 * (year - 1) // days in previous years ignoring leap days
                 + (year - 1) / 4 // Julian leap days before this year
                 - (year - 1) / 100 // minus prior century years
-        + (year - 1) / 400); // plus prior years divisible by 400
+                + (year - 1) / 400); // plus prior years divisible by 400
     }
-
+    
     /**
      * Returns is the year passed in is a <a href=
      * "https://en.wikipedia.org/wiki/Leap_year#Gregorian_calendar">Gregorian leap year</a>.
@@ -1289,7 +1289,7 @@ public class JewishCalendar {
     func isGregorianLeapYear(year:Int) -> Bool {
         return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
     }
-
+    
     /**
      * Returns the number of days elapsed from the Sunday prior to the start of the Jewish calendar to the mean
      * conjunction of Tishri of the Jewish year.
@@ -1308,7 +1308,7 @@ public class JewishCalendar {
         // delay Rosh Hashana for the 4 dechiyos
         return addDechiyos(year: year, moladDay: Int(moladDay), moladParts: Int(moladParts))
     }
-
+    
     /**
      * Adds the 4 dechiyos for molad Tishrei. These are:
      * <ol>
@@ -1347,7 +1347,7 @@ public class JewishCalendar {
         }
         return roshHashanaDay
     }
-
+    
     /**
      * Returns the number of chalakim (parts - 1080 to the hour) from the original hypothetical Molad Tohu to the year
      * and month passed in.
@@ -1373,7 +1373,7 @@ public class JewishCalendar {
         // return chalakim prior to BeHaRaD + number of chalakim since
         return Int64(JewishCalendar.CHALAKIM_MOLAD_TOHU + (JewishCalendar.CHALAKIM_PER_MONTH * Int64(monthsElapsed)))
     }
-
+    
     /**
      * Returns the number of chalakim (parts - 1080 to the hour) from the original hypothetical Molad Tohu to the Jewish
      * year and month that this Object is set to.
@@ -1383,7 +1383,7 @@ public class JewishCalendar {
     public func getChalakimSinceMoladTohu() -> Int64 {
         return getChalakimSinceMoladTohu(year: getJewishYear(), month: getJewishMonth());
     }
-
+    
     /**
      * Converts the {@link JewishDate#NISSAN} based constants used by this class to numeric month starting from
      * {@link JewishDate#TISHREI}. This is required for Molad claculations.
@@ -1617,295 +1617,295 @@ public class JewishCalendar {
     }
     
     /**
-         * Returns true if the current day is <em>Yom Tov</em>. The method returns true even for holidays such as {@link #CHANUKAH}
-         * and minor ones such as {@link #TU_BEAV} and {@link #PESACH_SHENI}. <em>Erev Yom Tov</em> (with the exception of
-         * {@link #HOSHANA_RABBA}, <em>erev</em> the second days of {@link #PESACH}) returns false, as do {@link #isTaanis() fast
-         * days} besides {@link #YOM_KIPPUR}. Use {@link #isAssurBemelacha()} to find the days that have a prohibition of work.
-         *
-         * @return true if the current day is a Yom Tov
-         *
-         * @see #getYomTovIndex()
-         * @see #isErevYomTov()
-         * @see #isErevYomTovSheni()
-         * @see #isTaanis()
-         * @see #isAssurBemelacha()
-         * @see #isCholHamoed()
-         */
-        public func isYomTov() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            if ((isErevYomTov() && (holidayIndex != JewishCalendar.HOSHANA_RABBA || (holidayIndex == JewishCalendar.CHOL_HAMOED_PESACH && getJewishDayOfMonth() != 20)))
-                || (isTaanis() && holidayIndex != JewishCalendar.YOM_KIPPUR) || holidayIndex == JewishCalendar.ISRU_CHAG) {
-                return false;
-            }
-            return getYomTovIndex() != -1;
-        }
-
-        /**
-         * Returns true if the <em>Yom Tov</em> day has a <em>melacha</em> (work)  prohibition. This method will return false for a
-         * non-<em>Yom Tov</em> day, even if it is <em>Shabbos</em>.
-         *
-         * @return if the <em>Yom Tov</em> day has a <em>melacha</em> (work)  prohibition.
-         */
-        public func isYomTovAssurBemelacha() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            return holidayIndex == JewishCalendar.PESACH || holidayIndex == JewishCalendar.SHAVUOS || holidayIndex == JewishCalendar.SUCCOS || holidayIndex == JewishCalendar.SHEMINI_ATZERES ||
-            holidayIndex == JewishCalendar.SIMCHAS_TORAH || holidayIndex == JewishCalendar.ROSH_HASHANA  || holidayIndex == JewishCalendar.YOM_KIPPUR;
-        }
-        
-        /**
-         * Returns true if it is <em>Shabbos</em> or if it is a <em>Yom Tov</em> day that has a <em>melacha</em> (work)  prohibition.
-         *
-         * @return if the day is a <em>Yom Tov</em> that is <em>assur bemlacha</em> or <em>Shabbos</em>
-         */
-        public func isAssurBemelacha() -> Bool {
-            return getDayOfWeek() == 7 || isYomTovAssurBemelacha();
-        }
-        
-        /**
-         * Returns true if the day has candle lighting. This will return true on <em>Erev Shabbos</em>, <em>Erev Yom Tov</em>, the
-         * first day of <em>Rosh Hashana</em> and the first days of <em>Yom Tov</em> out of Israel. It is identical
-         * to calling {@link #isTomorrowShabbosOrYomTov()}.
-         *
-         * @return if the day has candle lighting.
-         *
-         * @see #isTomorrowShabbosOrYomTov()
-         */
-        public func hasCandleLighting() -> Bool {
-            return isTomorrowShabbosOrYomTov();
-        }
-        
-        /**
-         * Returns true if tomorrow is <em>Shabbos</em> or <em>Yom Tov</em>. This will return true on <em>Erev Shabbos</em>,
-         * <em>Erev Yom Tov</em>, the first day of <em>Rosh Hashana</em> and <em>erev</em> the first days of <em>Yom Tov</em>
-         * out of Israel. It is identical to calling {@link #hasCandleLighting()}.
-         *
-         * @return will return if the next day is <em>Shabbos</em> or <em>Yom Tov</em>.
-         *
-         * @see #hasCandleLighting()
-         */
-        public func isTomorrowShabbosOrYomTov() -> Bool {
-            return getDayOfWeek() == 6 || isErevYomTov() || isErevYomTovSheni();
-        }
-        
-        /**
-         * Returns true if the day is the second day of <em>Yom Tov</em>. This impacts the second day of <em>Rosh Hashana</em> everywhere and
-         * the second days of Yom Tov in <em>chutz laaretz</em> (out of Israel).
-         *
-         * @return  if the day is the second day of <em>Yom Tov</em>.
-         */
-        public func isErevYomTovSheni() -> Bool {
-            return (getJewishMonth() == JewishCalendar.TISHREI && (getJewishDayOfMonth() == 1))
-            || (!getInIsrael()
-                && ((getJewishMonth() == JewishCalendar.NISSAN && (getJewishDayOfMonth() == 15 || getJewishDayOfMonth() == 21))
-                    || (getJewishMonth() == JewishCalendar.TISHREI && (getJewishDayOfMonth() == 15 || getJewishDayOfMonth() == 22))
-                    || (getJewishMonth() == JewishCalendar.SIVAN && getJewishDayOfMonth() == 6 )));
-        }
-
-        /**
-         * Returns true if the current day is <em>Aseres Yemei Teshuva</em>.
-         *
-         * @return if the current day is <em>Aseres Yemei Teshuvah</em>
-         */
-        public func isAseresYemeiTeshuva() -> Bool {
-            return getJewishMonth() == JewishCalendar.TISHREI && getJewishDayOfMonth() <= 10;
-        }
-        
-        /**
-         * Returns true if the current day is <em>Pesach</em> (either  the <em>Yom Tov</em> of <em>Pesach</em> or<em>Chol Hamoed Pesach</em>).
-         *
-         * @return true if the current day is <em>Pesach</em> (either  the <em>Yom Tov</em> of <em>Pesach</em> or<em>Chol Hamoed Pesach</em>).
-         * @see #isYomTov()
-         * @see #isCholHamoedPesach()
-         * @see #PESACH
-         * @see #CHOL_HAMOED_PESACH
-         */
-        public func isPesach() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            return holidayIndex == JewishCalendar.PESACH || holidayIndex == JewishCalendar.CHOL_HAMOED_PESACH;
-        }
-        
-        /**
-         * Returns true if the current day is <em>Chol Hamoed</em> of <em>Pesach</em>.
-         *
-         * @return true if the current day is <em>Chol Hamoed</em> of <em>Pesach</em>
-         * @see #isYomTov()
-         * @see #isPesach()
-         * @see #CHOL_HAMOED_PESACH
-         */
-        public func isCholHamoedPesach() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            return holidayIndex == JewishCalendar.CHOL_HAMOED_PESACH;
-        }
-        
-        /**
-         * Returns true if the current day is <em>Shavuos</em>.
-         *
-         * @return true if the current day is <em>Shavuos</em>.
-         * @see #isYomTov()
-         * @see #SHAVUOS
-         */
-        public func isShavuos() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            return holidayIndex == JewishCalendar.SHAVUOS;
-        }
-        
-        /**
-         * Returns true if the current day is <em>Rosh Hashana</em>.
-         *
-         * @return true if the current day is <em>Rosh Hashana</em>.
-         * @see #isYomTov()
-         * @see #ROSH_HASHANA
-         */
-        public func isRoshHashana() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            return holidayIndex == JewishCalendar.ROSH_HASHANA;
-        }
-        
-        /**
-         * Returns true if the current day is <em>Yom Kippur</em>.
-         *
-         * @return true if the current day is <em>Yom Kippur</em>.
-         * @see #isYomTov()
-         * @see #YOM_KIPPUR
-         */
-        public func isYomKippur() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            return holidayIndex == JewishCalendar.YOM_KIPPUR;
-        }
-        
-        /**
-         * Returns true if the current day is <em>Succos</em> (either  the <em>Yom Tov</em> of <em>Succos</em> or<em>Chol Hamoed Succos</em>).
-         * It will return false for {@link #isShminiAtzeres() Shmini Atzeres} and {@link #isSimchasTorah() Simchas Torah}.
-         *
-         * @return true if the current day is <em>Succos</em> (either  the <em>Yom Tov</em> of <em>Succos</em> or<em>Chol Hamoed Succos</em>.
-         * @see #isYomTov()
-         * @see #isCholHamoedSuccos()
-         * @see #isHoshanaRabba()
-         * @see #SUCCOS
-         * @see #CHOL_HAMOED_SUCCOS
-         * @see #HOSHANA_RABBA
-         */
-        public func isSuccos() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            return holidayIndex == JewishCalendar.SUCCOS || holidayIndex == JewishCalendar.CHOL_HAMOED_SUCCOS || holidayIndex == JewishCalendar.HOSHANA_RABBA;
-        }
-        
-        /**
-         * Returns true if the current day is <em>Hoshana Rabba</em>.
-         *
-         * @return true true if the current day is <em>Hoshana Rabba</em>.
-         * @see #isYomTov()
-         * @see #HOSHANA_RABBA
-         */
-        public func isHoshanaRabba() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            return holidayIndex == JewishCalendar.HOSHANA_RABBA;
-        }
-        
-        /**
-         * Returns true if the current day is <em>Shmini Atzeres</em>.
-         *
-         * @return true if the current day is <em>Shmini Atzeres</em>.
-         * @see #isYomTov()
-         * @see #SHEMINI_ATZERES
-         */
-    public func isShminiAtzeres() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            return holidayIndex == JewishCalendar.SHEMINI_ATZERES;
-        }
-        
-        /**
-         * Returns true if the current day is <em>Simchas Torah</em>. This will always return false if {@link #getInIsrael() in Israel}
-         *
-         * @return true if the current day is <em>Shmini Atzeres</em>.
-         * @see #isYomTov()
-         * @see #SIMCHAS_TORAH
-         */
-        public func isSimchasTorah() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            //if in Israel, Holiday index of SIMCHAS_TORAH will not be returned by getYomTovIndex()
-            return holidayIndex == JewishCalendar.SIMCHAS_TORAH;
-        }
-        
-        /**
-         * Returns true if the current day is <em>Chol Hamoed</em> of <em>Succos</em>.
-         *
-         * @return true if the current day is <em>Chol Hamoed</em> of <em>Succos</em>
-         * @see #isYomTov()
-         * @see #CHOL_HAMOED_SUCCOS
-         */
-        public func isCholHamoedSuccos() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            return holidayIndex == JewishCalendar.CHOL_HAMOED_SUCCOS || holidayIndex == JewishCalendar.HOSHANA_RABBA;
-        }
-        
-        /**
-         * Returns true if the current day is <em>Chol Hamoed</em> of <em>Pesach</em> or <em>Succos</em>.
-         *
-         * @return true if the current day is <em>Chol Hamoed</em> of <em>Pesach</em> or <em>Succos</em>
-         * @see #isYomTov()
-         * @see #CHOL_HAMOED_PESACH
-         * @see #CHOL_HAMOED_SUCCOS
-         */
-        public func isCholHamoed() -> Bool {
-            return isCholHamoedPesach() || isCholHamoedSuccos();
-        }
-
-        /**
-         * Returns true if the current day is <em>Erev Yom Tov</em>. The method returns true for <em>Erev</em> - <em>Pesach</em>
-         * (first and last days), <em>Shavuos</em>, <em>Rosh Hashana</em>, <em>Yom Kippur</em>, <em>Succos</em> and <em>Hoshana
-         * Rabba</em>.
-         *
-         * @return true if the current day is <em>Erev</em> - <em>Pesach</em>, <em>Shavuos</em>, <em>Rosh Hashana</em>, <em>Yom
-         * Kippur</em>, <em>Succos</em> and <em>Hoshana Rabba</em>.
-         * @see #isYomTov()
-         * @see #isErevYomTovSheni()
-         */
-        public func isErevYomTov() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            return holidayIndex == JewishCalendar.EREV_PESACH || holidayIndex == JewishCalendar.EREV_SHAVUOS || holidayIndex == JewishCalendar.EREV_ROSH_HASHANA
-            || holidayIndex == JewishCalendar.EREV_YOM_KIPPUR || holidayIndex == JewishCalendar.EREV_SUCCOS || holidayIndex == JewishCalendar.HOSHANA_RABBA
-            || (holidayIndex == JewishCalendar.CHOL_HAMOED_PESACH && getJewishDayOfMonth() == 20);
-        }
-
-        /**
-         * Returns true if the current day is <em>Erev Rosh Chodesh</em>. Returns false for <em>Erev Rosh Hashana</em>.
-         *
-         * @return true if the current day is <em>Erev Rosh Chodesh</em>. Returns false for <em>Erev Rosh Hashana</em>.
-         * @see #isRoshChodesh()
-         */
-        public func isErevRoshChodesh() -> Bool {
-            // Erev Rosh Hashana is not Erev Rosh Chodesh.
-            return (getJewishDayOfMonth() == 29 && getJewishMonth() != JewishCalendar.ELUL);
-        }
-        
-        
-        /**
-         * Returns true if the current day is <em>Yom Kippur Katan</em>. Returns false for <em>Erev Rosh Hashana</em>,
-         * <em>Erev Rosh Chodesh Cheshvan</em>, <em>Teves</em> and <em>Iyyar</em>. If <em>Erev Rosh Chodesh</em> occurs
-         * on a Friday or <em>Shabbos</em>, <em>Yom Kippur Katan</em> is moved back to Thursday.
-         *
-         * @return true if the current day is <em>Erev Rosh Chodesh</em>. Returns false for <em>Erev Rosh Hashana</em>.
-         * @see #isRoshChodesh()
-         */
-        public func isYomKippurKatan() -> Bool {
-            let dayOfWeek = getDayOfWeek();
-            let month = getJewishMonth();
-            let day = getJewishDayOfMonth();
-            
-            if (month == JewishCalendar.ELUL || month == JewishCalendar.TISHREI || month == JewishCalendar.KISLEV || month == JewishCalendar.NISSAN) {
-                return false;
-            }
-
-            if (day == 29 && dayOfWeek != 6 && dayOfWeek != 7) {
-                return true;
-            }
-            
-            if ((day == 27 || day == 28) && dayOfWeek == 5 ) {
-                return true;
-            }
+     * Returns true if the current day is <em>Yom Tov</em>. The method returns true even for holidays such as {@link #CHANUKAH}
+     * and minor ones such as {@link #TU_BEAV} and {@link #PESACH_SHENI}. <em>Erev Yom Tov</em> (with the exception of
+     * {@link #HOSHANA_RABBA}, <em>erev</em> the second days of {@link #PESACH}) returns false, as do {@link #isTaanis() fast
+     * days} besides {@link #YOM_KIPPUR}. Use {@link #isAssurBemelacha()} to find the days that have a prohibition of work.
+     *
+     * @return true if the current day is a Yom Tov
+     *
+     * @see #getYomTovIndex()
+     * @see #isErevYomTov()
+     * @see #isErevYomTovSheni()
+     * @see #isTaanis()
+     * @see #isAssurBemelacha()
+     * @see #isCholHamoed()
+     */
+    public func isYomTov() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        if ((isErevYomTov() && (holidayIndex != JewishCalendar.HOSHANA_RABBA || (holidayIndex == JewishCalendar.CHOL_HAMOED_PESACH && getJewishDayOfMonth() != 20)))
+            || (isTaanis() && holidayIndex != JewishCalendar.YOM_KIPPUR) || holidayIndex == JewishCalendar.ISRU_CHAG) {
             return false;
         }
+        return getYomTovIndex() != -1;
+    }
+    
+    /**
+     * Returns true if the <em>Yom Tov</em> day has a <em>melacha</em> (work)  prohibition. This method will return false for a
+     * non-<em>Yom Tov</em> day, even if it is <em>Shabbos</em>.
+     *
+     * @return if the <em>Yom Tov</em> day has a <em>melacha</em> (work)  prohibition.
+     */
+    public func isYomTovAssurBemelacha() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        return holidayIndex == JewishCalendar.PESACH || holidayIndex == JewishCalendar.SHAVUOS || holidayIndex == JewishCalendar.SUCCOS || holidayIndex == JewishCalendar.SHEMINI_ATZERES ||
+        holidayIndex == JewishCalendar.SIMCHAS_TORAH || holidayIndex == JewishCalendar.ROSH_HASHANA  || holidayIndex == JewishCalendar.YOM_KIPPUR;
+    }
+    
+    /**
+     * Returns true if it is <em>Shabbos</em> or if it is a <em>Yom Tov</em> day that has a <em>melacha</em> (work)  prohibition.
+     *
+     * @return if the day is a <em>Yom Tov</em> that is <em>assur bemlacha</em> or <em>Shabbos</em>
+     */
+    public func isAssurBemelacha() -> Bool {
+        return getDayOfWeek() == 7 || isYomTovAssurBemelacha();
+    }
+    
+    /**
+     * Returns true if the day has candle lighting. This will return true on <em>Erev Shabbos</em>, <em>Erev Yom Tov</em>, the
+     * first day of <em>Rosh Hashana</em> and the first days of <em>Yom Tov</em> out of Israel. It is identical
+     * to calling {@link #isTomorrowShabbosOrYomTov()}.
+     *
+     * @return if the day has candle lighting.
+     *
+     * @see #isTomorrowShabbosOrYomTov()
+     */
+    public func hasCandleLighting() -> Bool {
+        return isTomorrowShabbosOrYomTov();
+    }
+    
+    /**
+     * Returns true if tomorrow is <em>Shabbos</em> or <em>Yom Tov</em>. This will return true on <em>Erev Shabbos</em>,
+     * <em>Erev Yom Tov</em>, the first day of <em>Rosh Hashana</em> and <em>erev</em> the first days of <em>Yom Tov</em>
+     * out of Israel. It is identical to calling {@link #hasCandleLighting()}.
+     *
+     * @return will return if the next day is <em>Shabbos</em> or <em>Yom Tov</em>.
+     *
+     * @see #hasCandleLighting()
+     */
+    public func isTomorrowShabbosOrYomTov() -> Bool {
+        return getDayOfWeek() == 6 || isErevYomTov() || isErevYomTovSheni();
+    }
+    
+    /**
+     * Returns true if the day is the second day of <em>Yom Tov</em>. This impacts the second day of <em>Rosh Hashana</em> everywhere and
+     * the second days of Yom Tov in <em>chutz laaretz</em> (out of Israel).
+     *
+     * @return  if the day is the second day of <em>Yom Tov</em>.
+     */
+    public func isErevYomTovSheni() -> Bool {
+        return (getJewishMonth() == JewishCalendar.TISHREI && (getJewishDayOfMonth() == 1))
+        || (!getInIsrael()
+            && ((getJewishMonth() == JewishCalendar.NISSAN && (getJewishDayOfMonth() == 15 || getJewishDayOfMonth() == 21))
+                || (getJewishMonth() == JewishCalendar.TISHREI && (getJewishDayOfMonth() == 15 || getJewishDayOfMonth() == 22))
+                || (getJewishMonth() == JewishCalendar.SIVAN && getJewishDayOfMonth() == 6 )));
+    }
+    
+    /**
+     * Returns true if the current day is <em>Aseres Yemei Teshuva</em>.
+     *
+     * @return if the current day is <em>Aseres Yemei Teshuvah</em>
+     */
+    public func isAseresYemeiTeshuva() -> Bool {
+        return getJewishMonth() == JewishCalendar.TISHREI && getJewishDayOfMonth() <= 10;
+    }
+    
+    /**
+     * Returns true if the current day is <em>Pesach</em> (either  the <em>Yom Tov</em> of <em>Pesach</em> or<em>Chol Hamoed Pesach</em>).
+     *
+     * @return true if the current day is <em>Pesach</em> (either  the <em>Yom Tov</em> of <em>Pesach</em> or<em>Chol Hamoed Pesach</em>).
+     * @see #isYomTov()
+     * @see #isCholHamoedPesach()
+     * @see #PESACH
+     * @see #CHOL_HAMOED_PESACH
+     */
+    public func isPesach() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        return holidayIndex == JewishCalendar.PESACH || holidayIndex == JewishCalendar.CHOL_HAMOED_PESACH;
+    }
+    
+    /**
+     * Returns true if the current day is <em>Chol Hamoed</em> of <em>Pesach</em>.
+     *
+     * @return true if the current day is <em>Chol Hamoed</em> of <em>Pesach</em>
+     * @see #isYomTov()
+     * @see #isPesach()
+     * @see #CHOL_HAMOED_PESACH
+     */
+    public func isCholHamoedPesach() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        return holidayIndex == JewishCalendar.CHOL_HAMOED_PESACH;
+    }
+    
+    /**
+     * Returns true if the current day is <em>Shavuos</em>.
+     *
+     * @return true if the current day is <em>Shavuos</em>.
+     * @see #isYomTov()
+     * @see #SHAVUOS
+     */
+    public func isShavuos() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        return holidayIndex == JewishCalendar.SHAVUOS;
+    }
+    
+    /**
+     * Returns true if the current day is <em>Rosh Hashana</em>.
+     *
+     * @return true if the current day is <em>Rosh Hashana</em>.
+     * @see #isYomTov()
+     * @see #ROSH_HASHANA
+     */
+    public func isRoshHashana() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        return holidayIndex == JewishCalendar.ROSH_HASHANA;
+    }
+    
+    /**
+     * Returns true if the current day is <em>Yom Kippur</em>.
+     *
+     * @return true if the current day is <em>Yom Kippur</em>.
+     * @see #isYomTov()
+     * @see #YOM_KIPPUR
+     */
+    public func isYomKippur() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        return holidayIndex == JewishCalendar.YOM_KIPPUR;
+    }
+    
+    /**
+     * Returns true if the current day is <em>Succos</em> (either  the <em>Yom Tov</em> of <em>Succos</em> or<em>Chol Hamoed Succos</em>).
+     * It will return false for {@link #isShminiAtzeres() Shmini Atzeres} and {@link #isSimchasTorah() Simchas Torah}.
+     *
+     * @return true if the current day is <em>Succos</em> (either  the <em>Yom Tov</em> of <em>Succos</em> or<em>Chol Hamoed Succos</em>.
+     * @see #isYomTov()
+     * @see #isCholHamoedSuccos()
+     * @see #isHoshanaRabba()
+     * @see #SUCCOS
+     * @see #CHOL_HAMOED_SUCCOS
+     * @see #HOSHANA_RABBA
+     */
+    public func isSuccos() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        return holidayIndex == JewishCalendar.SUCCOS || holidayIndex == JewishCalendar.CHOL_HAMOED_SUCCOS || holidayIndex == JewishCalendar.HOSHANA_RABBA;
+    }
+    
+    /**
+     * Returns true if the current day is <em>Hoshana Rabba</em>.
+     *
+     * @return true true if the current day is <em>Hoshana Rabba</em>.
+     * @see #isYomTov()
+     * @see #HOSHANA_RABBA
+     */
+    public func isHoshanaRabba() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        return holidayIndex == JewishCalendar.HOSHANA_RABBA;
+    }
+    
+    /**
+     * Returns true if the current day is <em>Shmini Atzeres</em>.
+     *
+     * @return true if the current day is <em>Shmini Atzeres</em>.
+     * @see #isYomTov()
+     * @see #SHEMINI_ATZERES
+     */
+    public func isShminiAtzeres() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        return holidayIndex == JewishCalendar.SHEMINI_ATZERES;
+    }
+    
+    /**
+     * Returns true if the current day is <em>Simchas Torah</em>. This will always return false if {@link #getInIsrael() in Israel}
+     *
+     * @return true if the current day is <em>Shmini Atzeres</em>.
+     * @see #isYomTov()
+     * @see #SIMCHAS_TORAH
+     */
+    public func isSimchasTorah() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        //if in Israel, Holiday index of SIMCHAS_TORAH will not be returned by getYomTovIndex()
+        return holidayIndex == JewishCalendar.SIMCHAS_TORAH;
+    }
+    
+    /**
+     * Returns true if the current day is <em>Chol Hamoed</em> of <em>Succos</em>.
+     *
+     * @return true if the current day is <em>Chol Hamoed</em> of <em>Succos</em>
+     * @see #isYomTov()
+     * @see #CHOL_HAMOED_SUCCOS
+     */
+    public func isCholHamoedSuccos() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        return holidayIndex == JewishCalendar.CHOL_HAMOED_SUCCOS || holidayIndex == JewishCalendar.HOSHANA_RABBA;
+    }
+    
+    /**
+     * Returns true if the current day is <em>Chol Hamoed</em> of <em>Pesach</em> or <em>Succos</em>.
+     *
+     * @return true if the current day is <em>Chol Hamoed</em> of <em>Pesach</em> or <em>Succos</em>
+     * @see #isYomTov()
+     * @see #CHOL_HAMOED_PESACH
+     * @see #CHOL_HAMOED_SUCCOS
+     */
+    public func isCholHamoed() -> Bool {
+        return isCholHamoedPesach() || isCholHamoedSuccos();
+    }
+    
+    /**
+     * Returns true if the current day is <em>Erev Yom Tov</em>. The method returns true for <em>Erev</em> - <em>Pesach</em>
+     * (first and last days), <em>Shavuos</em>, <em>Rosh Hashana</em>, <em>Yom Kippur</em>, <em>Succos</em> and <em>Hoshana
+     * Rabba</em>.
+     *
+     * @return true if the current day is <em>Erev</em> - <em>Pesach</em>, <em>Shavuos</em>, <em>Rosh Hashana</em>, <em>Yom
+     * Kippur</em>, <em>Succos</em> and <em>Hoshana Rabba</em>.
+     * @see #isYomTov()
+     * @see #isErevYomTovSheni()
+     */
+    public func isErevYomTov() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        return holidayIndex == JewishCalendar.EREV_PESACH || holidayIndex == JewishCalendar.EREV_SHAVUOS || holidayIndex == JewishCalendar.EREV_ROSH_HASHANA
+        || holidayIndex == JewishCalendar.EREV_YOM_KIPPUR || holidayIndex == JewishCalendar.EREV_SUCCOS || holidayIndex == JewishCalendar.HOSHANA_RABBA
+        || (holidayIndex == JewishCalendar.CHOL_HAMOED_PESACH && getJewishDayOfMonth() == 20);
+    }
+    
+    /**
+     * Returns true if the current day is <em>Erev Rosh Chodesh</em>. Returns false for <em>Erev Rosh Hashana</em>.
+     *
+     * @return true if the current day is <em>Erev Rosh Chodesh</em>. Returns false for <em>Erev Rosh Hashana</em>.
+     * @see #isRoshChodesh()
+     */
+    public func isErevRoshChodesh() -> Bool {
+        // Erev Rosh Hashana is not Erev Rosh Chodesh.
+        return (getJewishDayOfMonth() == 29 && getJewishMonth() != JewishCalendar.ELUL);
+    }
+    
+    
+    /**
+     * Returns true if the current day is <em>Yom Kippur Katan</em>. Returns false for <em>Erev Rosh Hashana</em>,
+     * <em>Erev Rosh Chodesh Cheshvan</em>, <em>Teves</em> and <em>Iyyar</em>. If <em>Erev Rosh Chodesh</em> occurs
+     * on a Friday or <em>Shabbos</em>, <em>Yom Kippur Katan</em> is moved back to Thursday.
+     *
+     * @return true if the current day is <em>Erev Rosh Chodesh</em>. Returns false for <em>Erev Rosh Hashana</em>.
+     * @see #isRoshChodesh()
+     */
+    public func isYomKippurKatan() -> Bool {
+        let dayOfWeek = getDayOfWeek();
+        let month = getJewishMonth();
+        let day = getJewishDayOfMonth();
+        
+        if (month == JewishCalendar.ELUL || month == JewishCalendar.TISHREI || month == JewishCalendar.KISLEV || month == JewishCalendar.NISSAN) {
+            return false;
+        }
+        
+        if (day == 29 && dayOfWeek != 6 && dayOfWeek != 7) {
+            return true;
+        }
+        
+        if ((day == 27 || day == 28) && dayOfWeek == 5 ) {
+            return true;
+        }
+        return false;
+    }
     
     /**
      * Returns true if the current day is <em>Isru Chag</em>. The method returns true for the day following <em>Pesach</em>
@@ -1918,42 +1918,42 @@ public class JewishCalendar {
         let holidayIndex = getYomTovIndex();
         return holidayIndex == JewishCalendar.ISRU_CHAG;
     }
+    
+    /**
+     * The Monday, Thursday and Monday after the first <em>Shabbos</em> after {@link #isRoshChodesh() <em>Rosh Chodesh</em>}
+     * {@link JewishDate#CHESHVAN <em>Cheshvan</em>} and {@link JewishDate#IYAR <em>Iyar</em>} are <a href=
+     * "https://outorah.org/p/41334/"> <em>BeHaB</em></a> days. If the last Monday of Iyar's BeHaB coincides with {@link
+     * #PESACH_SHENI <em>Pesach Sheni</em>}, the method currently considers it both <em>Pesach Sheni</em> and <em>BeHaB</em>.
+     * As seen in an Ohr Sameach  article on the subject <a href="https://ohr.edu/this_week/insights_into_halacha/9340">The
+     * unknown Days: BeHaB Vs. Pesach Sheini?</a> there are some customs that delay the day to various points in the future.
+     * @return true if the day is <em>BeHaB</em>.
+     */
+    public func isBeHaB() -> Bool {
+        let dayOfWeek = getDayOfWeek();
+        let month = getJewishMonth();
+        let day = getJewishDayOfMonth();
         
-        /**
-         * The Monday, Thursday and Monday after the first <em>Shabbos</em> after {@link #isRoshChodesh() <em>Rosh Chodesh</em>}
-         * {@link JewishDate#CHESHVAN <em>Cheshvan</em>} and {@link JewishDate#IYAR <em>Iyar</em>} are <a href=
-         * "https://outorah.org/p/41334/"> <em>BeHaB</em></a> days. If the last Monday of Iyar's BeHaB coincides with {@link
-         * #PESACH_SHENI <em>Pesach Sheni</em>}, the method currently considers it both <em>Pesach Sheni</em> and <em>BeHaB</em>.
-         * As seen in an Ohr Sameach  article on the subject <a href="https://ohr.edu/this_week/insights_into_halacha/9340">The
-         * unknown Days: BeHaB Vs. Pesach Sheini?</a> there are some customs that delay the day to various points in the future.
-         * @return true if the day is <em>BeHaB</em>.
-         */
-        public func isBeHaB() -> Bool {
-            let dayOfWeek = getDayOfWeek();
-            let month = getJewishMonth();
-            let day = getJewishDayOfMonth();
-            
-            if (month == JewishCalendar.CHESHVAN || month == JewishCalendar.IYAR) {
-                if((dayOfWeek == 2 && day > 4 && day < 18)
-                        || (dayOfWeek == 5 && day > 7 && day < 14)) {
-                    return true;
-                }
+        if (month == JewishCalendar.CHESHVAN || month == JewishCalendar.IYAR) {
+            if((dayOfWeek == 2 && day > 4 && day < 18)
+               || (dayOfWeek == 5 && day > 7 && day < 14)) {
+                return true;
             }
-            return false;
         }
-
-        /**
-         * Return true if the day is a Taanis (fast day). Return true for <em>17 of Tammuz</em>, <em>Tisha B'Av</em>,
-         * <em>Yom Kippur</em>, <em>Fast of Gedalyah</em>, <em>10 of Teves</em> and the <em>Fast of Esther</em>.
-         * See isRegularTaanis if you do not want Yom Kippur included.
-         *
-         * @return true if today is a fast day
-         */
-        public func isTaanis() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            return holidayIndex == JewishCalendar.SEVENTEEN_OF_TAMMUZ || holidayIndex == JewishCalendar.TISHA_BEAV || holidayIndex == JewishCalendar.YOM_KIPPUR
-            || holidayIndex == JewishCalendar.FAST_OF_GEDALYAH || holidayIndex == JewishCalendar.TENTH_OF_TEVES || holidayIndex == JewishCalendar.FAST_OF_ESTHER;
-        }
+        return false;
+    }
+    
+    /**
+     * Return true if the day is a Taanis (fast day). Return true for <em>17 of Tammuz</em>, <em>Tisha B'Av</em>,
+     * <em>Yom Kippur</em>, <em>Fast of Gedalyah</em>, <em>10 of Teves</em> and the <em>Fast of Esther</em>.
+     * See isRegularTaanis if you do not want Yom Kippur included.
+     *
+     * @return true if today is a fast day
+     */
+    public func isTaanis() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        return holidayIndex == JewishCalendar.SEVENTEEN_OF_TAMMUZ || holidayIndex == JewishCalendar.TISHA_BEAV || holidayIndex == JewishCalendar.YOM_KIPPUR
+        || holidayIndex == JewishCalendar.FAST_OF_GEDALYAH || holidayIndex == JewishCalendar.TENTH_OF_TEVES || holidayIndex == JewishCalendar.FAST_OF_ESTHER;
+    }
     
     /**
      * Return true if the day is a Taanis (fast day) and not Yom Kippur. Return true for <em>17 of Tammuz</em>, <em>Tisha B'Av</em>,
@@ -1965,127 +1965,127 @@ public class JewishCalendar {
         let holidayIndex = getYomTovIndex();
         return holidayIndex == JewishCalendar.SEVENTEEN_OF_TAMMUZ || holidayIndex == JewishCalendar.TISHA_BEAV || holidayIndex == JewishCalendar.FAST_OF_GEDALYAH || holidayIndex == JewishCalendar.TENTH_OF_TEVES || holidayIndex == JewishCalendar.FAST_OF_ESTHER;
     }
-        
-        /**
-         * Return true if the day is <em>Taanis Bechoros</em> (on <em>Erev Pesach</em>). It will return true for the 14th
-         * of <em>Nissan</em> if it is not on <em>Shabbos</em>, or if the 12th of <em>Nissan</em> occurs on a Thursday.
-         *
-         * @return true if today is <em>Taanis Bechoros</em>.
-         */
-        public func isTaanisBechoros() -> Bool {
-            let day = getJewishDayOfMonth();
-            let dayOfWeek = getDayOfWeek();
-            // on 14 Nissan unless that is Shabbos where the fast is moved back to Thursday
-            return getJewishMonth() == JewishCalendar.NISSAN && ((day == 14 && dayOfWeek != 7) ||
-                    (day == 12 && dayOfWeek == 5 ));
-        }
-
-        /**
-         * Returns the day of <em>Chanukah</em> or -1 if it is not <em>Chanukah</em>.
-         *
-         * @return the day of <em>Chanukah</em> or -1 if it is not <em>Chanukah</em>.
-         * @see #isChanukah()
-         */
-        public func getDayOfChanukah() -> Int {
-            let day = getJewishDayOfMonth();
-            if (isChanukah()) {
-                if (getJewishMonth() == JewishCalendar.KISLEV) {
-                    return day - 24;
-                } else { // teves
-                    return isKislevShort() ? day + 5 : day + 6;
-                }
-            } else {
-                return -1;
+    
+    /**
+     * Return true if the day is <em>Taanis Bechoros</em> (on <em>Erev Pesach</em>). It will return true for the 14th
+     * of <em>Nissan</em> if it is not on <em>Shabbos</em>, or if the 12th of <em>Nissan</em> occurs on a Thursday.
+     *
+     * @return true if today is <em>Taanis Bechoros</em>.
+     */
+    public func isTaanisBechoros() -> Bool {
+        let day = getJewishDayOfMonth();
+        let dayOfWeek = getDayOfWeek();
+        // on 14 Nissan unless that is Shabbos where the fast is moved back to Thursday
+        return getJewishMonth() == JewishCalendar.NISSAN && ((day == 14 && dayOfWeek != 7) ||
+                                                             (day == 12 && dayOfWeek == 5 ));
+    }
+    
+    /**
+     * Returns the day of <em>Chanukah</em> or -1 if it is not <em>Chanukah</em>.
+     *
+     * @return the day of <em>Chanukah</em> or -1 if it is not <em>Chanukah</em>.
+     * @see #isChanukah()
+     */
+    public func getDayOfChanukah() -> Int {
+        let day = getJewishDayOfMonth();
+        if (isChanukah()) {
+            if (getJewishMonth() == JewishCalendar.KISLEV) {
+                return day - 24;
+            } else { // teves
+                return isKislevShort() ? day + 5 : day + 6;
             }
+        } else {
+            return -1;
         }
-
-        /**
-         * Returns true if the current day is one of the 8 days of <em>Chanukah</em>.
-         *
-         * @return if the current day is one of the 8 days of <em>Chanukah</em>.
-         *
-         * @see #getDayOfChanukah()
-         */
-        public func isChanukah() -> Bool {
-            return getYomTovIndex() == JewishCalendar.CHANUKAH;
+    }
+    
+    /**
+     * Returns true if the current day is one of the 8 days of <em>Chanukah</em>.
+     *
+     * @return if the current day is one of the 8 days of <em>Chanukah</em>.
+     *
+     * @see #getDayOfChanukah()
+     */
+    public func isChanukah() -> Bool {
+        return getYomTovIndex() == JewishCalendar.CHANUKAH;
+    }
+    
+    /**
+     * Returns if the day is Purim (<a href="https://en.wikipedia.org/wiki/Purim#Shushan_Purim">Shushan Purim</a>
+     * in a mukaf choma and regular Purim in a non-mukaf choma).
+     * @return if the day is Purim (Shushan Purim in a mukaf choma and regular Purin in a non-mukaf choma)
+     *
+     * @see #getIsMukafChoma()
+     * @see #setIsMukafChoma(boolean)
+     */
+    public func isPurim() -> Bool {
+        if(isMukafChoma) {
+            return getYomTovIndex() == JewishCalendar.SHUSHAN_PURIM;
+        } else {
+            return getYomTovIndex() == JewishCalendar.PURIM;
         }
+    }
+    
+    /**
+     * Returns if the day is Rosh Chodesh. Rosh Hashana will return false
+     *
+     * @return true if it is Rosh Chodesh. Rosh Hashana will return false
+     */
+    public func isRoshChodesh() -> Bool {
+        // Rosh Hashana is not rosh chodesh. Elul never has 30 days
+        return (getJewishDayOfMonth() == 1 && getJewishMonth() != JewishCalendar.TISHREI) || getJewishDayOfMonth() == 30;
+    }
+    
+    /**
+     * Returns if the day is <em>Shabbos</em> and Sunday is <em>Rosh Chodesh</em>.
+     *
+     * @return true if it is <em>Shabbos</em> and Sunday is <em>Rosh Chodesh</em>.
+     * @todo There is more to tweak in this method (it does not cover all cases and opinions), and it may be removed.
+     */
+    public func isMacharChodesh() -> Bool {
+        return (getDayOfWeek() == 7 && (getJewishDayOfMonth() == 30 || getJewishDayOfMonth() == 29));
+    }
+    
+    /**
+     * Returns if the day is <em>Shabbos Mevorchim</em>.
+     *
+     * @return true if it is <em>Shabbos Mevorchim</em>.
+     */
+    public func isShabbosMevorchim() -> Bool {
+        return (getDayOfWeek() == 7 && getJewishDayOfMonth() >= 23 && getJewishDayOfMonth() <= 29 && getJewishMonth() != JewishCalendar.ELUL);
+    }
+    
+    /**
+     * Returns the int value of the <em>Omer</em> day or -1 if the day is not in the <em>Omer</em>.
+     *
+     * @return The <em>Omer</em> count as an int or -1 if it is not a day of the <em>Omer</em>.
+     */
+    public func getDayOfOmer() -> Int {
+        var omer = -1; // not a day of the Omer
+        let month = getJewishMonth();
+        let day = getJewishDayOfMonth();
         
-        /**
-         * Returns if the day is Purim (<a href="https://en.wikipedia.org/wiki/Purim#Shushan_Purim">Shushan Purim</a>
-         * in a mukaf choma and regular Purim in a non-mukaf choma).
-         * @return if the day is Purim (Shushan Purim in a mukaf choma and regular Purin in a non-mukaf choma)
-         *
-         * @see #getIsMukafChoma()
-         * @see #setIsMukafChoma(boolean)
-         */
-        public func isPurim() -> Bool {
-            if(isMukafChoma) {
-                return getYomTovIndex() == JewishCalendar.SHUSHAN_PURIM;
-            } else {
-                return getYomTovIndex() == JewishCalendar.PURIM;
-            }
+        // if Nissan and second day of Pesach and on
+        if (month == JewishCalendar.NISSAN && day >= 16) {
+            omer = day - 15;
+            // if Iyar
+        } else if (month == JewishCalendar.IYAR) {
+            omer = day + 15;
+            // if Sivan and before Shavuos
+        } else if (month == JewishCalendar.SIVAN && day < 6) {
+            omer = day + 44;
         }
-
-        /**
-         * Returns if the day is Rosh Chodesh. Rosh Hashana will return false
-         *
-         * @return true if it is Rosh Chodesh. Rosh Hashana will return false
-         */
-        public func isRoshChodesh() -> Bool {
-            // Rosh Hashana is not rosh chodesh. Elul never has 30 days
-            return (getJewishDayOfMonth() == 1 && getJewishMonth() != JewishCalendar.TISHREI) || getJewishDayOfMonth() == 30;
-        }
-
-        /**
-         * Returns if the day is <em>Shabbos</em> and Sunday is <em>Rosh Chodesh</em>.
-         *
-         * @return true if it is <em>Shabbos</em> and Sunday is <em>Rosh Chodesh</em>.
-         * @todo There is more to tweak in this method (it does not cover all cases and opinions), and it may be removed.
-         */
-        public func isMacharChodesh() -> Bool {
-            return (getDayOfWeek() == 7 && (getJewishDayOfMonth() == 30 || getJewishDayOfMonth() == 29));
-        }
-
-        /**
-         * Returns if the day is <em>Shabbos Mevorchim</em>.
-         *
-         * @return true if it is <em>Shabbos Mevorchim</em>.
-         */
-        public func isShabbosMevorchim() -> Bool {
-            return (getDayOfWeek() == 7 && getJewishDayOfMonth() >= 23 && getJewishDayOfMonth() <= 29 && getJewishMonth() != JewishCalendar.ELUL);
-        }
-
-        /**
-         * Returns the int value of the <em>Omer</em> day or -1 if the day is not in the <em>Omer</em>.
-         *
-         * @return The <em>Omer</em> count as an int or -1 if it is not a day of the <em>Omer</em>.
-         */
-        public func getDayOfOmer() -> Int {
-            var omer = -1; // not a day of the Omer
-            let month = getJewishMonth();
-            let day = getJewishDayOfMonth();
-
-            // if Nissan and second day of Pesach and on
-            if (month == JewishCalendar.NISSAN && day >= 16) {
-                omer = day - 15;
-                // if Iyar
-            } else if (month == JewishCalendar.IYAR) {
-                omer = day + 15;
-                // if Sivan and before Shavuos
-            } else if (month == JewishCalendar.SIVAN && day < 6) {
-                omer = day + 44;
-            }
-            return omer;
-        }
-        
-        /**
-         * Returns if the day is Tisha Be'Av (the 9th of Av).
-         * @return if the day is Tisha Be'Av (the 9th of Av).
-         */
-        public func isTishaBav() -> Bool {
-            let holidayIndex = getYomTovIndex();
-            return holidayIndex == JewishCalendar.TISHA_BEAV;
-        }
+        return omer;
+    }
+    
+    /**
+     * Returns if the day is Tisha Be'Av (the 9th of Av).
+     * @return if the day is Tisha Be'Av (the 9th of Av).
+     */
+    public func isTishaBav() -> Bool {
+        let holidayIndex = getYomTovIndex();
+        return holidayIndex == JewishCalendar.TISHA_BEAV;
+    }
     
     /**
      This method does not return anything, however, it does set the variables moladHours, moladMiutes, and moladChalakim with the proper
@@ -2197,13 +2197,13 @@ public class JewishCalendar {
         // being incorrectly off by an hour in the summer due to DST. Proper adjustment for the actual time in DST will be done by the date
         // formatter class used to display the Date.
         var moladDay = DateComponents(calendar: calendar, timeZone: TimeZone(identifier: "GMT+2")!, year: Int(year), month: Int(month), day: Int(dayOfMonth), hour: Int(moladHours), minute: Int(moladMinutes), second: Int(moladSeconds)-1)
-                
+        
         if moladHours > 6 {
             moladDay.day! += 1
             moladDay.setValue(Int(moladHours), for: .hour)
         }
         moladDay.setValue((Int(moladHours) + 18) % 24, for: .hour)
-                
+        
         return calendar.date(from: moladDay)!
     }
     
@@ -2343,7 +2343,66 @@ public class JewishCalendar {
         let solar = Double(getJewishYear() - 1) * 365.25
         return Int(floor(days - solar))
     }
-
+    
+    /**
+     Returns a double if the current day has a tekufa event. The double represents the amout of hours and minutes into the day the tekufa event happens at. You will need to minus 6 hours from this double to account for the hebrew date starting at 6 hours into the day. See the ``getTekufaAsDate(shouldMinus21Minutes:)`` method for more details.
+     - Returns a double representing the hours and minutes of the tekufa with 6 hours added
+     */
+    public func getTekufa() -> Double? {
+        let INITIAL_TEKUFA_OFFSET = 12.625 // the number of days Tekufas Tishrei occurs before JEWISH_EPOCH
+        
+        let days = Double(getJewishCalendarElapsedDays(year: getJewishYear()) + getDaysSinceStartOfJewishYear()) + INITIAL_TEKUFA_OFFSET - 1 // total days since first Tekufas Tishrei event
+        
+        let solarDaysElapsed = days.truncatingRemainder(dividingBy: 365.25) // total days elapsed since start of solar year
+        let tekufaDaysElapsed = solarDaysElapsed.truncatingRemainder(dividingBy: 91.3125) // the number of days that have passed since a tekufa event
+        if (tekufaDaysElapsed > 0 && tekufaDaysElapsed <= 1) { // if the tekufa happens in the upcoming 24 hours
+            return ((1.0 - tekufaDaysElapsed) * 24.0).truncatingRemainder(dividingBy: 24) // rationalize the tekufa event to number of hours since start of jewish day
+        } else {
+            return nil
+        }
+    }
+    
+    /**
+     Returns a string if the current day has a tekufa event. The string will contain the name of the tekufa/season that is arriving. If this method is called on a day without the tekufa event, it will return an empty string.
+     - Returns a string with the tekufa name or an empty string on a day with no tekufa change
+     */
+    public func getTekufaName() -> String {
+        let tekufaNames = ["Tishri", "Tevet", "Nissan", "Tammuz"]
+        let INITIAL_TEKUFA_OFFSET = 12.625 // the number of days Tekufas Tishrei occurs before JEWISH_EPOCH
+        
+        let days = Double(getJewishCalendarElapsedDays(year: getJewishYear()) + getDaysSinceStartOfJewishYear()) + INITIAL_TEKUFA_OFFSET - 1 // total days since first Tekufas Tishrei event
+        
+        let solarDaysElapsed = days.truncatingRemainder(dividingBy: 365.25) // total days elapsed since start of solar year
+        let currentTekufaNumber = Int(solarDaysElapsed / 91.3125)
+        let tekufaDaysElapsed = solarDaysElapsed.truncatingRemainder(dividingBy: 91.3125) // the number of days that have passed since a tekufa event
+        
+        if (tekufaDaysElapsed > 0 && tekufaDaysElapsed <= 1) {//if the tekufa happens in the upcoming 24 hours
+            return tekufaNames[currentTekufaNumber]
+        } else {
+            return ""
+        }
+    }
+    
+    /**
+     Returns a Date if the current day has a tekufa event. The Date will contain the time of the tekufa/season that is arriving. If this method is called on a day without the tekufa event, it will return a nil. The default implementation of this method will return the Tekufa event according to the calculations of Rabbi Tulchinsky calendar. However, there is also the opinion of Rabbi Yonah Mertzbach, who says to calculate the tekufa based on local midday in Israel which causes a 21-minute difference. There is a third opinion as well to use seasonal midday but that is not an accepted opinion.
+     - Returns a Date with the tekufa time or a nil on a day with no tekufa change
+     - Parameter shouldMinus21Minutes a bool that, if true, removes 21 minutes from the time of Rabbi Tulchinsky's tekufa which is the opinion of Rabbi Yonah Mertzbach.
+     */
+    public func getTekufaAsDate(shouldMinus21Minutes:Bool = false) -> Date? {
+        let yerushalayimStandardTZ = TimeZone(identifier: "GMT+2")!
+        let cal = Calendar(identifier: .gregorian)
+        let workingDateComponents = cal.dateComponents([.year, .month, .day], from: workingDate)
+        guard let tekufa = getTekufa() else {
+            return nil
+        }
+        let hours = tekufa - 6
+        var minutes = Int((hours - Double(Int(hours))) * 60)
+        if shouldMinus21Minutes {
+            minutes -= 21
+        }
+        return cal.date(from: DateComponents(calendar: cal, timeZone: yerushalayimStandardTZ, year: workingDateComponents.year, month: workingDateComponents.month, day: workingDateComponents.day, hour: Int(hours), minute: minutes, second: 0, nanosecond: 0))
+    }
+    
     /**
      * returns true if the current hebrew year is a shmita year. Note that according to Rashi and other Rishonim, the year before is the year of shmita.
      */

@@ -19,17 +19,17 @@ public class ZmanimFormatter {
      * Setting to prepent a zero to single digit hours.
      * @see #setSettings(boolean, boolean, boolean)
      */
-    var prependZeroHours = false;
+    public var prependZeroHours = false;
 
     /**
      * @see #setSettings(boolean, boolean, boolean)
      */
-    var useSeconds = false;
+    public var useSeconds = false;
 
     /**
      * @see #setSettings(boolean, boolean, boolean)
      */
-    var useMillis = false;
+    public var useMillis = false;
 
     /**
      * the formatter for minutes as seconds.

@@ -16,17 +16,17 @@ public class Daf {
     /**
      * {@link #getMasechtaNumber()} and {@link #setMasechtaNumber(int)}.
      */
-    var masechtaNumber:Int = 0
+    public var masechtaNumber:Int = 0
     
     /**
      * See {@link #getDaf()} and {@link #setDaf(int)}.
      */
-    var daf:Int = 0
+    public var daf:Int = 0
 
     /**
      * See {@link #getMasechtaTransliterated()} and {@link #setMasechtaTransliterated(String[])}.
      */
-    private static var masechtosBavliTransliterated = [ "Berachos", "Shabbos", "Eruvin", "Pesachim", "Shekalim",
+    public static var masechtosBavliTransliterated = [ "Berachos", "Shabbos", "Eruvin", "Pesachim", "Shekalim",
             "Yoma", "Sukkah", "Beitzah", "Rosh Hashana", "Taanis", "Megillah", "Moed Katan", "Chagigah", "Yevamos",
             "Kesubos", "Nedarim", "Nazir", "Sotah", "Gitin", "Kiddushin", "Bava Kamma", "Bava Metzia", "Bava Basra",
             "Sanhedrin", "Makkos", "Shevuos", "Avodah Zarah", "Horiyos", "Zevachim", "Menachos", "Chullin", "Bechoros",
@@ -46,7 +46,7 @@ public class Daf {
     /**
      * See {@link #getYerushalmiMasechtaTransliterated()}.
      */
-    private static var masechtosYerushalmiTransliterated = [ "Berachos", "Pe'ah", "Demai", "Kilayim", "Shevi'is",
+    public static var masechtosYerushalmiTransliterated = [ "Berachos", "Pe'ah", "Demai", "Kilayim", "Shevi'is",
             "Terumos", "Ma'asros", "Ma'aser Sheni", "Chalah", "Orlah", "Bikurim", "Shabbos", "Eruvin", "Pesachim",
             "Beitzah", "Rosh Hashanah", "Yoma", "Sukah", "Ta'anis", "Shekalim", "Megilah", "Chagigah", "Moed Katan",
             "Yevamos", "Kesuvos", "Sotah", "Nedarim", "Nazir", "Gitin", "Kidushin", "Bava Kama", "Bava Metzia",
@@ -55,7 +55,7 @@ public class Daf {
     /**
      * See {@link #getYerushalmiMasechta()}.
      */
-    private static let masechtosYerushalmi = [ "ברכות"
+    public static let masechtosYerushalmi = [ "ברכות"
                                                      , "פיאה"
                                                      , "דמאי"
                                                      , "כלאים"

@@ -385,7 +385,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getAteretTorahSunsetOffset()
      * @see setAteretTorahSunsetOffset(double)
      */
-    var ateretTorahSunsetOffset = Double(40);
+    public var ateretTorahSunsetOffset = Double(40);
     
     /**
      * A constructor that takes a ``GeoLocation`` as a parameter.
@@ -4638,7 +4638,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * Warning: This zman should NOT be used in Israel.
      * @return the time of misheyakir calculated by the Amudei Horaah calendar by adjusting the zman based off of degrees.
      */
-    func getMisheyakirAmudeiHoraah() -> Date? {
+    public func getMisheyakirAmudeiHoraah() -> Date? {
         var calendar = Calendar.current
         calendar.timeZone = geoLocation.timeZone
         let temp = workingDate
@@ -4679,7 +4679,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
          * @return the Date representing 13.5 minutes zmaniyot after sunset adjusted to the users location using degrees based on Netanya, Israel. This zman
          * should NOT be used in Israel.
          */
-    func getTzaisAmudeiHoraah() -> Date? {
+    public func getTzaisAmudeiHoraah() -> Date? {
         var calendar = Calendar.current
         calendar.timeZone = geoLocation.timeZone
         let temp = workingDate
@@ -4699,7 +4699,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunset(), offset: numberOfSeconds * Double(secondsZmanit))
     }
     
-    func getTzaisAmudeiHoraahLChumra() -> Date? {
+    public func getTzaisAmudeiHoraahLChumra() -> Date? {
         var calendar = Calendar.current
         calendar.timeZone = geoLocation.timeZone
         let temp = workingDate
@@ -4719,7 +4719,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunset(), offset: numberOfSeconds * Double(secondsZmanit))
     }
     
-    func getTzais72ZmanisAmudeiHoraah() -> Date? {
+    public func getTzais72ZmanisAmudeiHoraah() -> Date? {
         var calendar = Calendar.current
         calendar.timeZone = geoLocation.timeZone
         let temp = workingDate
@@ -4739,7 +4739,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunset(), offset: numberOfSeconds * Double(secondsZmanit))
     }
     
-    func getTzaisShabbatAmudeiHoraah() -> Date? {
+    public func getTzaisShabbatAmudeiHoraah() -> Date? {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.GEOMETRIC_ZENITH + 7.14)
     }
     
@@ -4747,7 +4747,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      This is only for display purposes, it should not be used to calculate zmanim.
      - Returns: The earlier of ``getTzaisAteretTorah()`` or ``getTzaisShabbatAmudeiHoraah()``
      */
-    func getTzaisShabbatAmudeiHoraahLesserThan40() -> Date? {
+    public func getTzaisShabbatAmudeiHoraahLesserThan40() -> Date? {
         if getTzaisAteretTorah() == nil || getTzaisShabbatAmudeiHoraah() == nil {
             return nil
         }
@@ -4762,7 +4762,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      This is only for display purposes, it should not be used to calculate zmanim.
      - Returns: The earlier of ``getTzais72()`` or ``getTzais72ZmanitAmudeiHoraah()``
      */
-    func getTzaisZmanitAmudeiHoraahLkulah() -> Date? {
+    public func getTzaisZmanitAmudeiHoraahLkulah() -> Date? {
         if getTzais72() == nil || getTzais72ZmanisAmudeiHoraah() == nil {
             return nil
         }

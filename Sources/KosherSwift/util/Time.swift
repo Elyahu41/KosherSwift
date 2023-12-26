@@ -27,28 +27,28 @@ public class Time {
     /**
      * @see #getHours()
      */
-    private var hours = 0;
+    public var hours = 0;
 
     /**
      * @see #getMinutes()
      */
-    private var minutes = 0;
+    public var minutes = 0;
 
     /**
      * @see #getSeconds()
      */
-    private var seconds = 0;
+    public var seconds = 0;
 
     /**
      * @see #getMilliseconds()
      */
-    private var milliseconds = 0;
+    public var milliseconds = 0;
 
     /**
      * @see #isNegative()
      * @see #setIsNegative(boolean)
      */
-    var isNegative = false;
+    public var isNegative = false;
 
     /**
      * Constructor with parameters for the hours, minutes, seconds and millisecods.

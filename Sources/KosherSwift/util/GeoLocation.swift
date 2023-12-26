@@ -21,32 +21,32 @@ public class GeoLocation {
      * @see #setLatitude(double)
      * @see #setLatitude(int, int, double, String)
      */
-     var latitude:Double;
+     public var latitude:Double;
     
     /**
      * @see #getLongitude()
      * @see #setLongitude(double)
      * @see #setLongitude(int, int, double, String)
      */
-     var longitude:Double;
+     public var longitude:Double;
     
     /**
      * @see #getLocationName()
      * @see #setLocationName(String)
      */
-     var locationName:String;
+     public var locationName:String;
     
     /**
      * @see #getTimeZone()
      * @see #setTimeZone(TimeZone)
      */
-     var timeZone:TimeZone;
+     public var timeZone:TimeZone;
     
     /**
      * @see #getElevation()
      * @see #setElevation(double)
      */
-     var elevation:Double;
+     public var elevation:Double;
     
     /**
      * Constant for a distance type calculation.

@@ -52,24 +52,24 @@ public class Zman {
     /**
      * The name / label of the <em>zman</em>.
      */
-    private var label:String;
+    public var label:String;
     
     /**
      * The {@link Date} of the <em>zman</em>
      */
-    private var zman:Date?;
+    public var zman:Date?;
     
     /**
      * The duration if the <em>zman</em> is  a {@link com.kosherjava.zmanim.AstronomicalCalendar#getTemporalHour() temporal hour} (or the various
      * <em>shaah zmanis</em> base times such as {@link com.kosherjava.zmanim.ZmanimCalendar#getShaahZmanisGra()  <em>shaah Zmanis GRA</em>} or
      * {@link com.kosherjava.zmanim.ComplexZmanimCalendar#getShaahZmanis16Point1Degrees() <em>shaah Zmanis 16.1&deg;</em>}).
      */
-    var duration:Int64;
+    public var duration:Int64;
     
     /**
      * A longer description or explanation of a <em>zman</em>.
      */
-    var description:String;
+    public var description:String;
 
     /**
      * The constructor setting a {@link Date} based <em>zman</em> and a label.

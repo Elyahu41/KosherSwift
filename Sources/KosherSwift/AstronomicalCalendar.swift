@@ -55,17 +55,17 @@ public class AstronomicalCalendar {
     /**
      * The Swift date encapsulated by this class to track the current date used by the class
      */
-    var workingDate:Date;
+    public var workingDate:Date;
 
     /**
      * the {@link GeoLocation} used for calculations.
      */
-    var geoLocation:GeoLocation;
+    public var geoLocation:GeoLocation;
 
     /**
      * the internal {@link AstronomicalCalculator} used for calculating solar based times.
      */
-    var astronomicalCalculator:AstronomicalCalculator;
+    public var astronomicalCalculator:AstronomicalCalculator;
 
     /**
      * The getSunrise method Returns a <code>Date</code> representing the

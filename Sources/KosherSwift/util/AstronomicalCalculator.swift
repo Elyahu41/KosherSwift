@@ -22,14 +22,14 @@ public class AstronomicalCalculator {
      *
      * @see #getRefraction()
      */
-    private var refraction = 34.0 / 60.0;
+    public var refraction = 34.0 / 60.0;
 
     /**
      * The commonly used average solar radius in minutes of a degree.
      *
      * @see #getSolarRadius()
      */
-    private var solarRadius = 16.0 / 60.0;
+    public var solarRadius = 16.0 / 60.0;
 
     /**
      * The commonly used average earth radius in KM. At this time, this only affects elevation adjustment and not the
@@ -38,7 +38,7 @@ public class AstronomicalCalculator {
      * @see #getEarthRadius()
      * @see #setEarthRadius(double)
      */
-    var earthRadius = 6356.9; // in KM
+    public var earthRadius = 6356.9; // in KM
 
     /**
      * A method that returns the earth radius in KM. The value currently defaults to 6356.9 KM if not set.
@@ -62,7 +62,7 @@ public class AstronomicalCalculator {
     /**
      * The zenith of astronomical sunrise and sunset. The sun is 90&deg; from the vertical 0&deg;
      */
-    private static let GEOMETRIC_ZENITH = 90.0;
+    public static let GEOMETRIC_ZENITH = 90.0;
 
     /**
      * Returns the default class for calculating sunrise and sunset. This is currently the {@link NOAACalculator},

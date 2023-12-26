@@ -30,91 +30,91 @@ public class TefilaRules {
      * @see #isTachanunRecitedEndOfTishrei()
      * @see #setTachanunRecitedEndOfTishrei(boolean)
      */
-    var tachanunRecitedEndOfTishrei = true;
+    public var tachanunRecitedEndOfTishrei = true;
     
     /**
      * The default value is <code>false</code>.
      * @see #isTachanunRecitedWeekAfterShavuos()
      * @see #setTachanunRecitedWeekAfterShavuos(boolean)
      */
-    var tachanunRecitedWeekAfterShavuos = false;
+    public var tachanunRecitedWeekAfterShavuos = false;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecited13SivanOutOfIsrael()
      * @see #setTachanunRecited13SivanOutOfIsrael(boolean)
      */
-    var tachanunRecited13SivanOutOfIsrael = true;
+    public var tachanunRecited13SivanOutOfIsrael = true;
     
     /**
      * The default value is <code>false</code>.
      * @see #isTachanunRecitedPesachSheni()
      * @see #setTachanunRecitedPesachSheni(boolean)
      */
-    var tachanunRecitedPesachSheni = false;
+    public var tachanunRecitedPesachSheni = false;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecited15IyarOutOfIsrael()
      * @see #setTachanunRecited15IyarOutOfIsrael(boolean)
      */
-    var tachanunRecited15IyarOutOfIsrael = true;
+    public var tachanunRecited15IyarOutOfIsrael = true;
     
     /**
      * The default value is <code>false</code>.
      * @see #isTachanunRecitedMinchaErevLagBaomer()
      * @see #setTachanunRecitedMinchaErevLagBaomer(boolean)
      */
-    var tachanunRecitedMinchaErevLagBaomer = false;
+    public var tachanunRecitedMinchaErevLagBaomer = false;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecitedShivasYemeiHamiluim()
      * @see #setTachanunRecitedShivasYemeiHamiluim(boolean)
      */
-    var tachanunRecitedShivasYemeiHamiluim = true;
+    public var tachanunRecitedShivasYemeiHamiluim = true;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecitedWeekOfHod()
      * @see #setTachanunRecitedWeekOfHod(boolean)
      */
-    var tachanunRecitedWeekOfHod = true;
+    public var tachanunRecitedWeekOfHod = true;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecitedWeekOfPurim()
      * @see #setTachanunRecitedWeekOfPurim(boolean)
      */
-    var tachanunRecitedWeekOfPurim = true;
+    public var tachanunRecitedWeekOfPurim = true;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecitedFridays()
      * @see #setTachanunRecitedFridays(boolean)
      */
-    var tachanunRecitedFridays = true;
+    public var tachanunRecitedFridays = true;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecitedSundays()
      * @see #setTachanunRecitedSundays(boolean)
      */
-    var tachanunRecitedSundays = true;
+    public var tachanunRecitedSundays = true;
     
     /**
      * The default value is <code>true</code>.
      * @see #isTachanunRecitedMinchaAllYear()
      * @see #setTachanunRecitedMinchaAllYear(boolean)
      */
-    var tachanunRecitedMinchaAllYear = true;
+    public var tachanunRecitedMinchaAllYear = true;
     
     /**
      * The default value is <code>false</code>.
      * @see #isMizmorLesodaRecited(JewishCalendar)
      * @see #setMizmorLesodaRecitedErevYomKippurAndPesach(boolean)
      */
-    var mizmorLesodaRecitedErevYomKippurAndPesach = false;
+    public var mizmorLesodaRecitedErevYomKippurAndPesach = false;
     
     /**
      * Returns if <em>tachanun</em> is recited during <em>shacharis</em> on the day in question. There are the many

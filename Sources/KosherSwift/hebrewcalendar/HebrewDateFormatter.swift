@@ -33,27 +33,27 @@ public class HebrewDateFormatter {
     /**
      * See {@link #isHebrewFormat()} and {@link #setHebrewFormat(boolean)}.
      */
-    var hebrewFormat = false;
+    public var hebrewFormat = false;
     
     /**
      * See {@link #isUseLongHebrewYears()} and {@link #setUseLongHebrewYears(boolean)}.
      */
-    var useLonghebrewYears = false;
+    public var useLonghebrewYears = false;
     
     /**
      * See {@link #isUseGershGershayim()} and {@link #setUseGershGershayim(boolean)}.
      */
-    var useGershGershayim = true;
+    public var useGershGershayim = true;
     
     /**
      * See {@link #isLongWeekFormat()} and {@link #setLongWeekFormat(boolean)}.
      */
-    var longWeekFormat = true;
+    public var longWeekFormat = true;
     
     /**
      * See {@link #isUseFinalFormLetters()} and {@link #setUseFinalFormLetters(boolean)}.
      */
-    var useFinalFormLetters = false;
+    public var useFinalFormLetters = false;
     
     /**
      * The internal DateFormat.&nbsp; See {@link #isLongWeekFormat()} and {@link #setLongWeekFormat(boolean)}.
@@ -74,9 +74,9 @@ public class HebrewDateFormatter {
      *
      * @see #formatParsha(JewishCalendar)
      */
-    private var transliteratedParshaMap:[JewishCalendar.Parsha: String];
+    public var transliteratedParshaMap:[JewishCalendar.Parsha: String];
     
-    private var hebrewParshaMap:[JewishCalendar.Parsha: String];
+    public var hebrewParshaMap:[JewishCalendar.Parsha: String];
     
     /**
      * Default constructor sets the {@link EnumMap}s of Hebrew and default transliterated parshiyos.
@@ -279,7 +279,7 @@ public class HebrewDateFormatter {
      * @see #getTransliteratedMonthList()
      * @see #setTransliteratedMonthList(String[])
      */
-    var transliteratedMonths = [ "Tishrei", "Cheshvan", "Kislev", "Teves", "Shevat", "Adar", "Adar II", "Nissan", "Iyar", "Sivan", "Tammuz", "Av", "Elul" , "Adar I"];
+    public var transliteratedMonths = [ "Tishrei", "Cheshvan", "Kislev", "Teves", "Shevat", "Adar", "Adar II", "Nissan", "Iyar", "Sivan", "Tammuz", "Av", "Elul" , "Adar I"];
     
     /**
      * The Hebrew omer prefix charachter. It defaults to &#x05D1; producing &#x05D1;&#x05E2;&#x05D5;&#x05DE;&#x05E8;,
@@ -287,14 +287,14 @@ public class HebrewDateFormatter {
      * @see #getHebrewOmerPrefix()
      * @see #setHebrewOmerPrefix(String)
      */
-    var hebrewOmerPrefix = "\u{05D1}";
+    public var hebrewOmerPrefix = "\u{05D1}";
     
     /**
      * The default value for formatting Shabbos (Saturday).&nbsp; Defaults to Shabbos.
      * @see #getTransliteratedShabbosDayOfWeek()
      * @see #setTransliteratedShabbosDayOfWeek(String)
      */
-    var transliteratedShabbosDayOfweek = "Shabbos";
+    public var transliteratedShabbosDayOfweek = "Shabbos";
     
     /**
      * Returns the day of Shabbos transliterated into Latin chars. The default uses Ashkenazi pronunciation "Shabbos".
@@ -325,7 +325,7 @@ public class HebrewDateFormatter {
     /**
      * See {@link #getTransliteratedHolidayList()} and {@link #setTransliteratedHolidayList(String[])}.
      */
-    private var transliteratedHolidays = ["Erev Pesach", "Pesach", "Chol Hamoed Pesach", "Pesach Sheni",
+    public var transliteratedHolidays = ["Erev Pesach", "Pesach", "Chol Hamoed Pesach", "Pesach Sheni",
                                           "Erev Shavuos", "Shavuos", "Seventeenth of Tammuz", "Tishah B'Av", "Tu B'Av", "Erev Rosh Hashana",
                                           "Rosh Hashana", "Fast of Gedalyah", "Erev Yom Kippur", "Yom Kippur", "Erev Succos", "Succos",
                                           "Chol Hamoed Succos", "Hoshana Rabbah", "Shemini Atzeres", "Simchas Torah", "Erev Chanukah", "Chanukah",

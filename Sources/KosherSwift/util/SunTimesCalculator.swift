@@ -21,7 +21,7 @@ import Foundation
  */
 public class SunTimesCalculator : AstronomicalCalculator {
     
-    static var geoLocation: GeoLocation = GeoLocation()
+    public static var geoLocation: GeoLocation = GeoLocation()
     
     public override init() {
         SunTimesCalculator.geoLocation.setTimeZone(timeZone: TimeZone.current)
