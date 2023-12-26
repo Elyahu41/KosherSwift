@@ -704,14 +704,14 @@ public class JewishCalendar {
      * forwards the internal date of the jewish calendar by one day
      */
     public func forward() {
-        workingDate = workingDate.advanced(by: 86400)
+        workingDate = Date(timeIntervalSince1970: workingDate.timeIntervalSince1970 + 86400)
     }
     
     /**
      * backtracks the internal date of the jewish calendar by one day
      */
     public func back() {
-        workingDate = workingDate.advanced(by: -86400)
+        workingDate = Date(timeIntervalSince1970: workingDate.timeIntervalSince1970 + (-86400))
     }
     
     public init() {}
