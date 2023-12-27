@@ -27,7 +27,7 @@ public class JewishCalendar {
      * year}) month of the year.
      *
      */
-    static let NISSAN = 8;
+    public static let NISSAN = 8;
     
     /**
      * In Swift the value for the month of Iyar is always 9 as swift uses Tishrei as the 1st month.
@@ -36,7 +36,7 @@ public class JewishCalendar {
      * year starting at ``TISHREI``, it would actually be the 8th (or 9th in a {@link #isJewishLeapYear() leap
      * year}) month of the year.
      */
-    static let IYAR = 9;
+    public static let IYAR = 9;
     
     /**
      * In Swift the value for the month of Sivan is always 10 as swift uses Tishrei as the 1st month.
@@ -45,7 +45,7 @@ public class JewishCalendar {
      * year starting at ``TISHREI``, it would actually be the 9th (or 10th in a {@link #isJewishLeapYear() leap
      * year}) month of the year.
      */
-    static let SIVAN = 10;
+    public static let SIVAN = 10;
     
     /**
      * In Swift the value for the month of Tammuz is always 11 as swift uses Tishrei as the 1st month.
@@ -54,7 +54,7 @@ public class JewishCalendar {
      * year starting at ``TISHREI``, it would actually be the 10th (or 11th in a {@link #isJewishLeapYear() leap
      * year}) month of the year.
      */
-    static let TAMMUZ = 11;
+    public static let TAMMUZ = 11;
     
     /**
      * In Swift the value for the month of Av is always 12 as swift uses Tishrei as the 1st month.
@@ -63,7 +63,7 @@ public class JewishCalendar {
      * starting at ``TISHREI``, it would actually be the 11th (or 12th in a ``isJewishLeapYear()``)
      * month of the year.
      */
-    static let AV = 12;
+    public static let AV = 12;
     
     /**
      * In Swift the value for the month of Elul is always 13 as swift uses Tishrei as the 1st month.
@@ -72,7 +72,7 @@ public class JewishCalendar {
      * year starting at ``TISHREI``, it would actually be the 12th (or 13th in a {@link #isJewishLeapYear() leap
      * year}) month of the year.
      */
-    static let ELUL = 13;
+    public static let ELUL = 13;
     
     /**
      * In Swift the value for the month of Tishrei (Tishri) is always 1 as swift uses Tishrei as the 1st month.
@@ -80,7 +80,7 @@ public class JewishCalendar {
      * Value of the month field indicating Tishrei, the seventh numeric month of the year in the Jewish calendar. With
      * the year starting at this month, it would actually be the 1st month of the year.
      */
-    static let TISHREI = 1;
+    public static let TISHREI = 1;
     
     /**
      * In Swift the value for the month of Cheshvan is always 2 as swift uses Tishrei as the 1st month.
@@ -88,7 +88,7 @@ public class JewishCalendar {
      * Value of the month field indicating Cheshvan/marcheshvan, the eighth numeric month of the year in the Jewish
      * calendar. With the year starting at ``TISHREI``, it would actually be the 2nd month of the year.
      */
-    static let CHESHVAN = 2;
+    public static let CHESHVAN = 2;
     
     /**
      * In Swift the value for the month of Kislev is always 3 as swift uses Tishrei as the 1st month.
@@ -96,7 +96,7 @@ public class JewishCalendar {
      * Value of the month field indicating Kislev, the ninth numeric month of the year in the Jewish calendar. With the
      * year starting at ``TISHREI``, it would actually be the 3rd month of the year.
      */
-    static let KISLEV = 3;
+    public static let KISLEV = 3;
     
     /**
      * In Swift the value for the month of Teves is always 4 as swift uses Tishrei as the 1st month.
@@ -104,7 +104,7 @@ public class JewishCalendar {
      * Value of the month field indicating Teves, the tenth numeric month of the year in the Jewish calendar. With the
      * year starting at ``TISHREI``, it would actually be the 4th month of the year.
      */
-    static let TEVES = 4;
+    public static let TEVES = 4;
     
     /**
      * In Swift the value for the month of Shevat is always 5 as swift uses Tishrei as the 1st month.
@@ -112,7 +112,7 @@ public class JewishCalendar {
      * Value of the month field indicating Shevat, the eleventh numeric month of the year in the Jewish calendar. With
      * the year starting at ``TISHREI``, it would actually be the 5th month of the year.
      */
-    static let SHEVAT = 5;
+    public static let SHEVAT = 5;
     
     /**
      * In Swift, this month is ONLY used on jewish leap years. Meaning: If you use the getJewishMonth method in Adar on a non leap year,
@@ -124,7 +124,7 @@ public class JewishCalendar {
      * be the 6th month of the year.
      *
      */
-    static let ADAR = 6;
+    public static let ADAR = 6;
     
     /**
      * In Swift, Adar II is ALWAYS the 7th month and it will be returned on NON leap years during the month of Adar. Please keep this in mind.
@@ -134,101 +134,101 @@ public class JewishCalendar {
      * 14, 17 and 19 of a 19 year cycle. With the year starting at ``TISHREI``, it would actually be the 7th month
      * of the year.
      */
-    static let ADAR_II = 7;
+    public static let ADAR_II = 7;
     
     
     /** The 14th day of Nisan, the day before Pesach (Passover).*/
-    static let EREV_PESACH = 0
+    public static let EREV_PESACH = 0
     /** The holiday of Pesach (Passover) on the 15th (and 16th out of Israel) day of Nisan.*/
-    static let PESACH = 1
+    public static let PESACH = 1
     /** Chol Hamoed (interim days) of Pesach (Passover)*/
-    static let CHOL_HAMOED_PESACH = 2
+    public static let CHOL_HAMOED_PESACH = 2
     /**Pesach Sheni, the 14th day of Iyar, a minor holiday.*/
-    static let PESACH_SHENI = 3
+    public static let PESACH_SHENI = 3
     /**Erev Shavuos (the day before Shavuos), the 5th of Sivan*/
-    static let EREV_SHAVUOS = 4
+    public static let EREV_SHAVUOS = 4
     /**Shavuos (Pentecost), the 6th of Sivan*/
-    static let SHAVUOS = 5
+    public static let SHAVUOS = 5
     /** The fast of the 17th day of Tamuz*/
-    static let SEVENTEEN_OF_TAMMUZ = 6
+    public static let SEVENTEEN_OF_TAMMUZ = 6
     /** The fast of the 9th of Av*/
-    static let TISHA_BEAV = 7
+    public static let TISHA_BEAV = 7
     /** The 15th day of Av, a minor holiday*/
-    static let TU_BEAV = 8
+    public static let TU_BEAV = 8
     /**Erev Rosh Hashana (the day before Rosh Hashana), the 29th of Elul*/
-    static let EREV_ROSH_HASHANA = 9
+    public static let EREV_ROSH_HASHANA = 9
     /** Rosh Hashana, the first of Tishrei.*/
-    static let ROSH_HASHANA = 10
+    public static let ROSH_HASHANA = 10
     /** The fast of Gedalyah, the 3rd of Tishrei.*/
-    static let FAST_OF_GEDALYAH = 11
+    public static let FAST_OF_GEDALYAH = 11
     /** The 9th day of Tishrei, the day before of Yom Kippur.*/
-    static let EREV_YOM_KIPPUR = 12
+    public static let EREV_YOM_KIPPUR = 12
     /** The holiday of Yom Kippur, the 10th day of Tishrei*/
-    static let YOM_KIPPUR = 13
+    public static let YOM_KIPPUR = 13
     /** The 14th day of Tishrei, the day before of Succos/Sukkos (Tabernacles).*/
-    static let EREV_SUCCOS = 14
+    public static let EREV_SUCCOS = 14
     /** The holiday of Succos/Sukkos (Tabernacles), the 15th (and 16th out of Israel) day of Tishrei */
-    static let SUCCOS = 15
+    public static let SUCCOS = 15
     /** Chol Hamoed (interim days) of Succos/Sukkos (Tabernacles)*/
-    static let CHOL_HAMOED_SUCCOS = 16
+    public static let CHOL_HAMOED_SUCCOS = 16
     /** Hoshana Rabba, the 7th day of Succos/Sukkos that occurs on the 21st of Tishrei. */
-    static let HOSHANA_RABBA = 17
+    public static let HOSHANA_RABBA = 17
     /** Shmini Atzeres, the 8th day of Succos/Sukkos is an independent holiday that occurs on the 22nd of Tishrei. */
-    static let SHEMINI_ATZERES = 18
+    public static let SHEMINI_ATZERES = 18
     /** Simchas Torah, the 9th day of Succos/Sukkos, or the second day of Shmini Atzeres that is celebrated
      * {@link #getInIsrael() out of Israel} on the 23rd of Tishrei.
      */
-    static let SIMCHAS_TORAH = 19
+    public static let SIMCHAS_TORAH = 19
     
     // public static final int EREV_CHANUKAH = 20;// probably remove this
     
     /** The holiday of Chanukah. 8 days starting on the 25th day Kislev.*/
-    static let CHANUKAH = 21
+    public static let CHANUKAH = 21
     /** The fast of the 10th day of Teves.*/
-    static let TENTH_OF_TEVES = 22
+    public static let TENTH_OF_TEVES = 22
     /** Tu Bishvat on the 15th day of Shevat, a minor holiday.*/
-    static let TU_BESHVAT = 23
+    public static let TU_BESHVAT = 23
     /** The fast of Esther, usually on the 13th day of Adar (or Adar II on leap years). It is earlier on some years.*/
-    static let FAST_OF_ESTHER = 24
+    public static let FAST_OF_ESTHER = 24
     /** The holiday of Purim on the 14th day of Adar (or Adar II on leap years).*/
-    static let PURIM = 25
+    public static let PURIM = 25
     /** The holiday of Shushan Purim on the 15th day of Adar (or Adar II on leap years).*/
-    static let SHUSHAN_PURIM = 26
+    public static let SHUSHAN_PURIM = 26
     /** The holiday of Purim Katan on the 14th day of Adar I on a leap year when Purim is on Adar II, a minor holiday.*/
-    static let PURIM_KATAN = 27
+    public static let PURIM_KATAN = 27
     /**
      * Rosh Chodesh, the new moon on the first day of the Jewish month, and the 30th day of the previous month in the
      * case of a month with 30 days.
      */
-    static let ROSH_CHODESH = 28
+    public static let ROSH_CHODESH = 28
     /** Yom HaShoah, Holocaust Remembrance Day, usually held on the 27th of Nisan. If it falls on a Friday, it is moved
      * to the 26th, and if it falls on a Sunday it is moved to the 28th. A {@link #isUseModernHolidays() modern holiday}.
      */
-    static let YOM_HASHOAH = 29
+    public static let YOM_HASHOAH = 29
     /**
      * Yom HaZikaron, Israeli Memorial Day, held a day before Yom Ha'atzmaut.  A {@link #isUseModernHolidays() modern holiday}.
      */
-    static let YOM_HAZIKARON = 30
+    public static let YOM_HAZIKARON = 30
     /** Yom Ha'atzmaut, Israel Independence Day, the 5th of Iyar, but if it occurs on a Friday or Saturday, the holiday is
      * moved back to Thursday, the 3rd of 4th of Iyar, and if it falls on a Monday, it is moved forward to Tuesday the
      * 6th of Iyar.  A {@link #isUseModernHolidays() modern holiday}.*/
-    static let YOM_HAATZMAUT = 31
+    public static let YOM_HAATZMAUT = 31
     /**
      * Yom Yerushalayim or Jerusalem Day, on 28 Iyar. A {@link #isUseModernHolidays() modern holiday}.
      */
-    static let YOM_YERUSHALAYIM = 32
+    public static let YOM_YERUSHALAYIM = 32
     /** The 33rd day of the Omer, the 18th of Iyar, a minor holiday.*/
-    static let LAG_BAOMER = 33
+    public static let LAG_BAOMER = 33
     /** The holiday of Purim Katan on the 15th day of Adar I on a leap year when Purim is on Adar II, a minor holiday.*/
-    static let SHUSHAN_PURIM_KATAN = 34
+    public static let SHUSHAN_PURIM_KATAN = 34
     /** The day following the last day of Pesach, Shavuos and Sukkos.*/
-    static let ISRU_CHAG = 35;
+    public static let ISRU_CHAG = 35;
     /**
      * The day before <em>Rosh Chodesh</em> (moved to Thursday if <em>Rosh Chodesh</em> is on a Friday or <em>Shabbos</em>) in most months.
      * This constant is not actively in use.
      * @see #isYomKippurKatan()
      */
-    static let YOM_KIPPUR_KATAN = 36;
+    public static let YOM_KIPPUR_KATAN = 36;
     
     
     /**

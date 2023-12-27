@@ -69,7 +69,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getTzaisGeonim3Point7Degrees()
      */
-    static let ZENITH_3_POINT_7 = Double(GEOMETRIC_ZENITH + 3.7);
+    public static let ZENITH_3_POINT_7 = Double(GEOMETRIC_ZENITH + 3.7);
     
     /**
      * The zenith of 3.8&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -80,7 +80,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getTzaisGeonim3Point8Degrees()
      */
-    static let ZENITH_3_POINT_8 = Double(GEOMETRIC_ZENITH + 3.8);
+    public static let ZENITH_3_POINT_8 = Double(GEOMETRIC_ZENITH + 3.8);
     
     /**
      * The zenith of 5.95&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -91,7 +91,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getTzaisGeonim5Point95Degrees()
      */
-    static let ZENITH_5_POINT_95 = Double(GEOMETRIC_ZENITH + 5.95);
+    public static let ZENITH_5_POINT_95 = Double(GEOMETRIC_ZENITH + 5.95);
     
     /**
      * The zenith of 7.083&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This is often referred to as
@@ -110,7 +110,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getTzaisGeonim7Point083Degrees()
      * @see getBainHashmashosRT13Point5MinutesBefore7Point083Degrees()
      */
-    static let ZENITH_7_POINT_083 = Double(GEOMETRIC_ZENITH + 7 + (5.0 / 60));
+    public static let ZENITH_7_POINT_083 = Double(GEOMETRIC_ZENITH + 7 + (5.0 / 60));
     
     /**
      * The zenith of 10.2&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -121,7 +121,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getMisheyakir10Point2Degrees()
      */
-    static let ZENITH_10_POINT_2 = Double(GEOMETRIC_ZENITH + 10.2);
+    public static let ZENITH_10_POINT_2 = Double(GEOMETRIC_ZENITH + 10.2);
     
     /**
      * The zenith of 11&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -132,7 +132,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getMisheyakir11Degrees()
      */
-    static let ZENITH_11_DEGREES = Double(GEOMETRIC_ZENITH + 11);
+    public static let ZENITH_11_DEGREES = Double(GEOMETRIC_ZENITH + 11);
     
     /**
      * The zenith of 11.5&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -143,7 +143,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getMisheyakir11Point5Degrees()
      */
-    static let ZENITH_11_POINT_5 = Double(GEOMETRIC_ZENITH + 11.5);
+    public static let ZENITH_11_POINT_5 = Double(GEOMETRIC_ZENITH + 11.5);
     
     /**
      * The zenith of 13.24&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -153,7 +153,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getBainHashmashosRT13Point24Degrees
      *
      */
-    static let ZENITH_13_POINT_24 = Double(GEOMETRIC_ZENITH + 13.24);
+    public static let ZENITH_13_POINT_24 = Double(GEOMETRIC_ZENITH + 13.24);
     
     /**
      * The zenith of 19&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -162,7 +162,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getAlos19Degrees()
      * @see ZENITH_19_POINT_8
      */
-    static let ZENITH_19_DEGREES = Double(GEOMETRIC_ZENITH + 19);
+    public static let ZENITH_19_DEGREES = Double(GEOMETRIC_ZENITH + 19);
     
     /**
      * The zenith of 19.8&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -177,7 +177,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getTzais90()
      * @see ZENITH_19_DEGREES
      */
-    static let ZENITH_19_POINT_8 = Double(GEOMETRIC_ZENITH + 19.8);
+    public static let ZENITH_19_POINT_8 = Double(GEOMETRIC_ZENITH + 19.8);
     
     /**
      * The zenith of 26&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -194,7 +194,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getAlos120()
      * @see getTzais120()
      */
-    static let ZENITH_26_DEGREES = Double(GEOMETRIC_ZENITH + 26.0);
+    public static let ZENITH_26_DEGREES = Double(GEOMETRIC_ZENITH + 26.0);
     
     /**
      * The zenith of 4.37&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -206,7 +206,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getTzaisGeonim4Point37Degrees()
      */
-    static let ZENITH_4_POINT_37 = Double(GEOMETRIC_ZENITH + 4.37);
+    public static let ZENITH_4_POINT_37 = Double(GEOMETRIC_ZENITH + 4.37);
     
     /**
      * The zenith of 4.61&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -218,14 +218,14 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getTzaisGeonim4Point61Degrees()
      */
-    static let ZENITH_4_POINT_61 = Double(GEOMETRIC_ZENITH + 4.61);
+    public static let ZENITH_4_POINT_61 = Double(GEOMETRIC_ZENITH + 4.61);
     
     /**
      * The zenith of 4.8&deg; below ``GEOMETRIC_ZENITH`` (90&deg;).
      * @todo Add more documentation.
      * @see getTzaisGeonim4Point8Degrees()
      */
-    static let ZENITH_4_POINT_8 = Double(GEOMETRIC_ZENITH + 4.8);
+    public static let ZENITH_4_POINT_8 = Double(GEOMETRIC_ZENITH + 4.8);
     
     /**
      * The zenith of 3.65&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -241,7 +241,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getTzaisGeonim3Point65Degrees()
      */
     ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    static let ZENITH_3_POINT_65 = Double(GEOMETRIC_ZENITH + 3.65);
+    public static let ZENITH_3_POINT_65 = Double(GEOMETRIC_ZENITH + 3.65);
     
     /**
      * The zenith of 3.676&deg; below ``GEOMETRIC_ZENITH`` (90&deg;).
@@ -251,13 +251,13 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *              equinox / equilux</a> in Jerusalem.
      */
     ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    static let ZENITH_3_POINT_676 = Double(GEOMETRIC_ZENITH + 3.676);
+    public static let ZENITH_3_POINT_676 = Double(GEOMETRIC_ZENITH + 3.676);
     
     /**
      * The zenith of 5.88&deg; below ``GEOMETRIC_ZENITH`` (90&deg;).
      * @todo Add more documentation.
      */
-    static let ZENITH_5_POINT_88 = Double(GEOMETRIC_ZENITH + 5.88);
+    public static let ZENITH_5_POINT_88 = Double(GEOMETRIC_ZENITH + 5.88);
     
     /**
      * The zenith of 1.583&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -267,7 +267,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getSunriseBaalHatanya()
      * @see getSunsetBaalHatanya()
      */
-    static let ZENITH_1_POINT_583 = Double(GEOMETRIC_ZENITH + 1.583);
+    public static let ZENITH_1_POINT_583 = Double(GEOMETRIC_ZENITH + 1.583);
     
     /**
      * The zenith of 16.9&deg; below geometric zenith (90&deg;). This calculation is used for determining <em>alos</em>
@@ -280,7 +280,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getAlosBaalHatanya()
      */
-    static let ZENITH_16_POINT_9 = Double(GEOMETRIC_ZENITH + 16.9);
+    public static let ZENITH_16_POINT_9 = Double(GEOMETRIC_ZENITH + 16.9);
     
     /**
      * The zenith of 6&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -291,7 +291,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getTzaisBaalHatanya()
      */
-    static let ZENITH_6_DEGREES = Double(GEOMETRIC_ZENITH + 6);
+    public static let ZENITH_6_DEGREES = Double(GEOMETRIC_ZENITH + 6);
     
     /**
      * The zenith of 6.45&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -306,7 +306,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getTzaisGeonim6Point45Degrees()
      */
-    static let ZENITH_6_POINT_45 = Double(GEOMETRIC_ZENITH + 6.45);
+    public static let ZENITH_6_POINT_45 = Double(GEOMETRIC_ZENITH + 6.45);
     
     /**
      * The zenith of 7.65&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -314,7 +314,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getMisheyakir7Point65Degrees()
      */
-    static let ZENITH_7_POINT_65 = Double(GEOMETRIC_ZENITH + 7.65);
+    public static let ZENITH_7_POINT_65 = Double(GEOMETRIC_ZENITH + 7.65);
     
     /**
      * The zenith of 7.67&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -322,7 +322,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getTzaisGeonim7Point67Degrees()
      */
-    static let ZENITH_7_POINT_67 = Double(GEOMETRIC_ZENITH + 7.67);
+    public static let ZENITH_7_POINT_67 = Double(GEOMETRIC_ZENITH + 7.67);
     
     /**
      * The zenith of 9.3&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -330,7 +330,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getTzaisGeonim9Point3Degrees()
      */
-    static let ZENITH_9_POINT_3 = Double(GEOMETRIC_ZENITH + 9.3);
+    public static let ZENITH_9_POINT_3 = Double(GEOMETRIC_ZENITH + 9.3);
     
     /**
      * The zenith of 9.5&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -338,7 +338,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getMisheyakir9Point5Degrees()
      */
-    static let ZENITH_9_POINT_5 = Double(GEOMETRIC_ZENITH + 9.5);
+    public static let ZENITH_9_POINT_5 = Double(GEOMETRIC_ZENITH + 9.5);
     
     /**
      * The zenith of 9.75&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -346,7 +346,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getTzaisGeonim9Point75Degrees()
      */
-    static let ZENITH_9_POINT_75 = Double(GEOMETRIC_ZENITH + 9.75);
+    public static let ZENITH_9_POINT_75 = Double(GEOMETRIC_ZENITH + 9.75);
     
     /**
      * The zenith of 2.1&deg; above ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -356,7 +356,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getBainHashmashosYereim2Point1Degrees()
      */
-    static let ZENITH_MINUS_2_POINT_1 = Double(GEOMETRIC_ZENITH - 2.1);
+    public static let ZENITH_MINUS_2_POINT_1 = Double(GEOMETRIC_ZENITH - 2.1);
     
     /**
      * The zenith of 2.8&deg; above ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -366,7 +366,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getBainHashmashosYereim2Point8Degrees()
      */
-    static let ZENITH_MINUS_2_POINT_8 = Double(GEOMETRIC_ZENITH - 2.8);
+    public static let ZENITH_MINUS_2_POINT_8 = Double(GEOMETRIC_ZENITH - 2.8);
     
     /**
      * The zenith of 3.05&deg; above ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
@@ -376,7 +376,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      * @see getBainHashmashosYereim3Point05Degrees()
      */
-    static let ZENITH_MINUS_3_POINT_05 = Double(GEOMETRIC_ZENITH - 3.05);
+    public static let ZENITH_MINUS_3_POINT_05 = Double(GEOMETRIC_ZENITH - 3.05);
     
     /**
      * The offset in minutes (defaults to 40) after sunset used for <em>tzeit</em> based on calculations of
