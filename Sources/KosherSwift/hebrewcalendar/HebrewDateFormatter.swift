@@ -229,6 +229,12 @@ public class HebrewDateFormatter {
             JewishCalendar.Parsha.CHAZON: "חזון",
             JewishCalendar.Parsha.NACHAMU: "נחמו"
         ]
+        
+        if (longWeekFormat) {
+            weekFormat.dateFormat = "EEEE";
+        } else {
+            weekFormat.dateFormat = "EEE";
+        }
     }
     
     /**

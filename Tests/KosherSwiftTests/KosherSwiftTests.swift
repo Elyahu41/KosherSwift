@@ -411,8 +411,8 @@ class KosherSwiftTests: XCTestCase {
         let calculator = ComplexZmanimCalendar(location: geoLocation)
         let format = DateFormatter()
         format.timeStyle = .full
-        print(format.string(from: calculator.getSeaLevelSunrise()!))
-        print(format.string(from: calculator.getSeaLevelSunset()!))
+        print(format.string(from: calculator.getTzais72ZmanisAmudeiHoraah()!))
+        print(format.string(from: calculator.getTzaisShabbatAmudeiHoraah()!))
     }
 
 //    func testPerformanceExample() throws {

@@ -1183,7 +1183,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      */
     public func getMisheyakir66MinutesZmanit() -> Date? {
-        let shaahZmanit = getShaahZmanis72MinutesZmanis()
+        let shaahZmanit = getShaahZmanisGra()
         let dakahZmanit = shaahZmanit / 60
         return ComplexZmanimCalendar.getTimeOffset(time: getAlos72Zmanis(), offset: 6 * Double(dakahZmanit))
     }
@@ -1198,7 +1198,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      */
     public func getMisheyakir60MinutesZmanit() -> Date? {
-        let shaahZmanit = getShaahZmanis72MinutesZmanis()
+        let shaahZmanit = getShaahZmanisGra()
         let dakahZmanit = shaahZmanit / 60
         return ComplexZmanimCalendar.getTimeOffset(time: getAlos72Zmanis(), offset: 12 * Double(dakahZmanit))
     }
@@ -4617,19 +4617,15 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         calendar.timeZone = geoLocation.timeZone
         let temp = workingDate
         workingDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: workingDate), month: 3, day: 17))!
-        let alotBy16Degrees = getSunriseOffsetByDegrees(offsetZenith:ComplexZmanimCalendar.GEOMETRIC_ZENITH + 16.04)
-        let shaahZmanit = getShaahZmanisGra()
-        
-        if (shaahZmanit == .min) {
+
+        let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 16.04, sunset: false)
+        if (percentage == (-Double.greatestFiniteMagnitude)) {
             return nil;
         }
-        let numberOfSeconds = ((getSeaLevelSunrise()!.timeIntervalSince1970 - alotBy16Degrees!.timeIntervalSince1970))
         workingDate = temp//reset
-        
-        let dakahZmanit = shaahZmanit / 60
-        let secondsZmanit = dakahZmanit / 60
-        
-        return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunrise(), offset: -(numberOfSeconds * Double(secondsZmanit)))
+
+        let shaahZmanit = Double(getTemporalHour(startOfDay: getSeaLevelSunrise(), endOfDay: getSeaLevelSunset()));
+        return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunrise(), offset: -(percentage * shaahZmanit));
     }
     
     /**
@@ -4643,19 +4639,15 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         calendar.timeZone = geoLocation.timeZone
         let temp = workingDate
         workingDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: workingDate), month: 3, day: 17))!
-        let alotBy16Degrees = getSunriseOffsetByDegrees(offsetZenith:ComplexZmanimCalendar.GEOMETRIC_ZENITH + 16.04)
-        let shaahZmanit = getShaahZmanisGra()
-        
-        if (shaahZmanit == .min) {
+
+        let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 16.04, sunset: false)
+        if (percentage == (-Double.greatestFiniteMagnitude)) {
             return nil;
         }
-        let numberOfSeconds = ((getSeaLevelSunrise()!.timeIntervalSince1970 - alotBy16Degrees!.timeIntervalSince1970))
         workingDate = temp//reset
-        
-        let dakahZmanit = shaahZmanit / 60
-        let secondsZmanit = dakahZmanit / 60
-        
-        return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunrise(), offset: -(numberOfSeconds * Double(secondsZmanit) * 5 / 6))
+
+        let shaahZmanit = Double(getTemporalHour(startOfDay: getSeaLevelSunrise(), endOfDay: getSeaLevelSunset()));
+        return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunrise(), offset: -(percentage * shaahZmanit) * 5 / 6);
     }
     
     // These methods are similar to the ones in the base class, but they use the Amudei Horaah zmanim instead of the regular zmanim
@@ -4684,19 +4676,15 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         calendar.timeZone = geoLocation.timeZone
         let temp = workingDate
         workingDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: workingDate), month: 3, day: 17))!
-        let tzaitGeonimInDegrees = getSunsetOffsetByDegrees(offsetZenith:ComplexZmanimCalendar.GEOMETRIC_ZENITH + 3.77)
-        let shaahZmanit = getShaahZmanisGra()
-        
-        if (shaahZmanit == .min) {
+
+        let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 3.77, sunset: true)
+        if (percentage == (-Double.greatestFiniteMagnitude)) {
             return nil;
         }
-        let numberOfSeconds = (tzaitGeonimInDegrees!.timeIntervalSince1970 - getSeaLevelSunset()!.timeIntervalSince1970)
         workingDate = temp//reset
-        
-        let dakahZmanit = shaahZmanit / 60
-        let secondsZmanit = dakahZmanit / 60
-        
-        return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunset(), offset: numberOfSeconds * Double(secondsZmanit))
+
+        let shaahZmanit = Double(getTemporalHour(startOfDay: getSeaLevelSunrise(), endOfDay: getSeaLevelSunset()));
+        return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunset(), offset: percentage * shaahZmanit);
     }
     
     public func getTzaisAmudeiHoraahLChumra() -> Date? {
@@ -4704,19 +4692,15 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         calendar.timeZone = geoLocation.timeZone
         let temp = workingDate
         workingDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: workingDate), month: 3, day: 17))!
-        let tzaitGeonimInDegrees = getSunsetOffsetByDegrees(offsetZenith:ComplexZmanimCalendar.GEOMETRIC_ZENITH + 5.135)
-        let shaahZmanit = getShaahZmanisGra()
-        
-        if (shaahZmanit == .min) {
+
+        let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 5.135, sunset: true)
+        if (percentage == (-Double.greatestFiniteMagnitude)) {
             return nil;
         }
-        let numberOfSeconds = (tzaitGeonimInDegrees!.timeIntervalSince1970 - getSeaLevelSunset()!.timeIntervalSince1970)
         workingDate = temp//reset
-        
-        let dakahZmanit = shaahZmanit / 60
-        let secondsZmanit = dakahZmanit / 60
-        
-        return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunset(), offset: numberOfSeconds * Double(secondsZmanit))
+
+        let shaahZmanit = Double(getTemporalHour(startOfDay: getSeaLevelSunrise(), endOfDay: getSeaLevelSunset()));
+        return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunset(), offset: percentage * shaahZmanit);
     }
     
     public func getTzais72ZmanisAmudeiHoraah() -> Date? {
@@ -4724,19 +4708,15 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         calendar.timeZone = geoLocation.timeZone
         let temp = workingDate
         workingDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: workingDate), month: 3, day: 17))!
-        let tzaitRTInDegrees = getSunsetOffsetByDegrees(offsetZenith:ComplexZmanimCalendar.GEOMETRIC_ZENITH + 16.01)
-        let shaahZmanit = getShaahZmanisGra()
-        
-        if (shaahZmanit == .min) {
+
+        let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 16.01, sunset: true)
+        if (percentage == (-Double.greatestFiniteMagnitude)) {
             return nil;
         }
-        let numberOfSeconds = (tzaitRTInDegrees!.timeIntervalSince1970 - getSeaLevelSunset()!.timeIntervalSince1970)
         workingDate = temp//reset
-        
-        let dakahZmanit = shaahZmanit / 60
-        let secondsZmanit = dakahZmanit / 60
-        
-        return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunset(), offset: numberOfSeconds * Double(secondsZmanit))
+
+        let shaahZmanit = Double(getTemporalHour(startOfDay: getSeaLevelSunrise(), endOfDay: getSeaLevelSunset()));
+        return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunset(), offset: percentage * shaahZmanit);
     }
     
     public func getTzaisShabbatAmudeiHoraah() -> Date? {
@@ -4762,7 +4742,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      This is only for display purposes, it should not be used to calculate zmanim.
      - Returns: The earlier of ``getTzais72()`` or ``getTzais72ZmanitAmudeiHoraah()``
      */
-    public func getTzaisZmanitAmudeiHoraahLkulah() -> Date? {
+    public func getTzais72ZmanisAmudeiHoraahLkulah() -> Date? {
         if getTzais72() == nil || getTzais72ZmanisAmudeiHoraah() == nil {
             return nil
         }
