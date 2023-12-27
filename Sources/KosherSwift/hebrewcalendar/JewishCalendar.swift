@@ -1077,9 +1077,6 @@ public class JewishCalendar {
         
         return elapsedDays
     }
-
-
-
     
     /**
      * returns the number of days from Rosh Hashana of the date passed in, to the full date passed in.
