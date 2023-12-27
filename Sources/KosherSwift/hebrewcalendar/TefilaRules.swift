@@ -116,6 +116,8 @@ public class TefilaRules {
      */
     public var mizmorLesodaRecitedErevYomKippurAndPesach = false;
     
+    public init() {}
+    
     /**
      * Returns if <em>tachanun</em> is recited during <em>shacharis</em> on the day in question. There are the many
      * <em>minhagim</em> based settings that are available in self class that control what days are set for

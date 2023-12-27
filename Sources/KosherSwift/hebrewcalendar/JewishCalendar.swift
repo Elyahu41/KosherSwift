@@ -724,10 +724,22 @@ public class JewishCalendar {
     }
     
     /**
-     * A constructor that initializes the date to the Date parameter. useModernHolidays and inIsrael will be set to false
+     * A constructor that initializes the timezone to the timezone parameter. useModernHolidays and inIsrael will be set to false
      *
      * @param date
-     *            the <code>Date</code> to set the calendar to
+     *            the <code>Timezone</code> to keep track of
+     */
+    public init(timezone:TimeZone) {
+        self.timeZone = timezone
+    }
+    
+    /**
+     * A constructor that initializes the date to the Date parameter with a timezone. useModernHolidays and inIsrael will be set to false
+     *
+     * @param date
+     *            the <code>Date</code> to set the date to
+     * @param timezone
+     *            the <code>Timezone</code> to keep track of
      */
     public init(workingDate:Date, timezone:TimeZone) {
         self.workingDate = workingDate
