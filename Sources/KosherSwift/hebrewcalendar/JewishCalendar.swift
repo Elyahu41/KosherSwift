@@ -1077,6 +1077,9 @@ public class JewishCalendar {
         
         return elapsedDays
     }
+
+
+
     
     /**
      * returns the number of days from Rosh Hashana of the date passed in, to the full date passed in.
@@ -1099,7 +1102,7 @@ public class JewishCalendar {
     private func getDaysInJewishMonth(month:Int, year:Int) -> Int {
         if ((month == JewishCalendar.IYAR) || (month == JewishCalendar.TAMMUZ) || (month == JewishCalendar.ELUL) || ((month == JewishCalendar.CHESHVAN) && !(isCheshvanLong(year: year)))
             || ((month == JewishCalendar.KISLEV) && isKislevShort(year: year)) || (month == JewishCalendar.TEVES)
-            || ((month == JewishCalendar.ADAR) && !(isJewishLeapYear(year: year))) || (month == JewishCalendar.ADAR_II)) {
+            || ((month == JewishCalendar.ADAR && isJewishLeapYear(year: year)) && !(isJewishLeapYear(year: year))) || (month == JewishCalendar.ADAR_II)) {
             return 29;
         } else {
             return 30;
