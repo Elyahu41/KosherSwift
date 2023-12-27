@@ -1430,7 +1430,7 @@ public class JewishCalendar {
      *
      * @see HebrewDateFormatter#formatYomTov(JewishCalendar)
      */
-    func getYomTovIndex() -> Int {
+    public func getYomTovIndex() -> Int {
         let day = getJewishDayOfMonth()
         let dayOfWeek = getDayOfWeek()
         
