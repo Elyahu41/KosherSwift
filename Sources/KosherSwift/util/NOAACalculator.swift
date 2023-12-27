@@ -32,12 +32,21 @@ public class NOAACalculator : AstronomicalCalculator {
      */
     private static let JULIAN_DAYS_PER_CENTURY = 36525.0;
     
+    /**
+     * GeoLocation is only used to keep track of timezone
+     */
     public static var geoLocation: GeoLocation = GeoLocation()
     
+    /**
+     * timezone will be system default
+     */
     public override init() {
         NOAACalculator.geoLocation.setTimeZone(timeZone: TimeZone.current)
     }
     
+    /**
+     * GeoLocation is only used to keep track of timezone
+     */
     public init(geoLocation: GeoLocation) {
         NOAACalculator.geoLocation = geoLocation
     }

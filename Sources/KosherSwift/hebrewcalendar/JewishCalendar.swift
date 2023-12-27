@@ -51,8 +51,7 @@ public class JewishCalendar {
      * In Swift the value for the month of Tammuz is always 11 as swift uses Tishrei as the 1st month.
      *
      * Value of the month field indicating Tammuz, the fourth numeric month of the year in the Jewish calendar. With the
-     * year starting at ``TISHREI``, it would actually be the 10th (or 11th in a {@link #isJewishLeapYear() leap
-     * year}) month of the year.
+     * year starting at ``TISHREI``, it would actually be the 10th (or 11th in a ``isJewishLeapYear()``) month of the year.
      */
     public static let TAMMUZ = 11;
     
@@ -69,8 +68,7 @@ public class JewishCalendar {
      * In Swift the value for the month of Elul is always 13 as swift uses Tishrei as the 1st month.
      *
      * Value of the month field indicating Elul, the sixth numeric month of the year in the Jewish calendar. With the
-     * year starting at ``TISHREI``, it would actually be the 12th (or 13th in a {@link #isJewishLeapYear() leap
-     * year}) month of the year.
+     * year starting at ``TISHREI``, it would actually be the 12th (or 13th in a ``isJewishLeapYear()``) month of the year.
      */
     public static let ELUL = 13;
     
@@ -137,9 +135,9 @@ public class JewishCalendar {
     public static let ADAR_II = 7;
     
     
-    /** The 14th day of Nisan, the day before Pesach (Passover).*/
+    /** The 14th day of Nissan, the day before Pesach (Passover).*/
     public static let EREV_PESACH = 0
-    /** The holiday of Pesach (Passover) on the 15th (and 16th out of Israel) day of Nisan.*/
+    /** The holiday of Pesach (Passover) on the 15th (and 16th out of Israel) day of Nissan.*/
     public static let PESACH = 1
     /** Chol Hamoed (interim days) of Pesach (Passover)*/
     public static let CHOL_HAMOED_PESACH = 2
@@ -176,7 +174,7 @@ public class JewishCalendar {
     /** Shmini Atzeres, the 8th day of Succos/Sukkos is an independent holiday that occurs on the 22nd of Tishrei. */
     public static let SHEMINI_ATZERES = 18
     /** Simchas Torah, the 9th day of Succos/Sukkos, or the second day of Shmini Atzeres that is celebrated
-     * {@link #getInIsrael() out of Israel} on the 23rd of Tishrei.
+     *  out of Israel on the 23rd of Tishrei.
      */
     public static let SIMCHAS_TORAH = 19
     
@@ -202,19 +200,19 @@ public class JewishCalendar {
      */
     public static let ROSH_CHODESH = 28
     /** Yom HaShoah, Holocaust Remembrance Day, usually held on the 27th of Nisan. If it falls on a Friday, it is moved
-     * to the 26th, and if it falls on a Sunday it is moved to the 28th. A {@link #isUseModernHolidays() modern holiday}.
+     * to the 26th, and if it falls on a Sunday it is moved to the 28th. A modern holiday.
      */
     public static let YOM_HASHOAH = 29
     /**
-     * Yom HaZikaron, Israeli Memorial Day, held a day before Yom Ha'atzmaut.  A {@link #isUseModernHolidays() modern holiday}.
+     * Yom HaZikaron, Israeli Memorial Day, held a day before Yom Ha'atzmaut.  A modern holiday.
      */
     public static let YOM_HAZIKARON = 30
     /** Yom Ha'atzmaut, Israel Independence Day, the 5th of Iyar, but if it occurs on a Friday or Saturday, the holiday is
      * moved back to Thursday, the 3rd of 4th of Iyar, and if it falls on a Monday, it is moved forward to Tuesday the
-     * 6th of Iyar.  A {@link #isUseModernHolidays() modern holiday}.*/
+     * 6th of Iyar.  A modern holiday.*/
     public static let YOM_HAATZMAUT = 31
     /**
-     * Yom Yerushalayim or Jerusalem Day, on 28 Iyar. A {@link #isUseModernHolidays() modern holiday}.
+     * Yom Yerushalayim or Jerusalem Day, on 28 Iyar. A modern holiday.
      */
     public static let YOM_YERUSHALAYIM = 32
     /** The 33rd day of the Omer, the 18th of Iyar, a minor holiday.*/
@@ -229,7 +227,6 @@ public class JewishCalendar {
      * @see #isYomKippurKatan()
      */
     public static let YOM_KIPPUR_KATAN = 36;
-    
     
     /**
      * the Jewish epoch using the RD (Rata Die/Fixed Date or Reingold Dershowitz) day used in Calendrical Calculations.
@@ -260,7 +257,7 @@ public class JewishCalendar {
     public var moladChalakim:Int = 0;
     
     /**
-     * A short year where both {@link #CHESHVAN} and {@link #KISLEV} are 29 days.
+     * A short year where both ``CHESHVAN`` and ``KISLEV`` are 29 days.
      *
      * @see #getCheshvanKislevKviah()
      * @see HebrewDateFormatter#getFormattedKviah(int)
@@ -268,7 +265,7 @@ public class JewishCalendar {
     public static let CHASERIM = 0;
     
     /**
-     * An ordered year where {@link #CHESHVAN} is 29 days and {@link #KISLEV} is 30 days.
+     * An ordered year where ``CHESHVAN`` is 29 days and ``KISLEV`` is 30 days.
      *
      * @see #getCheshvanKislevKviah()
      * @see HebrewDateFormatter#getFormattedKviah(int)
@@ -276,7 +273,7 @@ public class JewishCalendar {
     public static let KESIDRAN = 1;
     
     /**
-     * A long year where both {@link #CHESHVAN} and {@link #KISLEV} are 30 days.
+     * A long year where both ``CHESHVAN`` and ``KISLEV`` are 30 days.
      *
      * @see #getCheshvanKislevKviah()
      * @see HebrewDateFormatter#getFormattedKviah(int)
