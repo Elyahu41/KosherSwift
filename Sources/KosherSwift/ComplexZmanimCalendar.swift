@@ -3089,7 +3089,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getTzais13Point5MinutesZmanis() -> Date?  {
         let shaahZmanit = getShaahZmanisGra()
         let dakahZmanit = shaahZmanit / 60
-        return ComplexZmanimCalendar.getTimeOffset(time: getSunset(), offset: (13 * dakahZmanit) + (dakahZmanit / 2))
+        return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: (13 * dakahZmanit) + (dakahZmanit / 2))
         //return getZmanisBasedOffset(hours: 0.225);
     }
     
@@ -4561,10 +4561,10 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      This method returns chatzos as a half way point between sunrise and sunset unless the location is in a place that does not have sunrise of sunset. Then it will return UTCNoon which is an astronomical chatzos.
      */
     public func getChatzosIfHalfDayNil() -> Date? {
-        if getSunTransit(startOfDay: getSunrise(), endOfDay: getSunset()) == nil {
+        if getSunTransit(startOfDay: getElevationAdjustedSunrise(), endOfDay: getElevationAdjustedSunset()) == nil {
             return getSunTransit()
         } else {
-            return getSunTransit(startOfDay: getSunrise(), endOfDay: getSunset())
+            return getSunTransit(startOfDay: getElevationAdjustedSunrise(), endOfDay: getElevationAdjustedSunset())
         }
     }
     
