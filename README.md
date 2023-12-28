@@ -80,6 +80,37 @@ let jewishCalendar = JewishCalendar()
 let tefilaRules = TefilaRules()
 tefilaRules.isVeseinTalUmatarRecited(jewishCalendar: jewishCalendar) // returns true or false depending on the DAY of the year
 ```
+Making Your Own Methods
+-------
+If you want to add onto what is already available in KosherSwift, Swift has a powerful feature called extensions that lets you do just that!
+For example, if you wanted to make a method that gives you a jewishCalendar object set to the first day of the jewish month, you could do this:
+```Swift
+public extension JewishCalendar {
+    func getFirstDayOfJewishMonth(jewishCalendar:JewishCalendar) -> JewishCalendar {
+        let firstDayOfMonth = jewishCalendar
+        jewishCalendar.setJewishDayOfMonth(dayOfMonth: 1)
+        return firstDayOfMonth
+    }
+}
+```
+The same goes for zmanim! If you want to create your own zmanim, it would look like this:
+```Swift
+public extension ComplexZmanimCalendar {
+    
+    // for degrees
+    func getTzais8PointSevenDegrees() -> Date? {
+        return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.GEOMETRIC_ZENITH + 8.7);
+    }
+    
+    // for seasonal times
+    func getTwoSeasonalHoursIntoTheDay() -> Date? {
+        let seasonalHour = getTemporalHour()
+        // it is preffered to use getTimeOffset because it will handle nil values
+        return AstronomicalCalendar.getTimeOffset(time: getSeaLevelSunrise(), offset: seasonalHour * 2)
+    }
+}
+```
+
 Things To Keep In Mind
 -------
 KosherSwift is very similar to KosherJava as it has brought over almost all of it's methods to Swift. However, there are big differences as well in the inner workings of the classes. For starters, the Calendar class in Swift does not contain a time in milliseconds to keep track of time, it only contains functions that can create a date. So everywhere there would be a need to use a Calendar has been replaced with a Date. If you look inside the code of the classes, there is a workingDate variable that can be changed instead of a calendar class.
