@@ -3521,7 +3521,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *         Pesach</em> or the calculation can't be computed such as in the Arctic Circle where there is at least one
      *         day a year where the sun does not rise, and one where it does not set, a <code>nil</code> will be returned.
      *         See detailed explanation on top of the ``AstronomicalCalendar`` documentation.
-     * @todo in v 3.0.0 enable the calendar check for erev pesach and return <code>nil</code> in all other cases.
      */
     public func getSofZmanAchilasChametzGRA() -> Date? {
         let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
@@ -3546,7 +3545,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *         calculation can't be computed such as in the Arctic Circle where there is at least one day a year where the sun does
      *         not rise, and one where it does not set), a <code>nil</code> will be returned. See detailed explanation on top of
      *         the ``AstronomicalCalendar`` documentation.
-     * @todo in v 3.0.0 enable the calendar check for erev pesach and return <code>nil</code> in all other cases.
      * @see getShaahZmanisMGA()
      * @see getAlos72()
      * @see getSofZmanTfilaMGA72Minutes()
@@ -3573,7 +3571,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *         calculation can't be computed such as northern and southern locations even south of the Arctic Circle and north
      *         of the Antarctic Circle where the sun may not reach low enough below the horizon for this calculation, a
      *         <code>nil</code> will be returned. See detailed explanation on top of the ``AstronomicalCalendar`` documentation.
-     * @todo in v 3.0.0 enable the calendar check for erev pesach and return <code>nil</code> in all other cases.
      * @see getShaahZmanis16Point1Degrees()
      * @see getAlos16Point1Degrees()
      * @see getSofZmanTfilaMGA16Point1Degrees()
@@ -3593,7 +3590,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * of the <a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a>. This time is 5 hours into the day based on the
      * opinion of the <a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a> that the day is calculated from
      * sunrise to sunset. This returns the time 5 x ``getShaahZmanisGra()`` after ``getSeaLevelSunrise()`` If it is not  <em>erev Pesach</em>, a nil will be returned.
-     * @todo in v 3.0.0 enable the calendar check for erev pesach and return <code>nil</code> in all other cases.
      * @see  ZmanimCalendar#getShaahZmanisGra()
      * @return the <code>Date</code> of the latest time for burning <em>chametz</em> on <em>Erev Pesach</em>. If it is not
      *         <em>erev Pesach</em> or the calculation can't be computed such as in the Arctic Circle where there is at least
@@ -3618,7 +3614,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * the MGA that the day is calculated from a ``getAlos72()`` dawn of 72 minutes before sunrise to ``
      * ``getTzais72()`` nightfall of 72 minutes after sunset. This returns the time of 5 x ``getShaahZmanisMGA()`` after
      * ``getAlos72()`` dawn. If it is not  <em>erev Pesach</em>, a nil will be returned.
-     * @todo in v 3.0.0 enable the calendar check for erev pesach and return <code>nil</code> in all other cases.
      * @return the <code>Date</code> of the latest time for burning <em>chametz</em> on <em>Erev Pesach</em>. If it is not
      *         <em>erev Pesach</em> or the calculation can't be computed such as in the Arctic Circle where there is at
      *         least one day a year where the sun does not rise, and one where it does not set), a <code>nil</code> will be
@@ -3644,7 +3639,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * the MGA that the day is calculated from a ``getAlos72()`` dawn of 72 minutes before sunrise to ``
      * ``getTzais72()`` nightfall of 72 minutes after sunset. This returns the time of 5 x ``getShaahZmanisMGA()`` after
      * ``getAlos72()`` dawn. If it is not  <em>erev Pesach</em>, a nil will be returned.
-     * @todo in v 3.0.0 enable the calendar check for erev pesach and return <code>nil</code> in all other cases.
      * @return the <code>Date</code> of the latest time for burning <em>chametz</em> on <em>Erev Pesach</em>. If it is not
      *         <em>erev Pesach</em> or the calculation can't be computed such as in the Arctic Circle where there is at
      *         least one day a year where the sun does not rise, and one where it does not set), a <code>nil</code> will be
@@ -3670,7 +3664,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * dawn based on the opinion of the MGA that the day is calculated from dawn to nightfall with both being 16.1&deg;
      * below sunrise or sunset. This returns the time of 5 ``getShaahZmanis16Point1Degrees()`` after
      * ``getAlos16Point1Degrees()`` dawn. If it is not  <em>erev Pesach</em>, a nil will be returned.
-     * @todo in v 3.0.0 enable the calendar check for erev pesach and return <code>nil</code> in all other cases.
      * @return the <code>Date</code> of the latest time for burning <em>chametz</em> on <em>Erev Pesach</em>. If it is not
      *         <em>erev Pesach</em> or the calculation can't be computed such as northern and southern locations even south
      *         of the Arctic Circle and north of the Antarctic Circle where the sun may not reach low enough below the
@@ -3845,7 +3838,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * is calculated from sunrise to sunset. This returns the time 4 ``getShaahZmanisBaalHatanya()`` after
      * ``getSunriseBaalHatanya()`` <em>netz amiti</em> (sunrise) If it is not  <em>erev Pesach</em>, a nil will be
      * returned.
-     * @todo in v 3.0.0 enable the calendar check for erev pesach and return <code>nil</code> in all other cases.
      * @see getShaahZmanisBaalHatanya()
      * @see getSofZmanTfilaBaalHatanya()
      * @return the <code>Date</code> one is allowed eating <em>chametz</em> on <em>Erev Pesach</em>. If it is not <em>erev
@@ -3867,7 +3859,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * the Baal Hatanya. This time is 5 hours into the day based on the opinion of the Baal Hatanya that the day is calculated
      * from sunrise to sunset. This returns the time 5 x ``getShaahZmanisBaalHatanya()`` after
      * ``getSunriseBaalHatanya()`` <em>netz amiti</em> (sunrise). If it is not  <em>erev Pesach</em>, a nil will be returned.
-     * @todo in v 3.0.0 enable the calendar check for erev pesach and return <code>nil</code> in all other cases.
      * @see getShaahZmanisBaalHatanya()
      * @return the <code>Date</code> of the latest time for burning <em>chametz</em> on <em>Erev Pesach</em>.  If it is not
      *         <em>erev Pesach</em> or the  calculation can't be computed such as in the Arctic Circle where there is at
