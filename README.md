@@ -27,6 +27,7 @@ If you want to use CocoaPods add this line to your podfile:
 ```ruby
 pod "KosherSwiftNew"
 ```
+KosherSwift already taken on CocoaPods, hence the "New"
 
 How To Use This API
 -------
