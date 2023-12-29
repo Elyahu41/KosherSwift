@@ -42,7 +42,7 @@ import KosherSwiftNew
 Then, it as simple as instantiating a class and calling it's methods:
 ```Swift
 let jewishCalendar = JewishCalendar() // by default it is set to today's date
-print(jewishCalendar.getJewishMonth()) // This will print the jewish month as a number, so Nissan will be 8. See the JewishCalendr class for more details
+print(jewishCalendar.getJewishMonth()) // This will print the jewish month as a number, so Nissan will be 8. See the JewishCalendar class for more details
 ```
 For sunrise and sunset times, you will need a GeoLocation object. Then, you will need to pass that into the AstronomicalCalendar class like so:
 ```Swift
