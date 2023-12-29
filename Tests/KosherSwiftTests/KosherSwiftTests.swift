@@ -411,8 +411,13 @@ class KosherSwiftTests: XCTestCase {
         let calculator = ComplexZmanimCalendar(location: geoLocation)
         let format = DateFormatter()
         format.timeStyle = .full
-        print(format.string(from: calculator.getTzais72ZmanisAmudeiHoraah()!))
-        print(format.string(from: calculator.getTzaisShabbatAmudeiHoraah()!))
+        //print(format.string(from: calculator.getTzais72ZmanisAmudeiHoraah()!))
+        //print(format.string(from: calculator.getTzaisShabbatAmudeiHoraah()!))
+        
+        let geoLocationFL = GeoLocation(locationName: "FL", latitude: 37.32495943, longitude: -122.01973712, timeZone: TimeZone(identifier: "America/New_York")!)
+        let calculatorFL = ComplexZmanimCalendar(location: geoLocation)
+
+        print(format.string(from: calculatorFL.getFixedLocalChatzos()!))
     }
 
 //    func testPerformanceExample() throws {

@@ -226,33 +226,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getTzaisGeonim4Point8Degrees()
      */
     public static let ZENITH_4_POINT_8 = Double(GEOMETRIC_ZENITH + 4.8);
-    
-    /**
-     * The zenith of 3.65&deg; below ``GEOMETRIC_ZENITH`` (90&deg;). This calculation is used for
-     * calculating <em>tzais</em> (nightfall) according to some opinions. This calculation is based on the position of
-     * the sun ``getTzaisGeonim3Point65Degrees()`` 13.5 minutes after sunset (3/4 of an 18-minute <em>Mil</em>)
-     * in Jerusalem <a href=
-     * "https://kosherjava.com/2022/01/12/equinox-vs-equilux-zmanim-calculations/">around the equinox / equilux</a> which
-     * calculates to 3.65&deg; below ``GEOMETRIC_ZENITH``.
-     * //@Deprecated This will be removed in v3.0.0 since calculations show that this time is earlier than 13.5 minutes at
-     *              the <a href="https://kosherjava.com/2022/01/12/equinox-vs-equilux-zmanim-calculations/">around the
-     *              equinox / equilux</a> in Jerusalem.
-     *
-     * @see getTzaisGeonim3Point65Degrees()
-     */
-    ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public static let ZENITH_3_POINT_65 = Double(GEOMETRIC_ZENITH + 3.65);
-    
-    /**
-     * The zenith of 3.676&deg; below ``GEOMETRIC_ZENITH`` (90&deg;).
-     * @todo Add more documentation.
-     * //@Deprecated This will be removed in v3.0.0 since calculations show that this time is earlier than 13.5 minutes at
-     *              the <a href="https://kosherjava.com/2022/01/12/equinox-vs-equilux-zmanim-calculations/">around the
-     *              equinox / equilux</a> in Jerusalem.
-     */
-    ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public static let ZENITH_3_POINT_676 = Double(GEOMETRIC_ZENITH + 3.676);
-    
+            
     /**
      * The zenith of 5.88&deg; below ``GEOMETRIC_ZENITH`` (90&deg;).
      * @todo Add more documentation.
@@ -1499,32 +1473,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     }
     
     /**
-     * From the GRA in Kol Eliyahu on Berachos173 that states that <em>zman krias shema</em> is calculated as half the
-     * time from ``getSeaLevelSunrise()``  to ``getFixedLocalChatzos()`` fixed local chatzos``
-     * The GRA himself seems to contradict this when he stated that <em>zman krias shema</em> is 1/4 of the day from
-     * sunrise to sunset. See <em>Sarah Lamoed</em>25 in Yisroel Vehazmanim Vol. III page 1016.
-     *
-     * @return the <code>Date</code> of the latest <em>zman krias shema</em> based on this calculation. If the
-     *         calculation can't be computed such as in the Arctic Circle where there is at least one day a year where
-     *         the sun does not rise, and one where it does not set, a <code>nil</code> will be returned. See detailed
-     *         explanation on top of the ``AstronomicalCalendar`` documentation.
-     * @see getFixedLocalChatzos()
-     *
-     * //@Deprecated As per a conversation Rabbi Yisroel Twerski had with Rabbi Harfenes, this <em>zman</em> published in
-     *         the Yisrael Vehazmanim was based on a misunderstanding and should not be used. This deprecated method
-     *         will be removed (likely in v3.0) pending confirmation from Rabbi Harfenes.
-     */
-    ////@Deprecated // (since="1.3", forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getSofZmanShmaKolEliyahu() -> Date? {
-        let chatzos = getFixedLocalChatzos();
-        if (chatzos == nil || getSunrise() == nil) {
-            return nil;
-        }
-        let diff = ((chatzos!.timeIntervalSince1970 - getElevationAdjustedSunrise()!.timeIntervalSince1970) * 1000) / 2;
-        return ComplexZmanimCalendar.getTimeOffset(time: chatzos, offset: -diff);
-    }
-    
-    /**
      * This method returns the latest <em>zman tfila</em> (time to recite the morning prayers) according to the opinion
      * of the <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on
      * <em>alos</em> being ``getAlos19Point8Degrees()`` 19.8&deg; before ``getSunrise()`` This time
@@ -2325,15 +2273,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     }
     
     /**
-     * Misspelled method name that should be ``getBainHashmashosRT58Point5Minutes()``.
-     * @return the properly spelled version.
-     */
-    //@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getBainHasmashosRT58Point5Minutes() -> Date? {
-        return getBainHashmashosRT58Point5Minutes();
-    }
-    
-    /**
      * This method returns the beginning of <em>bain hashmashos</em> based on the calculation of 13.5 minutes (3/4 of an
      * 18-minute <em>Mil</em>) before <em>shkiah</em> calculated as ``getTzaisGeonim7Point083Degrees() 7.083&deg;``.
      *
@@ -2348,15 +2287,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         return ComplexZmanimCalendar.getTimeOffset(
             time: getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_7_POINT_083),
             offset: -13.5 * ComplexZmanimCalendar.MINUTE_MILLIS);
-    }
-    
-    /**
-     * Misspelled method name that should be ``getBainHashmashosRT13Point5MinutesBefore7Point083Degrees()``.
-     * @return the properly spelled version.
-     */
-    //@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getBainHasmashosRT13Point5MinutesBefore7Point083Degrees() -> Date? {
-        return getBainHashmashosRT13Point5MinutesBefore7Point083Degrees();
     }
     
     /**
@@ -2381,15 +2311,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     }
     
     /**
-     * Misspelled method name that should be ``getBainHashmashosRT2Stars()``
-     * @return the properly spelled version.
-     */
-    ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getBainHasmashosRT2Stars() -> Date?  {
-        return getBainHashmashosRT2Stars();
-    }
-    
-    /**
      * This method returns the beginning of <em>bain hashmashos</em> (twilight) according to the <a href=
      * "https://en.wikipedia.org/wiki/Eliezer_ben_Samuel">Yereim (Rabbi Eliezer of Metz)</a> calculated as 18 minutes
      * or 3/4 of a 24-minute <em>Mil</em> before sunset. According to the Yereim, <em>bain hashmashos</em> starts 3/4
@@ -2403,15 +2324,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getBainHashmashosYereim18Minutes() -> Date?  {
         return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: -18 * ComplexZmanimCalendar.MINUTE_MILLIS);
-    }
-    
-    /**
-     * Misspelled method name that should be ``getBainHashmashosYereim18Minutes()``
-     * @return the properly spelled version.
-     */
-    ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getBainHasmashosYereim18Minutes() -> Date?  {
-        return getBainHashmashosYereim18Minutes();
     }
     
     /**
@@ -2448,16 +2360,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     }
     
     /**
-     * Misspelled method name that should be ``getBainHashmashosYereim3Point05Degrees()``
-     * @return the properly spelled version.
-     */
-    // //@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getBainHasmashosYereim3Point05Degrees() -> Date?  {
-        return getBainHashmashosYereim3Point05Degrees();
-    }
-    
-    
-    /**
      * This method returns the beginning of <em>bain hashmashos</em> (twilight) according to the <a href=
      * "https://en.wikipedia.org/wiki/Eliezer_ben_Samuel">Yereim (Rabbi Eliezer of Metz)</a> calculated as 16.875
      * minutes or 3/4 of a 22.5-minute <em>Mil</em> before sunset. According to the Yereim, <em>bain hashmashos</em>
@@ -2472,15 +2374,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getBainHashmashosYereim16Point875Minutes() -> Date?  {
         return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: -16.875 * ComplexZmanimCalendar.MINUTE_MILLIS);
-    }
-    
-    /**
-     * Misspelled method name that should be ``getBainHashmashosYereim16Point875Minutes()``
-     * @return the properly spelled version.
-     */
-    ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getBainHasmashosYereim16Point875Minutes() -> Date?  {
-        return getBainHashmashosYereim16Point875Minutes();
     }
     
     /**
@@ -2508,16 +2401,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     }
     
     /**
-     * Misspelled method name that should be ``getBainHashmashosYereim2Point8Degrees()``
-     * @return the properly spelled version.
-     */
-    ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getBainHasmashosYereim2Point8Degrees() -> Date?  {
-        return getBainHashmashosYereim2Point8Degrees();
-    }
-    
-    
-    /**
      * This method returns the beginning of <em>bain hashmashos</em> (twilight) according to the <a href=
      * "https://en.wikipedia.org/wiki/Eliezer_ben_Samuel">Yereim (Rabbi Eliezer of Metz)</a> calculated as 13.5 minutes
      * or 3/4 of an 18-minute <em>Mil</em> before sunset. According to the Yereim, <em>bain hashmashos</em> starts 3/4 of
@@ -2532,15 +2415,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getBainHashmashosYereim13Point5Minutes() -> Date?  {
         return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: -13.5 * ComplexZmanimCalendar.MINUTE_MILLIS);
-    }
-    
-    /**
-     * Misspelled method name that should be ``getBainHashmashosYereim13Point5Minutes()``
-     * @return the properly spelled version.
-     */
-    ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getBainHasmashosYereim13Point5Minutes() -> Date?  {
-        return getBainHashmashosYereim13Point5Minutes();
     }
     
     /**
@@ -2565,15 +2439,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getBainHashmashosYereim2Point1Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_MINUS_2_POINT_1);
-    }
-    
-    /**
-     * Misspelled method name that should be ``getBainHashmashosYereim2Point1Degrees()``
-     * @return the properly spelled version.
-     */
-    ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getBainHasmashosYereim2Point1Degrees() -> Date?  {
-        return getBainHashmashosYereim2Point1Degrees();
     }
     
     /**
@@ -2611,51 +2476,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getTzaisGeonim5Point95Degrees() -> Date?  {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_5_POINT_95);
-    }
-    
-    /**
-     * This method returns the <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> calculated as 3/4
-     * of a <a href= "https://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement" >Mil</a> based on an 18
-     * minute Mil, or 13.5 minutes. It is the sun's position at ``ZENITH_3_POINT_65`` 3.65&deg; below the western
-     * horizon.
-     *
-     * - Warning: This is a very early <em>zman</em> and should not be relied on without Rabbinical guidance.
-     *
-     * @return the <code>Date</code> representing the time when the sun is 3.65&deg; below sea level. If the calculation
-     *         can't be computed such as northern and southern locations even south of the Arctic Circle and north of
-     *         the Antarctic Circle where the sun may not reach low enough below the horizon for this calculation, a
-     *         <code>nil</code> will be returned. See detailed explanation on top of the ``AstronomicalCalendar``
-     *         documentation.
-     * //@Deprecated This will be removed in v3.0.0 since calculations show that this time is earlier than 13.5 minutes at
-     *              the <a href="https://kosherjava.com/2022/01/12/equinox-vs-equilux-zmanim-calculations/">around the
-     *              equinox / equilux</a> in Jerusalem.
-     * @see ZENITH_3_POINT_65
-     */
-    ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getTzaisGeonim3Point65Degrees() -> Date?  {
-        return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_3_POINT_65);
-    }
-    
-    /**
-     * This method returns the <em>tzais</em> (nightfall) based on the opinion of the <em>Geonim</em> calculated as 3/4
-     * of a <a href= "https://en.wikipedia.org/wiki/Biblical_and_Talmudic_units_of_measurement" >Mil</a> based on an 18
-     * minute Mil, or 13.5 minutes. It is the sun's position at ``ZENITH_3_POINT_676`` 3.676&deg; below the western
-     * horizon based on the calculations of Stanley Fishkind. This is a very early <em>zman</em> and should not be
-     * relied on without Rabbinical guidance.
-     *
-     * @return the <code>Date</code> representing the time when the sun is 3.676&deg; below sea level. If the
-     *         calculation can't be computed such as northern and southern locations even south of the Arctic Circle and
-     *         north of the Antarctic Circle where the sun may not reach low enough below the horizon for this
-     *         calculation, a <code>nil</code> will be returned. See detailed explanation on top of the
-     *         ``AstronomicalCalendar`` documentation.
-     * //@Deprecated This will be removed in v3.0.0 since calculations show that this time is earlier than 13.5 minutes at
-     *              the <a href="https://kosherjava.com/2022/01/12/equinox-vs-equilux-zmanim-calculations/">around the
-     *              equinox / equilux</a> in Jerusalem.
-     * @see ZENITH_3_POINT_676
-     */
-    ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getTzaisGeonim3Point676Degrees() -> Date?  {
-        return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_3_POINT_676);
     }
     
     /**
@@ -2984,19 +2804,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see setAteretTorahSunsetOffset(double)
      */
     public func getSofZmanTfilaAteretTorah() -> Date?  {
-        return getSofZmanTfila(startOfDay: getAlos72Zmanis(), endOfDay: getTzaisAteretTorah(), synchronous: false);
-    }
-    
-    /**
-     * @see getSofZmanTfilaAteretTorah()
-     * //@Deprecated misspelled method name (all other methods spell tfila witout an H) to be removed in 3.0.0.
-     * @return the <code>Date</code> of the latest <em>zman krias shema</em> based on this calculation. If the
-     *         calculation can't be computed such as in the Arctic Circle where there is at least one day a year where
-     *         the sun does not rise, and one where it does not set, a <code>nil</code> will be returned. See detailed
-     *         explanation on top of the ``AstronomicalCalendar`` documentation.
-     */
-    ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getSofZmanTfilahAteretTorah() -> Date?  {
         return getSofZmanTfila(startOfDay: getAlos72Zmanis(), endOfDay: getTzaisAteretTorah(), synchronous: false);
     }
     
@@ -3348,64 +3155,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     }
     
     /**
-     * A method that returns the latest <em>zman krias shema</em> (time to recite Shema in the morning) calculated as 3
-     * clock hours before ``getFixedLocalChatzos()`` Note that there are opinions brought down in Yisrael Vehazmanim
-     * <a href="https://hebrewbooks.org/pdfpager.aspx?req=9765&st=&pgnum=85">page 57</a> and Rav Yitzchak Silber's <a href=
-     * "https://www.worldcat.org/oclc/811253716">Sha'aos Shavos Balalacha</a> that this calculation is a mistake and regular
-     * <em>chatzos</em> shoud be used for clock-hour calculations as opposed to fixed local <em>chatzos</em>. According to
-     * these opinions it should be 3 clock hours before regular <em>chatzos</em> as calculated in ``
-     *getSofZmanShma3HoursBeforeChatzos()``
-     *
-     * @return the <code>Date</code> of the latest <em>zman krias shema</em> calculated as 3 clock hours before
-     *         ``getFixedLocalChatzos()``
-     * @see getFixedLocalChatzos()
-     * @see getSofZmanShma3HoursBeforeChatzos()
-     * @see getSofZmanTfilaFixedLocal()
-     *
-     * //@Deprecated This method of calculating <em>sof zman Shma</em> is considered a mistaken understanding of the proper
-     *         calculation of this <em>zman</em> in the opinion of Rav Yitzchak Silber's <a href=
-     *         "https://www.worldcat.org/oclc/811253716">Sha'aos Shavos Balalacha</a>. On pages 316-318 he discusses Rav Yisrael
-     *         Harfenes's calculations and points to his seeming agreement that using fixed local <em>chatzos</em> as the focal
-     *         point is problematic. See Yisrael Vehazmanim <a href=
-     *         "https://hebrewbooks.org/pdfpager.aspx?req=9765&st=&pgnum=85">page 57</a>. While the Yisrael Vehazmanim mentions
-     *         this issue in vol. 1, it was not corrected in the calculations in vol. 3 and other parts of the <em>sefer</em>.
-     *         A competent rabbinical authority should be consulted before using this <em>zman</em>. Instead, the use of ``
-     *        getSofZmanShma3HoursBeforeChatzos should be used to calculate <em>sof zman Tfila</em> using 3 fixed clock hours.
-     *         This will likely be removed in v3.0.
-     */
-    ////@Deprecated // (since="2.4.0", forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getSofZmanShmaFixedLocal() -> Date?  {
-        return ComplexZmanimCalendar.getTimeOffset(time: getFixedLocalChatzos(), offset: -180 * ComplexZmanimCalendar.MINUTE_MILLIS);
-    }
-    
-    /**
-     * This method returns the latest <em>zman tfila</em> (time to recite the morning prayers) calculated as 2 hours
-     * before ``getFixedLocalChatzos()`` See the documentation on ``getSofZmanShmaFixedLocal showing
-     * differing opinions on how the <em>zman</em> is calculated. According to many opinions ``
-     *getSofZmanTfila2HoursBeforeChatzos should be used as opposed to this <em>zman</em>.
-     *
-     * @return the <code>Date</code> of the latest <em>zman tfila</em>.
-     * @see getFixedLocalChatzos()
-     * @see getSofZmanShmaFixedLocal()
-     * @see getSofZmanTfila2HoursBeforeChatzos()
-     *
-     * //@Deprecated This method of calculating <em>sof zman Tfila</em> is considered a mistaken understanding of the proper
-     *         calculation of this <em>zman</em> in the opinion of Rav Yitzchak Silber's <a href=
-     *         "https://www.worldcat.org/oclc/811253716">Sha'aos Shavos Balalacha</a>. On pages 316-318 he discusses Rav Yisrael
-     *         Harfenes's calculations and points to his seeming agreement that using fixed local <em>chatzos</em> as the focal
-     *         point is problematic. See Yisrael Vehazmanim <a href=
-     *         "https://hebrewbooks.org/pdfpager.aspx?req=9765&st=&pgnum=85">page 57</a>. While the Yisrael Vehazmanim mentions
-     *         this issue in vol. 1, it was not corrected in the calculations in vol. 3 and other parts of the <em>sefer</em>.
-     *         A competent rabbinical authority should be consulted before using this <em>zman</em>. Instead, the use of ``
-     *        getSofZmanTfila2HoursBeforeChatzos should be used to calculate <em>sof zman Tfila</em> using 2 fixed
-     *         clock hours. This will likely be removed in v3.0.
-     */
-    ////@Deprecated // (since="2.4.0", forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getSofZmanTfilaFixedLocal() -> Date? {
-        return ComplexZmanimCalendar.getTimeOffset(time: getFixedLocalChatzos(), offset: -120 * ComplexZmanimCalendar.MINUTE_MILLIS);
-    }
-    
-    /**
      * Returns the latest time of <em>Kidush Levana</em> according to the <a
      * href="https://en.wikipedia.org/wiki/Yaakov_ben_Moshe_Levi_Moelin">Maharil's</a> opinion that it is calculated as
      * halfway between <em>molad</em> and <em>molad</em>. This adds half the 29 days, 12 hours and 793 chalakim time
@@ -3728,10 +3477,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see  JewishCalendar#getTchilasZmanKidushLevana7Days()
      */
     public func getTchilasZmanKidushLevana7Days(alos:Date?, tzais:Date?) -> Date? {
-        let jewishCalendar = JewishCalendar();
-        var gregorianCalendar = Calendar(identifier: .gregorian)
-        gregorianCalendar.timeZone = getGeoLocation().getTimeZone()
-        jewishCalendar.setGregorianDate(year: gregorianCalendar.component(.year, from: workingDate), month: gregorianCalendar.component(.month, from: workingDate), dayOfMonth: gregorianCalendar.component(.day, from: workingDate));
+        let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
         
         // Optimize to not calculate for impossible dates, but account for extreme cases. Tchilas zman kiddush Levana 7 days for
         // the extreme case of Rapa Iti in French Polynesia on Jan 2028 (when kiddush Levana 3 days can be said on the evening
@@ -3778,15 +3524,12 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @todo in v 3.0.0 enable the calendar check for erev pesach and return <code>nil</code> in all other cases.
      */
     public func getSofZmanAchilasChametzGRA() -> Date? {
-        /*JewishCalendar jewishCalendar = new JewishCalendar();
-         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-         getCalendar().get(Calendar.DAY_OF_MONTH));
-         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-         return getSofZmanTfilaGRA();
-         } else {
-         return nil;
-         }*/
-        return getSofZmanTfilaGRA();
+        let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
+        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+            return getSofZmanTfilaGRA();
+        } else {
+            return nil;
+        }
     }
     
     /**
@@ -3809,15 +3552,12 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getSofZmanTfilaMGA72Minutes()
      */
     public func getSofZmanAchilasChametzMGA72Minutes() -> Date? {
-        /*JewishCalendar jewishCalendar = new JewishCalendar();
-         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-         getCalendar().get(Calendar.DAY_OF_MONTH));
-         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-         return getSofZmanTfilaMGA72Minutes();
-         } else {
-         return nil;
-         }*/
-        return getSofZmanTfilaMGA72Minutes();
+        let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
+        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+            return getSofZmanTfilaMGA72Minutes();
+        } else {
+            return nil;
+        }
     }
     
     /**
@@ -3839,15 +3579,12 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getSofZmanTfilaMGA16Point1Degrees()
      */
     public func getSofZmanAchilasChametzMGA16Point1Degrees() -> Date? {
-        /*JewishCalendar jewishCalendar = new JewishCalendar();
-         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-         getCalendar().get(Calendar.DAY_OF_MONTH));
-         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-         return getSofZmanTfilaMGA16Point1Degrees();
-         } else {
-         return nil;
-         }*/
-        return getSofZmanTfilaMGA16Point1Degrees();
+        let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
+        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+            return getSofZmanTfilaMGA16Point1Degrees();
+        } else {
+            return nil;
+        }
     }
     
     /**
@@ -3864,15 +3601,12 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *         returned. See detailed explanation on top of the ``AstronomicalCalendar`` documentation.
      */
     public func getSofZmanBiurChametzGRA() -> Date? {
-        /*JewishCalendar jewishCalendar = new JewishCalendar();
-         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-         getCalendar().get(Calendar.DAY_OF_MONTH));
-         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-         return getTimeOffset(getElevationAdjustedSunrise(), getShaahZmanisGra() * 5);
-         } else {
-         return nil;
-         }*/
-        return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunrise(), offset: getShaahZmanisGra() * 5);
+        let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
+        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+            return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunrise(), offset: getShaahZmanisGra() * 5);
+        } else {
+            return nil;
+        }
     }
     
     /**
@@ -3893,15 +3627,12 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getAlos72()
      */
     public func getSofZmanBiurChametzMGA72Minutes() -> Date? {
-        /*JewishCalendar jewishCalendar = new JewishCalendar();
-         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-         getCalendar().get(Calendar.DAY_OF_MONTH));
-         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-         return getTimeOffset(getAlos72(), getShaahZmanisMGA() * 5);
-         } else {
-         return nil;
-         }*/
-        return ComplexZmanimCalendar.getTimeOffset(time: getAlos72(), offset: getShaahZmanisMGA() * 5);
+        let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
+        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+            return ComplexZmanimCalendar.getTimeOffset(time: getAlos72(), offset: getShaahZmanisMGA() * 5);
+        } else {
+            return nil;
+        }
     }
     
     /**
@@ -3922,15 +3653,12 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getAlos72()
      */
     public func getSofZmanBiurChametzMGA72MinutesZmanis() -> Date? {
-        /*JewishCalendar jewishCalendar = new JewishCalendar();
-         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-         getCalendar().get(Calendar.DAY_OF_MONTH));
-         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-         return getTimeOffset(getAlos72(), getShaahZmanisMGA() * 5);
-         } else {
-         return nil;
-         }*/
-        return ComplexZmanimCalendar.getTimeOffset(time: getAlos72Zmanis(), offset: getShaahZmanisMGA() * 5);
+        let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
+        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+            return ComplexZmanimCalendar.getTimeOffset(time: getAlos72Zmanis(), offset: getShaahZmanisMGA() * 5);
+        } else {
+            return nil;
+        }
     }
     
     /**
@@ -3953,15 +3681,12 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getAlos16Point1Degrees()
      */
     public func getSofZmanBiurChametzMGA16Point1Degrees() -> Date? {
-        /*JewishCalendar jewishCalendar = new JewishCalendar();
-         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-         getCalendar().get(Calendar.DAY_OF_MONTH));
-         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-         return getTimeOffset(getAlos16Point1Degrees(), getShaahZmanis16Point1Degrees() * 5);
-         } else {
-         return nil;
-         }*/
-        return ComplexZmanimCalendar.getTimeOffset(time: getAlos16Point1Degrees(), offset: getShaahZmanis16Point1Degrees() * 5);
+        let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
+        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+            return ComplexZmanimCalendar.getTimeOffset(time: getAlos16Point1Degrees(), offset: getShaahZmanis16Point1Degrees() * 5);
+        } else {
+            return nil;
+        }
     }
     
     /**
@@ -4129,15 +3854,12 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *         See detailed explanation on top of the ``AstronomicalCalendar`` documentation.
      */
     public func getSofZmanAchilasChametzBaalHatanya() -> Date? {
-        /*JewishCalendar jewishCalendar = new JewishCalendar();
-         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-         getCalendar().get(Calendar.DAY_OF_MONTH));
-         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-         return getSofZmanTfilaBaalHatanya();
-         } else {
-         return nil;
-         }*/
-        return getSofZmanTfilaBaalHatanya();
+        let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
+        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+            return getSofZmanTfilaBaalHatanya();
+        } else {
+            return nil;
+        }
     }
     
     /**
@@ -4153,15 +3875,12 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *         returned. See detailed explanation on top of the ``AstronomicalCalendar`` documentation.
      */
     public func getSofZmanBiurChametzBaalHatanya() -> Date? {
-        /*JewishCalendar jewishCalendar = new JewishCalendar();
-         jewishCalendar.setGregorianDate(getCalendar().get(Calendar.YEAR), getCalendar().get(Calendar.MONTH),
-         getCalendar().get(Calendar.DAY_OF_MONTH));
-         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-         return getTimeOffset(getSunriseBaalHatanya(), getShaahZmanisBaalHatanya() * 5);
-         } else {
-         return nil;
-         }*/
-        return ComplexZmanimCalendar.getTimeOffset(time: getSunriseBaalHatanya(), offset: getShaahZmanisBaalHatanya() * 5);
+        let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
+        if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
+            return ComplexZmanimCalendar.getTimeOffset(time: getSunriseBaalHatanya(), offset: getShaahZmanisBaalHatanya() * 5);
+        } else {
+            return nil;
+        }
     }
     
     /**
@@ -4266,38 +3985,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getTzaisBaalHatanya() -> Date? {
         return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.ZENITH_6_DEGREES);
-    }
-    
-    /**
-     * A utility method to calculate zmanim based on <a href="https://en.wikipedia.org/wiki/Moshe_Feinstein">Rav Moshe
-     * Feinstein</a> as calculated in <a href="https://en.wikipedia.org/wiki/Mesivtha_Tifereth_Jerusalem">MTJ</a>, <a href=
-     * "https://en.wikipedia.org/wiki/Mesivtha_Tifereth_Jerusalem">Yeshiva of Staten Island</a>, and Camp Yeshiva
-     * of Staten Island. The day is split in two, from <em>alos</em> / sunrise to fixed local <em>chatzos</em>, and the
-     * second half of the day, from fixed local <em>chatzos</em> to sunset / <em>tzais</em>. Morning based times are calculated
-     * based on the first 6 hours, and afternoon times based on the second half of the day.
-     * //@Deprecated This method will be replaced in v3.0.0 by the more generic
-     *         ``ZmanimCalendar#getHalfDayBasedZman(Date, Date, double)`` method.
-     *
-     * @param startOfHalfDay
-     *            The start of the half day. This would be <em>alos</em> or sunrise for morning based times and fixed
-     *            local <em>chatzos</em> for the second half of the day.
-     * @param endOfHalfDay
-     *            The end of the half day. This would be fixed local <em>chatzos</em> for morning based times and sunset
-     *            or <em>tzais</em> for afternoon based times.
-     * @param hours
-     *            the number of hours to offset the beginning of the first or second half of the day
-     *
-     * @return the <code>Date</code> of the <em>zman</em> based on calculation of the first or second half of the day. If
-     *         the calculation can't be computed such as in the Arctic Circle where there is at least one day a year where
-     *         the sun does not rise, and one where it does not set, a <code>nil</code> will be returned. See detailed
-     *         explanation on top of the ``AstronomicalCalendar`` documentation.
-     *
-     * @see  ComplexZmanimCalendar#''getFixedLocalChatzos()''
-     * @see  ZmanimCalendar#getHalfDayBasedZman(Date, Date, double)
-     */
-    ////@Deprecated // (forRemoval=true) // add back once Java 9 is the minimum supported version
-    public func getFixedLocalChatzosBasedZmanim(startOfHalfDay:Date?, endOfHalfDay:Date?, hours:Double) -> Date? {
-        return getHalfDayBasedZman(startOfHalfDay: startOfHalfDay, endOfHalfDay: endOfHalfDay, hours: hours);
     }
     
     /**
