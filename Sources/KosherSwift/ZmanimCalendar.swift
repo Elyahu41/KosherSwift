@@ -56,7 +56,7 @@ import Foundation
 public class ZmanimCalendar : AstronomicalCalendar {
     
     /**
-     * Is elevation factored in for some <em>zmanim</em> (see ``isUseElevation()`` for additional information).
+     * Is elevation factored in for some <em>zmanim</em> (see ``setUseElevation(useElevation:)`` for additional information).
      * @see #isUseElevation()
      * @see #setUseElevation(boolean)
      */
@@ -72,7 +72,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * accounted for in <em>zmanim</em> calculations. Related to this, Rabbi Yaakov Karp in <a href=
      * "https://www.worldcat.org/oclc/919472094">Shimush Zekeinim</a>, Ch. 1, page 17 states that obstructing horizons
      * should be factored into <em>zmanim</em> calculations. The setting defaults to false (elevation will not be used for
-     * <em>zmanim</em> calculations), unless the setting is changed to true in ``setUseElevation()``. This will
+     * <em>zmanim</em> calculations), unless the setting is changed to true in ``setUseElevation(useElevation:)``. This will
      * impact sunrise and sunset based <em>zmanim</em> such as ``getSunrise()``, ``getSunset()``,
      * ``getSofZmanShmaGRA()``, alos based <em>zmanim</em> such as ``getSofZmanShmaMGA()`` that are based on a
      * fixed offset of sunrise or sunset and <em>zmanim</em> based on a percentage of the day such as {@link
@@ -90,7 +90,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
 
     /**
      * Sets whether elevation above sea level is factored into <em>zmanim</em> calculations for times besides sunrise and sunset.
-     * See ``isUseElevation()`` for more details.
+     * See ``setUseElevation(useElevation:)`` for more details.
      * @see #isUseElevation()
      *
      * @param useElevation set to true to use elevation in <em>zmanim</em> calculations
@@ -242,11 +242,11 @@ public class ZmanimCalendar : AstronomicalCalendar {
     public var candleLightingOffset = 18;
     
     /**
-     * This method will return ``getSeaLevelSunrise()`` if ``isUseElevation()`` is false (the
+     * This method will return ``getSeaLevelSunrise()`` if ``setUseElevation(useElevation:)`` is false (the
      * default), or elevation adjusted {@link AstronomicalCalendar#getSunrise()} if it is true. This allows relevant <em>zmanim</em>
      * in this and extending classes (such as the``ComplexZmanimCalendar``) to automatically adjust to the elevation setting.
      *
-     * @return {@link #getSeaLevelSunrise()} if ``isUseElevation()`` is false (the default), or elevation adjusted
+     * @return {@link #getSeaLevelSunrise()} if ``setUseElevation(useElevation:)`` is false (the default), or elevation adjusted
      *         {@link AstronomicalCalendar#getSunrise()} if it is true.
      * @see com.kosherjava.zmanim.AstronomicalCalendar#getSunrise()
      */
@@ -258,11 +258,11 @@ public class ZmanimCalendar : AstronomicalCalendar {
     }
     
     /**
-     * This method will return ``getSeaLevelSunrise()`` if ``isUseElevation()`` is false (the default),
+     * This method will return ``getSeaLevelSunrise()`` if ``setUseElevation(useElevation:)`` is false (the default),
      * or elevation adjusted {@link AstronomicalCalendar#getSunrise()} if it is true. This allows relevant <em>zmanim</em>
      * in this and extending classes (such as the``ComplexZmanimCalendar``) to automatically adjust to the elevation setting.
      *
-     * @return {@link #getSeaLevelSunset()} if ``isUseElevation()`` is false (the default), or elevation adjusted
+     * @return {@link #getSeaLevelSunset()} if ``setUseElevation(useElevation:)`` is false (the default), or elevation adjusted
      *         {@link AstronomicalCalendar#getSunset()} if it is true.
      * @see com.kosherjava.zmanim.AstronomicalCalendar#getSunset()
      */
@@ -315,7 +315,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
 
     /**
      * Method to return <em>alos</em> (dawn) calculated using 72 minutes before ``getSunrise()`` or
-     * ``getSeaLevelSunrise()`` (depending on the ``isUseElevation()`` setting). This time
+     * ``getSeaLevelSunrise()`` (depending on the ``setUseElevation(useElevation:)`` setting). This time
      * is based on the time to walk the distance of 4 <em>Mil</em> at 18 minutes a <em>Mil</em>. The 72 minute time (but
      * not the concept of fixed minutes) is based on the opinion that the time of the <em>Neshef</em> (twilight between
      * dawn and sunrise) does not vary by the time of year or location but depends on the time it takes to walk the
@@ -409,7 +409,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * based on 1/6 of the time between sunrise and {@link #getSunTransit() astronomical <em>chatzos</em>}. As an example, passing
      * ``getSunrise()`` and ``getSunset()`` or ``getSeaLevelSunrise()`` and {@link
      * #getSeaLevelSunset() sea level sunset} to this method (or {@link #getElevationAdjustedSunrise()} and {@link
-     * #getElevationAdjustedSunset()} that is driven off the ``isUseElevation()`` setting) will return <em>sof zman krias
+     * #getElevationAdjustedSunset()} that is driven off the ``setUseElevation(useElevation:)`` setting) will return <em>sof zman krias
      * shema</em> according to the opinion of the <em><a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a></em>. In cases
      * where the start and end dates are not synchronous such as in {@link ComplexZmanimCalendar
      * #getSofZmanShmaAlos16Point1ToTzaisGeonim7Point083Degrees()} <code>false</code> should be passed to the synchronous parameter
@@ -462,10 +462,10 @@ public class ZmanimCalendar : AstronomicalCalendar {
     /**
      * This method returns the latest <em>zman krias shema</em> (time to recite shema in the morning) that is 3 *
      * {@link #getShaahZmanisGra() <em>shaos zmaniyos</em>} (solar hours) after ``getSunrise()`` or
-     * ``getSeaLevelSunrise()`` (depending on the ``isUseElevation()`` setting), according
+     * ``getSeaLevelSunrise()`` (depending on the ``setUseElevation(useElevation:)`` setting), according
      * to the <a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a>.
      *  The day is calculated from ``getSeaLevelSunrise()`` to {@link #getSeaLevelSunrise sea level
-     *  sunset} or ``getSunrise()`` to ``getSunset()`` (depending on the ``isUseElevation()``
+     *  sunset} or ``getSunrise()`` to ``getSunset()`` (depending on the ``setUseElevation(useElevation:)``
      *  setting).
      *
      * @see #getSofZmanShma(Date, Date)
@@ -487,7 +487,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * <a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a>. The day is calculated
      * from 72 minutes before ``getSeaLevelSunrise()`` to 72 minutes after {@link
      * #getSeaLevelSunrise sea level sunset} or from 72 minutes before ``getSunrise()`` to {@link #getSunset()
-     * sunset} (depending on the ``isUseElevation()`` setting).
+     * sunset} (depending on the ``setUseElevation(useElevation:)`` setting).
      *
      * @return the <code>Date</code> of the latest <em>zman shema</em>. If the calculation can't be computed such as in
      *         the Arctic Circle where there is at least one day a year where the sun does not rise, and one where it
@@ -508,7 +508,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * a <em>Mil</em>. According to the <a href="https://en.wikipedia.org/wiki/Samuel_Loew">Machtzis Hashekel</a> in
      * Orach Chaim 235:3, the <a href="https://en.wikipedia.org/wiki/Joseph_ben_Meir_Teomim">Pri Megadim</a> in Orach
      * Chaim 261:2 (see the Biur Halacha) and others (see Hazmanim Bahalacha 17:3 and 17:5) the 72 minutes are standard
-     * clock minutes any time of the year in any location. Depending on the ``isUseElevation()`` setting) a 72
+     * clock minutes any time of the year in any location. Depending on the ``setUseElevation(useElevation:)`` setting) a 72
      * minute offset from  either ``getSunset()`` or ``getSeaLevelSunset()`` is used.
      *
      * @see ComplexZmanimCalendar#getTzais16Point1Degrees()
@@ -547,7 +547,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * The time from the start of day to the end of day are divided into 12 <em>shaos zmaniyos</em> (temporal hours),
      * and <em>sof zman tfila</em> is calculated as 4 of those <em>shaos zmaniyos</em> after the beginning of the day.
      * As an example, passing ``getSunrise()`` and ``getSunset()`` or {@link #getSeaLevelSunrise()
-     * sea level sunrise} and ``getSeaLevelSunset()`` (depending on the ``isUseElevation()``
+     * sea level sunrise} and ``getSeaLevelSunset()`` (depending on the ``setUseElevation(useElevation:)``
      * elevation setting) to this method will return <em>zman tfilah</em> according to the opinion of the <em><a href=
      * "https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a></em>. This method's synchronous parameter indicates if the start
      * and end of day for the calculation are synchronous, having the same offset. This is typically the case, but some
@@ -603,10 +603,10 @@ public class ZmanimCalendar : AstronomicalCalendar {
     /**
      * This method returns the latest <em>zman tfila</em> (time to recite shema in the morning) that is 4 *
      * {@link #getShaahZmanisGra() <em>shaos zmaniyos</em> }(solar hours) after ``getSunrise()`` or
-     * ``getSeaLevelSunrise()`` (depending on the ``isUseElevation()`` setting), according
+     * ``getSeaLevelSunrise()`` (depending on the ``setUseElevation(useElevation:)`` setting), according
      * to the <a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a>.
      * The day is calculated from ``getSeaLevelSunrise()`` to {@link #getSeaLevelSunrise sea level
-     * sunset} or ``getSunrise()`` to ``getSunset()`` (depending on the ``isUseElevation()``
+     * sunset} or ``getSunrise()`` to ``getSunset()`` (depending on the ``setUseElevation(useElevation:)``
      * setting).
      *
      * @see #getSofZmanTfila(Date, Date)
@@ -627,7 +627,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * <em><a href="https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a></em>. The day is calculated
      * from 72 minutes before ``getSeaLevelSunrise()`` to 72 minutes after {@link
      * #getSeaLevelSunrise sea level sunset} or from 72 minutes before ``getSunrise()`` to {@link #getSunset()
-     * sunset} (depending on the ``isUseElevation()`` setting).
+     * sunset} (depending on the ``setUseElevation(useElevation:)`` setting).
      *
      * @return the <code>Date</code> of the latest <em>zman tfila</em>. If the calculation can't be computed such as in
      *         the Arctic Circle where there is at least one day a year where the sun does not rise, and one where it
@@ -713,13 +713,13 @@ public class ZmanimCalendar : AstronomicalCalendar {
     /**
      * This method returns the latest <em>mincha gedola</em>,the earliest time one can pray <em>mincha</em> that is 6.5 *
      * {@link #getShaahZmanisGra() <em>shaos zmaniyos</em>} (solar hours) after ``getSunrise()`` or
-     * ``getSeaLevelSunrise()`` (depending on the ``isUseElevation()`` setting), according
+     * ``getSeaLevelSunrise()`` (depending on the ``setUseElevation(useElevation:)`` setting), according
      * to the <em><a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a></em>. <em>Mincha gedola</em> is the earliest
      * time one can pray <em>mincha</em>. The Ramba"m is of the opinion that it is better to delay <em>mincha</em> until
      * {@link #getMinchaKetana() <em>mincha ketana</em>} while the <em>Ra"sh, Tur, GRA</em> and others are of the
      * opinion that <em>mincha</em> can be prayed <em>lechatchila</em> starting at <em>mincha gedola</em>.
      * The day is calculated from ``getSeaLevelSunrise()`` to {@link #getSeaLevelSunrise sea level
-     * sunset} or ``getSunrise()`` to ``getSunset()`` (depending on the ``isUseElevation()``
+     * sunset} or ``getSunrise()`` to ``getSunset()`` (depending on the ``setUseElevation(useElevation:)``
      * setting).
      * @todo Consider adjusting this to calculate the time as half an hour <em>zmaniyos</em> after either {@link
      *         #getSunTransit() astronomical <em>chatzos</em>} or {@link #getChatzosAsHalfDay() <em>chatzos</em> as half a day}
@@ -744,7 +744,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * start of the day, calculated using the start and end of the day passed to this method.
      * The time from the start of day to the end of day are divided into 12 <em>shaos zmaniyos</em> (temporal hours), and
      * <em>samuch lemincha ketana</em> is calculated as 9 of those <em>shaos zmaniyos</em> after the beginning of the day.
-     * For example, passing ``getSunrise()`` and ``getSunset()`` or ``getSeaLevelSunrise()`` and ``getSeaLevelSunset()`` (depending on the ``isUseElevation()`` elevation
+     * For example, passing ``getSunrise()`` and ``getSunset()`` or ``getSeaLevelSunrise()`` and ``getSeaLevelSunset()`` (depending on the ``setUseElevation(useElevation:)`` elevation
      * setting) to this method will return <em>samuch lemincha ketana</em> according to the opinion of the
      * <a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a>.
      *
@@ -803,7 +803,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * The time from the start of day to the end of day are divided into 12 <em>shaos zmaniyos</em> (temporal hours), and
      * <em>mincha ketana</em> is calculated as 9.5 of those <em>shaos zmaniyos</em> after the beginning of the day. As an
      * example, passing ``getSunrise()`` and ``getSunset()`` or {@link #getSeaLevelSunrise() sea
-     * level sunrise} and ``getSeaLevelSunset()`` (depending on the ``isUseElevation()``
+     * level sunrise} and ``getSeaLevelSunset()`` (depending on the ``setUseElevation(useElevation:)``
      * elevation setting) to this method will return <em>mincha ketana</em> according to the opinion of the
      * <a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a>. This method's synchronous parameter indicates ifthe start
      * and end of day for the calculation are synchronous, having the same offset. This is typically the case, but some
@@ -860,10 +860,10 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * This method returns <em>mincha ketana</em>,the preferred earliest time to pray <em>mincha</em> in the
      * opinion of the <em><a href="https://en.wikipedia.org/wiki/Maimonides">Rambam</a></em> and others, that is 9.5
      * * {@link #getShaahZmanisGra() <em>shaos zmaniyos</em>} (solar hours) after ``getSunrise()`` or
-     * ``getSeaLevelSunrise()`` (depending on the ``isUseElevation()`` setting), according
+     * ``getSeaLevelSunrise()`` (depending on the ``setUseElevation(useElevation:)`` setting), according
      * to the <a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a>. For more information on this see the
      * documentation on ``getMinchaGedola()``.
-     * The day is calculated from ``getSeaLevelSunrise()`` to ``getSeaLevelSunset()`` or ``getSunrise()`` to ``getSunset()`` (depending on the ``isUseElevation()``
+     * The day is calculated from ``getSeaLevelSunrise()`` to ``getSeaLevelSunset()`` or ``getSunrise()`` to ``getSunset()`` (depending on the ``setUseElevation(useElevation:)``
      * setting.
      *
      * @see #getMinchaKetana(Date, Date)
@@ -886,7 +886,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * The time from the start of day to the end of day are divided into 12 <em>shaos zmaniyos</em> (temporal hours), and
      * <em>plag hamincha</em> is calculated as 10.75 of those <em>shaos zmaniyos</em> after the beginning of the day. As an
      * example, passing ``getSunrise()`` and ``getSunset()`` or {@link #getSeaLevelSunrise() sea level
-     * sunrise} and ``getSeaLevelSunset()`` (depending on the ``isUseElevation()`` elevation
+     * sunrise} and ``getSeaLevelSunset()`` (depending on the ``setUseElevation(useElevation:)`` elevation
      * setting) to this method will return <em>plag mincha</em> according to the opinion of the
      * <em><a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a></em>. This method's synchronous parameter indicates if
      * the start and end of day for the calculation are synchronous, having the same offset. This is typically the case, but
@@ -938,10 +938,10 @@ public class ZmanimCalendar : AstronomicalCalendar {
     /**
      * This method returns <em>plag hamincha</em>, that is 10.75 * {@link #getShaahZmanisGra() <em>shaos zmaniyos</em>}
      * (solar hours) after ``getSunrise()`` or ``getSeaLevelSunrise()`` (depending on
-     * the ``isUseElevation()`` setting), according to the <em><a href="https://en.wikipedia.org/wiki/Vilna_Gaon"
+     * the ``setUseElevation(useElevation:)`` setting), according to the <em><a href="https://en.wikipedia.org/wiki/Vilna_Gaon"
      * >GRA</a></em>. Plag hamincha is the earliest time that <em>Shabbos</em> can be started.
      * The day is calculated from ``getSeaLevelSunrise()`` to {@link #getSeaLevelSunrise sea level
-     * sunset} or ``getSunrise()`` to ``getSunset()`` (depending on the ``isUseElevation()``
+     * sunset} or ``getSunrise()`` to ``getSunset()`` (depending on the ``setUseElevation(useElevation:)``
      *
      * @see #getPlagHamincha(Date, Date, boolean)
      * @see #getPlagHamincha(Date, Date)
@@ -960,7 +960,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * the opinion of the <em><a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a></em>. This calculation divides
      * the day based on the opinion of the <em>GRA</em> that the day runs from from {@link #getSeaLevelSunrise() sea
      * level sunrise} to {@link #getSeaLevelSunrise sea level sunset} or ``getSunrise()`` to
-     * ``getSunset()`` (depending on the ``isUseElevation()`` setting). The day is split into 12 equal
+     * ``getSunset()`` (depending on the ``setUseElevation(useElevation:)`` setting). The day is split into 12 equal
      * parts with each one being a <em>shaah zmanis</em>. This method is similar to {@link #getTemporalHour}, but can
      * account for elevation.
      *
@@ -982,8 +982,8 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * "https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a></em> based on a 72 minutes <em>alos</em>
      * and <em>tzais</em>. This calculation divides the day that runs from dawn to dusk (for <em>sof zman krias shema</em> and
      * <em>tfila</em>). Dawn for this calculation is 72 minutes before ``getSunrise()`` or {@link #getSeaLevelSunrise()
-     * sea level sunrise} (depending on the ``isUseElevation()`` elevation setting) and dusk is 72 minutes after {@link
-     * #getSunset sunset} or ``getSeaLevelSunset()`` (depending on the ``isUseElevation()`` elevation
+     * sea level sunrise} (depending on the ``setUseElevation(useElevation:)`` elevation setting) and dusk is 72 minutes after {@link
+     * #getSunset sunset} or ``getSeaLevelSunset()`` (depending on the ``setUseElevation(useElevation:)`` elevation
      * setting). This day is split into 12 equal parts with each part being a <em>shaah zmanis</em>. Alternate methods of calculating
      * a <em>shaah zmanis</em> according to the Magen Avraham (MGA) are available in the subclass``ComplexZmanimCalendar``.
      *
@@ -1050,7 +1050,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * This is a utility method to determine if the current Date (date-time) passed in has a <em>melacha</em> (work) prohibition.
      * Since there are many opinions on the time of <em>tzais</em>, the <em>tzais</em> for the current day has to be passed to this
      * class. Sunset is the classes current day's ``getElevationAdjustedSunset`` that observes the
-     * ``isUseElevation()`` settings. The ``JewishCalendar#getInIsrael()`` will be set by the inIsrael parameter.
+     * ``setUseElevation(useElevation:)`` settings. The ``JewishCalendar#getInIsrael()`` will be set by the inIsrael parameter.
      *
      * @param currentTime the current time
      * @param tzais the time of tzais
@@ -1084,7 +1084,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * method. This simplifies the code in other methods such as ``getPlagHamincha(startOfDay:endOfDay:)`` and cuts down on
      * code replication. As an example, passing ``getSunrise()`` and ``getSunset()`` or
      * ``#getSeaLevelSunrise()`` and ``getSeaLevelSunset()`` (depending on the
-     * ``isUseElevation()`` elevation setting) and 10.75 hours to this method will return <em>plag mincha</em>
+     * ``setUseElevation(useElevation:)`` elevation setting) and 10.75 hours to this method will return <em>plag mincha</em>
      * according to the opinion of the <em><a href="https://en.wikipedia.org/wiki/Vilna_Gaon">GRA</a></em>.
      *
      * @param startOfDay
