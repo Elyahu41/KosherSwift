@@ -23,11 +23,20 @@ https://github.com/Elyahu41/KosherSwift.git
 ```
 Go to [Package Dependencies](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) in Xcode and search for this repository and add it!
 
+If you want to use CocoaPods add this line to your podfile:
+```ruby
+pod "KosherSwiftNew"
+```
+
 How To Use This API
 -------
 Once you have added this project, you can go to any file/viewcontroller and import the framework:
 ```Swift
 import KosherSwift
+```
+If you used CocoaPods:
+```Swift
+import KosherSwiftNew
 ```
 Then, it as simple as instantiating a class and calling it's methods:
 ```Swift
