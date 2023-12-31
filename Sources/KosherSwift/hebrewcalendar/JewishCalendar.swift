@@ -710,7 +710,13 @@ public class JewishCalendar {
     public func back() {
         workingDate = Date(timeIntervalSince1970: workingDate.timeIntervalSince1970 + (-86400))
     }
-    
+ 
+    /**
+     * A constructor that initializes the workingDate to a new current system Date and timezone. useModernHolidays and inIsrael will be set to false
+     *
+     * @param date
+     *            the <code>Date</code> to set the calendar to
+     */
     public init() {}
     
     /**
@@ -976,8 +982,8 @@ public class JewishCalendar {
      * @param year
      *            the Jewish year. The year can't be negative
      * @param month
-     *            the Jewish month starting with Nisan. A value of 1 is expected for Nissan ... 12 for Adar and 13 for
-     *            Adar II. Use the constants {@link #NISSAN} ... {@link #ADAR} (or {@link #ADAR_II} for a leap year Adar
+     *            the Jewish month starting with Nisan. A value of 8 is expected for Nissan ... 6 for Adar and 7 for
+     *            Adar II. Use the constants ``NISSAN`` ... ``ADAR`` (or ``ADAR_II`` for a leap year Adar
      *            II) to avoid any confusion.
      * @param dayOfMonth
      *            the Jewish day of month. valid values are 1-30. If the day of month is set to 30 for a month that only
@@ -995,8 +1001,8 @@ public class JewishCalendar {
      * @param year
      *            the Jewish year. The year can't be negative
      * @param month
-     *            the Jewish month starting with Nisan. A value of 1 is expected for Nissan ... 12 for Adar and 13 for
-     *            Adar II. Use the constants {@link #NISSAN} ... {@link #ADAR} (or {@link #ADAR_II} for a leap year Adar
+     *            the Jewish month starting with Nisan. A value of 8 is expected for Nissan ... 6 for Adar and 7 for
+     *            Adar II. Use the constants ``NISSAN`` ... ``ADAR`` (or ``ADAR_II`` for a leap year Adar
      *            II) to avoid any confusion.
      * @param dayOfMonth
      *            the Jewish day of month. valid values are 1-30. If the day of month is set to 30 for a month that only
@@ -1191,11 +1197,11 @@ public class JewishCalendar {
     
     /**
      * Returns the Cheshvan and Kislev kviah (whether a Jewish year is short, regular or long). It will return
-     * {@link #SHELAIMIM} if both cheshvan and kislev are 30 days, {@link #KESIDRAN} if Cheshvan is 29 days and Kislev
-     * is 30 days and {@link #CHASERIM} if both are 29 days.
+     * ``SHELAIMIM`` if both cheshvan and kislev are 30 days, ``KESIDRAN`` if Cheshvan is 29 days and Kislev
+     * is 30 days and ``CHASERIM`` if both are 29 days.
      *
-     * @return {@link #SHELAIMIM} if both cheshvan and kislev are 30 days, {@link #KESIDRAN} if Cheshvan is 29 days and
-     *         Kislev is 30 days and {@link #CHASERIM} if both are 29 days.
+     * @return ``SHELAIMIM`` if both cheshvan and kislev are 30 days, ``KESIDRAN`` if Cheshvan is 29 days and
+     *         Kislev is 30 days and ``CHASERIM`` if both are 29 days.
      * @see #isCheshvanLong()
      * @see #isKislevShort()
      */
@@ -1210,7 +1216,7 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns the last month of a given Jewish year. This will be 6 on a non {@link #isJewishLeapYear(int) leap year}
+     * Returns the last month of a given Jewish year. This will be 6 on a non ``isJewishLeapYear(year:)`` leap year
      * or 7 on a leap year.
      *
      * @param year
@@ -1365,7 +1371,7 @@ public class JewishCalendar {
      *            the Jewish year
      * @param month
      *            the Jewish month the Jewish month, with the month numbers starting from Nisan. Use the JewishDate
-     *            constants such as {@link JewishDate#TISHREI}.
+     *            constants such as ``TISHREI``.
      * @return the number of chalakim (parts - 1080 to the hour) from the original hypothetical Molad Tohu
      */
     func getChalakimSinceMoladTohu(year: Int, month: Int) -> Int64 {
@@ -1394,8 +1400,8 @@ public class JewishCalendar {
     }
     
     /**
-     * Converts the {@link JewishDate#NISSAN} based constants used by this class to numeric month starting from
-     * {@link JewishDate#TISHREI}. This is required for Molad claculations.
+     * Converts the ``NISSAN`` based constants used by this class to numeric month starting from
+     * ``TISHREI``. This is required for Molad claculations.
      *
      * @param year
      *            The Jewish year
@@ -1434,11 +1440,10 @@ public class JewishCalendar {
     /**
      * Returns an index of the Jewish holiday or fast day for the current day, or a -1 if there is no holiday for this day.
      * There are constants in this class representing each <em>Yom Tov</em>. Formatting of the <em>Yomim tovim</em> is done
-     * in the {@link HebrewDateFormatter#formatYomTov(JewishCalendar)}.
+     * in the ``HebrewDateFormatter.formatYomTov(JewishCalendar)``.
      *
-     * @todo Consider using enums instead of the constant ints.
      *
-     * @return the index of the holiday such as the constant {@link #LAG_BAOMER} or {@link #YOM_KIPPUR} or a -1 if it is not a holiday.
+     * @return the index of the holiday such as the constant ``LAG_BAOMER`` or ``YOM_KIPPUR`` or a -1 if it is not a holiday.
      *
      * @see HebrewDateFormatter#formatYomTov(JewishCalendar)
      */
@@ -1627,9 +1632,9 @@ public class JewishCalendar {
     
     /**
      * Returns true if the current day is <em>Yom Tov</em>. The method returns true even for holidays such as {@link #CHANUKAH}
-     * and minor ones such as {@link #TU_BEAV} and {@link #PESACH_SHENI}. <em>Erev Yom Tov</em> (with the exception of
-     * {@link #HOSHANA_RABBA}, <em>erev</em> the second days of {@link #PESACH}) returns false, as do {@link #isTaanis() fast
-     * days} besides {@link #YOM_KIPPUR}. Use {@link #isAssurBemelacha()} to find the days that have a prohibition of work.
+     * and minor ones such as ``TU_BEAV`` and ``PESACH_SHENI``. <em>Erev Yom Tov</em> (with the exception of
+     * ``HOSHANA_RABBA``, <em>erev</em> the second days of ``PESACH``) returns false, as do ``isTaanis()`` fast
+     * days besides ``YOM_KIPPUR``. Use ``isAssurBemelacha()`` to find the days that have a prohibition of work.
      *
      * @return true if the current day is a Yom Tov
      *
@@ -1673,7 +1678,7 @@ public class JewishCalendar {
     /**
      * Returns true if the day has candle lighting. This will return true on <em>Erev Shabbos</em>, <em>Erev Yom Tov</em>, the
      * first day of <em>Rosh Hashana</em> and the first days of <em>Yom Tov</em> out of Israel. It is identical
-     * to calling {@link #isTomorrowShabbosOrYomTov()}.
+     * to calling ``isTomorrowShabbosOrYomTov()``.
      *
      * @return if the day has candle lighting.
      *
@@ -1686,7 +1691,7 @@ public class JewishCalendar {
     /**
      * Returns true if tomorrow is <em>Shabbos</em> or <em>Yom Tov</em>. This will return true on <em>Erev Shabbos</em>,
      * <em>Erev Yom Tov</em>, the first day of <em>Rosh Hashana</em> and <em>erev</em> the first days of <em>Yom Tov</em>
-     * out of Israel. It is identical to calling {@link #hasCandleLighting()}.
+     * out of Israel. It is identical to calling ``hasCandleLighting()``.
      *
      * @return will return if the next day is <em>Shabbos</em> or <em>Yom Tov</em>.
      *
@@ -1784,7 +1789,7 @@ public class JewishCalendar {
     
     /**
      * Returns true if the current day is <em>Succos</em> (either  the <em>Yom Tov</em> of <em>Succos</em> or<em>Chol Hamoed Succos</em>).
-     * It will return false for {@link #isShminiAtzeres() Shmini Atzeres} and {@link #isSimchasTorah() Simchas Torah}.
+     * It will return false for ``isShminiAtzeres()`` Shmini Atzeres and ``isSimchasTorah()`` Simchas Torah.
      *
      * @return true if the current day is <em>Succos</em> (either  the <em>Yom Tov</em> of <em>Succos</em> or<em>Chol Hamoed Succos</em>.
      * @see #isYomTov()
@@ -1824,7 +1829,7 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns true if the current day is <em>Simchas Torah</em>. This will always return false if {@link #getInIsrael() in Israel}
+     * Returns true if the current day is <em>Simchas Torah</em>. This will always return false if ``getInIsrael()`` in Israel is true
      *
      * @return true if the current day is <em>Shmini Atzeres</em>.
      * @see #isYomTov()
@@ -1918,10 +1923,10 @@ public class JewishCalendar {
     
     /**
      * Returns true if the current day is <em>Isru Chag</em>. The method returns true for the day following <em>Pesach</em>
-     * <em>Shavuos</em> and <em>Succos</em>. It utilizes {@see #getInIsrael()} to return the proper date.
+     * <em>Shavuos</em> and <em>Succos</em>. It utilizes ``getInIsrael()`` to return the proper date.
      *
      * @return true if the current day is <em>Isru Chag</em>. The method returns true for the day following <em>Pesach</em>
-     * <em>Shavuos</em> and <em>Succos</em>. It utilizes {@see #getInIsrael()} to return the proper date.
+     * <em>Shavuos</em> and <em>Succos</em>. It utilizes ``getInIsrael()`` to return the proper date.
      */
     public func isIsruChag() -> Bool {
         let holidayIndex = getYomTovIndex();
@@ -1929,10 +1934,8 @@ public class JewishCalendar {
     }
     
     /**
-     * The Monday, Thursday and Monday after the first <em>Shabbos</em> after {@link #isRoshChodesh() <em>Rosh Chodesh</em>}
-     * {@link JewishDate#CHESHVAN <em>Cheshvan</em>} and {@link JewishDate#IYAR <em>Iyar</em>} are <a href=
-     * "https://outorah.org/p/41334/"> <em>BeHaB</em></a> days. If the last Monday of Iyar's BeHaB coincides with {@link
-     * #PESACH_SHENI <em>Pesach Sheni</em>}, the method currently considers it both <em>Pesach Sheni</em> and <em>BeHaB</em>.
+     * The Monday, Thursday and Monday after the first <em>Shabbos</em> after ``isRoshChodesh()`` <em>Rosh Chodesh</em>
+     * ``CHESHVAN`` <em>Cheshvan</em> and ``IYAR`` <em>Iyar</em> are <a href="https://outorah.org/p/41334/"> <em>BeHaB</em></a> days. If the last Monday of Iyar's BeHaB coincides with ``PESACH_SHENI`` <em>Pesach Sheni</em>, the method currently considers it both <em>Pesach Sheni</em> and <em>BeHaB</em>.
      * As seen in an Ohr Sameach  article on the subject <a href="https://ohr.edu/this_week/insights_into_halacha/9340">The
      * unknown Days: BeHaB Vs. Pesach Sheini?</a> there are some customs that delay the day to various points in the future.
      * @return true if the day is <em>BeHaB</em>.
@@ -2228,9 +2231,8 @@ public class JewishCalendar {
      */
     public func getTchilasZmanKidushLevana3Days() -> Date {
         let molad = getMoladAsDate();
-        var gregCalendar = Calendar(identifier: .gregorian)
-        gregCalendar.timeZone = timeZone
-        return gregCalendar.date(byAdding: .day, value: 3, to: molad)!
+        return Date(timeInterval: 86400 * 3, since: molad)
+        // use time interval to avoid timezone changes
     }
     
     /**
@@ -2247,9 +2249,8 @@ public class JewishCalendar {
      */
     public func getTchilasZmanKidushLevana7Days() -> Date {
         let molad = getMoladAsDate();
-        var gregCalendar = Calendar(identifier: .gregorian)
-        gregCalendar.timeZone = timeZone
-        return gregCalendar.date(byAdding: .day, value: 7, to: molad)!
+        return Date(timeInterval: 86400 * 7, since: molad)
+        // use time interval to avoid timezone changes
     }
     
     /**
@@ -2269,15 +2270,8 @@ public class JewishCalendar {
      */
     public func getSofZmanKidushLevanaBetweenMoldos() -> Date {
         let molad = getMoladAsDate();
-        var gregCalendar = Calendar(identifier: .gregorian)
-        gregCalendar.timeZone = timeZone
-        // add half the time between molad and molad (half of 29 days, 12 hours and 793 chalakim (44 minutes, 3.3
-        // seconds), or 14 days, 18 hours, 22 minutes and 666 milliseconds). Add it as hours, not days, to avoid
-        // DST/ST crossover issues.
-        let moladWithHoursAdded = gregCalendar.date(byAdding: .hour, value: (24 * 14) + 18, to: molad)!
-        let moladWithMinutesAdded = gregCalendar.date(byAdding: .minute, value: 22, to: moladWithHoursAdded)!
-        let moladWithSecondsAdded = gregCalendar.date(byAdding: .second, value: 1, to: moladWithMinutesAdded)!
-        return gregCalendar.date(byAdding: .nanosecond, value: 666000000, to: moladWithSecondsAdded)!
+        // add half the time between molad and molad (half of 29 days, 12 hours and 793 chalakim (44 minutes, 3.3 seconds), or 14 days, 18 hours, 22 minutes and 666 milliseconds). Add it as a TimeInterval to avoid timezone changes
+        return Date(timeInterval: 1276720.666, since: molad)
     }
     
     /**
@@ -2285,7 +2279,7 @@ public class JewishCalendar {
      * opinion brought down in the Shulchan Aruch (Orach Chaim 426). It should be noted that some opinions hold that
      * the <a href="http://en.wikipedia.org/wiki/Moses_Isserles">Rema</a> who brings down the the <a
      * href="http://en.wikipedia.org/wiki/Yaakov_ben_Moshe_Levi_Moelin">Maharil's</a> opinion of calculating it as
-     * {@link #getSofZmanKidushLevanaBetweenMoldos() half way between <em>molad</em> and <em>molad</em>} is of the
+     * ``getSofZmanKidushLevanaBetweenMoldos()`` half way between <em>molad</em> and <em>molad</em> is of the
      * opinion of the Mechaber as well. Also see the Aruch Hashulchan. For additional details on the subject, See Rabbi
      * Dovid Heber's very detailed writeup in Siman Daled (chapter 4) of <a
      * href="http://www.worldcat.org/oclc/461326125">Shaarei Zmanim</a>. This method returns the time even if it is during
@@ -2299,27 +2293,26 @@ public class JewishCalendar {
      */
     public func getSofZmanKidushLevana15Days() -> Date {
         let molad = getMoladAsDate();
-        var gregCalendar = Calendar(identifier: .gregorian)
-        gregCalendar.timeZone = timeZone
-        return gregCalendar.date(byAdding: .day, value: 7, to: molad)!
+        return Date(timeInterval: 86400 * 15, since: molad)
+        // use time interval to avoid timezone changes
     }
     
     /**
      * Returns the <em>Daf Yomi (Bavli)</em> for the date that the calendar is set to. See the
-     * {@link HebrewDateFormatter#formatDafYomiBavli(Daf)} for the ability to format the <em>daf</em> in
+     * ``HebrewDateFormatter.formatDafYomiBavli(Daf)`` for the ability to format the <em>daf</em> in
      * Hebrew or transliterated <em>masechta</em> names.
      *
-     * @return the daf as a {@link Daf}
+     * @return the daf as a ``Daf``
      */
     public func getDafYomiBavli() -> Daf? {
         return YomiCalculator.getDafYomiBavli(jewishCalendar: self);
     }
     /**
      * Returns the <em>Daf Yomi (Yerushalmi)</em> for the date that the calendar is set to. See the
-     * {@link HebrewDateFormatter#formatDafYomiYerushalmi(Daf)} for the ability to format the <em>daf</em>
+     * ``HebrewDateFormatter.formatDafYomiYerushalmi(Daf)`` for the ability to format the <em>daf</em>
      * in Hebrew or transliterated <em>masechta</em> names.
      *
-     * @return the daf as a {@link Daf}
+     * @return the daf as a ``Daf``
      */
     public func getDafYomiYerushalmi() -> Daf? {
         return YerushalmiYomiCalculator.getDafYomiYerushalmi(jewishCalendar: self);
