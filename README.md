@@ -43,6 +43,15 @@ Then, it as simple as instantiating a class and calling it's methods:
 ```Swift
 let jewishCalendar = JewishCalendar() // by default it is set to today's date
 print(jewishCalendar.getJewishMonth()) // This will print the jewish month as a number, so Nissan will be 8. See the JewishCalendar class for more details
+
+// To check for holidays/yom tovs, you can use the built in methods of the jewish calendar:
+if jewishCalendar.isPesach() {
+print("Today is Passover!")
+}
+// or you can check it yourself with the getYomTovIndex() method just like in KosherJava:
+if jewishCalendar.getYomTovIndex() == JewishCalendar.PESACH {
+print("Today is Passover!")
+}
 ```
 For sunrise and sunset times, you will need a GeoLocation object. Then, you will need to pass that into the AstronomicalCalendar class like so:
 ```Swift
@@ -115,7 +124,7 @@ public extension ComplexZmanimCalendar {
     // for seasonal times
     func getTwoSeasonalHoursIntoTheDay() -> Date? {
         let seasonalHour = getTemporalHour()
-        // it is preffered to use getTimeOffset because it will handle nil values
+        // it is preferred to use getTimeOffset because it will handle nil values
         return AstronomicalCalendar.getTimeOffset(time: getSeaLevelSunrise(), offset: seasonalHour * 2)
     }
 }
