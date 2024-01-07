@@ -303,8 +303,8 @@ public class JewishCalendar {
     public var isMukafChoma: Bool = false
     
     /**
-     * List of <em>parshiyos</em> or special <em>Shabasos</em>. {@link #NONE} indicates a week without a <em>parsha</em>, while the enum for
-     * the <em>parsha</em> of {@link #VZOS_HABERACHA} exists for consistency, but is not currently used. The special <em>Shabasos</em> of
+     * List of <em>parshiyos</em> or special <em>Shabasos</em>. ``NONE`` indicates a week without a <em>parsha</em>, while the enum for
+     * the <em>parsha</em> of ``VZOS_HABERACHA`` exists for consistency, but is not currently used. The special <em>Shabasos</em> of
      * Shekalim, Zachor, Para, Hachodesh, as well as Shabbos Shuva, Shira, Hagadol, Chazon and Nachamu are also represented in this collection
      * of <em>parshiyos</em>.
      * @see #getSpecialShabbos()
@@ -505,7 +505,7 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns this week's ``Parsha`` if it is <em>Shabbos</em>. It returns {@link Parsha#NONE} if the date
+     * Returns this week's ``Parsha`` if it is <em>Shabbos</em>. It returns ``NONE`` if the date
      * is a weekday or if there is no <em>parsha</em> that week (for example <em>Yom Tov</em> that falls on a <em>Shabbos</em>).
      *
      * @return the current <em>parsha</em>.
@@ -527,7 +527,7 @@ public class JewishCalendar {
     
     /**
      * Returns the upcoming ``Parsha`` regardless of if it is the weekday or <em>Shabbos</em> (where next
-     * Shabbos's <em>Parsha</em> will be returned. This is unlike {@link #getParshah()} that returns {@link Parsha#NONE} if
+     * Shabbos's <em>Parsha</em> will be returned. This is unlike ``getParshah()`` that returns ``NONE`` if
      * the date is not <em>Shabbos</em>. If the upcoming <em>Shabbos</em> is a <em>Yom Tov</em> and has no <em>Parsha</em>, the
      * following week's <em>Parsha</em> will be returned.
      *
@@ -548,16 +548,14 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns a ``Parsha`` enum if the <em>Shabbos</em> is one of the four <em>parshiyos</em> of {@link
-     * Parsha#SHKALIM <em>Shkalim</em>}, {@link Parsha#ZACHOR <em>Zachor</em>}, {@link Parsha#PARA <em>Para</em>}, {@link
-     * Parsha#HACHODESH <em>Hachdesh</em>}, or five other special <em>Shabbasos</em> of {@link Parsha#HAGADOL <em>Hagadol</em>},
-     * {@link Parsha#CHAZON <em>Chazon</em>}, {@link Parsha#NACHAMU <em>Nachamu</em>}, {@link Parsha#SHUVA <em>Shuva</em>},
-     * {@link Parsha#SHIRA <em>Shira</em>}, or {@link Parsha#NONE Parsha.NONE} for a regular <em>Shabbos</em> (or any weekday).
+     * Returns a ``Parsha`` enum if the <em>Shabbos</em> is one of the four <em>parshiyos</em> of ``SHKALIM``, ``ZACHOR``, ``PARA``, ``HACHODESH``, or five other special <em>Shabbasos</em> of ``HAGADOL``,
+     * ``CHAZON``, ``NACHAMU``, ``SHUVA``,
+     * ``SHIRA``, or ``NONE`` for a regular <em>Shabbos</em> (or any weekday).
      *
-     * @return one of the four <em>parshiyos</em> of {@link    Parsha#SHKALIM <em>Shkalim</em>}, {@link Parsha#ZACHOR <em>Zachor</em>},
-     *         {@link Parsha#PARA <em>Para</em>}, {@link Parsha#HACHODESH <em>Hachdesh</em>}, or five other special <em>Shabbasos</em>
-     *         of {@link Parsha#HAGADOL <em>Hagadol</em>}, {@link Parsha#CHAZON <em>Chazon</em>}, {@link Parsha#NACHAMU <em>Nachamu</em>},
-     *         {@link Parsha#SHUVA <em>Shuva</em>}, {@link Parsha#SHIRA <em>Shira</em>}, or {@link Parsha#NONE Parsha.NONE} for a regular
+     * @return one of the four <em>parshiyos</em> of ``SHKALIM``, ``ZACHOR``,
+     *         ``PARA``, ``HACHODESH``, or five other special <em>Shabbasos</em>
+     *         of ``HAGADOL``, ``CHAZON``, ``NACHAMU``,
+     *         ``SHUVA``, ``SHIRA``, or ``NONE`` for a regular
      *         <em>Shabbos</em> (or any weekday).
      */
     public func getSpecialShabbos() -> Parsha {
@@ -780,13 +778,13 @@ public class JewishCalendar {
     }
     
     /**
-     * A constructor that initializes the date to the Date parameter. useModernHolidays and inIsrael will be set to false
+     * A constructor that initializes the date to the given parameters. useModernHolidays and inIsrael will be set to false
      *
-     * @param date the <code>Date</code> to set the calendar to
-     * @param isInIsrael a bool to determine whether or not the methods should use in Israel calculations
-     * @param shouldUseModernHolidays a bool to determine to use modern holidays in the methods or not
+     * @param jewishYear the jewish year to set the calendar to
+     * @param jewishMonth the jewish month to set the calendar to
+     * @param jewishDayOfMonth the jewish day for that month to set the calendar to
      */
-    public init(jewishYear:Int, jewishMonth:Int, jewishDayOfMonth:Int) {//Test this
+    public init(jewishYear:Int, jewishMonth:Int, jewishDayOfMonth:Int) {
         var hebrewCalendar = Calendar(identifier: .hebrew)
         hebrewCalendar.timeZone = timeZone
         workingDate = hebrewCalendar.date(from: DateComponents(calendar: hebrewCalendar, year: jewishYear, month: jewishMonth, day: jewishDayOfMonth))!
@@ -795,24 +793,24 @@ public class JewishCalendar {
     /**
      * A constructor that initializes the date to the Date parameter. useModernHolidays and inIsrael will be set to false
      *
-     * @param jewishYear
-     * @param jewishMonth
-     * @param jewishDayOfMonth
+     * @param jewishYear the jewish year to set the calendar to
+     * @param jewishMonth the jewish month to set the calendar to
+     * @param jewishDayOfMonth the jewish day for that month to set the calendar to
      * @param isInIsrael a bool to determine whether or not the methods should use in Israel calculations
      */
-    public init(jewishYear:Int, jewishMonth:Int, jewishDayOfMonth:Int, isInIsrael:Bool) {//Test this
+    public init(jewishYear:Int, jewishMonth:Int, jewishDayOfMonth:Int, inIsrael:Bool) {
         var hebrewCalendar = Calendar(identifier: .hebrew)
         hebrewCalendar.timeZone = timeZone
         workingDate = hebrewCalendar.date(from: DateComponents(calendar: hebrewCalendar, year: jewishYear, month: jewishMonth, day: jewishDayOfMonth))!
-        inIsrael = isInIsrael
+        self.inIsrael = inIsrael
     }
     
     /**
-     * sets the Jewish month.
+     * sets the Jewish month. Ut is recommended to use the static integers in this class to set the jewish month to avoid confusion. For example, use ``NISSAN`` as the parameter
      *
      * @param month
-     *            the Jewish month from 1 to 12 (or 13 years in a leap year). The month count starts with 1 for Nisan
-     *            and goes to 13 for Adar II
+     *            the Jewish month from 1 to 12 (or 13 years in a leap year). The month count starts with 1 for Tishrei
+     *            and goes to 13 for Elul
      */
     public func setJewishMonth(month:Int) {
         var hebrewCalendar = Calendar(identifier: .hebrew)
@@ -845,11 +843,11 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns the Jewish month 1-12 (or 13 years in a leap year). The month count starts with 1 for Nisan and goes to
-     * 13 for Adar II
+     * Returns the Jewish month 1-12 (or 13 years in a leap year). The month count starts with 1 for Tishrei and goes to
+     * 13 for Elul
      *
-     * @return the Jewish month from 1 to 12 (or 13 years in a leap year). The month count starts with 1 for Nisan and
-     *         goes to 13 for Adar II
+     * @return the Jewish month from 1 to 12 (or 13 years in a leap year). The month count starts with 1 for Tishrei and
+     *         goes to 13 for Elul
      */
     public func getJewishMonth() -> Int {
         var hebrewCalendar = Calendar(identifier: .hebrew)
@@ -890,9 +888,9 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns the Gregorian month (between 0-11).
+     * Returns the Gregorian month (between 1-12).
      *
-     * @return the Gregorian month (between 0-11).
+     * @return the Gregorian month (between 1-12).
      */
     public func getGregorianMonth() -> Int {
         var gregCalendar = Calendar(identifier: .gregorian)
@@ -967,8 +965,7 @@ public class JewishCalendar {
      * @param month
      *            the Gregorian month. Swift expects 1 for January
      * @param dayOfMonth
-     *            the Gregorian day of month. If this is &gt; the number of days in the month/year, the last valid date of
-     *            the month will be set
+     *            the Gregorian day of month.
      */
     public func setGregorianDate(year:Int, month:Int, dayOfMonth:Int) {
         var gregCalendar = Calendar(identifier: .gregorian)
@@ -980,14 +977,13 @@ public class JewishCalendar {
      * Sets the Jewish Date and updates the Gregorian date accordingly.
      *
      * @param year
-     *            the Jewish year. The year can't be negative
+     *            the Jewish year
      * @param month
      *            the Jewish month starting with Nisan. A value of 8 is expected for Nissan ... 6 for Adar and 7 for
      *            Adar II. Use the constants ``NISSAN`` ... ``ADAR`` (or ``ADAR_II`` for a leap year Adar
      *            II) to avoid any confusion.
      * @param dayOfMonth
-     *            the Jewish day of month. valid values are 1-30. If the day of month is set to 30 for a month that only
-     *            has 29 days, the day will be set as 29.
+     *            the Jewish day of month. valid values are 1-30.
      */
     public func setJewishDate(year:Int, month:Int, dayOfMonth:Int) {
         var gregCalendar = Calendar(identifier: .hebrew)
@@ -1005,8 +1001,7 @@ public class JewishCalendar {
      *            Adar II. Use the constants ``NISSAN`` ... ``ADAR`` (or ``ADAR_II`` for a leap year Adar
      *            II) to avoid any confusion.
      * @param dayOfMonth
-     *            the Jewish day of month. valid values are 1-30. If the day of month is set to 30 for a month that only
-     *            has 29 days, the day will be set as 29.
+     *            the Jewish day of month. valid values are 1-30.
      *
      * @param hours
      *            the hour of the day. Used for Molad calculations
@@ -1024,7 +1019,7 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns the day of the week as a number between 1-7.
+     * Returns the day of the week as a number between 1-7. Sunday will be 1 and Saturday will be 7.
      *
      * @return the day of the week as a number between 1-7.
      */
@@ -1074,7 +1069,7 @@ public class JewishCalendar {
         var hebrewMonth = getJewishMonth()
         
         if !isJewishLeapYear(year: getJewishYear()) && hebrewMonth >= 7 {
-            hebrewMonth = hebrewMonth - 1//special case for adar 2 because swift is weird
+            hebrewMonth = hebrewMonth - 1// for Nissan and above because swift is weird
         }
         
         for month in 1..<hebrewMonth {
@@ -1151,7 +1146,7 @@ public class JewishCalendar {
      * year Cheshvan is short. ND+ER
      *
      * @param year
-     *            the year
+     *            the jewish year
      * @return true if Cheshvan is long in Jewish year.
      * @see #isCheshvanLong()
      * @see #getCheshvanKislevKviah()
@@ -1277,7 +1272,7 @@ public class JewishCalendar {
      * @param year
      *            the Gregorian year
      * @param month
-     *            the Gregorian month. Unlike the Java Calendar where January has the value of 0,This expects a 1 for
+     *            the Gregorian month. Unlike the Java Calendar where January has the value of 0, This expects a 1 for
      *            January
      * @param dayOfMonth
      *            the day of the month (1st, 2nd, etc...)
@@ -1311,9 +1306,9 @@ public class JewishCalendar {
      *
      * @param year
      *            the Jewish year
-     * @return the number of days elapsed from prior to the molad Tohu BaHaRaD (Be = Monday, Ha= 5 hours and Rad =204
+     * @return the number of days elapsed from prior to the molad Tohu BaHaRaD (Be = Monday, Ha = 5 hours and Rad = 204
      *         chalakim/parts) prior to the start of the Jewish calendar, to the mean conjunction of Tishri of the
-     *         Jewish year. BeHaRaD is 23:11:20 on Sunday night(5 hours 204/1080 chalakim after sunset on Sunday
+     *         Jewish year. BeHaRaD is 23:11:20 on Sunday night (5 hours 204/1080 chalakim after sunset on Sunday
      *         evening).
      */
     public func getJewishCalendarElapsedDays(year:Int) -> Int {
@@ -1326,16 +1321,15 @@ public class JewishCalendar {
     
     /**
      * Adds the 4 dechiyos for molad Tishrei. These are:
-     * <ol>
-     * <li>Lo ADU Rosh - Rosh Hashana can't fall on a Sunday, Wednesday or Friday. If the molad fell on one of these
-     * days, Rosh Hashana is delayed to the following day.</li>
-     * <li>Molad Zaken - If the molad of Tishrei falls after 12 noon, Rosh Hashana is delayed to the following day. If
-     * the following day is ADU, it will be delayed an additional day.</li>
-     * <li>GaTRaD - If on a non leap year the molad of Tishrei falls on a Tuesday (Ga) on or after 9 hours (T) and 204
-     * chalakim (TRaD) it is delayed till Thursday (one day delay, plus one day for Lo ADU Rosh)</li>
-     * <li>BeTuTaKFoT - if the year following a leap year falls on a Monday (Be) on or after 15 hours (Tu) and 589
-     * chalakim (TaKFoT) it is delayed till Tuesday</li>
-     * </ol>
+     * Lo ADU Rosh - Rosh Hashana can't fall on a Sunday, Wednesday or Friday. If the molad fell on one of these
+     * days, Rosh Hashana is delayed to the following day.
+     * Molad Zaken - If the molad of Tishrei falls after 12 noon, Rosh Hashana is delayed to the following day. If
+     * the following day is ADU, it will be delayed an additional day.
+     * GaTRaD - If on a non leap year the molad of Tishrei falls on a Tuesday (Ga) on or after 9 hours (T) and 204
+     * chalakim (TRaD) it is delayed till Thursday (one day delay, plus one day for Lo ADU Rosh)
+     * BeTuTaKFoT - if the year following a leap year falls on a Monday (Be) on or after 15 hours (Tu) and 589
+     * chalakim (TaKFoT) it is delayed till Tuesday
+     *
      *
      * @param year the year
      * @param moladDay the molad day
@@ -1631,12 +1625,12 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns true if the current day is <em>Yom Tov</em>. The method returns true even for holidays such as {@link #CHANUKAH}
+     * Returns true if the current day is <em>Yom Tov</em>. The method returns true even for holidays such as ``CHANUKAH``
      * and minor ones such as ``TU_BEAV`` and ``PESACH_SHENI``. <em>Erev Yom Tov</em> (with the exception of
      * ``HOSHANA_RABBA``, <em>erev</em> the second days of ``PESACH``) returns false, as do ``isTaanis()`` fast
      * days besides ``YOM_KIPPUR``. Use ``isAssurBemelacha()`` to find the days that have a prohibition of work.
      *
-     * @return true if the current day is a Yom Tov
+     * @return true if the current day is a Yom Tov (special day). Use ``isYomTovAssurBemelacha()`` for Yomim tovim that have a prohibition of work. And use ``isAssurBemelacha()`` for ANY day that has a prohibition of work.
      *
      * @see #getYomTovIndex()
      * @see #isErevYomTov()
@@ -1658,7 +1652,7 @@ public class JewishCalendar {
      * Returns true if the <em>Yom Tov</em> day has a <em>melacha</em> (work)  prohibition. This method will return false for a
      * non-<em>Yom Tov</em> day, even if it is <em>Shabbos</em>.
      *
-     * @return if the <em>Yom Tov</em> day has a <em>melacha</em> (work)  prohibition.
+     * @return if the <em>Yom Tov</em> day has a <em>melacha</em> (work)  prohibition disregarding shabbos.
      */
     public func isYomTovAssurBemelacha() -> Bool {
         let holidayIndex = getYomTovIndex();
@@ -1716,7 +1710,7 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns true if the current day is <em>Aseres Yemei Teshuva</em>.
+     * Returns true if the current day is <em>Aseres Yemei Teshuva</em> (Ten days of repentance).
      *
      * @return if the current day is <em>Aseres Yemei Teshuvah</em>
      */
@@ -1725,9 +1719,9 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns true if the current day is <em>Pesach</em> (either  the <em>Yom Tov</em> of <em>Pesach</em> or<em>Chol Hamoed Pesach</em>).
+     * Returns true if the current day is <em>Pesach</em> (either  the <em>Yom Tov</em> of <em>Pesach</em> or <em>Chol Hamoed Pesach</em>).
      *
-     * @return true if the current day is <em>Pesach</em> (either  the <em>Yom Tov</em> of <em>Pesach</em> or<em>Chol Hamoed Pesach</em>).
+     * @return true if the current day is <em>Pesach</em> (either  the <em>Yom Tov</em> of <em>Pesach</em> or <em>Chol Hamoed Pesach</em>).
      * @see #isYomTov()
      * @see #isCholHamoedPesach()
      * @see #PESACH
@@ -1788,10 +1782,10 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns true if the current day is <em>Succos</em> (either  the <em>Yom Tov</em> of <em>Succos</em> or<em>Chol Hamoed Succos</em>).
+     * Returns true if the current day is <em>Succos</em> (either  the <em>Yom Tov</em> of <em>Succos</em> or <em>Chol Hamoed Succos</em>).
      * It will return false for ``isShminiAtzeres()`` Shmini Atzeres and ``isSimchasTorah()`` Simchas Torah.
      *
-     * @return true if the current day is <em>Succos</em> (either  the <em>Yom Tov</em> of <em>Succos</em> or<em>Chol Hamoed Succos</em>.
+     * @return true if the current day is <em>Succos</em> (either  the <em>Yom Tov</em> of <em>Succos</em> or <em>Chol Hamoed Succos</em>.
      * @see #isYomTov()
      * @see #isCholHamoedSuccos()
      * @see #isHoshanaRabba()
@@ -1956,7 +1950,7 @@ public class JewishCalendar {
     
     /**
      * Return true if the day is a Taanis (fast day). Return true for <em>17 of Tammuz</em>, <em>Tisha B'Av</em>,
-     * <em>Yom Kippur</em>, <em>Fast of Gedalyah</em>, <em>10 of Teves</em> and the <em>Fast of Esther</em>.
+     * <em>Yom Kippur</em>, <em>Fast of Gedalyah</em>, <em>10th of Teves</em> and the <em>Fast of Esther</em>.
      * See isRegularTaanis if you do not want Yom Kippur included.
      *
      * @return true if today is a fast day
@@ -1969,7 +1963,7 @@ public class JewishCalendar {
     
     /**
      * Return true if the day is a Taanis (fast day) and not Yom Kippur. Return true for <em>17 of Tammuz</em>, <em>Tisha B'Av</em>,
-     * <em>Fast of Gedalyah</em>, <em>10 of Teves</em> and the <em>Fast of Esther</em>.
+     * <em>Fast of Gedalyah</em>, <em>10th of Teves</em> and the <em>Fast of Esther</em>.
      *
      * @return true if today is a fast day  and not Yom Kippur
      */
@@ -1999,8 +1993,8 @@ public class JewishCalendar {
      * @see #isChanukah()
      */
     public func getDayOfChanukah() -> Int {
-        let day = getJewishDayOfMonth();
         if (isChanukah()) {
+            let day = getJewishDayOfMonth();
             if (getJewishMonth() == JewishCalendar.KISLEV) {
                 return day - 24;
             } else { // teves
@@ -2031,7 +2025,7 @@ public class JewishCalendar {
      * @see #setIsMukafChoma(boolean)
      */
     public func isPurim() -> Bool {
-        if(isMukafChoma) {
+        if (isMukafChoma) {
             return getYomTovIndex() == JewishCalendar.SHUSHAN_PURIM;
         } else {
             return getYomTovIndex() == JewishCalendar.PURIM;
@@ -2100,7 +2094,7 @@ public class JewishCalendar {
     }
     
     /**
-     This method does not return anything, however, it does set the variables moladHours, moladMiutes, and moladChalakim with the proper
+     This method does not return anything, however, it does set the variables ``moladHours``, ``moladMiutes``, and ``moladChalakim`` with the proper
      values for the molad of this month. Using these variable, you can create a string like so: "The molad is at 20 hours, 1 minutes and 3 Chalakim".
      There is also a method to recieve a string like this called getMoladAsString
      */
@@ -2130,7 +2124,7 @@ public class JewishCalendar {
     }
     
     /**
-     This method sets the variables moladHours, moladMinutes, and moladChalakim within this class and returns a string like so: "The molad is at 20 hours, 1 minutes and 3 Chalakim"
+     This method sets the variables ``moladHours``, ``moladMiutes``, and ``moladChalakim`` within this class and returns a string like so: "The molad is at 20 hours, 1 minutes and 3 Chalakim"
      */
     public func getMoladAsString() -> String {
         let chalakim = getChalakimSinceMoladTohu(year: getJewishYear(), month: getJewishMonth())
@@ -2321,9 +2315,8 @@ public class JewishCalendar {
     /**
      * Returns the elapsed days since <em>Tekufas Tishrei</em>. This uses <em>Tekufas Shmuel</em> (identical to the <a href=
      * "https://en.wikipedia.org/wiki/Julian_year_(astronomy)">Julian Year</a> with a solar year length of 365.25 days).
-     * The notation used below is D = days, H = hours and C = chalakim. <em><a href="https://en.wikipedia.org/wiki/Molad"
-     * >Molad</a> BaHaRad</em> was 2D,5H,204C or 5H,204C from the start of <em>Rosh Hashana</em> year 1. For <em>molad
-     * Nissan</em> add 177D, 4H and 438C (6 * 29D, 12H and 793C), or 177D,9H,642C after <em>Rosh Hashana</em> year 1.
+     * The notation used below is D = days, H = hours and C = chalakim. <em><a href="https://en.wikipedia.org/wiki/Molad">Molad</a> BaHaRad</em> was 2D,5H,204C or 5H,204C from the start of <em>Rosh Hashana</em> year 1. For <em>molad
+     * Nissan</em> add 177D, 4H and 438C (6 x 29D, 12H and 793C), or 177D,9H,642C after <em>Rosh Hashana</em> year 1.
      * <em>Tekufas Nissan</em> was 7D, 9H and 642C before <em>molad Nissan</em> according to the Rambam, or 170D, 0H and
      * 0C after <em>Rosh Hashana</em> year 1. <em>Tekufas Tishrei</em> was 182D and 3H (365.25 / 2) before <em>tekufas
      * Nissan</em>, or 12D and 15H before <em>Rosh Hashana</em> of year 1. Outside of Israel we start reciting <em>Tal
