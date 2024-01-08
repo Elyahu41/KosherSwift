@@ -169,8 +169,8 @@ Disclaimer:
 __While I did my best to get accurate results, please double check before relying on these zmanim for <em>halacha lemaaseh</em>__.
 
 ------------------------
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/KosherJava/zmanim?color=eed6af&label=KosherSwift&logo=github)](1.0.0)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/Elyahu41/KosherSwift?color=eed6af&label=KosherSwift&logo=github)](1.0.0)
 [![GitHub](https://img.shields.io/github/license/KosherJava/zmanim?color=eed6af&logo=gnu)](https://github.com/KosherJava/zmanim/blob/master/LICENSE)
-[![GitHub last commit](https://img.shields.io/github/last-commit/KosherJava/zmanim?logo=github)](https://github.com/Elyahu41/KosherSwift/commits/master)
+[![GitHub last commit](https://img.shields.io/github/last-commit/Elyahu41/KosherSwift?logo=github)](https://github.com/Elyahu41/KosherSwift/commits/master)
 [![CodeQL](https://github.com/KosherJava/zmanim/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/KosherJava/zmanim/actions/workflows/codeql-analysis.yml)
-[![Run unit tests](https://github.com/KosherJava/zmanim/actions/workflows/pull_request_worklow.yml/badge.svg)](https://github.com/KosherJava/zmanim/actions/workflows/pull_request_worklow.yml)
+[![Run unit tests](https://github.com/KosherJava/zmanim/actions/workflows/pull_request_worklow.yml/badge.svg)](https://github.com/Elyahu41/KosherSwift/actions/workflows/swift.yml)
