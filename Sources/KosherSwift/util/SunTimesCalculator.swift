@@ -13,8 +13,8 @@ import Foundation
  * Boone</a> that is based on the <a href = "https://aa.usno.navy.mil/">US Naval Observatory's</a><a
  * href="https://aa.usno.navy.mil/publications/asa">Astronomical Almanac</a> and used with his permission. Added to Kevin's
  * code is adjustment of the zenith to account for elevation. This algorithm returns the same time every year and does not
- * account for leap years. It is not as accurate as the Jean Meeus based {@link NOAACalculator} that is the default calculator
- * use by the KosherJava <em>zmanim</em> library.
+ * account for leap years. It is not as accurate as the Jean Meeus based ``NOAACalculator`` that is the default calculator
+ * use by the KosherJava/KosherSwift <em>zmanim</em> libraries.
  *
  * @author &copy; Eliyahu Hershfeld 2004 - 2023
  * @author &copy; Kevin Boone 2000
@@ -32,6 +32,7 @@ public class SunTimesCalculator : AstronomicalCalculator {
     }
 
     /**
+     * Returns the name of this calculator
      * @see com.kosherjava.zmanim.util.AstronomicalCalculator#getCalculatorName()
      */
     public func getCalculatorName() -> String {
@@ -258,7 +259,7 @@ public class SunTimesCalculator : AstronomicalCalculator {
      * Return the <a href="https://en.wikipedia.org/wiki/Universal_Coordinated_Time">Universal Coordinated Time</a> (UTC)
      * of <a href="https://en.wikipedia.org/wiki/Noon#Solar_noon">solar noon</a> for the given day at the given location
      * on earth. This implementation returns solar noon as the time halfway between sunrise and sunset.
-     * {@link NOAACalculator}, the default calculator, returns true solar noon. See <a href=
+     * ``NOAACalculator``, the default calculator, returns true solar noon. See <a href=
      * "https://kosherjava.com/2020/07/02/definition-of-chatzos/">The Definition of Chatzos</a> for details on solar
      * noon calculations.
      * @see com.kosherjava.zmanim.util.AstronomicalCalculator#getUTCNoon(Calendar, GeoLocation)
@@ -269,7 +270,7 @@ public class SunTimesCalculator : AstronomicalCalculator {
      * @param geoLocation
      *            The location information used for astronomical calculating sun times.
      * @return the time in minutes from zero UTC. If an error was encountered in the calculation (expected behavior for
-     *         some locations such as near the poles, {@link Double#NaN} will be returned.
+     *         some locations such as near the poles, ``Double.nan`` will be returned.
      */
     public override func getUTCNoon(date:Date, geoLocation:GeoLocation) -> Double {
         let sunrise = getUTCSunrise(date: date, geoLocation: geoLocation, zenith: 90, adjustForElevation: false);

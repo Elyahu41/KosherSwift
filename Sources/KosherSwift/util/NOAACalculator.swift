@@ -52,35 +52,23 @@ public class NOAACalculator : AstronomicalCalculator {
     }
 
     /**
-         * Returns the name of the algorithm.
-         *
-         * @return the descriptive name of the algorithm.
-         */
+     * Returns the name of the algorithm.
+     * @return the descriptive name of the algorithm.
+     */
     public func getCalculatorName() -> String {
         return "US National Oceanic and Atmospheric Administration Algorithm";
     }
 
     /**
-         * A method that calculates UTC sunrise as well as any time based on an angle above or below sunrise. This abstract
-         * method is implemented by the classes that extend this class.
-         *
-         * @param calendar
-         *            Used to calculate day of year.
-         * @param geoLocation
-         *            The location information used for astronomical calculating sun times.
-         * @param zenith
-         *            the azimuth below the vertical zenith of 90 degrees. for sunrise typically the {@link #adjustZenith
-         *            zenith} used for the calculation uses geometric zenith of 90&deg; and {@link #adjustZenith adjusts}
-         *            this slightly to account for solar refraction and the sun's radius. Another example would be
-         *            {@link com.kosherjava.zmanim.AstronomicalCalendar#getBeginNauticalTwilight()} that passes
-         *            {@link com.kosherjava.zmanim.AstronomicalCalendar#NAUTICAL_ZENITH} to this method.
-         * @param adjustForElevation
-         *            Should the time be adjusted for elevation
-         * @return The UTC time of sunrise in 24 hour format. 5:45:00 AM will return 5.75.0. If an error was encountered in
-         *         the calculation (expected behavior for some locations such as near the poles,
-         *         {@link java.lang.Double#NaN} will be returned.
-         * @see #getElevationAdjustment(double)
-         */
+     A method that calculates UTC sunrise as well as any time based on an angle above or below sunrise. This abstract method is implemented by the classes that extend this class.
+     @param calendar Used to calculate day of year.
+     @param geoLocation The location information used for astronomical calculating sun times.
+     @param zenith the azimuth below the vertical zenith of 90 degrees. for sunrise typically the ``adjustZenith`` zenith used for the calculation uses geometric zenith of 90&deg; and ``adjustZenith`` adjusts this slightly to account for solar refraction and the sun's radius. Another example would be ``AstronomicalCalendar.getBeginNauticalTwilight()`` that passes ``AstronomicalCalendar.NAUTICAL_ZENITH`` to this method.
+     @param adjustForElevation Should the time be adjusted for elevation
+     @return The UTC time of sunrise in 24 hour format. 5:45:00 AM will return 5.75.0. If an error was encountered in
+     the calculation (expected behavior for some locations such as near the poles, ``Double.nan`` will be returned.
+     @see #getElevationAdjustment(double)
+    */
     public override func getUTCSunrise(date: Date, geoLocation: GeoLocation, zenith: Double, adjustForElevation: Bool) -> Double {
         let elevation = adjustForElevation ? geoLocation.getElevation() : 0;
         let adjustedZenith = adjustZenith(zenith: zenith, elevation: elevation);
@@ -107,16 +95,16 @@ public class NOAACalculator : AstronomicalCalculator {
      * @param geoLocation
      *            The location information used for astronomical calculating sun times.
      * @param zenith
-     *            the azimuth below the vertical zenith of 90&deg;. For sunset typically the {@link #adjustZenith
-     *            zenith} used for the calculation uses geometric zenith of 90&deg; and {@link #adjustZenith adjusts}
+     *            the azimuth below the vertical zenith of 90&deg;. For sunset typically the ``adjustZenith``
+     *            zenith used for the calculation uses geometric zenith of 90&deg; and ``adjustZenith`` adjusts
      *            this slightly to account for solar refraction and the sun's radius. Another example would be
-     *            {@link com.kosherjava.zmanim.AstronomicalCalendar#getEndNauticalTwilight()} that passes
-     *            {@link com.kosherjava.zmanim.AstronomicalCalendar#NAUTICAL_ZENITH} to this method.
+     *            ``AstronomicalCalendar.getEndNauticalTwilight()`` that passes
+     *            ``AstronomicalCalendar.NAUTICAL_ZENITH`` to this method.
      * @param adjustForElevation
      *            Should the time be adjusted for elevation
      * @return The UTC time of sunset in 24 hour format. 5:45:00 AM will return 5.75.0. If an error was encountered in
      *         the calculation (expected behavior for some locations such as near the poles,
-     *         {@link java.lang.Double#NaN} will be returned.
+     *         ``Double.nan`` will be returned.
      * @see #getElevationAdjustment(double)
      */
     public override func getUTCSunset(date: Date, geoLocation: GeoLocation, zenith: Double, adjustForElevation: Bool) -> Double {
@@ -137,10 +125,10 @@ public class NOAACalculator : AstronomicalCalculator {
     }
 
     /**
-     * Return the <a href="https://en.wikipedia.org/wiki/Julian_day">Julian day</a> from a Java Calendar
+     * Return the <a href="https://en.wikipedia.org/wiki/Julian_day">Julian day</a> from a Swift Date
      *
-     * @param calendar
-     *            The Java Calendar
+     * @param date
+     *            The Swift Date
      * @return the Julian day corresponding to the date Note: Number is returned for start of day. Fractional days
      *         should be added later.
      */
@@ -394,8 +382,7 @@ public class NOAACalculator : AstronomicalCalculator {
     /**
      * Returns the <a href="https://en.wikipedia.org/wiki/Hour_angle">hour angle</a> of the sun in <a href=
      * "https://en.wikipedia.org/wiki/Radian">radians</a>at sunset for the latitude.
-     * @todo use - {@link #getSunHourAngleAtSunrise(double, double, double)} implementation to avoid
-     * duplication of code.
+     * @todo use - {@link #getSunHourAngleAtSunrise(double, double, double)} implementation to avoid duplication of code.
      *
      * @param lat
      *            the latitude of observer in degrees
@@ -418,7 +405,7 @@ public class NOAACalculator : AstronomicalCalculator {
      * horizontal coordinate system at the given location at the given time. Can be negative if the sun is below the
      * horizon. Not corrected for altitude.
      *
-     * @param cal
+     * @param date
      *            time of calculation
      * @param lat
      *            latitude of location for calculation
@@ -455,7 +442,7 @@ public class NOAACalculator : AstronomicalCalculator {
      * horizontal coordinate system at the given location at the given time. Not corrected for altitude. True south is 0
      * degrees.
      *
-     * @param cal
+     * @param date
      *            time of calculation
      * @param lat
      *            latitude of location for calculation
@@ -544,8 +531,8 @@ public class NOAACalculator : AstronomicalCalculator {
      * @see com.kosherjava.zmanim.util.AstronomicalCalculator#getUTCNoon(Calendar, GeoLocation)
      * @see #getSolarNoonUTC(double, double)
      *
-     * @param calendar
-     *            The Calendar representing the date to calculate solar noon for
+     * @param date
+     *            The Date representing the date to calculate solar noon for
      * @param geoLocation
      *            The location information used for astronomical calculating sun times. This class uses only requires
      *            the longitude for calculating noon since it is the same time anywhere along the longitude line.

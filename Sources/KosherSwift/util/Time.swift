@@ -8,13 +8,14 @@
 import Foundation
 
 /**
- * A class that represents a numeric time. Times that represent a time of day are stored as {@link java.util.Date}s in
+ * A class that represents a numeric time. Times that represent a time of day are stored as ``Date``s in
  * this API. The time class is used to represent numeric time such as the time in hours, minutes, seconds and
- * milliseconds of a {@link com.kosherjava.zmanim.AstronomicalCalendar#getTemporalHour() temporal hour}.
+ * milliseconds of a ``AstronomicalCalendar.getTemporalHour()`` temporal hour.
  *
  * @author &copy; Eliyahu Hershfeld 2004 - 2020
  */
 public class Time {
+    
     /** milliseconds in a second. */
     private static let SECOND_MILLIS = 1000;
 
@@ -67,7 +68,7 @@ public class Time {
 
     /**
      * Constructor with a parameter for milliseconds. This constructor casts the milliseconds to an int and
-     * calls {@link #Time(int)}
+     * calls ``init(millis:)``
      * @param millis the milliseconds to set the object with.
      */
     public convenience init(millis:Double) {
@@ -76,7 +77,7 @@ public class Time {
 
     /**
      * A constructor that sets the time by milliseconds. The milliseconds are converted to hours, minutes, seconds
-     * and milliseconds. If the milliseconds are negative it will call {@link #setIsNegative(boolean)}.
+     * and milliseconds. If the milliseconds are negative it will call ``setIsNegative(isNegative:)``.
      * @param millis the milliseconds to set.
      */
     public init(millis:Int) {
@@ -98,7 +99,7 @@ public class Time {
     }
 
     /**
-     * Does the time represent a negative time 9such as using this to subtract time from another Time.
+     * Does the time represent a negative time such as using this to subtract time from another Time.
      * @return if the time is negative.
      */
     public func getIsNegative() -> Bool {

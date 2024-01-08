@@ -55,14 +55,14 @@ public class Zman {
     public var label:String;
     
     /**
-     * The {@link Date} of the <em>zman</em>
+     * The Date of the <em>zman</em>
      */
     public var zman:Date?;
     
     /**
-     * The duration if the <em>zman</em> is  a {@link com.kosherjava.zmanim.AstronomicalCalendar#getTemporalHour() temporal hour} (or the various
-     * <em>shaah zmanis</em> base times such as {@link com.kosherjava.zmanim.ZmanimCalendar#getShaahZmanisGra()  <em>shaah Zmanis GRA</em>} or
-     * {@link com.kosherjava.zmanim.ComplexZmanimCalendar#getShaahZmanis16Point1Degrees() <em>shaah Zmanis 16.1&deg;</em>}).
+     * The duration if the <em>zman</em> is  a ``AstronomicalCalendar.getTemporalHour()`` temporal hour (or the various
+     * <em>shaah zmanis</em> base times such as ``ZmanimCalendar.getShaahZmanisGra()``  <em>shaah Zmanis GRA</em> or
+     * ``ComplexZmanimCalendar.getShaahZmanis16Point1Degrees()`` <em>shaah Zmanis 16.1&deg;</em>).
      */
     public var duration:Int64;
     
@@ -72,7 +72,7 @@ public class Zman {
     public var description:String;
 
     /**
-     * The constructor setting a {@link Date} based <em>zman</em> and a label.
+     * The constructor setting a ``Date`` based <em>zman</em> and a label.
      * @param date the Date of the <em>zman</em>.
      * @param label the label of the  <em>zman</em> such as "<em>Sof Zman Krias Shema GRA</em>".
      * @see #Zman(long, String)
@@ -86,10 +86,10 @@ public class Zman {
 
     /**
      * The constructor setting a duration based <em>zman</em> such as
-     * {@link com.kosherjava.zmanim.AstronomicalCalendar#getTemporalHour() temporal hour} (or the various <em>shaah zmanis</em> times such as
-     * {@link com.kosherjava.zmanim.ZmanimCalendar#getShaahZmanisGra() <em>shaah zmanis GRA</em>} or
-     * {@link com.kosherjava.zmanim.ComplexZmanimCalendar#getShaahZmanis16Point1Degrees() <em>shaah Zmanis 16.1&deg;</em>}) and label.
-     * @param duration a duration based <em>zman</em> such as ({@link com.kosherjava.zmanim.AstronomicalCalendar#getTemporalHour()}
+     * ``AstronomicalCalendar.getTemporalHour()`` temporal hour (or the various <em>shaah zmanis</em> times such as
+     * ``ZmanimCalendar.getShaahZmanisGra()`` <em>shaah zmanis GRA</em> or
+     * ``ComplexZmanimCalendar.getShaahZmanis16Point1Degrees()`` <em>shaah Zmanis 16.1&deg;</em>) and label.
+     * @param duration a duration based <em>zman</em> such as (``AstronomicalCalendar.getTemporalHour()``
      * @param label the label of the  <em>zman</em> such as "<em>Shaah Zmanis GRA</em>".
      * @see #Zman(Date, String)
      */
@@ -100,7 +100,7 @@ public class Zman {
     }
 
     /**
-     * Returns the {@code Date} based <em>zman</em>.
+     * Returns the Date based <em>zman</em>.
      * @return the <em>zman</em>.
      * @see #setZman(Date)
      */
@@ -109,7 +109,7 @@ public class Zman {
     }
 
     /**
-     * Sets a {@code Date} based <em>zman</em>.
+     * Sets a Date based <em>zman</em>.
      * @param date a {@code Date} based <em>zman</em>
      * @see #getZman()
      */
@@ -118,9 +118,9 @@ public class Zman {
     }
 
     /**
-     * Returns a duration based <em>zman</em> such as {@link com.kosherjava.zmanim.AstronomicalCalendar#getTemporalHour() temporal hour}
-     * (or the various <em>shaah zmanis</em> times such as {@link com.kosherjava.zmanim.ZmanimCalendar#getShaahZmanisGra() <em>shaah zmanis GRA</em>}
-     * or {@link com.kosherjava.zmanim.ComplexZmanimCalendar#getShaahZmanis16Point1Degrees() <em>shaah zmanis 16.1&deg;</em>}).
+     * Returns a duration based <em>zman</em> such as ``AstronomicalCalendar#getTemporalHour()`` temporal hour
+     * (or the various <em>shaah zmanis</em> times such as ``ZmanimCalendar.getShaahZmanisGra()`` <em>shaah zmanis GRA</em>
+     * or ``ComplexZmanimCalendar.getShaahZmanis16Point1Degrees()`` <em>shaah zmanis 16.1&deg;</em>).
      * @return the duration based <em>zman</em>.
      * @see #setDuration(long)
      */
@@ -129,10 +129,10 @@ public class Zman {
     }
 
     /**
-     *  Sets a duration based <em>zman</em> such as {@link com.kosherjava.zmanim.AstronomicalCalendar#getTemporalHour() temporal hour}
-     * (or the various <em>shaah zmanis</em> times as {@link com.kosherjava.zmanim.ZmanimCalendar#getShaahZmanisGra() <em>shaah zmanis GRA</em>} or
-     * {@link com.kosherjava.zmanim.ComplexZmanimCalendar#getShaahZmanis16Point1Degrees() <em>shaah zmanis 16.1&deg;</em>}).
-     * @param duration duration based <em>zman</em> such as {@link com.kosherjava.zmanim.AstronomicalCalendar#getTemporalHour()}.
+     *  Sets a duration based <em>zman</em> such as ``AstronomicalCalendar.getTemporalHour()`` temporal hour
+     * (or the various <em>shaah zmanis</em> times as ``ZmanimCalendar.getShaahZmanisGra()`` <em>shaah zmanis GRA</em> or
+     * ``ComplexZmanimCalendar.getShaahZmanis16Point1Degrees()`` <em>shaah zmanis 16.1&deg;</em>).
+     * @param duration duration based <em>zman</em> such as ``AstronomicalCalendar#getTemporalHour()``.
      * @see #getDuration()
      */
     public func setDuration(duration:Int64) {
@@ -141,7 +141,7 @@ public class Zman {
 
     /**
      * Returns the name / label of the <em>zman</em> such as "<em>Sof Zman Krias Shema GRA</em>". There are no automatically set labels
-     * and you must set them using {@link #setLabel(String)}.
+     * and you must set them using ``setLabel(label:)``.
      * @return the name/label of the <em>zman</em>.
      * @see #setLabel(String)
      */
@@ -160,7 +160,7 @@ public class Zman {
 
     /**
      * Returns the longer description or explanation of a <em>zman</em>. There is no default value for this and it must be set using
-     * {@link #setDescription(String)}
+     * ``setDescription(description:)``
      * @return the description or explanation of a <em>zman</em>.
      * @see #setDescription(String)
      */
@@ -209,9 +209,9 @@ public class Zman {
 
     /**
      * A {@link Comparator} that will compare and sort duration based <em>zmanim</em>  such as
-     * {@link com.kosherjava.zmanim.AstronomicalCalendar#getTemporalHour() temporal hour} (or the various <em>shaah zmanis</em> times
-     * such as <em>{@link com.kosherjava.zmanim.ZmanimCalendar#getShaahZmanisGra() shaah zmanis GRA}</em> or
-     * {@link com.kosherjava.zmanim.ComplexZmanimCalendar#getShaahZmanis16Point1Degrees() <em>shaah zmanis 16.1&deg;</em>}). Returns a negative
+     * ``AstronomicalCalendar#getTemporalHour()`` temporal hour (or the various <em>shaah zmanis</em> times
+     * such as <em>``ZmanimCalendar#getShaahZmanisGra()`` shaah zmanis GRA</em> or
+     * ``ComplexZmanimCalendar#getShaahZmanis16Point1Degrees()`` <em>shaah zmanis 16.1&deg;</em>). Returns a negative
      * integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
      * Please note that this class will will sort cases where {@code Zman} is a null.
      */

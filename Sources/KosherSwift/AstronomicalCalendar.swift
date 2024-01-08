@@ -155,7 +155,7 @@ public class AstronomicalCalendar {
      * the calculation uses ``GEOMETRIC_ZENITH`` geometric zenith of 90&deg; plus
      * ``AstronomicalCalculator.getElevationAdjustment(double)``. This is adjusted by the
      * ``AstronomicalCalculator`` to add approximately 50/60 of a degree to account for 34 archminutes of refraction
-     * and 16 archminutes for the sun's radius for a total of {@link AstronomicalCalculator#adjustZenith 90.83333&deg;}.
+     * and 16 archminutes for the sun's radius for a total of ``AstronomicalCalculator.adjustZenith`` 90.83333&deg;.
      * See documentation for the specific implementation of the ``AstronomicalCalculator`` that you are using. Note:
      * In certain cases the calculates sunset will occur before sunrise. This will typically happen when a timezone
      * other than the local timezone is used (calculating Los Angeles sunset using a GMT timezone for example). In this
@@ -187,7 +187,7 @@ public class AstronomicalCalendar {
      *         such as in the Arctic Circle where there is at least one day a year where the sun does not rise, and one
      *         where it does not set, a <code>nil</code> will be returned. See detailed explanation on top of the page.
      * @see AstronomicalCalendar#getSunset
-     * @see AstronomicalCalendar#getUTCSeaLevelSunset 2see {@link #getSunset()}
+     * @see AstronomicalCalendar#getUTCSeaLevelSunset 2see ``getSunset()``
      */
     public func getSeaLevelSunset() -> Date? {
         let sunset = getUTCSeaLevelSunset(zenith: AstronomicalCalendar.GEOMETRIC_ZENITH);
@@ -348,7 +348,7 @@ public class AstronomicalCalendar {
      *            the degrees below the horizon. For time after sunrise use negative numbers.
      * @return The time in the format: 18.75 for 18:45:00 UTC/GMT. If the calculation can't be computed such as in the
      *         Arctic Circle where there is at least one day a year where the sun does not rise, and one where it does
-     *         not set, {@link Double#NaN} will be returned. See detailed explanation on top of the page.
+     *         not set, ``Double.nan`` will be returned. See detailed explanation on top of the page.
      */
     public func getUTCSunrise(zenith:Double) -> Double {
         return getAstronomicalCalculator().getUTCSunrise(date: workingDate, geoLocation: getGeoLocation(), zenith: zenith, adjustForElevation: true);
@@ -364,7 +364,7 @@ public class AstronomicalCalendar {
      *            the degrees below the horizon. For time after sunrise use negative numbers.
      * @return The time in the format: 18.75 for 18:45:00 UTC/GMT. If the calculation can't be computed such as in the
      *         Arctic Circle where there is at least one day a year where the sun does not rise, and one where it does
-     *         not set, {@link Double#NaN} will be returned. See detailed explanation on top of the page.
+     *         not set, ``Double.nan`` will be returned. See detailed explanation on top of the page.
      * @see AstronomicalCalendar#getUTCSunrise
      * @see AstronomicalCalendar#getUTCSeaLevelSunset
      */

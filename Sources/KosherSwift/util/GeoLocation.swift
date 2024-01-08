@@ -10,7 +10,7 @@ import Foundation
 /**
  * A class that contains location information such as latitude and longitude required for astronomical calculations. The
  * elevation field may not be used by some calculation engines and would be ignored if set. Check the documentation for
- * specific implementations of the {@link AstronomicalCalculator} to see if elevation is calculated as part of the
+ * specific implementations of the ``AstronomicalCalculator`` to see if elevation is calculated as part of the
  * algorithm.
  *
  * @author &copy; Eliyahu Hershfeld 2004 - 2022
@@ -98,7 +98,7 @@ public class GeoLocation {
      * GeoLocation constructor with parameters for all required fields.
      *
      * @param name
-     *            The location name for display use such as &quot;Lakewood, NJ&quot;
+     *            The location name for display use such as &quot;Lakewood, NJ&quot;. This can be an empty string as well
      * @param latitude
      *            the latitude in a double format such as 40.095965 for Lakewood, NJ.
      *            <b>Note:</b> For latitudes south of the equator, a negative value should be used.
@@ -121,7 +121,7 @@ public class GeoLocation {
      * GeoLocation constructor with parameters for all required fields.
      *
      * @param name
-     *            The location name for display use such as &quot;Lakewood, NJ&quot;
+     *            The location name for display use such as &quot;Lakewood, NJ&quot;. This can be an empty string as well
      * @param latitude
      *            the latitude in a double format such as 40.095965 for Lakewood, NJ.
      *            <b>Note:</b> For latitudes south of the equator, a negative value should be used.
@@ -278,12 +278,7 @@ public class GeoLocation {
     }
 
     /**
-     * Method to set the TimeZone. If this is ever set after the GeoLocation is set in the
-     * {@link com.kosherjava.zmanim.AstronomicalCalendar}, it is critical that
-     * {@link com.kosherjava.zmanim.AstronomicalCalendar#getCalendar()}.
-     * {@link java.util.Calendar#setTimeZone(TimeZone) setTimeZone(TimeZone)} be called in order for the
-     * AstronomicalCalendar to output times in the expected offset. This situation will arise if the
-     * AstronomicalCalendar is ever {@link com.kosherjava.zmanim.AstronomicalCalendar#clone() cloned}.
+     * Method to set the TimeZone.
      *
      * @param timeZone
      *            The timeZone to set.
@@ -293,11 +288,11 @@ public class GeoLocation {
     }
 
     /**
-     * This method is not tested at all. If you want to use this method or fix it, please submit an issue on github.
+     * This method is not tested at all. If you want to use this method or fix it, please submit an issue on the KosherSwift github.
      * A method that will return the location's local mean time offset in milliseconds from local <a
      * href="https://en.wikipedia.org/wiki/Standard_time">standard time</a>. The globe is split into 360&deg;, with
      * 15&deg; per hour of the day. For a local that is at a longitude that is evenly divisible by 15 (longitude % 15 ==
-     * 0), at solar {@link com.kosherjava.zmanim.AstronomicalCalendar#getSunTransit() noon} (with adjustment for the <a
+     * 0), at solar ``AstronomicalCalendar.getSunTransit()`` noon (with adjustment for the <a
      * href="https://en.wikipedia.org/wiki/Equation_of_time">equation of time</a>) the sun should be directly overhead,
      * so a user who is 1&deg; west of this will have noon at 4 minutes after standard time noon, and conversely, a user
      * who is 1&deg; east of the 15&deg; longitude will have noon at 11:56 AM. Lakewood, N.J., whose longitude is
@@ -311,7 +306,7 @@ public class GeoLocation {
      * @since 1.1
      */
     public func getLocalMeanTimeOffset() -> Double {
-        //This method might not work properly. I did not test it at all.
+        //This method might not work properly. I did not test it at all as it is not currently used anywhere in the codebase
         return Double(Int(getLongitude()) * 4 * GeoLocation.MINUTE_MILLIS - getTimeZone().secondsFromGMT());
     }
     
@@ -401,8 +396,8 @@ public class GeoLocation {
      * @param location
      *            the destination location
      * @param formula
-     *            This formula calculates initial bearing ({@link #INITIAL_BEARING}), final bearing (
-     *            {@link #FINAL_BEARING}) and distance ({@link #DISTANCE}).
+     *            This formula calculates initial bearing (``INITIAL_BEARING``), final bearing (
+     *            ``FINAL_BEARING``) and distance (``DISTANCE``).
      * @return geodesic distance in Meters
      */
     private func vincentyFormula(location: GeoLocation, formula: Int) -> Double {
