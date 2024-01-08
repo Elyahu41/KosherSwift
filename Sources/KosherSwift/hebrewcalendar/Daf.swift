@@ -14,17 +14,17 @@ import Foundation
  */
 public class Daf {
     /**
-     * {@link #getMasechtaNumber()} and {@link #setMasechtaNumber(int)}.
+     * ``getMasechtaNumber()`` and ``setMasechtaNumber(masechtaNumber:).
      */
     public var masechtaNumber:Int = 0
     
     /**
-     * See {@link #getDaf()} and {@link #setDaf(int)}.
+     * See ``getDaf()`` and ``setDaf(daf:)``.
      */
     public var daf:Int = 0
 
     /**
-     * See {@link #getMasechtaTransliterated()} and {@link #setMasechtaTransliterated(String[])}.
+     * See ``getMasechtaTransliterated()`` and ``setMasechtaTransliterated(masechtosBavliTransliterated:)``.
      */
     public static var masechtosBavliTransliterated = [ "Berachos", "Shabbos", "Eruvin", "Pesachim", "Shekalim",
             "Yoma", "Sukkah", "Beitzah", "Rosh Hashana", "Taanis", "Megillah", "Moed Katan", "Chagigah", "Yevamos",
@@ -33,7 +33,7 @@ public class Daf {
             "Arachin", "Temurah", "Kerisos", "Meilah", "Kinnim", "Tamid", "Midos", "Niddah" ];
 
     /**
-     * See {@link #getMasechta()}.
+     * See ``getMasechta()``.
      */
     private static let masechtosBavli = [
         "ברקות", "שבת", "אירובים", "פסחים", "שקלים", "יומא", "סוכה", "ביצה",
@@ -44,7 +44,7 @@ public class Daf {
     ];
     
     /**
-     * See {@link #getYerushalmiMasechtaTransliterated()}.
+     * See ``getYerushalmiMasechtaTransliterated()``.
      */
     public static var masechtosYerushalmiTransliterated = [ "Berachos", "Pe'ah", "Demai", "Kilayim", "Shevi'is",
             "Terumos", "Ma'asros", "Ma'aser Sheni", "Chalah", "Orlah", "Bikurim", "Shabbos", "Eruvin", "Pesachim",
@@ -53,7 +53,7 @@ public class Daf {
             "Bava Basra", "Shevuos", "Makos", "Sanhedrin", "Avodah Zarah", "Horayos", "Nidah", "No Daf Today" ];
     
     /**
-     * See {@link #getYerushalmiMasechta()}.
+     * See ``getYerushalmiMasechta()``.
      */
     public static let masechtosYerushalmi = [ "ברכות"
                                                      , "פיאה"
@@ -124,8 +124,8 @@ public class Daf {
     }
 
     /**
-     * Constructor that creates a Daf setting the {@link #setMasechtaNumber(int) <em>masechta</em> number} and
-     * {@link #setDaf(int) <em>daf</em> number}.
+     * Constructor that creates a ``Daf`` setting the ``setMasechtaNumber(masechtaNumber:)`` <em>masechta</em> number} and
+     * ``setDaf(daf:)`` <em>daf</em> number.
      *
      * @param masechtaNumber the <em>masechta</em> number in the order of the Daf Yomi to set as the current <em>masechta</em>.
      * @param daf the <em>daf</em> (page) number to set.

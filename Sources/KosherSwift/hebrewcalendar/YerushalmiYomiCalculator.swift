@@ -9,7 +9,7 @@ import Foundation
 
 /**
  * This class calculates the <a href="https://en.wikipedia.org/wiki/Jerusalem_Talmud">Talmud Yerusalmi</a> <a href=
- * "https://en.wikipedia.org/wiki/Daf_Yomi">Daf Yomi</a> page ({@link Daf}) for the a given date.
+ * "https://en.wikipedia.org/wiki/Daf_Yomi">Daf Yomi</a> page (``Daf``) for the a given date.
  *
  * @author &copy; elihaidv
  * @author &copy; Eliyahu Hershfeld 2017 - 2023
@@ -20,10 +20,13 @@ public class YerushalmiYomiCalculator {
      * The start date of the first Daf Yomi Yerushalmi cycle of February 2, 1980 / 15 Shevat, 5740.
      */
     private static let DAF_YOMI_START_DAY = gregorianDate(forYear: 1980, month: 2, andDay: 2)
+    
     /** The number of milliseconds in a day. */
     private static let DAY_MILIS = 1000 * 60 * 60 * 24
+    
     /** The number of pages in the Talmud Yerushalmi.*/
     private static let WHOLE_SHAS_DAFS = 1554
+    
     /** The number of pages per <em>masechta</em> (tractate).*/
     private static let BLATT_PER_MASECHTA = [
             68, 37, 34, 44, 31, 59, 26, 33, 28, 20, 13, 92, 65, 71, 22, 22, 42, 26, 26, 33, 34, 22,
@@ -31,17 +34,15 @@ public class YerushalmiYomiCalculator {
 
     /**
      * Returns the <a href="https://en.wikipedia.org/wiki/Daf_Yomi">Daf Yomi</a>
-     * <a href="https://en.wikipedia.org/wiki/Jerusalem_Talmud">Yerusalmi</a> page ({@link Daf}) for a given date.
+     * <a href="https://en.wikipedia.org/wiki/Jerusalem_Talmud">Yerusalmi</a> page (``Daf``) for a given date.
      * The first Daf Yomi cycle started on 15 Shevat (Tu Bishvat), 5740 (February, 2, 1980) and calculations
      * prior to this date will result in an nil. A nil will be returned on Tisha B'Av or
      * Yom Kippur.
      *
      * @param calendar
      *            the calendar date for calculation
-     * @return the {@link Daf} or null if the date is on Tisha B'Av or Yom Kippur.
+     * @return the ``Daf`` or nil if the date is on Tisha B'Av or Yom Kippur, or if the date is prior to the February 2, 1980, the start of the first Daf Yomi Yerushalmi cycle
      *
-     * @throws IllegalArgumentException
-     *             if the date is prior to the February 2, 1980, the start of the first Daf Yomi Yerushalmi cycle
      */
     public static func getDafYomiYerushalmi(jewishCalendar:JewishCalendar) -> Daf? {
         let dateCreator = Calendar(identifier: .gregorian)

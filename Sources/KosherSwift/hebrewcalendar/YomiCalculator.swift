@@ -8,8 +8,8 @@
 import Foundation
 
 /**
- * This class calculates the Daf Yomi Bavli page (daf) for a given date. To calculate Daf Yomi Yerushalmi
- * use the {@link YerushalmiYomiCalculator}. The library may cover Mishna Yomi etc. at some point in the future.
+ * This class calculates the ``Daf`` Yomi Bavli page (daf) for a given date. To calculate Daf Yomi Yerushalmi
+ * use the ``YerushalmiYomiCalculator``. The library may cover Mishna Yomi etc. at some point in the future.
  *
  * @author &copy; Bob Newell (original C code)
  * @author &copy; Eliyahu Hershfeld 2011 - 2020
@@ -20,24 +20,28 @@ public class YomiCalculator {
      * The start date of the first Daf Yomi Bavli cycle of September 11, 1923 / Rosh Hashana 5684.
      */
     private static let dafYomiStartDay = gregorianDate(forYear: 1923, month: 9, andDay: 11)!;
+    
     /** The start date of the first Daf Yomi Bavli cycle in the Julian calendar. Used internally for claculations.*/
     private static let dafYomiJulianStartDay = getJulianDay(date: dafYomiStartDay);
+    
     /**
      * The date that the pagination for the Daf Yomi <em>Maseches Shekalim</em> changed to use the commonly used Vilna
      * Shas pagination from the no longer commonly available Zhitomir / Slavuta Shas used by Rabbi Meir Shapiro.
      */
     private static let shekalimChangeDay = gregorianDate(forYear: 1975, month: 6, andDay: 24)!;
     
-    /** The Julian date that the cycle for Shekalim changed.
+    /**
+     * The Julian date that the cycle for Shekalim changed.
+     *
      * @see #getDafYomiBavli(JewishCalendar) for details.
      */
     private static let shekalimJulianChangeDay = getJulianDay(date: shekalimChangeDay);
 
     /**
      * Returns the <a href="http://en.wikipedia.org/wiki/Daf_yomi">Daf Yomi</a> <a
-     * href="http://en.wikipedia.org/wiki/Talmud">Bavli</a> {@link Daf} for a given date. The first Daf Yomi cycle
+     * href="http://en.wikipedia.org/wiki/Talmud">Bavli</a> ``Daf`` for a given date. The first Daf Yomi cycle
      * started on Rosh Hashana 5684 (September 11, 1923) and calculations prior to this date will result in an
-     * IllegalArgumentException thrown. For historical calculations (supported by this method), it is important to note
+     * nil returned. For historical calculations (supported by this method), it is important to note
      * that a change in length of the cycle was instituted starting in the eighth Daf Yomi cycle beginning on June 24,
      * 1975. The Daf Yomi Bavli cycle has a single masechta of the Talmud Yerushalmi - Shekalim as part of the cycle.
      * Unlike the Bavli where the number of daf per masechta was standardized since the original <a
@@ -50,9 +54,9 @@ public class YomiCalculator {
      * the <a href="https://en.wikipedia.org/wiki/Vilna_Edition_Shas">Vilna Shas</a> that is in common use today.
      *
      * @param jewishCalendar
-     *            The JewishCalendar date for calculation. TODO: this can be changed to use a regular GregorianCalendar since
+     *            The ``JewishCalendar`` date for calculation. TODO: this can be changed to use a regular GregorianCalendar since
      *            there is nothing specific to the JewishCalendar in this class.
-     * @return the {@link Daf} or nil if before the bavli start date
+     * @return the ``Daf`` or nil if before the bavli start date
      *
      */
     public static func getDafYomiBavli(jewishCalendar: JewishCalendar) -> Daf? {
