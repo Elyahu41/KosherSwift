@@ -8,22 +8,19 @@
 import Foundation
 
 /**
- * The HebrewDateFormatter class formats a {@link JewishCalendar}.
+ * The HebrewDateFormatter class formats a ``JewishCalendar``.
  *
  * The class formats Jewish dates, numbers, <em>Daf Yomi</em> (<em>Bavli</em> and <em>Yerushalmi</em>), the <em>Omer</em>,
  * <em>Parshas Hashavua</em> (including the special <em>parshiyos</em> of <em>Shekalim</em>, <em>Zachor</em>, <em>Parah</em>
  * and <em>Hachodesh</em>), Yomim Tovim and the Molad (experimental) in Hebrew or Latin chars, and has various settings.
- * Sample full date output includes (using various options):
- * <ul>
- * <li>21 Shevat, 5729</li>
- * <li>&#x5DB;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5DB;&#x5D8;</li>
- * <li>&#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5D4;&#x5F3;&#x5EA;&#x5E9;&#x5DB;&#x5F4;&#x5D8;</li>
- * <li>&#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5F4;&#x05E4; or
- * &#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5F4;&#x05E3;</li>
- * <li>&#x05DB;&#x05F3; &#x05E9;&#x05D1;&#x05D8; &#x05D5;&#x05F3; &#x05D0;&#x05DC;&#x05E4;&#x05D9;&#x05DD;</li>
- * </ul>
+# Sample full date output includes (using various options): #
+ * 1. 21 Shevat, 5729
+ * 2. &#x5DB;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5DB;&#x5D8;
+ * 3. &#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5D4;&#x5F3;&#x5EA;&#x5E9;&#x5DB;&#x5F4;&#x5D8;
+ * 4. &#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5F4;&#x05E4; or
+ * &#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5F4;&#x05E3;
+ * 5. &#x05DB;&#x05F3; &#x05E9;&#x05D1;&#x05D8; &#x05D5;&#x05F3; &#x05D0;&#x05DC;&#x05E4;&#x05D9;&#x05DD;
  *
- * @see JewishCalendar
  * @see JewishCalendar
  *
  * @author &copy; Eliyahu Hershfeld 2011 - 2023
@@ -31,40 +28,40 @@ import Foundation
 public class HebrewDateFormatter {
     
     /**
-     * See {@link #isHebrewFormat()} and {@link #setHebrewFormat(boolean)}.
+     * See ``isHebrewFormat()`` and ``setHebrewFormat(hebrewFormat:)``.
      */
     public var hebrewFormat = false;
     
     /**
-     * See {@link #isUseLongHebrewYears()} and {@link #setUseLongHebrewYears(boolean)}.
+     * See ``isUseLongHebrewYears()`` and ``setUseLongHebrewYears(useLongHebrewYears:)``.
      */
     public var useLonghebrewYears = false;
     
     /**
-     * See {@link #isUseGershGershayim()} and {@link #setUseGershGershayim(boolean)}.
+     * See ``isUseGershGershayim()`` and ``setUseGershGershayim(useGershGershayim:)``.
      */
     public var useGershGershayim = true;
     
     /**
-     * See {@link #isLongWeekFormat()} and {@link #setLongWeekFormat(boolean)}.
+     * See ``isLongWeekFormat()`` and ``setLongWeekFormat(longWeekFormat:)``.
      */
     public var longWeekFormat = true;
     
     /**
-     * See {@link #isUseFinalFormLetters()} and {@link #setUseFinalFormLetters(boolean)}.
+     * See ``isUseFinalFormLetters()`` and ``setUseFinalFormLetters(useFinalFormLetters:)``.
      */
     public var useFinalFormLetters = false;
     
     /**
-     * The internal DateFormat.&nbsp; See {@link #isLongWeekFormat()} and {@link #setLongWeekFormat(boolean)}.
+     * The internal DateFormatter. See ``isLongWeekFormat()`` and ``setLongWeekFormat(longWeekFormat:)``.
      */
     private let weekFormat = DateFormatter();
     
     /**
-     * List of transliterated parshiyos using the default <em>Ashkenazi</em> pronunciation.&nbsp; The formatParsha method
-     * uses self for transliterated <em>parsha</em> formatting.&nbsp; self list can be overridden (for <em>Sephardi</em>
-     * English transliteration for example) by setting the {@link #setTransliteratedParshiosList(EnumMap)}.&nbsp; The list
-     * includes double and special <em>parshiyos</em> is set as "<em>Bereshis, Noach, Lech Lecha, Vayera, Chayei Sara,
+     * List of transliterated parshiyos using the default <em>Ashkenazi</em> pronunciation. The formatParsha method
+     * uses this for transliterated <em>parsha</em> formatting. This list can be overridden (for <em>Sephardi</em>
+     * English transliteration for example) by setting the ``setTransliteratedParshiosList(transliteratedParshaMap:)``.&nbsp; The list
+     * includes double and special <em>parshiyos</em> and is set as "<em>Bereshis, Noach, Lech Lecha, Vayera, Chayei Sara,
      * Toldos, Vayetzei, Vayishlach, Vayeshev, Miketz, Vayigash, Vayechi, Shemos, Vaera, Bo, Beshalach, Yisro, Mishpatim,
      * Terumah, Tetzaveh, Ki Sisa, Vayakhel, Pekudei, Vayikra, Tzav, Shmini, Tazria, Metzora, Achrei Mos, Kedoshim, Emor,
      * Behar, Bechukosai, Bamidbar, Nasso, Beha'aloscha, Sh'lach, Korach, Chukas, Balak, Pinchas, Matos, Masei, Devarim,
@@ -76,10 +73,39 @@ public class HebrewDateFormatter {
      */
     public var transliteratedParshaMap:[JewishCalendar.Parsha: String];
     
+    /**
+     * Dictionary of Hebrew <em>parshiyos</em>. The list includes double and special <em>parshiyos</em> and
+     * contains <code>"&#x05D1;&#x05E8;&#x05D0;&#x05E9;&#x05D9;&#x05EA;, &#x05E0;&#x05D7;, &#x05DC;&#x05DA; &#x05DC;&#x05DA;,
+     *  &#x05D5;&#x05D9;&#x05E8;&#x05D0;, &#x05D7;&#x05D9;&#x05D9; &#x05E9;&#x05E8;&#x05D4;,
+     *  &#x05EA;&#x05D5;&#x05DC;&#x05D3;&#x05D5;&#x05EA;, &#x05D5;&#x05D9;&#x05E6;&#x05D0;, &#x05D5;&#x05D9;&#x05E9;&#x05DC;&#x05D7;,
+     *  &#x05D5;&#x05D9;&#x05E9;&#x05D1;, &#x05DE;&#x05E7;&#x05E5;, &#x05D5;&#x05D9;&#x05D2;&#x05E9;, &#x05D5;&#x05D9;&#x05D7;&#x05D9;,
+     *  &#x05E9;&#x05DE;&#x05D5;&#x05EA;, &#x05D5;&#x05D0;&#x05E8;&#x05D0;, &#x05D1;&#x05D0;, &#x05D1;&#x05E9;&#x05DC;&#x05D7;,
+     *  &#x05D9;&#x05EA;&#x05E8;&#x05D5;, &#x05DE;&#x05E9;&#x05E4;&#x05D8;&#x05D9;&#x05DD;, &#x05EA;&#x05E8;&#x05D5;&#x05DE;&#x05D4;,
+     *  &#x05EA;&#x05E6;&#x05D5;&#x05D4;, &#x05DB;&#x05D9; &#x05EA;&#x05E9;&#x05D0;, &#x05D5;&#x05D9;&#x05E7;&#x05D4;&#x05DC;,
+     *  &#x05E4;&#x05E7;&#x05D5;&#x05D3;&#x05D9;, &#x05D5;&#x05D9;&#x05E7;&#x05E8;&#x05D0;, &#x05E6;&#x05D5;,
+     *  &#x05E9;&#x05DE;&#x05D9;&#x05E0;&#x05D9;, &#x05EA;&#x05D6;&#x05E8;&#x05D9;&#x05E2;, &#x05DE;&#x05E6;&#x05E8;&#x05E2;,
+     *  &#x05D0;&#x05D7;&#x05E8;&#x05D9; &#x05DE;&#x05D5;&#x05EA;, &#x05E7;&#x05D3;&#x05D5;&#x05E9;&#x05D9;&#x05DD;,
+     *  &#x05D0;&#x05DE;&#x05D5;&#x05E8;, &#x05D1;&#x05D4;&#x05E8;, &#x05D1;&#x05D7;&#x05E7;&#x05EA;&#x05D9;,
+     *  &#x05D1;&#x05DE;&#x05D3;&#x05D1;&#x05E8;, &#x05E0;&#x05E9;&#x05D0;, &#x05D1;&#x05D4;&#x05E2;&#x05DC;&#x05EA;&#x05DA;,
+     *  &#x05E9;&#x05DC;&#x05D7; &#x05DC;&#x05DA;, &#x05E7;&#x05E8;&#x05D7;, &#x05D7;&#x05D5;&#x05E7;&#x05EA;, &#x05D1;&#x05DC;&#x05E7;,
+     *  &#x05E4;&#x05D9;&#x05E0;&#x05D7;&#x05E1;, &#x05DE;&#x05D8;&#x05D5;&#x05EA;, &#x05DE;&#x05E1;&#x05E2;&#x05D9;,
+     *  &#x05D3;&#x05D1;&#x05E8;&#x05D9;&#x05DD;, &#x05D5;&#x05D0;&#x05EA;&#x05D7;&#x05E0;&#x05DF;, &#x05E2;&#x05E7;&#x05D1;,
+     *  &#x05E8;&#x05D0;&#x05D4;, &#x05E9;&#x05D5;&#x05E4;&#x05D8;&#x05D9;&#x05DD;, &#x05DB;&#x05D9; &#x05EA;&#x05E6;&#x05D0;,
+     *  &#x05DB;&#x05D9; &#x05EA;&#x05D1;&#x05D5;&#x05D0;, &#x05E0;&#x05E6;&#x05D1;&#x05D9;&#x05DD;, &#x05D5;&#x05D9;&#x05DC;&#x05DA;,
+     *  &#x05D4;&#x05D0;&#x05D6;&#x05D9;&#x05E0;&#x05D5;, &#x05D5;&#x05D6;&#x05D0;&#x05EA; &#x05D4;&#x05D1;&#x05E8;&#x05DB;&#x05D4;,
+     *  &#x05D5;&#x05D9;&#x05E7;&#x05D4;&#x05DC; &#x05E4;&#x05E7;&#x05D5;&#x05D3;&#x05D9;, &#x05EA;&#x05D6;&#x05E8;&#x05D9;&#x05E2;
+     *  &#x05DE;&#x05E6;&#x05E8;&#x05E2;, &#x05D0;&#x05D7;&#x05E8;&#x05D9; &#x05DE;&#x05D5;&#x05EA;
+     *  &#x05E7;&#x05D3;&#x05D5;&#x05E9;&#x05D9;&#x05DD;, &#x05D1;&#x05D4;&#x05E8; &#x05D1;&#x05D7;&#x05E7;&#x05EA;&#x05D9;,
+     *  &#x05D7;&#x05D5;&#x05E7;&#x05EA; &#x05D1;&#x05DC;&#x05E7;, &#x05DE;&#x05D8;&#x05D5;&#x05EA; &#x05DE;&#x05E1;&#x05E2;&#x05D9;,
+     *  &#x05E0;&#x05E6;&#x05D1;&#x05D9;&#x05DD; &#x05D5;&#x05D9;&#x05DC;&#x05DA;, &#x05E9;&#x05E7;&#x05DC;&#x05D9;&#x05DD;,
+     *  &#x05D6;&#x05DB;&#x05D5;&#x05E8;, &#x05E4;&#x05E8;&#x05D4;, &#x05D4;&#x05D7;&#x05D3;&#x05E9;,
+     * &#x05E9;&#x05D5;&#x05D1;&#x05D4;,&#x05E9;&#x05D9;&#x05E8;&#x05D4;,&#x05D4;&#x05D2;&#x05D3;&#x05D5;&#x05DC;,
+     *  &#x05D7;&#x05D6;&#x05D5;&#x05DF;,&#x05E0;&#x05D7;&#x05DE;&#x05D5;"</code>
+     */
     public var hebrewParshaMap:[JewishCalendar.Parsha: String];
     
     /**
-     * Default constructor sets the {@link EnumMap}s of Hebrew and default transliterated parshiyos.
+     * Default constructor sets the Dictionaries of Hebrew and default transliterated parshiyos.
      */
     public init() {
         transliteratedParshaMap = [
@@ -238,25 +264,25 @@ public class HebrewDateFormatter {
     }
     
     /**
-     * Returns if the {@link #formatDayOfWeek(JewishCalendar)} will use the long format such as
-     * &#x05E8;&#x05D0;&#x05E9;&#x05D5;&#x05DF; or short such as &#x05D0; when formatting the day of week in
-     * {@link #isHebrewFormat() Hebrew}.
+     * Returns true if the ``formatDayOfWeek(jewishCalendar:)`` will use the long format such as
+     * &#x05E8;&#x05D0;&#x05E9;&#x05D5;&#x05DF; or false if short is used such as &#x05D0; when formatting the day of week in
+     * ``isHebrewFormat()`` Hebrew.
      *
-     * @return the longWeekFormat
+     * @return true if longWeekFormat is used
      * @see #setLongWeekFormat(boolean)
      * @see #formatDayOfWeek(JewishCalendar)
      */
-    public func isLongWeekFormat() -> Bool{
+    public func isLongWeekFormat() -> Bool {
         return longWeekFormat;
     }
     
     /**
-     * Setting to control if the {@link #formatDayOfWeek(JewishCalendar)} will use the long format such as
+     * Setting to control if the ``formatDayOfWeek(jewishCalendar:)`` will use the long format such as
      * &#x05E8;&#x05D0;&#x05E9;&#x05D5;&#x05DF; or short such as &#x05D0; when formatting the day of week in
-     * {@link #isHebrewFormat() Hebrew}.
+     * ``isHebrewFormat()`` Hebrew.
      *
      * @param longWeekFormat
-     *            the longWeekFormat to set
+     *            a bool for whether to use longWeekFormat
      */
     public func setLongWeekFormat(longWeekFormat:Bool) {
         self.longWeekFormat = longWeekFormat;
@@ -280,7 +306,7 @@ public class HebrewDateFormatter {
     private static let GERSHAYIM = "\u{05F4}";
     
     /**
-     * Transliterated month names.&nbsp; Defaults to ["Nissan", "Iyar", "Sivan", "Tammuz", "Av", "Elul", "Tishrei", "Cheshvan",
+     * Transliterated month names. Defaults to ["Nissan", "Iyar", "Sivan", "Tammuz", "Av", "Elul", "Tishrei", "Cheshvan",
      * "Kislev", "Teves", "Shevat", "Adar", "Adar II", "Adar I" ].
      * @see #getTransliteratedMonthList()
      * @see #setTransliteratedMonthList(String[])
@@ -296,7 +322,7 @@ public class HebrewDateFormatter {
     public var hebrewOmerPrefix = "\u{05D1}";
     
     /**
-     * The default value for formatting Shabbos (Saturday).&nbsp; Defaults to Shabbos.
+     * The default value for formatting Shabbos (Saturday). Defaults to Shabbos.
      * @see #getTransliteratedShabbosDayOfWeek()
      * @see #setTransliteratedShabbosDayOfWeek(String)
      */
@@ -304,7 +330,7 @@ public class HebrewDateFormatter {
     
     /**
      * Returns the day of Shabbos transliterated into Latin chars. The default uses Ashkenazi pronunciation "Shabbos".
-     * self can be overwritten using the {@link #setTransliteratedShabbosDayOfWeek(String)}
+     * This can be overwritten using the ``setTransliteratedShabbosDayOfWeek(transliteratedShabbos:)``
      *
      * @return the transliteratedShabbos. The default list of months uses Ashkenazi pronunciation "Shabbos".
      * @see #setTransliteratedShabbosDayOfWeek(String)
@@ -316,7 +342,7 @@ public class HebrewDateFormatter {
     
     /**
      * Setter to override the default transliterated name of "Shabbos" to alternate spelling such as "Shabbat" used by
-     * the {@link #formatDayOfWeek(JewishCalendar)}
+     * the ``formatDayOfWeek(jewishCalendar:)``
      *
      * @param transliteratedShabbos
      *            the transliteratedShabbos to set
@@ -329,7 +355,7 @@ public class HebrewDateFormatter {
     }
     
     /**
-     * See {@link #getTransliteratedHolidayList()} and {@link #setTransliteratedHolidayList(String[])}.
+     * See ``getTransliteratedHolidayList()`` and ``setTransliteratedHolidayList(transliteratedHolidays:)``.
      */
     public var transliteratedHolidays = ["Erev Pesach", "Pesach", "Chol Hamoed Pesach", "Pesach Sheni",
                                           "Erev Shavuos", "Shavuos", "Seventeenth of Tammuz", "Tishah B'Av", "Tu B'Av", "Erev Rosh Hashana",
@@ -340,8 +366,8 @@ public class HebrewDateFormatter {
                                           "Isru Chag"];
     
     /**
-     * Returns the list of holidays transliterated into Latin chars. self is used by the
-     * {@link #formatYomTov(JewishCalendar)} when formatting the Yom Tov String. The default list of months uses
+     * Returns the list of holidays transliterated into Latin chars. This is used by the
+     * ``formatYomTov(jewishCalendar:)`` when formatting the Yom Tov String. The default list of months uses
      * Ashkenazi pronunciation in typical American English spelling.
      *
      * @return the list of transliterated holidays. The default list is currently ["Erev Pesach", "Pesach",
@@ -350,7 +376,7 @@ public class HebrewDateFormatter {
      *         "Erev Succos", "Succos", "Chol Hamoed Succos", "Hoshana Rabbah", "Shemini Atzeres", "Simchas Torah",
      *         "Erev Chanukah", "Chanukah", "Tenth of Teves", "Tu B'Shvat", "Fast of Esther", "Purim", "Shushan Purim",
      *         "Purim Katan", "Rosh Chodesh", "Yom HaShoah", "Yom Hazikaron", "Yom Ha'atzmaut", "Yom Yerushalayim",
-     *         "Lag B'Omer","Shushan Purim Katan","Isru Chag"].
+     *         "Lag B'Omer", "Shushan Purim Katan", "Isru Chag"].
      *
      * @see #setTransliteratedMonthList(String[])
      * @see #formatYomTov(JewishCalendar)
@@ -361,8 +387,8 @@ public class HebrewDateFormatter {
     }
     
     /**
-     * Sets the list of holidays transliterated into Latin chars. self is used by the
-     * {@link #formatYomTov(JewishCalendar)} when formatting the Yom Tov String.
+     * Sets the list of holidays transliterated into Latin chars. This is used by the
+     * ``formatYomTov(jewishCalendar:)`` when formatting the Yom Tov String.
      *
      * @param transliteratedHolidays
      *            the transliteratedHolidays to set. Ensure that the sequence exactly matches the list returned by the
@@ -372,7 +398,41 @@ public class HebrewDateFormatter {
         self.transliteratedHolidays = transliteratedHolidays;
     }
     
-    private final let hebrewHolidays = [
+    /**
+     * Hebrew holiday array in the following format. <code>["&#x05E2;&#x05E8;&#x05D1; &#x05E4;&#x05E1;&#x05D7;",
+     * "&#x05E4;&#x05E1;&#x05D7;", "&#x05D7;&#x05D5;&#x05DC; &#x05D4;&#x05DE;&#x05D5;&#x05E2;&#x05D3;
+     * &#x05E4;&#x05E1;&#x05D7;", "&#x05E4;&#x05E1;&#x05D7; &#x05E9;&#x05E0;&#x05D9;", "&#x05E2;&#x05E8;&#x05D1;
+     * &#x05E9;&#x05D1;&#x05D5;&#x05E2;&#x05D5;&#x05EA;", "&#x05E9;&#x05D1;&#x05D5;&#x05E2;&#x05D5;&#x05EA;",
+     * "&#x05E9;&#x05D1;&#x05E2;&#x05D4; &#x05E2;&#x05E9;&#x05E8; &#x05D1;&#x05EA;&#x05DE;&#x05D5;&#x05D6;",
+     * "&#x05EA;&#x05E9;&#x05E2;&#x05D4; &#x05D1;&#x05D0;&#x05D1;",
+     * "&#x05D8;&#x05F4;&#x05D5; &#x05D1;&#x05D0;&#x05D1;",
+     * "&#x05E2;&#x05E8;&#x05D1; &#x05E8;&#x05D0;&#x05E9; &#x05D4;&#x05E9;&#x05E0;&#x05D4;",
+     * "&#x05E8;&#x05D0;&#x05E9; &#x05D4;&#x05E9;&#x05E0;&#x05D4;",
+     * "&#x05E6;&#x05D5;&#x05DD; &#x05D2;&#x05D3;&#x05DC;&#x05D9;&#x05D4;",
+     * "&#x05E2;&#x05E8;&#x05D1; &#x05D9;&#x05D5;&#x05DD; &#x05DB;&#x05D9;&#x05E4;&#x05D5;&#x05E8;",
+     * "&#x05D9;&#x05D5;&#x05DD; &#x05DB;&#x05D9;&#x05E4;&#x05D5;&#x05E8;",
+     * "&#x05E2;&#x05E8;&#x05D1; &#x05E1;&#x05D5;&#x05DB;&#x05D5;&#x05EA;",
+     * "&#x05E1;&#x05D5;&#x05DB;&#x05D5;&#x05EA;",
+     * "&#x05D7;&#x05D5;&#x05DC; &#x05D4;&#x05DE;&#x05D5;&#x05E2;&#x05D3; &#x05E1;&#x05D5;&#x05DB;&#x05D5;&#x05EA;",
+     * "&#x05D4;&#x05D5;&#x05E9;&#x05E2;&#x05E0;&#x05D0; &#x05E8;&#x05D1;&#x05D4;",
+     * "&#x05E9;&#x05DE;&#x05D9;&#x05E0;&#x05D9; &#x05E2;&#x05E6;&#x05E8;&#x05EA;",
+     * "&#x05E9;&#x05DE;&#x05D7;&#x05EA; &#x05EA;&#x05D5;&#x05E8;&#x05D4;",
+     * "&#x05E2;&#x05E8;&#x05D1; &#x05D7;&#x05E0;&#x05D5;&#x05DB;&#x05D4;",
+     * "&#x05D7;&#x05E0;&#x05D5;&#x05DB;&#x05D4;", "&#x05E2;&#x05E9;&#x05E8;&#x05D4; &#x05D1;&#x05D8;&#x05D1;&#x05EA;",
+     * "&#x05D8;&#x05F4;&#x05D5; &#x05D1;&#x05E9;&#x05D1;&#x05D8;",
+     * "&#x05EA;&#x05E2;&#x05E0;&#x05D9;&#x05EA; &#x05D0;&#x05E1;&#x05EA;&#x05E8;",
+     * "&#x05E4;&#x05D5;&#x05E8;&#x05D9;&#x05DD;",
+     * "&#x05E4;&#x05D5;&#x05E8;&#x05D9;&#x05DD; &#x05E9;&#x05D5;&#x05E9;&#x05DF;",
+     * "&#x05E4;&#x05D5;&#x05E8;&#x05D9;&#x05DD; &#x05E7;&#x05D8;&#x05DF;",
+     * "&#x05E8;&#x05D0;&#x05E9; &#x05D7;&#x05D5;&#x05D3;&#x05E9;",
+     * "&#x05D9;&#x05D5;&#x05DD; &#x05D4;&#x05E9;&#x05D5;&#x05D0;&#x05D4;",
+     * "&#x05D9;&#x05D5;&#x05DD; &#x05D4;&#x05D6;&#x05D9;&#x05DB;&#x05E8;&#x05D5;&#x05DF;",
+     * "&#x05D9;&#x05D5;&#x05DD; &#x05D4;&#x05E2;&#x05E6;&#x05DE;&#x05D0;&#x05D5;&#x05EA;",
+     * "&#x05D9;&#x05D5;&#x05DD; &#x05D9;&#x05E8;&#x05D5;&#x05E9;&#x05DC;&#x05D9;&#x05DD;",
+     * "&#x05DC;&#x05F4;&#x05D2; &#x05D1;&#x05E2;&#x05D5;&#x05DE;&#x05E8;",
+     * "&#x05E4;&#x05D5;&#x05E8;&#x05D9;&#x05DD; &#x05E9;&#x05D5;&#x05E9;&#x05DF; &#x05E7;&#x05D8;&#x05DF;"]</code>
+     */
+    public final let hebrewHolidays = [
         "ערב פסח", "פסח", "חול המועד פסח", "פסח שני", "ערב שבועות", "שבועות",
         "שבעה עשר בתמוז", "תשעה באב", "ט\"ו באב", "ערב ראש השנה", "ראש השנה",
         "צום גדליה", "ערב יום כיפור", "יום כיפור", "ערב סוכות", "סוכות",
@@ -386,7 +446,7 @@ public class HebrewDateFormatter {
     /**
      * Formats the Yom Tov (holiday) in Hebrew or transliterated Latin characters.
      *
-     * @param jewishCalendar the JewishCalendar
+     * @param jewishCalendar the ``JewishCalendar``
      * @return the formatted holiday or an empty String if the day is not a holiday.
      * @see #isHebrewFormat()
      */
@@ -404,7 +464,7 @@ public class HebrewDateFormatter {
      * Formats a day as Rosh Chodesh in the format of in the format of &#x05E8;&#x05D0;&#x05E9;
      * &#x05D7;&#x05D5;&#x05D3;&#x05E9; &#x05E9;&#x05D1;&#x05D8; or Rosh Chodesh Shevat. If it
      * is not Rosh Chodesh, an empty <code>String</code> will be returned.
-     * @param jewishCalendar the JewishCalendar
+     * @param jewishCalendar the ``JewishCalendar``
      * @return The formatted <code>String</code> in the format of &#x05E8;&#x05D0;&#x05E9;
      * &#x05D7;&#x05D5;&#x05D3;&#x05E9; &#x05E9;&#x05D1;&#x05D8; or Rosh Chodesh Shevat. If it
      * is not Rosh Chodesh, an empty <code>String</code> will be returned.
@@ -433,7 +493,7 @@ public class HebrewDateFormatter {
     /**
      * Returns if the formatter is set to use Hebrew formatting in the various formatting methods.
      *
-     * @return the hebrewFormat
+     * @return if hebrewFormat is used
      * @see #setHebrewFormat(boolean)
      * @see #format(JewishCalendar)
      * @see #formatDayOfWeek(JewishCalendar)
@@ -464,7 +524,7 @@ public class HebrewDateFormatter {
     /**
      * Returns the Hebrew Omer prefix.&nbsp; By default it is the letter &#x05D1; producing
      * &#x05D1;&#x05E2;&#x05D5;&#x05DE;&#x05E8;, but it can be set to &#x05DC; to produce
-     * &#x05DC;&#x05E2;&#x05D5;&#x05DE;&#x05E8; (or any other prefix) using the {@link #setHebrewOmerPrefix(String)}.
+     * &#x05DC;&#x05E2;&#x05D5;&#x05DE;&#x05E8; (or any other prefix) using the ``setHebrewOmerPrefix(hebrewOmerPrefix:)``.
      *
      * @return the hebrewOmerPrefix
      *
@@ -492,7 +552,7 @@ public class HebrewDateFormatter {
     
     /**
      * Returns the list of months transliterated into Latin chars. The default list of months uses Ashkenazi
-     * pronunciation in typical American English spelling. self list has a length of 14 with 3 variations for Adar -
+     * pronunciation in typical American English spelling. This list has a length of 14 with 3 variations for Adar -
      * "Adar", "Adar II", "Adar I"
      *
      * @return the list of months beginning in Nissan and ending in in "Adar", "Adar II", "Adar I". The default list is
@@ -518,10 +578,22 @@ public class HebrewDateFormatter {
     }
     
     /**
-     * Unicode list of Hebrew months in the following format <code>["\u05E0\u05D9\u05E1\u05DF","\u05D0\u05D9\u05D9\u05E8",
-     * "\u05E1\u05D9\u05D5\u05DF","\u05EA\u05DE\u05D5\u05D6","\u05D0\u05D1","\u05D0\u05DC\u05D5\u05DC",
-     * "\u05EA\u05E9\u05E8\u05D9","\u05D7\u05E9\u05D5\u05DF","\u05DB\u05E1\u05DC\u05D5","\u05D8\u05D1\u05EA",
-     * "\u05E9\u05D1\u05D8","\u05D0\u05D3\u05E8","\u05D0\u05D3\u05E8 \u05D1","\u05D0\u05D3\u05E8 \u05D0"]</code>
+     * Unicode list of Hebrew months in the following format <code>[
+     "תשרי",
+     "חשון",
+     "כסלו",
+     "טבת",
+     "שבט",
+     "אדר",
+     "אדר ב",
+     "ניסן",
+     "אייר",
+     "סיוון",
+     "תמוז",
+     "אב",
+     "אלול",
+     "אדר א"
+     *     ]</code>
      *
      * @see #formatMonth(JewishCalendar)
      */
@@ -544,7 +616,7 @@ public class HebrewDateFormatter {
     
     
     /**
-     * Unicode list of Hebrew days of week in the format of <code>["&#x05E8;&#x05D0;&#x05E9;&#x05D5;&#x05DF;",
+     * List of Hebrew days of week in the format of <code>["&#x05E8;&#x05D0;&#x05E9;&#x05D5;&#x05DF;",
      * "&#x05E9;&#x05E0;&#x05D9;","&#x05E9;&#x05DC;&#x05D9;&#x05E9;&#x05D9;","&#x05E8;&#x05D1;&#x05D9;&#x05E2;&#x05D9;",
      * "&#x05D7;&#x05DE;&#x05D9;&#x05E9;&#x05D9;","&#x05E9;&#x05E9;&#x05D9;","&#x05E9;&#x05D1;&#x05EA;"]</code>
      */
@@ -553,11 +625,11 @@ public class HebrewDateFormatter {
     ];
     
     /**
-     * Formats the day of week. If {@link #isHebrewFormat() Hebrew formatting} is set, it will display in the format
+     * Formats the day of week. If ``isHebrewFormat()`` Hebrew formatting is set, it will display in the format
      * &#x05E8;&#x05D0;&#x05E9;&#x05D5;&#x05DF; etc. If Hebrew formatting is not in use it will return it in the format
      * of Sunday etc. There are various formatting options that will affect the output.
      *
-     * @param JewishCalendar the JewishCalendar Object
+     * @param JewishCalendar the ``JewishCalendar`` Object
      * @return the formatted day of week
      * @see #isHebrewFormat()
      * @see #isLongWeekFormat()
@@ -589,7 +661,7 @@ public class HebrewDateFormatter {
     /**
      * Returns whether the class is set to use the Geresh &#x5F3; and Gershayim &#x5F4; in formatting Hebrew dates and
      * numbers. When true and output would look like &#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5F4;&#x5DB;
-     * (or &#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5F4;&#x5DA;). When set to false, self output
+     * (or &#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5F4;&#x5DA;). When set to false, this output
      * would display as &#x5DB;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5DB;.
      *
      * @return true if set to use the Geresh &#x5F3; and Gershayim &#x5F4; in formatting Hebrew dates and numbers.
@@ -601,7 +673,7 @@ public class HebrewDateFormatter {
     /**
      * Sets whether to use the Geresh &#x5F3; and Gershayim &#x5F4; in formatting Hebrew dates and numbers. The default
      * value is true and output would look like &#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5F4;&#x5DB;
-     * (or &#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5F4;&#x5DA;). When set to false, self output would
+     * (or &#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5F4;&#x5DA;). When set to false, this output would
      * display as &#x5DB;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5DB; (or
      * &#x5DB;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5DA;). Single digit days or month or years such as &#x05DB;&#x05F3;
      * &#x05E9;&#x05D1;&#x05D8; &#x05D5;&#x05F3; &#x05D0;&#x05DC;&#x05E4;&#x05D9;&#x05DD; show the use of the Geresh.
@@ -617,7 +689,7 @@ public class HebrewDateFormatter {
      * Returns whether the class is set to use the &#x05DE;&#x05E0;&#x05E6;&#x05E4;&#x05F4;&#x05DA; letters when
      * formatting years ending in 20, 40, 50, 80 and 90 to produce &#x05EA;&#x05E9;&#x05F4;&#x05E4; if false or
      * or &#x05EA;&#x05E9;&#x05F4;&#x05E3; if true. Traditionally non-final form letters are used, so the year
-     * 5780 would be formatted as &#x05EA;&#x05E9;&#x05F4;&#x05E4; if the default false is used here. If self returns
+     * 5780 would be formatted as &#x05EA;&#x05E9;&#x05F4;&#x05E4; if the default false is used here. If this returns
      * true, the format &#x05EA;&#x05E9;&#x05F4;&#x05E3; would be used.
      *
      * @return true if set to use final form letters when formatting Hebrew years. The default value is false.
@@ -628,12 +700,12 @@ public class HebrewDateFormatter {
     
     /**
      * When formatting a Hebrew Year, traditionally years ending in 20, 40, 50, 80 and 90 are formatted using non-final
-     * form letters for example &#x05EA;&#x05E9;&#x05F4;&#x05E4; for the year 5780. Setting self to true (the default
+     * form letters for example &#x05EA;&#x05E9;&#x05F4;&#x05E4; for the year 5780. Setting this to true (the default
      * is false) will use the final form letters for &#x05DE;&#x05E0;&#x05E6;&#x05E4;&#x05F4;&#x05DA; and will format
      * the year 5780 as &#x05EA;&#x05E9;&#x05F4;&#x05E3;.
      *
      * @param useFinalFormLetters
-     *            Set self to true to use final form letters when formatting Hebrew years.
+     *            Set this to true to use final form letters when formatting Hebrew years.
      */
     public func setUseFinalFormLetters(useFinalFormLetters:Bool) {
         self.useFinalFormLetters = useFinalFormLetters;
@@ -653,12 +725,12 @@ public class HebrewDateFormatter {
     
     /**
      * When formatting a Hebrew Year, traditionally the thousands digit is omitted and output for a year such as 5729
-     * (1969 Gregorian) would be calculated for 729 and format as &#x5EA;&#x5E9;&#x5DB;&#x5F4;&#x5D8;. self method
-     * allows setting self to true to return the long format year such as &#x5D4;&#x5F3;
+     * (1969 Gregorian) would be calculated for 729 and format as &#x5EA;&#x5E9;&#x5DB;&#x5F4;&#x5D8;. this method
+     * allows setting this to true to return the long format year such as &#x5D4;&#x5F3;
      * &#x5EA;&#x5E9;&#x5DB;&#x5F4;&#x5D8; for 5729/1969.
      *
      * @param useLongHebrewYears
-     *            Set self to true to use the long formatting
+     *            Set this to true to use the long formatting
      */
     public func setUseLongHebrewYears(useLongHebrewYears:Bool) {
         self.useLonghebrewYears = useLongHebrewYears;
@@ -669,7 +741,7 @@ public class HebrewDateFormatter {
      * "21 Shevat, 5729" if not.
      *
      * @param JewishCalendar
-     *            the JewishCalendar to be formatted
+     *            the ``JewishCalendar`` to be formatted
      * @return the formatted date. If the formatter is set to Hebrew, it will format in the form, "day Month year" for
      *         example &#x5DB;&#x5F4;&#x5D0; &#x5E9;&#x5D1;&#x5D8; &#x5EA;&#x5E9;&#x5DB;&#x5F4;&#x5D8;, and the format
      *         "21 Shevat, 5729" if not.
@@ -683,11 +755,11 @@ public class HebrewDateFormatter {
     }
     
     /**
-     * Returns a string of the current Hebrew month such as "Tishrei". Returns a string of the current Hebrew month such
+     * Returns a string of the current Hebrew month such as "Tishrei". Or returns a string of the current Hebrew month such
      * as "&#x5D0;&#x5D3;&#x5E8; &#x5D1;&#x5F3;".
      *
      * @param JewishCalendar
-     *            the JewishCalendar to format
+     *            the ``JewishCalendar`` to format
      * @return the formatted month name
      * @see #isHebrewFormat()
      * @see #setHebrewFormat(boolean)
@@ -721,14 +793,14 @@ public class HebrewDateFormatter {
     
     /**
      * Returns a String of the Omer day in the form &#x5DC;&#x5F4;&#x5D2; &#x5D1;&#x05E2;&#x05D5;&#x05DE;&#x5E8; if
-     * Hebrew Format is set, or "Omer X" or "Lag B'Omer" if not. An empty string if there is no Omer self day.
+     * Hebrew Format is set, or "Omer X" or "Lag B'Omer" if not. An empty string if there is no Omer this day.
      *
      * @param jewishCalendar
-     *            the JewishCalendar to be formatted
+     *            the ``JewishCalendar`` to be formatted
      *
-     * @return a String of the Omer day in the form or an empty string if there is no Omer self day. The default
-     *         formatting has a &#x5D1;&#x5F3; prefix that would output &#x5D1;&#x05E2;&#x05D5;&#x05DE;&#x5E8;, but self
-     *         can be set via the {@link #setHebrewOmerPrefix(String)} method to use a &#x5DC; and output
+     * @return a String of the Omer day in the form or an empty string if there is no Omer this day. The default
+     *         formatting has a &#x5D1;&#x5F3; prefix that would output &#x5D1;&#x05E2;&#x05D5;&#x05DE;&#x5E8;, but this
+     *         can be set via the ``setHebrewOmerPrefix(hebrewOmerPrefix:)`` method to use a &#x5DC; and output
      *         &#x5DC;&#x5F4;&#x5D2; &#x5DC;&#x05E2;&#x05D5;&#x05DE;&#x5E8;.
      * @see #isHebrewFormat()
      * @see #getHebrewOmerPrefix()
@@ -777,8 +849,8 @@ public class HebrewDateFormatter {
     
     /**
      * Returns the kviah in the traditional 3 letter Hebrew format where the first letter represents the day of week of
-     * Rosh Hashana, the second letter represents the lengths of Cheshvan and Kislev ({@link JewishCalendar#SHELAIMIM
-     * Shelaimim} , {@link JewishCalendar#KESIDRAN Kesidran} or {@link JewishCalendar#CHASERIM Chaserim}) and the 3rd letter
+     * Rosh Hashana, the second letter represents the lengths of Cheshvan and Kislev (``JewishCalendar.SHELAIMIM``
+     *  , ``JewishCalendar.KESIDRAN`` or ``JewishCalendar.CHASERIM``) and the 3rd letter
      * represents the day of week of Pesach. For example 5729 (1969) would return &#x5D1;&#x5E9;&#x5D4; (Rosh Hashana on
      * Monday, Shelaimim, and Pesach on Thursday), while 5771 (2011) would return &#x5D4;&#x5E9;&#x5D2; (Rosh Hashana on
      * Thursday, Shelaimim, and Pesach on Tuesday).
@@ -807,7 +879,7 @@ public class HebrewDateFormatter {
     
     /**
      * Formats the <a href="https://en.wikipedia.org/wiki/Daf_Yomi">Daf Yomi</a> Bavli in the format of
-     * "&#x05E2;&#x05D9;&#x05E8;&#x05D5;&#x05D1;&#x05D9;&#x05DF; &#x05E0;&#x05F4;&#x05D1;" in {@link #isHebrewFormat() Hebrew},
+     * "&#x05E2;&#x05D9;&#x05E8;&#x05D5;&#x05D1;&#x05D9;&#x05DF; &#x05E0;&#x05F4;&#x05D1;" in ``isHebrewFormat() Hebrew},
      * or the transliterated format of "Eruvin 52".
      * @param daf the Daf to be formatted.
      * @return the formatted daf.
@@ -822,7 +894,7 @@ public class HebrewDateFormatter {
     
     /**
      * Formats the <a href="https://en.wikipedia.org/wiki/Jerusalem_Talmud#Daf_Yomi_Yerushalmi">Daf Yomi Yerushalmi</a> in the format
-     * of "&#x05E2;&#x05D9;&#x05E8;&#x05D5;&#x05D1;&#x05D9;&#x05DF; &#x05E0;&#x05F4;&#x05D1;" in {@link #isHebrewFormat() Hebrew}, or
+     * of "&#x05E2;&#x05D9;&#x05E8;&#x05D5;&#x05D1;&#x05D9;&#x05DF; &#x05E0;&#x05F4;&#x05D1;" in ``isHebrewFormat()`` Hebrew, or
      * the transliterated format of "Eruvin 52".
      *
      * @param daf the Daf to be formatted.
@@ -859,7 +931,7 @@ public class HebrewDateFormatter {
      * </ul>
      *
      * @param number
-     *            the number to be formatted. It will trow an IllegalArgumentException if the number is &lt; 0 or &gt; 9999.
+     *            the number to be formatted. It will return a string containing an error if the number is &lt; 0 or &gt; 9999.
      * @return the Hebrew formatted number such as &#x5EA;&#x5E9;&#x5DB;&#x5F4;&#x5D8;
      * @see #isUseFinalFormLetters()
      * @see #isUseGershGershayim()
@@ -867,11 +939,11 @@ public class HebrewDateFormatter {
      *
      */
     public func formatHebrewNumber(number:Int) -> String {
-        //            if (number < 0) {
-        //                throw Error("negative numbers can't be formatted");
-        //            } else if (number > 9999) {
-        //                throw Error("numbers > 9999 can't be formatted");
-        //            }
+        if (number < 0) {
+            return "negative numbers can't be formatted"
+        } else if (number > 9999) {
+            return "numbers > 9999 can't be formatted"
+        }
         
         let ALAFIM = "אלפים";
         let EFES = "אפס";
@@ -883,7 +955,7 @@ public class HebrewDateFormatter {
         let jOnes =  ["", "א", "ב", "ג", "ד", "ה", "ו", "ז", "ח", "ט"];
         
         var number = number
-        if (number == 0) { // do we really need self? Should it be applicable to a date?
+        if (number == 0) { // do we really need this? Should it be applicable to a date?
             return EFES;
         }
         let shortNumber = number % 1000; // discard thousands
@@ -945,7 +1017,7 @@ public class HebrewDateFormatter {
     }
     
     /**
-     * Retruns the list of transliterated parshiyos used by self formatter.
+     * Returns the list of transliterated parshiyos used by this formatter.
      *
      * @return the list of transliterated Parshios
      */
@@ -958,7 +1030,7 @@ public class HebrewDateFormatter {
      * default uses Ashkenazi American English transliteration.
      *
      * @param transliteratedParshaMap
-     *            the transliterated Parshios as an EnumMap to set
+     *            the transliterated Parshios as a Dictionary to set
      * @see #getTransliteratedParshiosList()
      */
     public func setTransliteratedParshiosList(transliteratedParshaMap:[JewishCalendar.Parsha: String]) {
@@ -966,17 +1038,17 @@ public class HebrewDateFormatter {
     }
     
     /**
-     * Returns a String with the name of the current parsha(ios). self method gets the current <em>parsha</em> by
-     * calling {@link JewishCalendar#getParshah()} that does not return a <em>parsha</em> for any non-<em>Shabbos</em>
+     * Returns a String with the name of the current parsha(ios). This method gets the current <em>parsha</em> by
+     * calling ``JewishCalendar.getParshah()`` that does not return a <em>parsha</em> for any non-<em>Shabbos</em>
      * or a <em>Shabbos</em> that occurs on a <em>Yom Tov</em>, and will return an empty <code>String</code> in those
-     * cases. If the class {@link #isHebrewFormat() is set to format in Hebrew} it will return a <code>String</code>
+     * cases. If the class ``isHebrewFormat()`` is set to format in Hebrew it will return a <code>String</code>
      * of the current parsha(ios) in Hebrew for example &#x05D1;&#x05E8;&#x05D0;&#x05E9;&#x05D9;&#x05EA; or
      * &#x05E0;&#x05E6;&#x05D1;&#x05D9;&#x05DD; &#x05D5;&#x05D9;&#x05DC;&#x05DA; or an empty string if there
      * are none. If not set to Hebrew, it returns a string of the parsha(ios) transliterated into Latin chars. The
      * default uses Ashkenazi pronunciation in typical American English spelling, for example Bereshis or
      * Nitzavim Vayeilech or an empty string if there are none.
      *
-     * @param jewishCalendar the JewishCalendar Object
+     * @param jewishCalendar the ``JewishCalendar`` Object
      * @return today's parsha(ios) in Hebrew for example, if the formatter is set to format in Hebrew, returns a string
      *         of the current parsha(ios) in Hebrew for example &#x05D1;&#x05E8;&#x05D0;&#x05E9;&#x05D9;&#x05EA; or
      *         &#x05E0;&#x05E6;&#x05D1;&#x05D9;&#x05DD; &#x05D5;&#x05D9;&#x05DC;&#x05DA; or an empty string if
@@ -993,12 +1065,11 @@ public class HebrewDateFormatter {
     }
     
     /**
-     * Returns a String with the name of the current parsha(ios). self method overloads {@link
-     * HebrewDateFormatter#formatParsha(JewishCalendar)} and unlike that method, it will format the <em>parsha</em> passed
-     * to self method regardless of the day of week. self is the way to format a <em>parsha</em> retrieved from calling
-     * {@link JewishCalendar#getUpcomingParshah()}.
+     * Returns a String with the name of the current parsha(ios). This method overloads ``formatParsha(jewishCalendar:)`` and unlike that method, it will format the <em>parsha</em> passed
+     * to this method regardless of the day of week. This is the way to format a <em>parsha</em> retrieved from calling
+     * ``JewishCalendar.getUpcomingParshah()``.
      *
-     * @param parsha a JewishCalendar.Parsha object
+     * @param parsha a ``JewishCalendar.Parsha`` object
      * @return today's parsha(ios) in Hebrew for example, if the formatter is set to format in Hebrew, returns a string
      *         of the current parsha(ios) in Hebrew for example &#x05D1;&#x05E8;&#x05D0;&#x05E9;&#x05D9;&#x05EA; or
      *         &#x05E0;&#x05E6;&#x05D1;&#x05D9;&#x05DD; &#x05D5;&#x05D9;&#x05DC;&#x05DA; or an empty string if
