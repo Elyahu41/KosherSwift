@@ -21,7 +21,7 @@ public class YomiCalculator {
      */
     private static let dafYomiStartDay = gregorianDate(forYear: 1923, month: 9, andDay: 11)!;
     
-    /** The start date of the first Daf Yomi Bavli cycle in the Julian calendar. Used internally for claculations.*/
+    /** The start date of the first Daf Yomi Bavli cycle in the Julian calendar. Used internally for calculations.*/
     private static let dafYomiJulianStartDay = getJulianDay(date: dafYomiStartDay);
     
     /**
@@ -45,12 +45,12 @@ public class YomiCalculator {
      * that a change in length of the cycle was instituted starting in the eighth Daf Yomi cycle beginning on June 24,
      * 1975. The Daf Yomi Bavli cycle has a single masechta of the Talmud Yerushalmi - Shekalim as part of the cycle.
      * Unlike the Bavli where the number of daf per masechta was standardized since the original <a
-     * href="http://en.wikipedia.org/wiki/Daniel_Bomberg">Bomberg Edition</a> published from 1520 - 1523, there is no
+     * href="http://en.wikipedia.org/wiki/Daniel_Bomberg">Bomberg Edition</a> published from 1520 to 1523, there is no
      * uniform page length in the Yerushalmi. The early cycles had the Yerushalmi Shekalim length of 13 days following the
      * <a href=
      * "https://he.wikipedia.org/wiki/%D7%93%D7%A4%D7%95%D7%A1_%D7%A1%D7%9C%D7%90%D7%95%D7%95%D7%99%D7%98%D7%90">Slavuta/Zhytomyr</a>
      * Shas used by <a href="http://en.wikipedia.org/wiki/Meir_Shapiro">Rabbi Meir Shapiro</a>. With the start of the eighth Daf Yomi
-     * cycle beginning on June 24, 1975 the length of the Yerushalmi Shekalim was changed from 13 to 22 daf to follow
+     * cycle beginning on June 24, 1975, the length of the Yerushalmi Shekalim was changed from 13 to 22 daf to follow
      * the <a href="https://en.wikipedia.org/wiki/Vilna_Edition_Shas">Vilna Shas</a> that is in common use today.
      *
      * @param jewishCalendar

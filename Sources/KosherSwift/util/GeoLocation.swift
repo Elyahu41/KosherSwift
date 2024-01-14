@@ -55,7 +55,7 @@ public class GeoLocation {
     private static let DISTANCE = 0;
     
     /**
-     * Constant for a initial bearing type calculation.
+     * Constant for an initial bearing type calculation.
      * @see #getGeodesicInitialBearing(GeoLocation)
      */
     private static let INITIAL_BEARING = 1;

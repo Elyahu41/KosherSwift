@@ -66,7 +66,7 @@ public class AstronomicalCalendar {
     public var astronomicalCalculator:AstronomicalCalculator;
 
     /**
-     * The getSunrise method Returns a <code>Date</code> representing the
+     * The getSunrise method returns a <code>Date</code> representing the
      * ``AstronomicalCalculator.getElevationAdjustment(double)`` elevation adjusted sunrise time. The zenith used
      * for the calculation uses ``GEOMETRIC_ZENITH`` geometric zenith of 90&deg; plus
      * ``AstronomicalCalculator.getElevationAdjustment(double)``. This is adjusted by the
@@ -315,8 +315,8 @@ public class AstronomicalCalendar {
     }
 
     /**
-     * Default constructor will set a default ``GeoLocation``, a default
-     * ``AstronomicalCalculator.getDefault()`` AstronomicalCalculator and default the calendar to the current date.
+     * The default constructor will set a default ``GeoLocation``, a default
+     * ``AstronomicalCalculator`` which will be the more accurate ``NOAACalculator``, and default the workingDate to the current date.
      */
     public init() {
         self.workingDate = Date()
@@ -326,8 +326,8 @@ public class AstronomicalCalendar {
 
     /**
      * A constructor that takes in <a href="https://en.wikipedia.org/wiki/Geolocation">geolocation</a> information as a
-     * parameter. The default ``AstronomicalCalculator.getDefault()`` AstronomicalCalculator used for solar
-     * calculations is the the ``NOAACalculator``.
+     * parameter. The default ``AstronomicalCalculator``  used for solar
+     * calculations is the the more accurate ``NOAACalculator``.
      *
      * @param geoLocation
      *            The location information used for calculating astronomical sun times.
@@ -533,7 +533,7 @@ public class AstronomicalCalendar {
      *            The time to be set as the time for the <code>Date</code>. The time expected is in the format: 18.75
      *            for 6:45:00 PM
      * @param isSunrise true if the time is for sunrise
-     * @return The Date object from the time input
+     * @return The nullable Date? object representation of the time double
      */
     func getDateFromTime(date:Date, time: Double, isSunrise:Bool) -> Date? {
         if (time.isNaN) {
@@ -744,7 +744,7 @@ public class AstronomicalCalendar {
      * with a number of different implementations of the <code>abstract</code> ``AstronomicalCalculator`` based on
      * different algorithms, including the default ``NOAACalculator`` based on <a href=
      * "https://noaa.gov">NOAA's</a> implementation of Jean Meeus's algorithms as well as ``SunTimesCalculator`` based on the <a href = "https://www.cnmoc.usff.navy.mil/usno/">US
-     * Naval Observatory's</a> algorithm,. This allows easy runtime switching and comparison of different algorithms.
+     * Naval Observatory's</a> algorithm. This allows easy runtime switching and comparison of different algorithms.
      *
      * @param astronomicalCalculator
      *            The astronomicalCalculator to set.

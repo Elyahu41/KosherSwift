@@ -129,7 +129,7 @@ public class JewishCalendar {
      *
      * Value of the month field indicating Adar II, the leap (intercalary or embolismic) thirteenth (Undecimber) numeric
      * month of the year added in Jewish ``isJewishLeapYear()``). The leap years are years 3, 6, 8, 11,
-     * 14, 17 and 19 of a 19 year cycle. With the year starting at ``TISHREI``, it would actually be the 7th month
+     * 14, 17 and 19 of a 19-year cycle. With the year starting at ``TISHREI``, it would actually be the 7th month
      * of the year.
      */
     public static let ADAR_II = 7;
@@ -147,7 +147,7 @@ public class JewishCalendar {
     public static let EREV_SHAVUOS = 4
     /**Shavuos (Pentecost), the 6th of Sivan*/
     public static let SHAVUOS = 5
-    /** The fast of the 17th day of Tamuz*/
+    /** The fast of the 17th day of Tammuz*/
     public static let SEVENTEEN_OF_TAMMUZ = 6
     /** The fast of the 9th of Av*/
     public static let TISHA_BEAV = 7
@@ -155,7 +155,7 @@ public class JewishCalendar {
     public static let TU_BEAV = 8
     /**Erev Rosh Hashana (the day before Rosh Hashana), the 29th of Elul*/
     public static let EREV_ROSH_HASHANA = 9
-    /** Rosh Hashana, the first of Tishrei.*/
+    /** Rosh Hashana, the first and second days of Tishrei.*/
     public static let ROSH_HASHANA = 10
     /** The fast of Gedalyah, the 3rd of Tishrei.*/
     public static let FAST_OF_GEDALYAH = 11
@@ -230,7 +230,7 @@ public class JewishCalendar {
     
     /**
      * the Jewish epoch using the RD (Rata Die/Fixed Date or Reingold Dershowitz) day used in Calendrical Calculations.
-     * Day 1 is January 1, 0001 Gregorian
+     * Day 1 is January 1, 0001, Gregorian
      */
     static let JEWISH_EPOCH:Int64 = -1373429;
     
@@ -238,7 +238,7 @@ public class JewishCalendar {
     public static let CHALAKIM_PER_MINUTE = 18;
     /** The number  of <em>chalakim</em> (1080) in an hour.*/
     public static let CHALAKIM_PER_HOUR = 1080;
-    /** The number of <em>chalakim</em> (25,920) in a 24 hour day .*/
+    /** The number of <em>chalakim</em> (25,920) in a 24-hour day .*/
     public static let CHALAKIM_PER_DAY:Int64 = 25920; // 24 * 1080
     /** The number  of <em>chalakim</em> in an average Jewish month. A month has 29 days, 12 hours and 793
      * <em>chalakim</em> (44 minutes and 3.3 seconds) for a total of 765,433 <em>chalakim</em>*/
@@ -609,7 +609,7 @@ public class JewishCalendar {
     }
     
     /**
-     * Is this calendar set to return modern Israeli national holidays. By default this value is false. The holidays
+     * Is this calendar set to return modern Israeli national holidays. By default, this value is false. The holidays
      * are: <em>Yom HaShoah</em>, <em>Yom Hazikaron</em>, <em>Yom Ha'atzmaut</em> and <em>Yom Yerushalayim</em>.
      *
      * @return the useModernHolidays true if set to return modern Israeli national holidays
@@ -910,7 +910,7 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns the Gregotian year.
+     * Returns the Gregorian year.
      *
      * @return the Gregorian year
      */
@@ -1030,7 +1030,7 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns if the year is a Jewish leap year. Years 3, 6, 8, 11, 14, 17 and 19 in the 19 year cycle are leap years.
+     * Returns if the year is a Jewish leap year. Years 3, 6, 8, 11, 14, 17 and 19 in the 19-year cycle are leap years.
      *
      * @param year
      *            the Jewish year.
@@ -1042,7 +1042,7 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns if the year the calendar is set to is a Jewish leap year. Years 3, 6, 8, 11, 14, 17 and 19 in the 19 year
+     * Returns if the year the calendar is set to is a Jewish leap year. Years 3, 6, 8, 11, 14, 17 and 19 in the 19-year
      * cycle are leap years.
      *
      * @return true if it is a leap year
@@ -1342,10 +1342,10 @@ public class JewishCalendar {
         if (moladParts >= 19440) || // Dechiya of Molad Zaken - molad is >= midday (18 hours * 1080 chalakim)
             ((moladDay % 7) == 2 && // start Dechiya of GaTRaD - Ga = is a Tuesday
              moladParts >= 9924 && // TRaD = 9 hours, 204 parts or later (9 * 1080 + 204)
-             !isJewishLeapYear(year: year)) || // of a non-leap year - end Dechiya of GaTRaD
+             !isJewishLeapYear(year: year)) || // of a non-leap year-end Dechiya of GaTRaD
             ((moladDay % 7) == 1 && // start Dechiya of BeTuTaKFoT - Be = is on a Monday
              moladParts >= 16789 && // TRaD = 15 hours, 589 parts or later (15 * 1080 + 589)
-             isJewishLeapYear(year: year - 1)) { // in a year following a leap year - end Dechiya of BeTuTaKFoT
+             isJewishLeapYear(year: year - 1)) { // in a year following a leap year-end Dechiya of BeTuTaKFoT
             roshHashanaDay += 1 // Then postpone Rosh HaShanah one day
         }
         // start 4th Dechiya - Lo ADU Rosh - Rosh Hashana can't occur on A- sunday, D- Wednesday, U - Friday
@@ -1395,7 +1395,7 @@ public class JewishCalendar {
     
     /**
      * Converts the ``NISSAN`` based constants used by this class to numeric month starting from
-     * ``TISHREI``. This is required for Molad claculations.
+     * ``TISHREI``. This is required for Molad calculations.
      *
      * @param year
      *            The Jewish year
@@ -1423,7 +1423,7 @@ public class JewishCalendar {
          * to Nisan = 177. Subtract 7 days since tekufas Nisan was 7 days and 9 hours before the molad as stated in the Rambam,
          * and we are now at 170 days. Because getJewishCalendarElapsedDays and getDaysSinceStartOfJewishYear use the value for
          * Rosh Hashana as 1, we have to add 1 day for a total of 171. To this add a day since the tekufah is on a Tuesday
-         * night, and we push off the bracha to Wednesday AM resulting in the 172 used in the calculation.
+         * night, and we push off the bracha to Wednesday morning resulting in the 172 used in the calculation.
          */
         if (elapsedDays % Int(28 * 365.25) == 172) { // 28 years of 365.25 days + the offset from molad tohu mentioned above
             return true;
@@ -1474,7 +1474,7 @@ public class JewishCalendar {
                     || ((day == 3 || day == 2) && dayOfWeek == 4) || (day == 5 && dayOfWeek == 2))) {
                 return JewishCalendar.YOM_HAZIKARON;
             }
-            // if 5 Iyar falls on Wed, Yom Haatzmaut is that day. If it fal1s on Friday or Shabbos, it is moved back to
+            // if 5 Iyar falls on Wed, Yom Haatzmaut is that day. If it falls on Friday or Shabbos, it is moved back to
             // Thursday. If it falls on Monday it is moved to Tuesday
             if (isUseModernHolidays()
                 && ((day == 5 && dayOfWeek == 4)
@@ -1627,7 +1627,7 @@ public class JewishCalendar {
     /**
      * Returns true if the current day is <em>Yom Tov</em>. The method returns true even for holidays such as ``CHANUKAH``
      * and minor ones such as ``TU_BEAV`` and ``PESACH_SHENI``. <em>Erev Yom Tov</em> (with the exception of
-     * ``HOSHANA_RABBA``, <em>erev</em> the second days of ``PESACH``) returns false, as do ``isTaanis()`` fast
+     * ``HOSHANA_RABBA``, and <em>erev</em> the second days of ``PESACH``) returns false, as do ``isTaanis()`` fast
      * days besides ``YOM_KIPPUR``. Use ``isAssurBemelacha()`` to find the days that have a prohibition of work.
      *
      * @return true if the current day is a Yom Tov (special day). Use ``isYomTovAssurBemelacha()`` for Yomim tovim that have a prohibition of work. And use ``isAssurBemelacha()`` for ANY day that has a prohibition of work.
@@ -1712,7 +1712,7 @@ public class JewishCalendar {
     /**
      * Returns true if the current day is <em>Aseres Yemei Teshuva</em> (Ten days of repentance).
      *
-     * @return if the current day is <em>Aseres Yemei Teshuvah</em>
+     * @return if the current day is <em>Aseres Yemei Teshuva</em>
      */
     public func isAseresYemeiTeshuva() -> Bool {
         return getJewishMonth() == JewishCalendar.TISHREI && getJewishDayOfMonth() <= 10;
@@ -1801,7 +1801,7 @@ public class JewishCalendar {
     /**
      * Returns true if the current day is <em>Hoshana Rabba</em>.
      *
-     * @return true true if the current day is <em>Hoshana Rabba</em>.
+     * @return true if the current day is <em>Hoshana Rabba</em>.
      * @see #isYomTov()
      * @see #HOSHANA_RABBA
      */
@@ -2019,7 +2019,7 @@ public class JewishCalendar {
     /**
      * Returns if the day is Purim (<a href="https://en.wikipedia.org/wiki/Purim#Shushan_Purim">Shushan Purim</a>
      * in a mukaf choma and regular Purim in a non-mukaf choma).
-     * @return if the day is Purim (Shushan Purim in a mukaf choma and regular Purin in a non-mukaf choma)
+     * @return if the day is Purim (Shushan Purim in a mukaf choma and regular Purim in a non-mukaf choma)
      *
      * @see #getIsMukafChoma()
      * @see #setIsMukafChoma(boolean)
@@ -2271,7 +2271,7 @@ public class JewishCalendar {
     /**
      * Returns the latest time of <em>Kiddush Levana</em> calculated as 15 days after the <em>molad.</em> This is the
      * opinion brought down in the Shulchan Aruch (Orach Chaim 426). It should be noted that some opinions hold that
-     * the <a href="http://en.wikipedia.org/wiki/Moses_Isserles">Rema</a> who brings down the the <a
+     * the <a href="http://en.wikipedia.org/wiki/Moses_Isserles">Rema</a> who brings down the <a
      * href="http://en.wikipedia.org/wiki/Yaakov_ben_Moshe_Levi_Moelin">Maharil's</a> opinion of calculating it as
      * ``getSofZmanKidushLevanaBetweenMoldos()`` half way between <em>molad</em> and <em>molad</em> is of the
      * opinion of the Mechaber as well. Also see the Aruch Hashulchan. For additional details on the subject, See Rabbi

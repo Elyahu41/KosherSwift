@@ -9,7 +9,7 @@ import Foundation
 
 /**
  * This class calculates the <a href="https://en.wikipedia.org/wiki/Jerusalem_Talmud">Talmud Yerusalmi</a> <a href=
- * "https://en.wikipedia.org/wiki/Daf_Yomi">Daf Yomi</a> page (``Daf``) for the a given date.
+ * "https://en.wikipedia.org/wiki/Daf_Yomi">Daf Yomi</a> page (``Daf``) for the given date.
  *
  * @author &copy; elihaidv
  * @author &copy; Eliyahu Hershfeld 2017 - 2023
@@ -96,12 +96,12 @@ public class YerushalmiYomiCalculator {
     }
     
     /**
-     * Return the number of special days (Yom Kippur and Tisha Beav) That there is no Daf in this days.
-     * From the last given number of days until given date
+     * Return the number of special days (Yom Kippur and Tisha Beav, where there are no dafim on these days),
+     * from the start date given until the given end date.
      *
-     * @param start start date to calculate
-     * @param end end date to calculate
-     * @return the number of special days
+     * @param start date to start calculating from
+     * @param end date to finish calculating at
+     * @return the number of special days between the start time and end time
      */
     private static func getNumOfSpecialDays(startDate: Date, endDate: Date) -> Int {
         let startCalendar = JewishCalendar()

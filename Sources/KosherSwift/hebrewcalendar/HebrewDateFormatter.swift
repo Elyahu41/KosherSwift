@@ -326,7 +326,7 @@ public class HebrewDateFormatter {
      * @see #getTransliteratedShabbosDayOfWeek()
      * @see #setTransliteratedShabbosDayOfWeek(String)
      */
-    public var transliteratedShabbosDayOfweek = "Shabbos";
+    public var transliteratedShabbosDayOfWeek = "Shabbos";
     
     /**
      * Returns the day of Shabbos transliterated into Latin chars. The default uses Ashkenazi pronunciation "Shabbos".
@@ -337,7 +337,7 @@ public class HebrewDateFormatter {
      * @see #formatDayOfWeek(JewishCalendar)
      */
     public func getTransliteratedShabbosDayOfWeek() -> String {
-        return transliteratedShabbosDayOfweek;
+        return transliteratedShabbosDayOfWeek;
     }
     
     /**
@@ -351,7 +351,7 @@ public class HebrewDateFormatter {
      * @see #formatDayOfWeek(JewishCalendar)
      */
     public func setTransliteratedShabbosDayOfWeek(transliteratedShabbos:String) {
-        self.transliteratedShabbosDayOfweek = transliteratedShabbos;
+        self.transliteratedShabbosDayOfWeek = transliteratedShabbos;
     }
     
     /**
@@ -555,7 +555,7 @@ public class HebrewDateFormatter {
      * pronunciation in typical American English spelling. This list has a length of 14 with 3 variations for Adar -
      * "Adar", "Adar II", "Adar I"
      *
-     * @return the list of months beginning in Nissan and ending in in "Adar", "Adar II", "Adar I". The default list is
+     * @return the list of months beginning in Nissan and ending in "Adar", "Adar II", "Adar I". The default list is
      *         currently ["Nissan", "Iyar", "Sivan", "Tammuz", "Av", "Elul", "Tishrei", "Cheshvan", "Kislev", "Teves",
      *         "Shevat", "Adar", "Adar II", "Adar I"].
      * @see #setTransliteratedMonthList(String[])
@@ -565,7 +565,7 @@ public class HebrewDateFormatter {
     }
     
     /**
-     * Setter method to allow overriding of the default list of months transliterated into into Latin chars. The default
+     * Setter method to allow overriding of the default list of months transliterated into Latin chars. The default
      * uses Ashkenazi American English transliteration.
      *
      * @param transliteratedMonths
@@ -679,7 +679,7 @@ public class HebrewDateFormatter {
      * &#x05E9;&#x05D1;&#x05D8; &#x05D5;&#x05F3; &#x05D0;&#x05DC;&#x05E4;&#x05D9;&#x05DD; show the use of the Geresh.
      *
      * @param useGershGershayim
-     *            set to false to omit the Geresh &#x5F3; and Gershayim &#x5F4; in formatting
+     *            set this to false to omit the Geresh &#x5F3; and Gershayim &#x5F4; in formatting
      */
     public func setUseGershGershayim(useGershGershayim:Bool) {
         self.useGershGershayim = useGershGershayim;
@@ -687,7 +687,7 @@ public class HebrewDateFormatter {
     
     /**
      * Returns whether the class is set to use the &#x05DE;&#x05E0;&#x05E6;&#x05E4;&#x05F4;&#x05DA; letters when
-     * formatting years ending in 20, 40, 50, 80 and 90 to produce &#x05EA;&#x05E9;&#x05F4;&#x05E4; if false or
+     * formatting years ending in 20, 40, 50, 80 and 90 to produce &#x05EA;&#x05E9;&#x05F4;&#x05E4; if false
      * or &#x05EA;&#x05E9;&#x05F4;&#x05E3; if true. Traditionally non-final form letters are used, so the year
      * 5780 would be formatted as &#x05EA;&#x05E9;&#x05F4;&#x05E4; if the default false is used here. If this returns
      * true, the format &#x05EA;&#x05E9;&#x05F4;&#x05E3; would be used.
@@ -863,17 +863,17 @@ public class HebrewDateFormatter {
     public func getFormattedKviah(jewishYear:Int) -> String{
         let jewishCalendar = JewishCalendar(jewishYear: jewishYear, jewishMonth: JewishCalendar.TISHREI, jewishDayOfMonth: 1); // set date to Rosh Hashana
         let kviah = jewishCalendar.getCheshvanKislevKviah();
-        let roshHashanaDayOfweek = jewishCalendar.getDayOfWeek();
-        var returnValue = formatHebrewNumber(number: roshHashanaDayOfweek);
+        let roshHashanaDayOfWeek = jewishCalendar.getDayOfWeek();
+        var returnValue = formatHebrewNumber(number: roshHashanaDayOfWeek);
         returnValue += (kviah == JewishCalendar.CHASERIM ? "\u{05D7}" : kviah == JewishCalendar.SHELAIMIM ? "\u{05E9}" : "\u{05DB}");
         jewishCalendar.setJewishDate(year: jewishYear, month: JewishCalendar.NISSAN, dayOfMonth: 15); // set to Pesach of the given year
-        let pesachDayOfweek = jewishCalendar.getDayOfWeek();
-        returnValue += formatHebrewNumber(number: pesachDayOfweek);
+        let pesachDayOfWeek = jewishCalendar.getDayOfWeek();
+        returnValue += formatHebrewNumber(number: pesachDayOfWeek);
         returnValue = returnValue.replacingOccurrences(of: HebrewDateFormatter.GERESH, with: "");// geresh is never used in the kviah format
         // boolean isLeapYear = JewishCalendar.isJewishLeapYear(jewishYear);
         // for efficiency we can avoid the expensive recalculation of the pesach day of week by adding 1 day to Rosh
-        // Hashana for a 353 day year, 2 for a 354 day year, 3 for a 355 or 383 day year, 4 for a 384 day year and 5 for
-        // a 385 day year
+        // Hashana for a 353-day year, 2 for a 354-day year, 3 for a 355 or 383-day year, 4 for a 384-day year and 5 for
+        // a 385-day year
         return returnValue;
     }
     
@@ -916,7 +916,7 @@ public class HebrewDateFormatter {
     }
     
     /**
-     * Returns a Hebrew formatted string of a number. The method can calculate from 0 - 9999.
+     * Returns a Hebrew formatted string of a number. The method can calculate from 0 to 9999.
      * <ul>
      * <li>Single digit numbers such as 3, 30 and 100 will be returned with a &#x5F3; (<a
      * href="http://en.wikipedia.org/wiki/Geresh">Geresh</a>) appended as at the end. For example &#x5D2;&#x5F3;,
@@ -970,7 +970,7 @@ public class HebrewDateFormatter {
                 sb.append(HebrewDateFormatter.GERESH);
             }
             sb.append(" ");
-            sb.append(ALAFIM); // add # of thousands plus word thousand (overide alafim boolean)
+            sb.append(ALAFIM); // add # of thousands plus the word "thousand" (override alafim boolean)
             return sb;
         } else if (useLonghebrewYears && number >= 1000) { // if alafim boolean display thousands
             sb.append(jOnes[thousands]);
@@ -989,7 +989,7 @@ public class HebrewDateFormatter {
             sb.append(tavTaz[1]);
         } else {
             let tens = number / 10;
-            if (number % 10 == 0) { // if evenly divisable by 10
+            if (number % 10 == 0) { // if evenly divisible by 10
                 if (!singleDigitNumber) {
                     if(isUseFinalFormLetters()) {
                         sb.append(jTenEnds[tens]); // years like 5780 will end with a final form &#x05E3;
@@ -1026,7 +1026,7 @@ public class HebrewDateFormatter {
     }
     
     /**
-     * Setter method to allow overriding of the default list of parshiyos transliterated into into Latin chars. The
+     * Setter method to allow overriding of the default list of parshiyos transliterated into Latin chars. The
      * default uses Ashkenazi American English transliteration.
      *
      * @param transliteratedParshaMap
