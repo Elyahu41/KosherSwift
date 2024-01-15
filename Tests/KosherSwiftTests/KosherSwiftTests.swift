@@ -406,6 +406,22 @@ class KosherSwiftTests: XCTestCase {
         XCTAssertEqual(alot, gregorianCalendar.date(from: decFirst))
     }
     
+    func testNilZman() {
+        var gregorianCalendar = Calendar(identifier: .gregorian)
+        gregorianCalendar.timeZone = TimeZone(identifier: "America/New_York")!
+        
+        let geoLocation = GeoLocation(locationName: "NY", latitude: 40.73114, longitude: -73.79993, timeZone: TimeZone.init(identifier: "America/New_York")!)
+        let calculator = ComplexZmanimCalendar(location: geoLocation)
+        
+        var decFirst = DateComponents()
+        decFirst.year = 2024
+        decFirst.month = 6
+        decFirst.day = 16
+        
+        calculator.workingDate = gregorianCalendar.date(from: decFirst)!
+        XCTAssertEqual(calculator.getTzais26Degrees(), nil)
+    }
+    
     func testZmanim() {
         let geoLocation = GeoLocation(locationName: "CO", latitude: 39.6240, longitude: -104.8709, timeZone: TimeZone.current)
         let calculator = ComplexZmanimCalendar(location: geoLocation)
@@ -417,7 +433,7 @@ class KosherSwiftTests: XCTestCase {
         let geoLocationFL = GeoLocation(locationName: "FL", latitude: 37.32495943, longitude: -122.01973712, timeZone: TimeZone(identifier: "America/New_York")!)
         let calculatorFL = ComplexZmanimCalendar(location: geoLocation)
 
-        print(format.string(from: calculatorFL.getFixedLocalChatzos()!))
+        //print(format.string(from: calculatorFL.getFixedLocalChatzos()!))
     }
 
 //    func testPerformanceExample() throws {
