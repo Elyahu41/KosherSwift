@@ -115,6 +115,11 @@ public extension JewishCalendar {
 The same goes for zmanim! If you want to create your own zmanim, it would look like this:
 ```Swift
 public extension ComplexZmanimCalendar {
+
+    // for regular minutes (note the need to convert to milliseconds)
+    func getTzais45() -> Date?  {
+        return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: 45 * ComplexZmanimCalendar.MINUTE_MILLIS);
+    }
     
     // for degrees
     func getTzais8PointSevenDegrees() -> Date? {
