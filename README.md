@@ -39,7 +39,7 @@ If you used CocoaPods:
 ```Swift
 import KosherSwiftNew
 ```
-Then, it as simple as instantiating a class and calling it's methods:
+Then, it is as simple as instantiating a class and calling it's methods:
 ```Swift
 let jewishCalendar = JewishCalendar() // by default it is set to today's date
 print(jewishCalendar.getJewishMonth()) // This will print the jewish month as a number, so Nissan will be 8. See the JewishCalendar class for more details
