@@ -827,7 +827,7 @@ public class JewishCalendar {
     public func setJewishYear(year:Int) {
         var hebrewCalendar = Calendar(identifier: .hebrew)
         hebrewCalendar.timeZone = timeZone
-        workingDate = hebrewCalendar.date(bySetting: .year, value: year, of: workingDate)!
+        workingDate = hebrewCalendar.date(byAdding: .year, value: (year - getJewishYear()), to: workingDate)!
     }
     
     /**

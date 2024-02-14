@@ -63,9 +63,6 @@ public class YerushalmiYomiCalculator {
         nextCycle.year = 1980
         nextCycle.month = 2
         nextCycle.day = 2
-        
-//        let n = dateCreator.date(from: nextCycle)
-//        let p = dateCreator.date(from: prevCycle)
 
         // Go cycle by cycle, until we get the next cycle
         while jewishCalendar.workingDate.compare(dateCreator.date(from: nextCycle)!) == .orderedDescending {
@@ -76,7 +73,7 @@ public class YerushalmiYomiCalculator {
         }
         
         // Get the number of days from cycle start until request.
-        let dafNo = getDiffBetweenDays(start: dateCreator.date(from: prevCycle)!, end: jewishCalendar.workingDate.addingTimeInterval(-86400))// this should be a temporary solution. Not sure why the dates are one day off
+        let dafNo = getDiffBetweenDays(start: dateCreator.date(from: prevCycle)!, end: jewishCalendar.workingDate)
         
         // Get the number of special day to subtract
         let specialDays = getNumOfSpecialDays(startDate: dateCreator.date(from: prevCycle)!, endDate: jewishCalendar.workingDate)
@@ -114,28 +111,20 @@ public class YerushalmiYomiCalculator {
         
         var specialDays = 0
         
-        let dateCreator = Calendar(identifier: .hebrew)
-
-        //create a hebrew calendar set to the date 7/10/5770
-        var yomKippurComponents = DateComponents()
-        yomKippurComponents.year = 5770
-        yomKippurComponents.month = 1
-        yomKippurComponents.day = 10
+        //create a jewish calendar set to the date Tishrei/10/5770
+        let yom_kippur = JewishCalendar(jewishYear: 5770, jewishMonth: JewishCalendar.TISHREI, jewishDayOfMonth: 10)
         
-        var tishaBeavComponents = DateComponents()
-        tishaBeavComponents.year = 5770
-        tishaBeavComponents.month = 5
-        tishaBeavComponents.day = 9
+        let tisha_beav = JewishCalendar(jewishYear: 5770, jewishMonth: JewishCalendar.AV, jewishDayOfMonth: 9)
         
         while startYear <= endYear {
-            yomKippurComponents.year = startYear
-            tishaBeavComponents.year = startYear
+            yom_kippur.setJewishYear(year: startYear)
+            tisha_beav.setJewishYear(year: startYear)
             
-            if isBetween(start: startDate, date: dateCreator.date(from: yomKippurComponents)!, end: endDate) {
+            if isBetween(start: startDate, date: yom_kippur.workingDate, end: endDate) {
                 specialDays += 1
             }
             
-            if isBetween(start: startDate, date: dateCreator.date(from: tishaBeavComponents)!, end: endDate) {
+            if isBetween(start: startDate, date: tisha_beav.workingDate, end: endDate) {
                 specialDays += 1
             }
             

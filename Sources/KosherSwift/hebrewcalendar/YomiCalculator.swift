@@ -67,7 +67,7 @@ public class YomiCalculator {
          */
         var blattPerMasechta = [ 64, 157, 105, 121, 22, 88, 56, 40, 35, 31, 32, 29, 27, 122, 112, 91, 66, 49, 90, 82,
                 119, 119, 176, 113, 24, 49, 76, 14, 120, 110, 142, 61, 34, 34, 28, 22, 4, 9, 5, 73 ];
-        let calendar = jewishCalendar.workingDate.addingTimeInterval(-86400)//temp fix
+        let calendar = jewishCalendar.workingDate
 
         var dafYomi: Daf? = nil;
         let julianDay = getJulianDay(date: calendar);
@@ -134,9 +134,9 @@ public class YomiCalculator {
         let a = year / 100;
         let b = 2 - a + a / 4;
         let c = floor(365.25 * (Double(year) + 4716))
-        let d = floor(30.6001 * Double(month))
+        let d = floor(30.6001 * Double(month + 1))
         let e = Double(day) + Double(b) - 1524.5
-        return Int(c + d + e);
+        return Int(Double(c + d + e))
     }
     
     private static func gregorianDate(forYear year: Int, month: Int, andDay day: Int) -> Date? {

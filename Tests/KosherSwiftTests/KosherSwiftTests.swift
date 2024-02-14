@@ -189,12 +189,28 @@ class KosherSwiftTests: XCTestCase {
     
     func testDafYomis() {
         jewishCalendar.setGregorianDate(year: 2023, month: 12, dayOfMonth: 21)
-        let dafYomi = jewishCalendar.getDafYomiBavli()
-        let dafYomiYeru = jewishCalendar.getDafYomiYerushalmi()
+        var dafYomi = jewishCalendar.getDafYomiBavli()
+        var dafYomiYeru = jewishCalendar.getDafYomiYerushalmi()
         XCTAssertEqual(dafYomi?.getMasechta(), "בבא קמא")
         XCTAssertEqual(dafYomi?.getDaf(), 49)
         XCTAssertEqual(dafYomiYeru?.getYerushalmiMasechta(), "שבת")
         XCTAssertEqual(dafYomiYeru?.getDaf(), 8)
+        
+        jewishCalendar.setGregorianDate(year: 2024, month: 2, dayOfMonth: 4)
+        dafYomi = jewishCalendar.getDafYomiBavli()
+        dafYomiYeru = jewishCalendar.getDafYomiYerushalmi()
+        XCTAssertEqual(dafYomi?.getMasechta(), "בבא קמא")
+        XCTAssertEqual(dafYomi?.getDaf(), 94)
+        XCTAssertEqual(dafYomiYeru?.getYerushalmiMasechta(), "שבת")
+        XCTAssertEqual(dafYomiYeru?.getDaf(), 53)
+        
+        jewishCalendar.setGregorianDate(year: 2020, month: 6, dayOfMonth: 18)
+        dafYomi = jewishCalendar.getDafYomiBavli()
+        dafYomiYeru = jewishCalendar.getDafYomiYerushalmi()
+        XCTAssertEqual(dafYomi?.getMasechta(), "שבת")
+        XCTAssertEqual(dafYomi?.getDaf(), 104)
+        XCTAssertEqual(dafYomiYeru?.getYerushalmiMasechta(), "יומא")
+        XCTAssertEqual(dafYomiYeru?.getDaf(), 17)
     }
     
     func testCalculatorSunrise() throws {
