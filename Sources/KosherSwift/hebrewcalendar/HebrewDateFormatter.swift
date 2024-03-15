@@ -297,13 +297,13 @@ public class HebrewDateFormatter {
      * The <a href="https://en.wikipedia.org/wiki/Geresh#Punctuation_mark">gersh</a> character is the &#x05F3; char
      * that is similar to a single quote and is used in formatting Hebrew numbers.
      */
-    private static let GERESH = "\u{05F3}";
+    private static let GERESH = "׳";
     
     /**
      * The <a href="https://en.wikipedia.org/wiki/Gershayim#Punctuation_mark">gershyim</a> character is the &#x05F4; char
      * that is similar to a double quote and is used in formatting Hebrew numbers.
      */
-    private static let GERSHAYIM = "\u{05F4}";
+    private static let GERSHAYIM = "״";
     
     /**
      * Transliterated month names. Defaults to ["Nissan", "Iyar", "Sivan", "Tammuz", "Av", "Elul", "Tishrei", "Cheshvan",
@@ -311,7 +311,7 @@ public class HebrewDateFormatter {
      * @see #getTransliteratedMonthList()
      * @see #setTransliteratedMonthList(String[])
      */
-    public var transliteratedMonths = [ "Tishrei", "Cheshvan", "Kislev", "Teves", "Shevat", "Adar", "Adar II", "Nissan", "Iyar", "Sivan", "Tammuz", "Av", "Elul" , "Adar I"];
+    public var transliteratedMonths = ["Tishrei", "Cheshvan", "Kislev", "Teves", "Shevat", "Adar", "Adar II", "Nissan", "Iyar", "Sivan", "Tammuz", "Av", "Elul" , "Adar I"];
     
     /**
      * The Hebrew omer prefix charachter. It defaults to &#x05D1; producing &#x05D1;&#x05E2;&#x05D5;&#x05DE;&#x05E8;,
@@ -319,7 +319,7 @@ public class HebrewDateFormatter {
      * @see #getHebrewOmerPrefix()
      * @see #setHebrewOmerPrefix(String)
      */
-    public var hebrewOmerPrefix = "\u{05D1}";
+    public var hebrewOmerPrefix = "ב";
     
     /**
      * The default value for formatting Shabbos (Saturday). Defaults to Shabbos.
@@ -438,8 +438,8 @@ public class HebrewDateFormatter {
         "צום גדליה", "ערב יום כיפור", "יום כיפור", "ערב סוכות", "סוכות",
         "חול המועד סוכות", "הושענא רבה", "שמיני עצרת", "שמחת תורה", "ערב חנוכה",
         "חנוכה", "עשרה בטבת", "ט\"ו בשבט", "תענית אסתר", "פורים",
-        "פורים שושן", "פורים קטן", "ראש חודש", "יום השואה", "יום הזיכרון",
-        "יום העצמאות", "יום ירושלים", "ל\"ג בעומר", "פורים שושן קטן", "אסרו חג"
+        "שושן פורים", "פורים קטן", "ראש חודש", "יום השואה", "יום הזיכרון",
+        "יום העצמאות", "יום ירושלים", "ל\"ג בעומר", "שושן פורים קטן", "אסרו חג"
     ];
     
     
@@ -607,7 +607,7 @@ public class HebrewDateFormatter {
         "אדר ב",
         "ניסן",
         "אייר",
-        "סיוון",
+        "סיון",
         "תמוז",
         "אב",
         "אלול",
