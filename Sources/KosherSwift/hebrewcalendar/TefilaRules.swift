@@ -180,6 +180,7 @@ public class TefilaRules {
      */
     public func isTachanunRecitedMincha(jewishCalendar:JewishCalendar) -> Bool {
         let tomorrow = JewishCalendar();
+        tomorrow.workingDate = jewishCalendar.workingDate
         tomorrow.forward()
         
         if (!tachanunRecitedMinchaAllYear
@@ -222,7 +223,7 @@ public class TefilaRules {
             if (jewishCalendar.getDayOfWeek() == 7) { //Not recited on Friday night
                 return false;
             }
-            if(jewishCalendar.getDayOfWeek() == 1) { // When starting on Sunday, it can be the start date or delayed from Shabbos
+            if (jewishCalendar.getDayOfWeek() == 1) { // When starting on Sunday, it can be the start date or delayed from Shabbos
                 return jewishCalendar.getTekufasTishreiElapsedDays() == 48 || jewishCalendar.getTekufasTishreiElapsedDays() == 47;
             } else {
                 return jewishCalendar.getTekufasTishreiElapsedDays() == 47;
@@ -282,7 +283,7 @@ public class TefilaRules {
         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() < 15) {
             return true;
         }
-        if (jewishCalendar.getJewishMonth() < JewishCalendar.CHESHVAN) {
+        if (jewishCalendar.getJewishMonth() >= JewishCalendar.NISSAN || jewishCalendar.getJewishMonth() == JewishCalendar.TISHREI) {
             return false;
         }
         if (jewishCalendar.getInIsrael()) {

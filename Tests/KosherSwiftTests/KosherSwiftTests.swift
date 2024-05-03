@@ -64,6 +64,20 @@ class KosherSwiftTests: XCTestCase {
         XCTAssertEqual(jewishCalendar.isPesach(), true)
     }
     
+    func testTefilaRules() {
+        jewishCalendar.setJewishDate(year: 5784, month: JewishCalendar.NISSAN, dayOfMonth: 14)
+        XCTAssertEqual(TefilaRules().isVeseinBerachaRecited(jewishCalendar: jewishCalendar), false)
+        
+        jewishCalendar.setJewishDate(year: 5784, month: JewishCalendar.NISSAN, dayOfMonth: 15)
+        XCTAssertEqual(TefilaRules().isVeseinBerachaRecited(jewishCalendar: jewishCalendar), true)
+        
+        jewishCalendar.setGregorianDate(year: 2023, month: 12, dayOfMonth: 5)
+        XCTAssertEqual(TefilaRules().isVeseinTalUmatarRecited(jewishCalendar: jewishCalendar), false)
+        
+        jewishCalendar.setGregorianDate(year: 2023, month: 12, dayOfMonth: 6)
+        XCTAssertEqual(TefilaRules().isVeseinTalUmatarRecited(jewishCalendar: jewishCalendar), true)
+    }
+    
     func testInternalHebrewCalendarMonths() {
         let arrayOfHebrewMonthsLeapYear = [8,9,10,11,12,13,1,2,3,4,5,6,7]
         jewishCalendar.setJewishDate(year: 5784, month: JewishCalendar.TISHREI, dayOfMonth: 1)//leap year
