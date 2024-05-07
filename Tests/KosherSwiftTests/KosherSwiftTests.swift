@@ -201,6 +201,14 @@ class KosherSwiftTests: XCTestCase {
         XCTAssertEqual(hebrewDateFormatter.formatDayOfWeek(jewishCalendar: jewishCalendar), "Tuesday")
     }
     
+    func testRhumbLineBearing() {
+        let denver = GeoLocation(locationName: "Denver", latitude: 39.6272082, longitude: -104.8800718, timeZone: TimeZone.current)
+        let jer = GeoLocation(locationName: "Jerusalem", latitude: 31.778015, longitude: 35.235413, timeZone: TimeZone.current)
+
+        let bearing = denver.getRhumbLineBearing(location: jer)        
+        XCTAssertEqual(bearing, 93.9525489160192)
+    }
+    
     func testDafYomis() {
         jewishCalendar.setGregorianDate(year: 2023, month: 12, dayOfMonth: 21)
         var dafYomi = jewishCalendar.getDafYomiBavli()

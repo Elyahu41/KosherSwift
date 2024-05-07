@@ -523,7 +523,7 @@ public class GeoLocation {
     }
     
     public func toRadians(degrees:Double) -> Double {
-        return Double.pi / 180.0
+        return degrees * Double.pi / 180.0
     }
     
     public func toDegrees(radians:Double) -> Double {
