@@ -50,13 +50,23 @@ public class NOAACalculator : AstronomicalCalculator {
     public init(geoLocation: GeoLocation) {
         NOAACalculator.geoLocation = geoLocation
     }
+    
+    /**
+     * An enum to indicate what type of solar event is being calculated.
+     */
+        enum SolarEvent {
+            /**SUNRISE A solar event related to sunrise*/case SUNRISE
+            /**SUNSET A solar event related to sunset*/case SUNSET
+            // possibly add the following in the future, if added, an IllegalArgumentException should be thrown in getSunHourAngle
+            // /**NOON A solar event related to noon*/NOON, /**MIDNIGHT A solar event related to midnight*/MIDNIGHT
+        }
 
     /**
      * Returns the name of the algorithm.
      * @return the descriptive name of the algorithm.
      */
     public func getCalculatorName() -> String {
-        return "US National Oceanic and Atmospheric Administration Algorithm";
+        return "US National Oceanic and Atmospheric Administration Algorithm"; // Implementation of the Jean Meeus algorithm
     }
 
     /**
@@ -72,8 +82,7 @@ public class NOAACalculator : AstronomicalCalculator {
     public override func getUTCSunrise(date: Date, geoLocation: GeoLocation, zenith: Double, adjustForElevation: Bool) -> Double {
         let elevation = adjustForElevation ? geoLocation.getElevation() : 0;
         let adjustedZenith = adjustZenith(zenith: zenith, elevation: elevation);
-
-        var sunrise = NOAACalculator.getSunriseUTC(julianDay: NOAACalculator.getJulianDay(date: date), latitude: geoLocation.getLatitude(), longitude: -geoLocation.getLongitude(), zenith: adjustedZenith);
+        var sunrise = NOAACalculator.getSunRiseSetUTC(julianDay: NOAACalculator.getJulianDay(date: date), latitude: geoLocation.getLatitude(), longitude: -geoLocation.getLongitude(), zenith: adjustedZenith, solarEvent: SolarEvent.SUNRISE);
         sunrise = sunrise / 60;
 
         // ensure that the time is >= 0 and < 24
@@ -111,7 +120,7 @@ public class NOAACalculator : AstronomicalCalculator {
         let elevation = adjustForElevation ? geoLocation.getElevation() : 0;
         let adjustedZenith = adjustZenith(zenith: zenith, elevation: elevation);
 
-        var sunset = NOAACalculator.getSunsetUTC(julianDay: NOAACalculator.getJulianDay(date: date), latitude: geoLocation.getLatitude(), longitude: -geoLocation.getLongitude(),zenith: adjustedZenith);
+        var sunset = NOAACalculator.getSunRiseSetUTC(julianDay: NOAACalculator.getJulianDay(date: date), latitude: geoLocation.getLatitude(), longitude: -geoLocation.getLongitude(),zenith: adjustedZenith, solarEvent: SolarEvent.SUNSET);
         sunset = sunset / 60;
 
         // ensure that the time is >= 0 and < 24
@@ -361,27 +370,8 @@ public class NOAACalculator : AstronomicalCalculator {
     }
 
     /**
-     * Return the <a href="https://en.wikipedia.org/wiki/Hour_angle">hour angle</a> of the sun in
-     * <a href="https://en.wikipedia.org/wiki/Radian">radians</a> at sunrise for the latitude.
-     *
-     * @param lat
-     *            the latitude of observer in degrees
-     * @param solarDec
-     *            the declination angle of sun in degrees
-     * @param zenith
-     *            the zenith
-     * @return hour angle of sunrise in <a href="https://en.wikipedia.org/wiki/Radian">radians</a>
-     */
-    private static func getSunHourAngleAtSunrise(lat: Double, solarDec: Double, zenith: Double) -> Double {
-        let latRad = toRadians(degrees: lat);
-        let sdRad = toRadians(degrees: solarDec);
-
-        return acos(cos(toRadians(degrees: zenith)) / (cos(latRad) * cos(sdRad)) - tan(latRad) * tan(sdRad)); // in radians
-    }
-
-    /**
      * Returns the <a href="https://en.wikipedia.org/wiki/Hour_angle">hour angle</a> of the sun in <a href=
-     * "https://en.wikipedia.org/wiki/Radian">radians</a>at sunset for the latitude.
+     * "https://en.wikipedia.org/wiki/Radian">radians</a>at for the latitude.
      * @todo use - {@link #getSunHourAngleAtSunrise(double, double, double)} implementation to avoid duplication of code.
      *
      * @param lat
@@ -390,14 +380,19 @@ public class NOAACalculator : AstronomicalCalculator {
      *            the declination angle of sun in degrees
      * @param zenith
      *            the zenith
+     * @param solarEvent
+     *             If the hour angle is for sunrise or sunset
      * @return the hour angle of sunset in <a href="https://en.wikipedia.org/wiki/Radian">radians</a>
      */
-    private static func getSunHourAngleAtSunset(lat: Double, solarDec: Double, zenith: Double) -> Double {
-        let latRad = toRadians(degrees: lat);
-        let sdRad = toRadians(degrees: solarDec);
-
-        let hourAngle = (acos(cos(toRadians(degrees: zenith)) / (cos(latRad) * cos(sdRad)) - tan(latRad) * tan(sdRad)));
-        return -hourAngle; // in radians
+    private static func getSunHourAngle(latitude: Double, solarDeclination: Double, zenith: Double, solarEvent: SolarEvent) -> Double {
+        let latRad = toRadians(degrees: latitude);
+        let sdRad = toRadians(degrees: solarDeclination);
+        
+        var hourAngle = (acos(cos(toRadians(degrees: zenith)) / (cos(latRad) * cos(sdRad)) - tan(latRad) * tan(sdRad)));
+        if (solarEvent == SolarEvent.SUNSET) {
+            hourAngle = -hourAngle;
+        }
+        return hourAngle;
     }
 
     /**
@@ -474,52 +469,6 @@ public class NOAACalculator : AstronomicalCalculator {
         return toDegrees(radians: atan(sin(hourAngle_rad) / ((cos(hourAngle_rad) * sin(lat_rad)) - (tan(dec_rad) * cos(lat_rad)))))+180.0;
 
     }
-
-    /**
-     * Return the <a href="https://en.wikipedia.org/wiki/Universal_Coordinated_Time">Universal Coordinated Time</a> (UTC)
-     * of sunrise for the given day at the given location on earth.
-     *
-     * @param julianDay
-     *            the Julian day
-     * @param latitude
-     *            the latitude of observer in degrees
-     * @param longitude
-     *            the longitude of observer in degrees
-     * @param zenith
-     *            the zenith
-     * @return the time in minutes from zero UTC
-     */
-    private static func getSunriseUTC(julianDay:Double, latitude:Double, longitude:Double, zenith:Double) -> Double {
-        let julianCenturies = getJulianCenturiesFromJulianDay(julianDay: julianDay);
-
-        // Find the time of solar noon at the location, and use that declination. This is better than start of the
-        // Julian day
-
-        let noonmin = getSolarNoonUTC(julianCenturies: julianCenturies, longitude: longitude);
-        let tnoon = getJulianCenturiesFromJulianDay(julianDay: julianDay + noonmin / 1440.0);
-
-        // First pass to approximate sunrise (using solar noon)
-
-        var eqTime = getEquationOfTime(julianCenturies: tnoon);
-        var solarDec = getSunDeclination(julianCenturies: tnoon);
-        var hourAngle = getSunHourAngleAtSunrise(lat: latitude, solarDec: solarDec, zenith: zenith);
-
-        var delta = longitude - toDegrees(radians: hourAngle);
-        var timeDiff = 4 * delta; // in minutes of time
-        var timeUTC = 720 + timeDiff - eqTime; // in minutes
-
-        // Second pass includes fractional Julian Day in gamma calc
-
-        let newt = getJulianCenturiesFromJulianDay(julianDay: getJulianDayFromJulianCenturies(julianCenturies: julianCenturies) + timeUTC
-                / 1440.0);
-        eqTime = getEquationOfTime(julianCenturies: newt);
-        solarDec = getSunDeclination(julianCenturies: newt);
-        hourAngle = getSunHourAngleAtSunrise(lat: latitude, solarDec: solarDec, zenith: zenith);
-        delta = longitude - toDegrees(radians: hourAngle);
-        timeDiff = 4 * delta;
-        timeUTC = 720 + timeDiff - eqTime; // in minutes
-        return timeUTC;
-    }
     
     /**
      * Return the <a href="https://en.wikipedia.org/wiki/Universal_Coordinated_Time">Universal Coordinated Time</a> (UTC)
@@ -572,7 +521,7 @@ public class NOAACalculator : AstronomicalCalculator {
      * @see #getUTCNoon(Calendar, GeoLocation)
      */
     private static func getSolarNoonUTC(julianCenturies: Double, longitude: Double) -> Double {
-        // First pass uses approximate solar noon to calculate equation of time
+        // Only 1 pass for approximate solar noon to calculate equation of time
         let tnoon = getJulianCenturiesFromJulianDay(julianDay: getJulianDayFromJulianCenturies(julianCenturies: julianCenturies) + longitude / 360.0);
         var eqTime = getEquationOfTime(julianCenturies: tnoon);
         let solNoonUTC = 720 + (longitude * 4) - eqTime; // min
@@ -586,7 +535,7 @@ public class NOAACalculator : AstronomicalCalculator {
 
     /**
      * Return the <a href="https://en.wikipedia.org/wiki/Universal_Coordinated_Time">Universal Coordinated Time</a> (UTC)
-     * of sunset for the given day at the given location on earth.
+     * of sunrise or sunset for the given day at the given location on earth.
      *
      * @param julianDay
      *            the Julian day
@@ -596,13 +545,15 @@ public class NOAACalculator : AstronomicalCalculator {
      *            longitude of observer in degrees
      * @param zenith
      *            zenith
+     * @param solarEvent
+     *             Is the calculation for sunrise or sunset
      * @return the time in minutes from zero Universal Coordinated Time (UTC)
      */
-    private static func getSunsetUTC(julianDay:Double, latitude:Double, longitude: Double, zenith:Double) -> Double {
+    private static func getSunRiseSetUTC(julianDay: Double, latitude: Double, longitude: Double, zenith: Double, solarEvent: SolarEvent) -> Double {
         let julianCenturies = getJulianCenturiesFromJulianDay(julianDay: julianDay);
 
-        // Find the time of solar noon at the location, and use that declination. This is better than start of the
-        // Julian day
+        // Find the time of solar noon at the location, and use that declination.
+        // This is better than start of the Julian day
 
         let noonmin = getSolarNoonUTC(julianCenturies: julianCenturies, longitude: longitude);
         let tnoon = getJulianCenturiesFromJulianDay(julianDay: julianDay + noonmin / 1440.0);
@@ -611,7 +562,7 @@ public class NOAACalculator : AstronomicalCalculator {
 
         var eqTime = getEquationOfTime(julianCenturies: tnoon);
         var solarDec = getSunDeclination(julianCenturies: tnoon);
-        var hourAngle = getSunHourAngleAtSunset(lat: latitude, solarDec: solarDec, zenith: zenith);
+        var hourAngle = getSunHourAngle(latitude: latitude, solarDeclination: solarDec, zenith: zenith, solarEvent: solarEvent);
 
         var delta = longitude - toDegrees(radians: hourAngle);
         var timeDiff = 4 * delta;
@@ -623,7 +574,7 @@ public class NOAACalculator : AstronomicalCalculator {
                 / 1440.0);
         eqTime = getEquationOfTime(julianCenturies: newt);
         solarDec = getSunDeclination(julianCenturies: newt);
-        hourAngle = getSunHourAngleAtSunset(lat: latitude, solarDec: solarDec, zenith: zenith);
+        hourAngle = getSunHourAngle(latitude: latitude, solarDeclination: solarDec, zenith: zenith, solarEvent: solarEvent);
 
         delta = longitude - toDegrees(radians: hourAngle);
         timeDiff = 4 * delta;

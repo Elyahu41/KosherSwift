@@ -303,6 +303,13 @@ public class JewishCalendar {
     public var isMukafChoma: Bool = false
     
     /**
+     * Is the calendar set to have a safek (doubtful) Purim <em>demukafim</em>, where Purim is celebrated (mainly) on the 14th and the 15th of Adar.
+     * @see #getIsSafekMukafChoma()
+     * @see #setIsSafekMukafChoma(boolean)
+     */
+    public var isSafekMukafChoma = false
+    
+    /**
      * List of <em>parshiyos</em> or special <em>Shabasos</em>. ``NONE`` indicates a week without a <em>parsha</em>, while the enum for
      * the <em>parsha</em> of ``VZOS_HABERACHA`` exists for consistency, but is not currently used. The special <em>Shabasos</em> of
      * Shekalim, Zachor, Para, Hachodesh, as well as Shabbos Shuva, Shira, Hagadol, Chazon and Nachamu are also represented in this collection
@@ -676,6 +683,29 @@ public class JewishCalendar {
      */
     public func setIsMukafChoma(isMukafChoma: Bool) {
         self.isMukafChoma = isMukafChoma;
+    }
+    
+    /**
+     * Returns if the city is set as a city that may have been surrounded by a wall from the time of Yehoshua, and
+     * Shushan Purim should be celebrated as well as regular Purim.
+     * @return if the city is set as a city that may have been surrounded by a wall from the time of Yehoshua, and
+     * Shushan Purim should be celebrated as well as regular Purim.
+     * @see #setIsSafekMukafChoma(boolean)
+     */
+    public func getIsSafekMukafChoma() -> Bool {
+        return isSafekMukafChoma
+    }
+    
+    /**
+     * Sets if the location may have been surrounded by a wall from the time of Yehoshua, and Shushan Purim should be
+     * celebrated as well as regular Purim. This can be set for Baghdad Iraq, or other cities around the world that
+     * have the status of a "Safek Mukaf Choma". There are multiple cities in Israel that have this status.
+     * The exception being Yerushalayim.
+     * @param isSafekMukafChoma if the city may have been surrounded by a wall from the time of Yehoshua.
+     * @see #getIsSafekMukafChoma()
+     */
+    public func setIsSafekMukafChoma(isSafekMukafChoma: Bool) {
+        self.isSafekMukafChoma = isSafekMukafChoma
     }
     
     /**
@@ -1544,7 +1574,7 @@ public class JewishCalendar {
             if (day == 15 || (day == 16 && !inIsrael)) {
                 return JewishCalendar.SUCCOS;
             }
-            if (day >= 17 && day <= 20 || (day == 16 && inIsrael)) {
+            if (day >= 16 && day <= 20) {
                 return JewishCalendar.CHOL_HAMOED_SUCCOS;
             }
             if (day == 21) {
@@ -1641,7 +1671,7 @@ public class JewishCalendar {
      */
     public func isYomTov() -> Bool {
         let holidayIndex = getYomTovIndex();
-        if ((isErevYomTov() && (holidayIndex != JewishCalendar.HOSHANA_RABBA || (holidayIndex == JewishCalendar.CHOL_HAMOED_PESACH && getJewishDayOfMonth() != 20)))
+        if ((isErevYomTov() && !( holidayIndex == JewishCalendar.HOSHANA_RABBA || holidayIndex == JewishCalendar.CHOL_HAMOED_PESACH))
             || (isTaanis() && holidayIndex != JewishCalendar.YOM_KIPPUR) || holidayIndex == JewishCalendar.ISRU_CHAG) {
             return false;
         }
@@ -2018,17 +2048,22 @@ public class JewishCalendar {
     
     /**
      * Returns if the day is Purim (<a href="https://en.wikipedia.org/wiki/Purim#Shushan_Purim">Shushan Purim</a>
-     * in a mukaf choma and regular Purim in a non-mukaf choma).
-     * @return if the day is Purim (Shushan Purim in a mukaf choma and regular Purim in a non-mukaf choma)
+     * in a mukaf choma and regular Purim in a non-mukaf choma. On both days if {@link #setIsSafekMukafChoma(boolean)} is true).
+     * @return if the day is Purim (Shushan Purim in a mukaf choma and regular Purim in a non-mukaf choma or on both days
+     * if {@link #setIsSafekMukafChoma(boolean)} is true)
      *
      * @see #getIsMukafChoma()
      * @see #setIsMukafChoma(boolean)
+     * @see #getIsSafekMukafChoma()
+     * @see #setIsSafekMukafChoma(boolean)
      */
     public func isPurim() -> Bool {
         if (isMukafChoma) {
-            return getYomTovIndex() == JewishCalendar.SHUSHAN_PURIM;
+            return getYomTovIndex() == JewishCalendar.SHUSHAN_PURIM
+        } else if (isSafekMukafChoma) {
+            return getYomTovIndex() == JewishCalendar.PURIM || getYomTovIndex() == JewishCalendar.SHUSHAN_PURIM
         } else {
-            return getYomTovIndex() == JewishCalendar.PURIM;
+            return getYomTovIndex() == JewishCalendar.PURIM
         }
     }
     

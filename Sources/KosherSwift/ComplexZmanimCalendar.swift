@@ -4033,7 +4033,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getHalfDayBasedZman(Date, Date, double)
      */
     public func getSofZmanShmaGRASunriseToFixedLocalChatzos() -> Date? {
-        return getHalfDayBasedZman(startOfHalfDay: getSunrise(), endOfHalfDay: getFixedLocalChatzos(), hours: 3);
+        return getHalfDayBasedZman(startOfHalfDay: getElevationAdjustedSunrise(), endOfHalfDay: getFixedLocalChatzos(), hours: 3);
     }
     
     /**
@@ -4053,7 +4053,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getHalfDayBasedZman(Date, Date, double)
      */
     public func getSofZmanTfilaGRASunriseToFixedLocalChatzos() -> Date? {
-        return getHalfDayBasedZman(startOfHalfDay: getSunrise(), endOfHalfDay: getFixedLocalChatzos(), hours: 4);
+        return getHalfDayBasedZman(startOfHalfDay: getElevationAdjustedSunrise(), endOfHalfDay: getFixedLocalChatzos(), hours: 4);
     }
     
     /**
@@ -4093,7 +4093,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see  ZmanimCalendar#getHalfDayBasedZman(Date, Date, double)
      */
     public func getMinchaKetanaGRAFixedLocalChatzosToSunset() -> Date? {
-        return getHalfDayBasedZman(startOfHalfDay: getFixedLocalChatzos(), endOfHalfDay: getSunset(), hours: 3.5);
+        return getHalfDayBasedZman(startOfHalfDay: getFixedLocalChatzos(), endOfHalfDay: getElevationAdjustedSunset(), hours: 3.5);
     }
     
     /**
@@ -4114,7 +4114,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see  ZmanimCalendar#getHalfDayBasedZman(Date, Date, double)
      */
     public func getPlagHaminchaGRAFixedLocalChatzosToSunset() -> Date? {
-        return getHalfDayBasedZman(startOfHalfDay: getFixedLocalChatzos(), endOfHalfDay: getSunset(), hours: 4.75);
+        return getHalfDayBasedZman(startOfHalfDay: getFixedLocalChatzos(), endOfHalfDay: getElevationAdjustedSunset(), hours: 4.75);
     }
     
     /**
