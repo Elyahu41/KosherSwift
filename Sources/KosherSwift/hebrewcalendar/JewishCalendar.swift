@@ -886,6 +886,48 @@ public class JewishCalendar {
     }
     
     /**
+     * Returns the Jewish month 1-12 (or 13 years in a leap year) as it is in KosherJava with Nissan being the first month of the year.
+     * The month count starts with 1 for Nissan and goes to 13 for Adar II
+     *
+     * @return the Jewish month from 1 to 12 (or 13 years in a leap year). The month count starts with 1 for Nissan and goes to 13 for Adar II
+     */
+    public func getNissanStartingJewishMonth() -> Int {
+        var hebrewCalendar = Calendar(identifier: .hebrew)
+        hebrewCalendar.timeZone = timeZone
+        let swiftJewishMoth = hebrewCalendar.component(.month, from: workingDate);
+        switch swiftJewishMoth {
+        case JewishCalendar.NISSAN:
+            return 1
+        case JewishCalendar.IYAR:
+            return 2
+        case JewishCalendar.SIVAN:
+            return 3
+        case JewishCalendar.TAMMUZ:
+            return 4
+        case JewishCalendar.AV:
+            return 5
+        case JewishCalendar.ELUL:
+            return 6
+        case JewishCalendar.TISHREI:
+            return 7
+        case JewishCalendar.CHESHVAN:
+            return 8
+        case JewishCalendar.KISLEV:
+            return 9
+        case JewishCalendar.TEVES:
+            return 10
+        case JewishCalendar.SHEVAT:
+            return 11
+        case JewishCalendar.ADAR:
+            return 12
+        case JewishCalendar.ADAR_II:
+            return 13
+        default:
+            return -1
+        }
+    }
+    
+    /**
      * Returns the Jewish day of month.
      *
      * @return the Jewish day of the month
