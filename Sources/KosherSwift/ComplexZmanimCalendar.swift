@@ -499,6 +499,23 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     }
     
     /**
+     * Method to return a <em>shaah zmanis</em> (solar hour) according to the opinion of the <a href=
+     * "https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a>. This calculation divides the day
+     * based on the opinion of the MGA that the day runs from dawn to dusk. Dawn for this calculation is 72 zmaniyos minutes
+     * before sunrise and dusk is 72 zmaniyos minutes after sunset. This day is split into 12 equal parts with each part
+     * being a <em>shaah zmanis</em>. Alternate methods of calculating a <em>shaah zmanis</em> are available in the
+     * subclass `` ComplexZmanimCalendar``
+     *
+     * @return the <code>long</code> millisecond length of a <em>shaah zmanis</em>. If the calculation can't be computed
+     *         such as in the Arctic Circle where there is at least one day a year where the sun does not rise, and one
+     *         where it does not set, a ``Int64.min`` will be returned. See detailed explanation on top of the
+     *         ``AstronomicalCalendar`` documentation.
+     */
+    public func getShaahZmanisMGAZmanis() -> Int64 {
+        return getTemporalHour(startOfDay: getAlos72Zmanis(), endOfDay: getTzais72Zmanis());
+    }
+    
+    /**
      * Method to return a <em>shaah zmanis</em> (temporal hour) according to the opinion of the <a href=
      * "https://en.wikipedia.org/wiki/Avraham_Gombinern">Magen Avraham (MGA)</a> based on <em>alos</em> being
      * ``getAlos72Zmanis()`` 72 minutes <em>zmaniyos</em> before ``getSunrise()`` This calculation
@@ -4217,7 +4234,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * Yalkut Yosef holds that the time for Plag Hamincha is calculated by taking 1.25 "seasonal hours" (Sha'ot Zmaniot) from tzait hacochavim.
      * This is how Rabbi Dahan calculates Plag Hamincha in his Amudei Horaah calendar with his own algorithm for tzait hacochavim.
      * Note: The Amudei Horaah calendar provides both the Yalkut Yosef and Halacha Berurah times for Plag Hamincha. (No elevation adjustment is used)
-     * - Warning: This zman should NOT be used in Israel.
+     * - Warning: This zman should NOT be used in Israel! The regular ``getPlagHaminchaYalkutYosef()`` method is preferred in Israel.
      * @return the time for Plag Hamincha as calculated by the Amudei Horaah calendar and Yalkut Yosef.
      */
     public func getPlagHaminchaYalkutYosefAmudeiHoraah() -> Date? {
@@ -4347,22 +4364,31 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         return ComplexZmanimCalendar.getTimeOffset(time: getSeaLevelSunset(), offset: percentage * shaahZmanit);
     }
     
-    public func getTzaisShabbatAmudeiHoraah() -> Date? {
-        return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.GEOMETRIC_ZENITH + 7.14)
+    public func getTzaisShabbosAmudeiHoraah() -> Date? {
+        let tzait = getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.GEOMETRIC_ZENITH + 7.14);
+        if tzait != nil && getTzaisAteretTorah(minutes: 20) != nil {
+            if getTzaisAteretTorah(minutes: 20)!.timeIntervalSince1970 > tzait!.timeIntervalSince1970 { // if shabbat ends before 20 minutes after sunset, use 20 minutes
+                return getTzaisAteretTorah(minutes: 20)
+            }
+            if (getSolarMidnight()!.timeIntervalSince1970 < tzait!.timeIntervalSince1970) { // if chatzot is before when shabbat ends, just use chatzot
+                return getSolarMidnight();
+            }
+        }
+        return tzait
     }
     
     /**
      This is only for display purposes, it should not be used to calculate zmanim.
-     - Returns: The earlier of ``getTzaisAteretTorah()`` or ``getTzaisShabbatAmudeiHoraah()``
+     - Returns: The earlier of ``getTzaisAteretTorah()`` or ``getTzaisShabbosAmudeiHoraah()``
      */
-    public func getTzaisShabbatAmudeiHoraahLesserThan40() -> Date? {
-        if getTzaisAteretTorah() == nil || getTzaisShabbatAmudeiHoraah() == nil {
+    public func getTzaisShabbosAmudeiHoraahLesserThan40() -> Date? {
+        if getTzaisAteretTorah() == nil || getTzaisShabbosAmudeiHoraah() == nil {
             return nil
         }
-        if getTzaisShabbatAmudeiHoraah()?.compare(getTzaisAteretTorah()!) == .orderedDescending {
+        if getTzaisShabbosAmudeiHoraah()?.compare(getTzaisAteretTorah()!) == .orderedDescending {
             return getTzaisAteretTorah()
         } else {
-            return getTzaisShabbatAmudeiHoraah()
+            return getTzaisShabbosAmudeiHoraah()
         }
     }
     
