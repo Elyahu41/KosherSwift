@@ -67,7 +67,7 @@ For zmanim, you will do the same thing, just use the ComplexZmanimCalendar or Zm
 ```Swift
 let geoLocation = GeoLocation(locationName: "Lakewood, NJ", latitude: 40.08213, longitude: -74.20970, timeZone: TimeZone(identifier: "America/New_York")!)
 let cal = ComplexZmanimCalendar(location: geoLocation)
-let sunrise = cal.getSofZmanShmaGRA() // This will return a nullable Date? object
+let sofZmanShmaGra = cal.getSofZmanShmaGRA() // This will return a nullable Date? object
 ```
 If you want to calculate a zman for a certain date:
 ```Swift
@@ -130,14 +130,14 @@ public extension ComplexZmanimCalendar {
     func getTwoSeasonalHoursIntoTheDay() -> Date? {
         let seasonalHour = getTemporalHour()
         // it is preferred to use getTimeOffset because it will handle nil values
-        return AstronomicalCalendar.getTimeOffset(time: getSeaLevelSunrise(), offset: seasonalHour * 2)
+        return AstronomicalCalendar.getTimeOffset(time: getElevationAdjustedSunrise(), offset: seasonalHour * 2)
     }
 }
 ```
 
 Things To Keep In Mind
 -------
-KosherSwift is very similar to KosherJava as it has brought over almost all of it's methods to Swift. I have tried to keep the code as similar as possible to the original repository, because I personally wanted to bring over my Java code from my android project to IOS without having to refactor almost all of the code. However, as much as I tried to keep them similar, there are still big differences in the inner workings of the classes. For starters, the Calendar class in Swift does not contain a time in milliseconds to keep track of time, it only contains functions that can create a date. So everywhere there would be a need to use a Calendar has been replaced with a Date. If you look inside the code of the classes, there is a workingDate variable that can be changed instead of a calendar class.
+KosherSwift is very similar to KosherJava as it has brought over almost all of it's methods to Swift. I have tried to keep the code as similar as possible to the original repository, because I personally wanted to bring over my Java code from my android project to iOS without having to refactor almost all of the code. However, as much as I tried to keep them similar, there are still big differences in the inner workings of the classes. For starters, the Calendar class in Swift does not contain a time in milliseconds to keep track of time, it only contains functions that can create a date. So everywhere there would be a need to use a Calendar has been replaced with a Date. If you look inside the code of the classes, there is a workingDate variable that can be changed instead of a calendar class.
 
 Timezone issues are a big deal in Swift since Date objects are set to UTC by default and only afterwards are timezones taken into account, this leads to the date changing if the timezone for the Calendar class in Swift is not set to the same as timezone as the system. All objects that have a GeoLocation object take this into account, however, if you are using the JewishCalendar class in another timezone, use the JewishCalendar(workingDate: <Date>, timezone: <TimeZone>) constructor.
 
