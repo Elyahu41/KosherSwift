@@ -1170,9 +1170,9 @@ public class JewishCalendar {
      * @return the number of days for a given Jewish month
      */
     private func getDaysInJewishMonth(month:Int, year:Int) -> Int {
-        if ((month == JewishCalendar.IYAR) || (month == JewishCalendar.TAMMUZ) || (month == JewishCalendar.ELUL) || ((month == JewishCalendar.CHESHVAN) && !(isCheshvanLong(year: year)))
-            || ((month == JewishCalendar.KISLEV) && isKislevShort(year: year)) || (month == JewishCalendar.TEVES)
-            || ((month == JewishCalendar.ADAR && isJewishLeapYear(year: year)) && !(isJewishLeapYear(year: year))) || (month == JewishCalendar.ADAR_II)) {
+        if (month == JewishCalendar.IYAR || month == JewishCalendar.TAMMUZ || month == JewishCalendar.ELUL || (month == JewishCalendar.CHESHVAN && !isCheshvanLong(year: year))
+            || (month == JewishCalendar.KISLEV && isKislevShort(year: year)) || month == JewishCalendar.TEVES
+            || (month == JewishCalendar.ADAR && !isJewishLeapYear(year: year)) || (isJewishLeapYear(year: year) && month == JewishCalendar.ADAR_II)) {
             return 29;
         } else {
             return 30;
@@ -2267,7 +2267,7 @@ public class JewishCalendar {
         let moladRemainingChalakim = conjunctionParts - moladHours * 1080
         var moladMinutes = moladRemainingChalakim / 18
         let moladChalakim = moladRemainingChalakim - moladMinutes * 18
-        var moladSeconds = Double(moladChalakim * 10 / 3)
+        var moladSeconds = Double(Double(moladChalakim) * 10 / 3.0)
         
         // subtract local time difference of 20.94 minutes (20 minutes and 56.496 seconds) to get to Standard time
         moladMinutes = moladMinutes - 20

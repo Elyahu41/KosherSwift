@@ -124,6 +124,13 @@ class KosherSwiftTests: XCTestCase {
         XCTAssertEqual(jewishCalendar.getParshah(), .VAYECHI)
     }
     
+    func testTekufa() {
+        jewishCalendar.setGregorianDate(year: 2025, month: 4, dayOfMonth: 8)//the day this test was made
+        let tekufa = jewishCalendar.getTekufaAsDate()
+        let tekufaActualDate = Date(timeIntervalSince1970: 1744041600.0)
+        XCTAssertEqual(tekufa, tekufaActualDate)
+    }
+    
     func testToString() {
         //leap year
         jewishCalendar.setJewishDate(year: 5784, month: JewishCalendar.TISHREI, dayOfMonth: 8)
