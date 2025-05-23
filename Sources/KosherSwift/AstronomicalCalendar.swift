@@ -245,6 +245,14 @@ public class AstronomicalCalendar {
      * @return the Date with the offset added to it
      */
     public static func getTimeOffset(time: Date?, offset: Double) -> Date? {
+        guard let time = time else { return nil }
+
+        guard offset.isFinite,
+              offset <= Double(Int64.max),
+              offset >= Double(Int64.min) else {
+            print("Offset too large or invalid: \(offset)")
+            return nil
+        }
         return getTimeOffset(time: time, offset: Int64(offset));
     }
 
