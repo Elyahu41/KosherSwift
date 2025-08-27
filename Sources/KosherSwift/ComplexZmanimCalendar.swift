@@ -4201,21 +4201,23 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         return getSamuchLeMinchaKetana(startOfDay: getAlos72(), endOfDay: getTzais72(), synchronous: true);
     }
     
-    // these methods are not included in KosherJava, however, I am adding them because of convenience
+    
+    // MARK: - Helper methods. These methods are not included in KosherJava, however, I am added them because of convenience
     
     /**
-     This method returns chatzos as a half way point between sunrise and sunset unless the location is in a place that does not have sunrise of sunset. Then it will return UTCNoon which is an astronomical chatzos.
+     This method returns chatzos as a half way point between sunrise and sunset unless the location is in a place that does not have sunrise of sunset. Then it will return UTCNoon which is an astronomical chatzos based in the NOAACalculator class.
      */
     public func getChatzosIfHalfDayNil() -> Date? {
-        if getSunTransit(startOfDay: getElevationAdjustedSunrise(), endOfDay: getElevationAdjustedSunset()) == nil {
-            return getSunTransit()
+        let middayBasedOnSunriseSunset = getSunTransit(startOfDay: getElevationAdjustedSunrise(), endOfDay: getElevationAdjustedSunset())
+        if middayBasedOnSunriseSunset != nil {
+            return middayBasedOnSunriseSunset
         } else {
-            return getSunTransit(startOfDay: getElevationAdjustedSunrise(), endOfDay: getElevationAdjustedSunset())
+            return getSunTransit()
         }
     }
     
     /**
-     * This method returns the time of <em>plag hamincha</em> according to the Yalkut Yosef. This is calculated as -1.25 hours before
+     * This method returns the time of <em>plag hamincha</em> according to the Yalkut Yosef. This is calculated as -1.25 GRA hours before
      * ``getTzais13Point5Zmanis()``.
      *
      * @return the <code>Date</code> of the time of <em>plag hamincha</em>. If the calculation can't be computed such as
@@ -4232,8 +4234,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     
     /**
      * The Yalkut Yosef holds that the time for Plag Hamincha is calculated by taking 1.25 "seasonal hours" (Sha'ot Zmaniot) from tzait hacochavim.
-     * This is how Rabbi Leeor Dahan calculates Plag Hamincha in his Amudei Horaah calendar with his own algorithm for tzait hacochavim.
-     * Note: The Amudei Horaah calendar provides both the Yalkut Yosef and Halacha Berurah times for Plag Hamincha.
+     * This is how Rabbi Leeor Dahan calculates Plag Hamincha in his Amudei Horaah calendar, adjusting for the distance from the equator for tzait hacochavim.
      * @return the time for Plag Hamincha as calculated by the Amudei Horaah calendar according to the Yalkut Yosef.
      */
     public func getPlagHaminchaYalkutYosefAmudeiHoraah() -> Date? {
@@ -4245,7 +4246,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     /**
      * This method returns the time of alot hashachar (dawn) calculated by the Amudei Horaah calendar. While normally this is calculated as 72 zmaniyot
      * minutes before sunrise, Rabbi Leeor Dahan says that the zmanim need to be adjusted for more northern/southern locations. He calculates the time as
-     * zmaniyot minutes/seconds, however, he adjusts it based on the location and 16.04 degrees (72 zmaniyot minutes in Israel).
+     * zmaniyot minutes/seconds, however, he adjusts it based on the location's distance from the equator at 16.04 degrees (72 zmaniyot minutes in Israel).
      * <p>
      * For example: If you wanted to calculate when alot is for NY, USA, you would first calculate the amount of regular minutes there are in an equinox
      * day between sunrise and 16.04 degrees before sunrise. In NY, this would lead you to around 80 minutes. You would then minus 80 zmaniyot minutes to
@@ -4273,8 +4274,9 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     }
     
     /**
-     * This method returns the time of misheyakir calculated by the Amudei Horaah calendar.
-     * Rabbi Leeor Dahan calculates this zman for as 11/12th of the time between alot and sunrise.
+     * This method returns the time of misheyakir l'kulah calculated by the Amudei Horaah calendar.
+     * Rabbi Leeor Dahan calculates this zman for as 11/12th of the time between alot and sunrise, which is 66 zmaniyot minutes.
+     * - Warning: This is an extremely early zman! It should only be used by workers that need to run to work or similar circumstances. Ideally, do not show this zman without providing another,
      * @return the time of misheyakir calculated by the Amudei Horaah calendar by adjusting the zman based off of degrees.
      */
     public func getMisheyakir66AmudeiHoraah() -> Date? {
@@ -4295,7 +4297,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     
     /**
      * This method returns the time of misheyakir calculated by the Amudei Horaah calendar.
-     * Rabbi Leeor Dahan calculates this zman for as 5/6 of the time between alot and sunrise in the Amudei Horaah calendar.
+     * Rabbi Leeor Dahan calculates this zman for as 5/6 of the time between alot and sunrise in the Amudei Horaah calendar, which is 60 zmaniyot minutes.
      * @return the time of misheyakir calculated by the Amudei Horaah calendar by adjusting the zman based off of degrees.
      */
     public func getMisheyakir60AmudeiHoraah() -> Date? {
@@ -4328,16 +4330,16 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     }
     
     /**
-         * This method calculates the time for Nightfall according to the opinion of the Amudei Horaah Calendar. This is calculated as 13.5 adjusted zmaniyot minutes after sunset. This is based on the calculation of the 3.77&deg which is the time at 13.5 minutes in Netanya, Israel on the equinox. Why Netanya and not Jerusalem? Because Netanya is the mid point between Israel and Iraq, and Rabbi Leeor Dahan equates them.
-         @return the Date representing 13.5 minutes zmaniyot after sunset adjusted to the users location using degrees based on Netanya, Israel.
-         */
+     * This method calculates the time for Nightfall according to the opinion of the Amudei Horaah Calendar. This is calculated as 13.5 adjusted zmaniyot minutes after sunset. This zman is calculated based on 3.7&deg which is the where the sun is after sunset at 13.5 minutes in Israel on the equinox. Based on that degree, the 13.5 zmaniyot minutes are adjusted from the distance of the equator.
+     @return the Date representing 13.5 minutes zmaniyot after sunset adjusted to the users location based on the equator using degrees based in Israel.
+     */
     public func getTzaisAmudeiHoraah() -> Date? {
         var calendar = Calendar.current
         calendar.timeZone = geoLocation.timeZone
         let temp = workingDate
         workingDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: workingDate), month: 3, day: 17))!
 
-        let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 3.77, sunset: true)
+        let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 3.7, sunset: true)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
             return nil;
         }
@@ -4353,7 +4355,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         let temp = workingDate
         workingDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: workingDate), month: 3, day: 17))!
 
-        let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 5.135, sunset: true)
+        let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 5.075, sunset: true)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
             return nil;
         }
@@ -4369,7 +4371,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
         let temp = workingDate
         workingDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: workingDate), month: 3, day: 17))!
 
-        let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 16.01, sunset: true)
+        let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 16.04, sunset: true)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
             return nil;
         }
@@ -4380,7 +4382,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     }
     
     public func getTzaisShabbosAmudeiHoraah() -> Date? {
-        let tzait = getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.GEOMETRIC_ZENITH + 7.14);
+        let tzait = getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.GEOMETRIC_ZENITH + 7.165);
         if tzait != nil && getTzaisAteretTorah(minutes: 20) != nil {
             if getTzaisAteretTorah(minutes: 20)!.timeIntervalSince1970 > tzait!.timeIntervalSince1970 { // if shabbat ends before 20 minutes after sunset, use 20 minutes
                 return getTzaisAteretTorah(minutes: 20)
