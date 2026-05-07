@@ -15,38 +15,38 @@ import Foundation
  *
  * @author &copy; Eliyahu Hershfeld 2004 - 2022
  */
-public class GeoLocation {
+public class GeoLocation: Equatable {
     /**
      * @see #getLatitude()
      * @see #setLatitude(double)
      * @see #setLatitude(int, int, double, String)
      */
-     public var latitude:Double;
+    public var latitude:Double;
     
     /**
      * @see #getLongitude()
      * @see #setLongitude(double)
      * @see #setLongitude(int, int, double, String)
      */
-     public var longitude:Double;
+    public var longitude:Double;
     
     /**
      * @see #getLocationName()
      * @see #setLocationName(String)
      */
-     public var locationName:String;
+    public var locationName:String;
     
     /**
      * @see #getTimeZone()
      * @see #setTimeZone(TimeZone)
      */
-     public var timeZone:TimeZone;
+    public var timeZone:TimeZone;
     
     /**
      * @see #getElevation()
      * @see #setElevation(double)
      */
-     public var elevation:Double;
+    public var elevation:Double;
     
     /**
      * Constant for a distance type calculation.
@@ -65,13 +65,13 @@ public class GeoLocation {
      * @see #getGeodesicFinalBearing(GeoLocation)
      */
     private static let FINAL_BEARING = 2;
-
+    
     /** constant for milliseconds in a minute (60,000) */
     private static let MINUTE_MILLIS = 60 * 1000;
-
+    
     /** constant for milliseconds in an hour (3,600,000) */
     private static let HOUR_MILLIS = Double(MINUTE_MILLIS * 60);
-
+    
     /**
      * Method to get the elevation in Meters.
      *
@@ -80,7 +80,7 @@ public class GeoLocation {
     public func getElevation() -> Double {
         return elevation;
     }
-
+    
     /**
      * Method to set the elevation in Meters <b>above</b> sea level.
      *
@@ -93,11 +93,11 @@ public class GeoLocation {
         }
         self.elevation = elevation;
     }
-
+    
     /**
      * GeoLocation constructor with parameters for all required fields.
      *
-     * @param name
+     * @param locationName
      *            The location name for display use such as &quot;Lakewood, NJ&quot;. This can be an empty string as well
      * @param latitude
      *            the latitude in a double format such as 40.095965 for Lakewood, NJ.
@@ -116,11 +116,11 @@ public class GeoLocation {
         self.elevation = 0
         self.timeZone = timeZone
     }
-
+    
     /**
      * GeoLocation constructor with parameters for all required fields.
      *
-     * @param name
+     * @param locationName
      *            The location name for display use such as &quot;Lakewood, NJ&quot;. This can be an empty string as well
      * @param latitude
      *            the latitude in a double format such as 40.095965 for Lakewood, NJ.
@@ -142,7 +142,7 @@ public class GeoLocation {
         self.elevation = elevation
         self.timeZone = timeZone
     }
-
+    
     /**
      * Default GeoLocation constructor will set location to the Prime Meridian at Greenwich, England and a TimeZone of
      * GMT. The longitude will be set to 0 and the latitude will be 51.4772 to match the location of the <a
@@ -155,7 +155,7 @@ public class GeoLocation {
         elevation = 0
         timeZone = TimeZone(identifier: "GMT")!
     }
-
+    
     /**
      * Method to set the latitude.
      *
@@ -170,7 +170,7 @@ public class GeoLocation {
         }
         self.latitude = latitude;
     }
-
+    
     /**
      * Method to set the latitude in degrees, minutes and seconds.
      *
@@ -196,14 +196,14 @@ public class GeoLocation {
         }
         self.latitude = Double(tempLat);
     }
-
+    
     /**
      * @return Returns the latitude.
      */
     public func getLatitude() -> Double {
         return latitude;
     }
-
+    
     /**
      * Method to set the longitude in a double format.
      *
@@ -219,7 +219,7 @@ public class GeoLocation {
         }
         self.longitude = longitude;
     }
-
+    
     /**
      * Method to set the longitude in degrees, minutes and seconds.
      *
@@ -232,8 +232,6 @@ public class GeoLocation {
      *            <a href="https://en.wikipedia.org/wiki/Minute_of_arc#Cartography">seconds of arc</a>
      * @param direction
      *            E for east of the <a href="https://en.wikipedia.org/wiki/Prime_Meridian">Prime Meridian</a> or W for west of it.
-     *            An IllegalArgumentException will be thrown if
-     *            the value is not E or W.
      */
     public func setLongitude(degrees: Int, minutes: Int, seconds: Double, direction:String) {
         var longTemp = degrees + Int(Double(minutes + Int(seconds / 60.0)) / 60.0);
@@ -247,21 +245,21 @@ public class GeoLocation {
         }
         self.longitude = Double(longTemp);
     }
-
+    
     /**
      * @return Returns the longitude.
      */
     public func getLongitude() -> Double {
         return longitude;
     }
-
+    
     /**
      * @return Returns the location name.
      */
     public func getLocationName() -> String {
         return locationName;
     }
-
+    
     /**
      * @param name
      *            The setter method for the display name.
@@ -269,14 +267,14 @@ public class GeoLocation {
     public func setLocationName(name:String) {
         self.locationName = name;
     }
-
+    
     /**
      * @return Returns the timeZone.
      */
     public func getTimeZone() -> TimeZone {
         return timeZone;
     }
-
+    
     /**
      * Method to set the TimeZone.
      *
@@ -286,7 +284,7 @@ public class GeoLocation {
     public func setTimeZone(timeZone:TimeZone) {
         self.timeZone = timeZone;
     }
-
+    
     /**
      * This method is not tested at all. If you want to use this method or fix it, please submit an issue on the KosherSwift github.
      * A method that will return the location's local mean time offset in milliseconds from local <a
@@ -331,15 +329,15 @@ public class GeoLocation {
         let localHoursOffset = getLocalMeanTimeOffset() / GeoLocation.HOUR_MILLIS;
         
         if (localHoursOffset >= 20){// if the offset is 20 hours or more in the future (never expected anywhere other
-                                    // than a location using a timezone across the anti meridian to the east such as Samoa)
+            // than a location using a timezone across the anti meridian to the east such as Samoa)
             return 1; // roll the date forward a day
         } else if (localHoursOffset <= -20) {    // if the offset is 20 hours or more in the past (no current location is known
-                                                //that crosses the antimeridian to the west, but better safe than sorry)
+            //that crosses the antimeridian to the west, but better safe than sorry)
             return -1; // roll the date back a day
         }
         return 0; //99.999% of the world will have no adjustment
     }
-
+    
     /**
      * Calculate the initial <a href="https://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing between this
      * Object and a second Object passed to this method using <a
@@ -354,7 +352,7 @@ public class GeoLocation {
     public func getGeodesicInitialBearing(location:GeoLocation) -> Double {
         return vincentyFormula(location: location, formula: GeoLocation.INITIAL_BEARING);
     }
-
+    
     /**
      * Calculate the final <a href="https://en.wikipedia.org/wiki/Great_circle">geodesic</a> bearing between this Object
      * and a second Object passed to this method using <a href="https://en.wikipedia.org/wiki/Thaddeus_Vincenty">Thaddeus
@@ -369,7 +367,7 @@ public class GeoLocation {
     public func getGeodesicFinalBearing(location:GeoLocation) -> Double {
         return vincentyFormula(location: location, formula: GeoLocation.FINAL_BEARING);
     }
-
+    
     /**
      * Calculate <a href="https://en.wikipedia.org/wiki/Great-circle_distance">geodesic distance</a> in Meters between
      * this Object and a second Object passed to this method using <a
@@ -385,7 +383,7 @@ public class GeoLocation {
     public func getGeodesicDistance(location:GeoLocation) -> Double {
         return vincentyFormula(location: location, formula: GeoLocation.DISTANCE);
     }
-
+    
     /**
      * Calculate <a href="https://en.wikipedia.org/wiki/Great-circle_distance">geodesic distance</a> in Meters between
      * this Object and a second Object passed to this method using <a
@@ -409,61 +407,61 @@ public class GeoLocation {
         let U2 = atan((1 - f) * tan(toRadians(degrees: location.latitude)))
         let sinU1 = sin(U1), cosU1 = cos(U1)
         let sinU2 = sin(U2), cosU2 = cos(U2)
-
+        
         var lambda = L
         var lambdaP = 2 * Double.pi
         var iterLimit = 20
         var sinLambda = 0.0, cosLambda = 0.0, sinSigma = 0.0, cosSigma = 0.0, sigma = 0.0
         var sinAlpha = 0.0, cosSqAlpha = 0.0, cos2SigmaM = 0.0, C = 0.0
-
+        
         while abs(lambda - lambdaP) > 1e-12, iterLimit > 0 {
             sinLambda = sin(lambda)
             cosLambda = cos(lambda)
             sinSigma = sqrt((cosU2 * sinLambda) * (cosU2 * sinLambda)
-                + (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) * (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda))
-
+                            + (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) * (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda))
+            
             if sinSigma == 0 { return 0 } // co-incident points
-
+            
             cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda
             sigma = atan2(sinSigma, cosSigma)
             sinAlpha = cosU1 * cosU2 * sinLambda / sinSigma
             cosSqAlpha = 1 - sinAlpha * sinAlpha
             cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cosSqAlpha
-
+            
             if cos2SigmaM.isNaN { cos2SigmaM = 0 } // equatorial line: cosSqAlpha=0 (§6)
-
+            
             C = f / 16 * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha))
             lambdaP = lambda
             lambda = L + (1 - C) * f * sinAlpha
-                * (sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)))
-
+            * (sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)))
+            
             iterLimit -= 1
         }
-
+        
         if iterLimit == 0 { return Double.nan } // formula failed to converge
-
+        
         let uSq = cosSqAlpha * (a * a - b * b) / (b * b)
         let A = 1 + uSq / 16384 * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq)))
         let B = uSq / 1024 * (256 + uSq * (-128 + uSq * (74 - 47 * uSq)))
         let deltaSigma = B
-            * sinSigma
-            * (cos2SigmaM + B
-                / 4
-                * (cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) - B / 6 * cos2SigmaM
-                    * (-3 + 4 * sinSigma * sinSigma) * (-3 + 4 * cos2SigmaM * cos2SigmaM)))
-
+        * sinSigma
+        * (cos2SigmaM + B
+           / 4
+           * (cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) - B / 6 * cos2SigmaM
+              * (-3 + 4 * sinSigma * sinSigma) * (-3 + 4 * cos2SigmaM * cos2SigmaM)))
+        
         let distance = b * A * (sigma - deltaSigma)
-
+        
         let atanPart1 = cosU1 * sinU2 - sinU1 * cosU2 * cosLambda
         let atanPart2 = -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda
-
+        
         let atanResult1 = atan2(atanPart1, Double(sinLambda))
         let atanResult2 = atan2(atanPart2, Double(sinLambda))
-
+        
         let fwdAz = toDegrees(radians: cosU2 * atanResult1)
         let revAz = toDegrees(radians: cosU1 * atanResult2)
-
-
+        
+        
         switch formula {
         case GeoLocation.DISTANCE:
             return distance
@@ -475,8 +473,7 @@ public class GeoLocation {
             return Double.nan
         }
     }
-
-
+    
     /**
      * Returns the <a href="https://en.wikipedia.org/wiki/Rhumb_line">rhumb line</a> bearing from the current location to
      * the GeoLocation passed in.
@@ -494,7 +491,7 @@ public class GeoLocation {
         }
         return toDegrees(radians: atan2(dLon, dPhi));
     }
-
+    
     /**
      * Returns the <a href="https://en.wikipedia.org/wiki/Rhumb_line">rhumb line</a> distance from the current location
      * to the GeoLocation passed in.
@@ -510,7 +507,7 @@ public class GeoLocation {
         let dPhi = log(tan(toRadians(degrees: location.getLatitude()) / 2 + Double.pi / 4)
                        / tan(toRadians(degrees: getLatitude()) / 2 + Double.pi / 4));
         var q = dLat / dPhi;
-
+        
         if (!(abs(q) <= Double.greatestFiniteMagnitude)) {
             q = cos(toRadians(degrees: getLatitude()));
         }
@@ -529,21 +526,48 @@ public class GeoLocation {
     public func toDegrees(radians:Double) -> Double {
         return radians * 180.0 / Double.pi
     }
-
-    /**
-     * @see java.lang.Object#toString()
-     */
-//    public func toString() -> String {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("\nLocation Name:\t\t\t").append(getLocationName());
-//        sb.append("\nLatitude:\t\t\t").append(getLatitude()).append("\u00B0");
-//        sb.append("\nLongitude:\t\t\t").append(getLongitude()).append("\u00B0");
-//        sb.append("\nElevation:\t\t\t").append(getElevation()).append(" Meters");
-//        sb.append("\nTimezone ID:\t\t\t").append(getTimeZone().getID());
-//        sb.append("\nTimezone Display Name:\t\t").append(getTimeZone().getDisplayName())
-//                .append(" (").append(getTimeZone().getDisplayName(false, TimeZone.SHORT)).append(")");
-//        sb.append("\nTimezone GMT Offset:\t\t").append(getTimeZone().getRawOffset() / HOUR_MILLIS);
-//        sb.append("\nTimezone DST Offset:\t\t").append(getTimeZone().getDSTSavings() / HOUR_MILLIS);
-//        return sb.toString();
-//    }
+    
+    /// Returns a formatted string describing the location and its time zone details.
+    ///
+    /// - Returns: A multi-line string containing:
+    ///   - Location name
+    ///   - Latitude and longitude (in degrees)
+    ///   - Elevation (in meters)
+    ///   - Time zone identifier and display names
+    ///   - GMT and DST offsets (in hours)
+    public func toString() -> String {
+        let tz = getTimeZone()
+        
+        return """
+        
+        Location Name:\t\t\t\(getLocationName())
+        Latitude:\t\t\t\(getLatitude())°
+        Longitude:\t\t\t\(getLongitude())°
+        Elevation:\t\t\t\(getElevation()) Meters
+        Timezone ID:\t\t\t\(tz.identifier)
+        Timezone Display Name:\t\t\(tz.localizedName(for: .standard, locale: .current) ?? "") (\(tz.localizedName(for: .shortStandard, locale: .current) ?? ""))
+        Timezone GMT Offset:\t\t\(tz.secondsFromGMT() / 3600)
+        Timezone DST Offset:\t\t\(tz.daylightSavingTimeOffset() / 3600)
+        """
+    }
+    
+    public static func == (lhs: GeoLocation, rhs: GeoLocation) -> Bool {
+        return lhs.getLocationName() == rhs.getLocationName() &&
+        lhs.getLatitude() == rhs.getLatitude() &&
+        lhs.getLongitude() == rhs.getLongitude() &&
+        lhs.getElevation() == rhs.getElevation() &&
+        lhs.getTimeZone().identifier == rhs.getTimeZone().identifier
+    }
+    
+    /// Compares this object with another instance for equality.
+    ///
+    /// - Parameter other: Another GeoLocation instance to compare against.
+    /// - Returns: `true` if all relevant properties match; otherwise `false`.
+    public func equals(_ other: GeoLocation) -> Bool {
+        return self.getLocationName() == other.getLocationName() &&
+        self.getLatitude() == other.getLatitude() &&
+        self.getLongitude() == other.getLongitude() &&
+        self.getElevation() == other.getElevation() &&
+        self.getTimeZone().identifier == other.getTimeZone().identifier
+    }
 }

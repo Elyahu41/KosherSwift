@@ -113,7 +113,7 @@ public class JewishCalendar {
     public static let SHEVAT = 5;
     
     /**
-     * In Swift, this month is ONLY used on jewish leap years. Meaning: If you use the getJewishMonth method in Adar on a non leap year,
+     * - Warning: In Swift, this month is ONLY used on jewish leap years. Meaning: If you use the getJewishMonth method in Adar on a non leap year,
      * it will return the number 7, since Adar (the 6th month) is not used. Even though there is no Adar II on non leap years,
      * that is the way swift's hebrew calendar class is designed.
      *
@@ -125,7 +125,7 @@ public class JewishCalendar {
     public static let ADAR = 6;
     
     /**
-     * In Swift, Adar II is ALWAYS the 7th month and it will be returned on NON leap years during the month of Adar. Please keep this in mind.
+     * - Warning: In Swift, Adar II is ALWAYS the 7th month and it will be returned on NON leap years during the month of Adar. Please keep this in mind.
      *
      * Value of the month field indicating Adar II, the leap (intercalary or embolismic) thirteenth (Undecimber) numeric
      * month of the year added in Jewish ``isJewishLeapYear()``). The leap years are years 3, 6, 8, 11,
@@ -199,7 +199,7 @@ public class JewishCalendar {
      * case of a month with 30 days.
      */
     public static let ROSH_CHODESH = 28
-    /** Yom HaShoah, Holocaust Remembrance Day, usually held on the 27th of Nisan. If it falls on a Friday, it is moved
+    /** Yom HaShoah, Holocaust Remembrance Day, usually held on the 27th of Nissan. If it falls on a Friday, it is moved
      * to the 26th, and if it falls on a Sunday it is moved to the 28th. A modern holiday.
      */
     public static let YOM_HASHOAH = 29
@@ -541,7 +541,7 @@ public class JewishCalendar {
      * @return the upcoming <em>parsha</em>.
      */
     public func getUpcomingParshah() -> Parsha {
-        let clone = JewishCalendar(workingDate: workingDate, inIsrael: inIsrael, useModernHolidays: useModernHolidays)
+        let clone = copy()
         let daysToShabbos = (7 - getDayOfWeek() + 7) % 7;
         if (getDayOfWeek() != 7) {
             clone.workingDate.addTimeInterval(TimeInterval(86400 * daysToShabbos))
@@ -835,6 +835,21 @@ public class JewishCalendar {
         self.inIsrael = inIsrael
     }
     
+    /// Initializes a new instance by copying another `JewishCalendar`.
+    public init(copy other: JewishCalendar) {
+        self.moladHours = other.moladHours
+        self.moladMinutes = other.moladMinutes
+        self.moladChalakim = other.moladChalakim
+        
+        self.inIsrael = other.inIsrael
+        self.useModernHolidays = other.useModernHolidays
+        self.isMukafChoma = other.isMukafChoma
+        self.isSafekMukafChoma = other.isSafekMukafChoma
+        
+        self.workingDate = other.workingDate
+        self.timeZone = other.timeZone
+    }
+    
     /**
      * sets the Jewish month. Ut is recommended to use the static integers in this class to set the jewish month to avoid confusion. For example, use ``NISSAN`` as the parameter
      *
@@ -873,10 +888,11 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns the Jewish month 1-12 (or 13 years in a leap year). The month count starts with 1 for Tishrei and goes to
-     * 13 for Elul
+     * Returns the Jewish month 1-12 (or 13 in a leap year). The month count starts with 1 for Tishrei and goes to
+     * 13 for Elul.
+     * - Warning: In a non leap year, 7 will be returned in Adar, which is meant for Adar II. In a leap year, 6 will be returned for the first Adar and 7 for Adar II.
      *
-     * @return the Jewish month from 1 to 12 (or 13 years in a leap year). The month count starts with 1 for Tishrei and
+     * @return the Jewish month from 1 to 12 (or 13 in a leap year). The month count starts with 1 for Tishrei and
      *         goes to 13 for Elul
      */
     public func getJewishMonth() -> Int {
@@ -886,7 +902,7 @@ public class JewishCalendar {
     }
     
     /**
-     * Returns the Jewish month 1-12 (or 13 years in a leap year) as it is in KosherJava with Nissan being the first month of the year.
+     * A convenience method that returns the Jewish month 1-12 (or 13 years in a leap year) as it is in KosherJava with Nissan being the first month of the year.
      * The month count starts with 1 for Nissan and goes to 13 for Adar II
      *
      * @return the Jewish month from 1 to 12 (or 13 years in a leap year). The month count starts with 1 for Nissan and goes to 13 for Adar II
@@ -1051,16 +1067,16 @@ public class JewishCalendar {
      * @param year
      *            the Jewish year
      * @param month
-     *            the Jewish month starting with Nisan. A value of 8 is expected for Nissan ... 6 for Adar and 7 for
+     *            the Jewish month starting with Nissan. A value of 8 is expected for Nissan ... 6 for Adar and 7 for
      *            Adar II. Use the constants ``NISSAN`` ... ``ADAR`` (or ``ADAR_II`` for a leap year Adar
      *            II) to avoid any confusion.
      * @param dayOfMonth
      *            the Jewish day of month. valid values are 1-30.
      */
     public func setJewishDate(year:Int, month:Int, dayOfMonth:Int) {
-        var gregCalendar = Calendar(identifier: .hebrew)
-        gregCalendar.timeZone = timeZone
-        workingDate = gregCalendar.date(from: DateComponents(year: year, month: month, day: dayOfMonth))!
+        var hebrewCalendar = Calendar(identifier: .hebrew)
+        hebrewCalendar.timeZone = timeZone
+        workingDate = hebrewCalendar.date(from: DateComponents(year: year, month: month, day: dayOfMonth))!
     }
     
     /**
@@ -1069,7 +1085,7 @@ public class JewishCalendar {
      * @param year
      *            the Jewish year. The year can't be negative
      * @param month
-     *            the Jewish month starting with Nisan. A value of 8 is expected for Nissan ... 6 for Adar and 7 for
+     *            the Jewish month starting with Nissan. A value of 8 is expected for Nissan ... 6 for Adar and 7 for
      *            Adar II. Use the constants ``NISSAN`` ... ``ADAR`` (or ``ADAR_II`` for a leap year Adar
      *            II) to avoid any confusion.
      * @param dayOfMonth
@@ -1125,7 +1141,7 @@ public class JewishCalendar {
     }
     
     /**
-     * returns the number of days from Rosh Hashana of the date passed in, to the full date passed in.
+     * Returns the number of days from Rosh Hashana of the date passed in, to the full date passed in.
      *
      * @param year
      *            the Jewish year
@@ -1135,24 +1151,23 @@ public class JewishCalendar {
      *            the day in the Jewish month
      * @return the number of days
      */
-    private func getDaysSinceStartOfJewishYear(year:Int, month:Int, dayOfMonth:Int) -> Int {
-        var elapsedDays = getJewishDayOfMonth()
+    public func getDaysSinceStartOfJewishYear(year:Int, month:Int, dayOfMonth:Int) -> Int {
+        var elapsedDays = dayOfMonth
+        var hebrewMonth = month
         
-        var hebrewMonth = getJewishMonth()
-        
-        if !isJewishLeapYear(year: getJewishYear()) && hebrewMonth >= 7 {
+        if !isJewishLeapYear(year: year) && hebrewMonth >= 7 {
             hebrewMonth = hebrewMonth - 1// for Nissan and above because swift is weird
         }
         
         for month in 1..<hebrewMonth {
-            elapsedDays += getDaysInJewishMonth(month: month, year: getJewishYear())
+            elapsedDays += getDaysInJewishMonth(month: month, year: year)
         }
         
         return elapsedDays
     }
     
     /**
-     * returns the number of days from Rosh Hashana of the date passed in, to the full date passed in.
+     * Returns the number of days from Rosh Hashana of the current date set, to the current date.
      *
      * @return the number of days
      */
@@ -1170,9 +1185,14 @@ public class JewishCalendar {
      * @return the number of days for a given Jewish month
      */
     private func getDaysInJewishMonth(month:Int, year:Int) -> Int {
-        if (month == JewishCalendar.IYAR || month == JewishCalendar.TAMMUZ || month == JewishCalendar.ELUL || (month == JewishCalendar.CHESHVAN && !isCheshvanLong(year: year))
-            || (month == JewishCalendar.KISLEV && isKislevShort(year: year)) || month == JewishCalendar.TEVES
-            || (month == JewishCalendar.ADAR && !isJewishLeapYear(year: year)) || (isJewishLeapYear(year: year) && month == JewishCalendar.ADAR_II)) {
+        if (month == JewishCalendar.IYAR
+            || month == JewishCalendar.TAMMUZ
+            || month == JewishCalendar.ELUL
+            || (month == JewishCalendar.CHESHVAN && !isCheshvanLong(year: year))
+            || (month == JewishCalendar.KISLEV && isKislevShort(year: year))
+            || month == JewishCalendar.TEVES
+            || (month == JewishCalendar.ADAR && !isJewishLeapYear(year: year)) // Adar in a leap year has 30 days
+            || (month == JewishCalendar.ADAR_II && isJewishLeapYear(year: year))) {
             return 29;
         } else {
             return 30;
@@ -1436,7 +1456,7 @@ public class JewishCalendar {
      * @param year
      *            the Jewish year
      * @param month
-     *            the Jewish month the Jewish month, with the month numbers starting from Nisan. Use the JewishDate
+     *            the Jewish month the Jewish month, with the month numbers starting from Nissan. Use the JewishCalendar
      *            constants such as ``TISHREI``.
      * @return the number of chalakim (parts - 1080 to the hour) from the original hypothetical Molad Tohu
      */
@@ -1484,15 +1504,15 @@ public class JewishCalendar {
      * <a href="https://en.wikipedia.org/wiki/Birkat_Hachama">Birkas Hachamah</a> is recited every 28 years based on
      * Tekufas Shmuel (Julian years) that a year is 365.25 days. The <a href="https://en.wikipedia.org/wiki/Maimonides">Rambam</a>
      * in <a href="http://hebrewbooks.org/pdfpager.aspx?req=14278&amp;st=&amp;pgnum=323">Hilchos Kiddush Hachodesh 9:3</a> states that
-     * tekufas Nisan of year 1 was 7 days + 9 hours before molad Nisan. This is calculated as every 10,227 days (28 * 365.25).
+     * tekufas Nissan of year 1 was 7 days + 9 hours before molad Nissan. This is calculated as every 10,227 days (28 * 365.25).
      * @return true for a day that Birkas Hachamah is recited.
      */
     public func isBirkasHachamah() -> Bool {
         var elapsedDays:Int = getJewishCalendarElapsedDays(year: getJewishYear()) //elapsed days since molad ToHu
         elapsedDays = elapsedDays + getDaysSinceStartOfJewishYear(); //elapsed days to the current calendar date
         
-        /* Molad Nisan year 1 was 177 days after molad tohu of Tishrei. We multiply 29.5 days * 6 months from Tishrei
-         * to Nisan = 177. Subtract 7 days since tekufas Nisan was 7 days and 9 hours before the molad as stated in the Rambam,
+        /* Molad Nissan year 1 was 177 days after molad tohu of Tishrei. We multiply 29.5 days * 6 months from Tishrei
+         * to Nissan = 177. Subtract 7 days since tekufas Nissan was 7 days and 9 hours before the molad as stated in the Rambam,
          * and we are now at 170 days. Because getJewishCalendarElapsedDays and getDaysSinceStartOfJewishYear use the value for
          * Rosh Hashana as 1, we have to add 1 day for a total of 171. To this add a day since the tekufah is on a Tuesday
          * night, and we push off the bracha to Wednesday morning resulting in the 172 used in the calculation.
@@ -2283,7 +2303,6 @@ public class JewishCalendar {
         
         if moladHours > 6 {
             moladDay.day! += 1
-            moladDay.setValue(Int(moladHours), for: .hour)
         }
         moladDay.setValue((Int(moladHours) + 18) % 24, for: .hour)
         
@@ -2456,7 +2475,7 @@ public class JewishCalendar {
     }
     
     /**
-     Returns a Date if the current day has a tekufa event. The Date will contain the time of the tekufa/season that is arriving. If this method is called on a day without the tekufa event, it will return a nil. The default implementation of this method will return the Tekufa event according to the calculations of Rabbi Tulchinsky calendar. However, there is also the opinion of Rabbi Yonah Mertzbach, who says to calculate the tekufa based on local midday in Israel which causes a 21-minute difference. There is a third opinion as well to use seasonal midday but that is not an accepted opinion.
+     Returns a Date if the current day has a tekufa event. The Date will contain the time of the tekufa/season that is arriving. If this method is called on a day without the tekufa event, it will return a nil. The default implementation of this method will return the Tekufa event according to the calculations of Rabbi Tulchinsky calendar. However, there is also the opinion of Rabbi Yonah Mertzbach, who says to calculate the tekufa based on local midday in Israel which causes a 21-minute difference. There is a third opinion as well to use seasonal mid-day but that is not an opinion commonly favored.
      - Returns a Date with the tekufa time or a nil on a day with no tekufa change
      - Parameter shouldMinus21Minutes a bool that, if true, removes 21 minutes from the time of Rabbi Tulchinsky's tekufa which is the opinion of Rabbi Yonah Mertzbach.
      */
@@ -2480,6 +2499,29 @@ public class JewishCalendar {
      */
     public func isShmitaYear() -> Bool {
         return (getJewishYear() % 7) == 0
+    }
+    
+    /// Creates and returns a copy of the current `JewishCalendar` instance.
+    ///
+    /// - Returns: A new `JewishCalendar` object with identical state.
+    public func copy() -> JewishCalendar {
+        let new = JewishCalendar()
+        
+        // Copy primitive values
+        new.moladHours = self.moladHours
+        new.moladMinutes = self.moladMinutes
+        new.moladChalakim = self.moladChalakim
+        
+        new.inIsrael = self.inIsrael
+        new.useModernHolidays = self.useModernHolidays
+        new.isMukafChoma = self.isMukafChoma
+        new.isSafekMukafChoma = self.isSafekMukafChoma
+        
+        // Copy date & timezone
+        new.workingDate = self.workingDate
+        new.timeZone = self.timeZone
+        
+        return new
     }
     
     /**

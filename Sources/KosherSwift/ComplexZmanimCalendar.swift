@@ -1843,15 +1843,13 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      *
      */
     public func getMinchaGedolaGreaterThan30() -> Date? {
-        if (getMinchaGedola30Minutes() == nil || getMinchaGedola() == nil) {
-            return nil;
-        } else {
-            if getMinchaGedola30Minutes()!.timeIntervalSince1970 > getMinchaGedola()!.timeIntervalSince1970 {
-                return getMinchaGedola30Minutes()
-            } else {
-                return getMinchaGedola()
-            }
+        let minchaGedola = getMinchaGedola()
+        let minchaGedola30Minutes = getMinchaGedola30Minutes()
+        
+        if let d1 = minchaGedola, let d2 = minchaGedola30Minutes {
+            return d1 > d2 ? d1 : d2 // return whichever is later
         }
+        return minchaGedola ?? minchaGedola30Minutes
     }
     
     /**
@@ -4203,18 +4201,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     
     
     // MARK: - Helper methods. These methods are not included in KosherJava, however, I am added them because of convenience
-    
-    /**
-     This method returns chatzos as a half way point between sunrise and sunset unless the location is in a place that does not have sunrise of sunset. Then it will return UTCNoon which is an astronomical chatzos based in the NOAACalculator class.
-     */
-    public func getChatzosIfHalfDayNil() -> Date? {
-        let middayBasedOnSunriseSunset = getSunTransit(startOfDay: getElevationAdjustedSunrise(), endOfDay: getElevationAdjustedSunset())
-        if middayBasedOnSunriseSunset != nil {
-            return middayBasedOnSunriseSunset
-        } else {
-            return getSunTransit()
-        }
-    }
     
     /**
      * This method returns the time of <em>plag hamincha</em> according to the Yalkut Yosef. This is calculated as -1.25 GRA hours before

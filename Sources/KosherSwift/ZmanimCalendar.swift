@@ -351,7 +351,7 @@ public class ZmanimCalendar : AstronomicalCalendar {
             return getSunTransit(); // can be nil of the calculator does not support astronomical chatzos
         } else {
             let halfDayChatzos = getChatzosAsHalfDay();
-            if(halfDayChatzos == nil) {
+            if (halfDayChatzos == nil) {
                 return getSunTransit(); // can be nil if the calculator does not support astronomical chatzos
             } else {
                 return halfDayChatzos;

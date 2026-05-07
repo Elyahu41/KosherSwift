@@ -480,6 +480,23 @@ class KosherSwiftTests: XCTestCase {
 
         //print(format.string(from: calculatorFL.getFixedLocalChatzos()!))
     }
+    
+    func testEquals() {
+        let geoLocation1 = GeoLocation(locationName: "CO", latitude: 39.6240, longitude: -104.8709, timeZone: TimeZone.current)
+        let geoLocation2 = GeoLocation(locationName: "CO", latitude: 39.6240, longitude: -104.8709, timeZone: TimeZone.current)
+        
+        XCTAssertEqual(geoLocation1, geoLocation2)
+        XCTAssertTrue(geoLocation1.equals(geoLocation2))
+    }
+    
+    func testHebrewDateFormatterMapsWithUpdatedValues() {
+        let hdf = HebrewDateFormatter()
+        XCTAssertEqual(hdf.hebrewParshaMap[JewishCalendar.Parsha.BERESHIS], "בראשית")
+        
+        hdf.hebrewParshaMap.updateValue("Changed", forKey: JewishCalendar.Parsha.BERESHIS)
+        
+        XCTAssertNotEqual(hdf.hebrewParshaMap[JewishCalendar.Parsha.BERESHIS], "בראשית")
+    }
 
 //    func testPerformanceExample() throws {
 //        // This is an example of a performance test case.
