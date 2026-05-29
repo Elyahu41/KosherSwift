@@ -93,11 +93,32 @@ print(hebrewDateFormatter.formatMonth(jewishCalendar: jewishCalendar)) // prints
 hebrewDateFormatter.hebrewFormat = true
 print(hebrewDateFormatter.formatMonth(jewishCalendar: jewishCalendar)) // prints "ניסן"
 ```
-Lastly, look at the TefilaRules class for methods that use the JewishCalendar to tell you which prayers to say:
+Look at the TefilaRules class for methods that use the JewishCalendar to tell you which prayers to say:
 ```Swift
 let jewishCalendar = JewishCalendar()
 let tefilaRules = TefilaRules()
 tefilaRules.isVeseinTalUmatarRecited(jewishCalendar: jewishCalendar) // returns true or false depending on the DAY of the year
+```
+There are also convenience Classes brought over from KosherJava but updated for Swift:
+```Swift
+let formatter = ZmanimFormatter() // This class can format Date, Double, and TimeInterval classes. The default time zone is the system's timezone. 
+formatter.format(date: Date()) // By default, AM/PM is used, so the result will be similar to: "7:30:00 PM". To customize the output see the ZmanimFormatter class.
+
+var time = Time(hours: 1, minutes: 2, seconds: 3, milliseconds: 456)// This class represents a numeric time
+time.getTime() // will output 3_723_456
+// You can also pass in milliseconds and they can even be negative:
+time = Time(millis: -100000).toString() // will output "-00:01:40"
+
+let zman = Zman(label: "Sunrise", zman: Date()) // A wrapper class for zmanim that is mostly intended to allow sorting collections of astronomical times.
+zman.description = "This is the time for sunrise."
+
+// or use it sort your list of zmanim like so:
+
+let early = Date()
+let later = early.addingTimeInterval(3600)
+        
+let array = [Zman(label: "Later", zman: later), Zman(label: "Earlier", zman: early)]        
+let sorted = array.sorted(by: Zman.dateOrder)
 ```
 Making Your Own Methods
 -------
