@@ -570,4 +570,20 @@ public class GeoLocation: Equatable {
         self.getElevation() == other.getElevation() &&
         self.getTimeZone().identifier == other.getTimeZone().identifier
     }
+    
+    /// Creates and returns a copy of the current `GeoLocation` instance.
+    ///
+    /// - Returns: A new `GeoLocation` object with identical state.
+    public func copy() -> GeoLocation {
+        let new = GeoLocation()
+        
+        // Copy primitive values
+        new.locationName = self.locationName
+        new.latitude = self.latitude
+        new.longitude = self.longitude
+        new.elevation = self.elevation
+        new.timeZone = self.timeZone
+        
+        return new
+    }
 }

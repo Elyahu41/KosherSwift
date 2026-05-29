@@ -17,7 +17,7 @@ import Foundation
  * @author &copy; Eliyahu Hershfeld 2011 - 2023
  * @author &copy; Elyahu Jacobi 2023
  */
-public class JewishCalendar {
+public class JewishCalendar: Equatable {
     
     /**
      * In Swift the value for the month of Nissan is always 8 as swift uses Tishrei as the 1st month.
@@ -709,7 +709,7 @@ public class JewishCalendar {
     }
     
     /**
-     * The internal date object that all the calculations are dependant on. Change this date to effect all the other methods of the class. By default the date is set to the system's current time with the system's current timezone.
+     * The internal date object that all the calculations are dependant on. Change this date to affect all the other methods of the class. By default the date is set to the system's current time with the system's current timezone.
      */
     public var workingDate:Date = Date()
     
@@ -726,113 +726,60 @@ public class JewishCalendar {
     }
     
     /**
-     * forwards the internal date of the jewish calendar by one day
+     * Forwards the internal date of the jewish calendar by one day
      */
     public func forward() {
         workingDate = Date(timeIntervalSince1970: workingDate.timeIntervalSince1970 + 86400)
     }
     
     /**
-     * backtracks the internal date of the jewish calendar by one day
+     * Backtracks the internal date of the jewish calendar by one day
      */
     public func back() {
         workingDate = Date(timeIntervalSince1970: workingDate.timeIntervalSince1970 + (-86400))
     }
- 
-    /**
-     * A constructor that initializes the workingDate to a new current system Date and timezone. useModernHolidays and inIsrael will be set to false
-     *
-     * @param date
-     *            the <code>Date</code> to set the calendar to
-     */
-    public init() {}
     
-    /**
-     * A constructor that initializes the date to the Date parameter. useModernHolidays and inIsrael will be set to false
-     *
-     * @param date
-     *            the <code>Date</code> to set the calendar to
-     */
-    public init(workingDate:Date) {
-        self.workingDate = workingDate
-    }
-    
-    /**
-     * A constructor that initializes the timezone to the timezone parameter. useModernHolidays and inIsrael will be set to false
-     *
-     * @param date
-     *            the <code>Timezone</code> to keep track of
-     */
-    public init(timezone:TimeZone) {
-        self.timeZone = timezone
-    }
-    
-    /**
-     * A constructor that initializes the date to the Date parameter with a timezone. useModernHolidays and inIsrael will be set to false
-     *
-     * @param date
-     *            the <code>Date</code> to set the date to
-     * @param timezone
-     *            the <code>Timezone</code> to keep track of
-     */
-    public init(workingDate:Date, timezone:TimeZone) {
-        self.workingDate = workingDate
-        self.timeZone = timezone
-    }
-    
-    /**
-     * A constructor that initializes the date to the Date parameter.
-     *
-     * @param date the <code>Date</code> to set the calendar to
-     * @param inIsrael a bool to determine whether or not the methods should use in Israel calculations
-     * @param shouldUseModernHolidays a bool to determine to use modern holidays in the methods or not
-     */
-    public init(workingDate:Date, inIsrael:Bool, useModernHolidays:Bool) {
-        self.workingDate = workingDate
-        self.inIsrael = inIsrael
-        self.useModernHolidays = useModernHolidays
-    }
-    
-    /**
-     * A constructor that initializes the date to the Date parameter.
-     *
-     * @param date the <code>Date</code> to set the calendar to
-     * @param inIsrael a bool to determine whether or not the methods should use in Israel calculations
-     * @param shouldUseModernHolidays a bool to determine to use modern holidays in the methods or not
-     */
-    public init(workingDate:Date, timezone:TimeZone, inIsrael:Bool, useModernHolidays:Bool) {
+    /// Initializes a calendar instance with a specific date, time zone, and holiday settings.
+    ///
+    /// Use this initializer to define the starting point for calendar calculations. If no parameters are passed,
+    /// it defaults to the current system time, the device's local time zone, and non-Israeli diaspora settings.
+    ///
+    /// - Parameters:
+    ///   - workingDate: The `Date` used as the base for calculations. Defaults to the current date and time.
+    ///   - timezone: The time zone to apply to the calendar. Defaults to the device's current `TimeZone`.
+    ///   - inIsrael: Set to `true` to use calculations specific to the Land of Israel (e.g., holiday lengths). Defaults to `false`.
+    ///   - useModernHolidays: Set to `true` to include modern national holidays in calculations. Defaults to `false`.
+    public init(workingDate: Date = Date(),
+                timezone: TimeZone = TimeZone.current,
+                inIsrael: Bool = false,
+                useModernHolidays: Bool = false) {
         self.workingDate = workingDate
         self.inIsrael = inIsrael
         self.useModernHolidays = useModernHolidays
         self.timeZone = timezone
     }
     
-    /**
-     * A constructor that initializes the date to the given parameters. useModernHolidays and inIsrael will be set to false
-     *
-     * @param jewishYear the jewish year to set the calendar to
-     * @param jewishMonth the jewish month to set the calendar to
-     * @param jewishDayOfMonth the jewish day for that month to set the calendar to
-     */
-    public init(jewishYear:Int, jewishMonth:Int, jewishDayOfMonth:Int) {
-        var hebrewCalendar = Calendar(identifier: .hebrew)
-        hebrewCalendar.timeZone = timeZone
-        workingDate = hebrewCalendar.date(from: DateComponents(calendar: hebrewCalendar, year: jewishYear, month: jewishMonth, day: jewishDayOfMonth))!
-    }
-    
-    /**
-     * A constructor that initializes the date to the Date parameter. useModernHolidays and inIsrael will be set to false
-     *
-     * @param jewishYear the jewish year to set the calendar to
-     * @param jewishMonth the jewish month to set the calendar to
-     * @param jewishDayOfMonth the jewish day for that month to set the calendar to
-     * @param isInIsrael a bool to determine whether or not the methods should use in Israel calculations
-     */
-    public init(jewishYear:Int, jewishMonth:Int, jewishDayOfMonth:Int, inIsrael:Bool) {
+    /// Initializes a calendar instance using specific Hebrew date components.
+    ///
+    /// This initializer calculates a standard `Date` based on the provided Hebrew year, month,
+    /// and day, and assigns it to the `workingDate` property.
+    ///
+    /// - Parameters:
+    ///   - jewishYear: The Hebrew year (e.g., 5784).
+    ///   - jewishMonth: The numerical Hebrew month.
+    ///   - jewishDayOfMonth: The day of the Hebrew month.
+    ///   - inIsrael: Set to `true` to use holiday calculations for the Land of Israel. Defaults to `false`.
+    ///   - useModernHolidays: Set to `true` to include modern national holidays in calculations. Defaults to `false`.
+    public init(jewishYear: Int,
+                jewishMonth: Int,
+                jewishDayOfMonth: Int,
+                inIsrael: Bool = false,
+                useModernHolidays: Bool = false) {
         var hebrewCalendar = Calendar(identifier: .hebrew)
         hebrewCalendar.timeZone = timeZone
         workingDate = hebrewCalendar.date(from: DateComponents(calendar: hebrewCalendar, year: jewishYear, month: jewishMonth, day: jewishDayOfMonth))!
         self.inIsrael = inIsrael
+        self.useModernHolidays = useModernHolidays
     }
     
     /// Initializes a new instance by copying another `JewishCalendar`.
@@ -2436,8 +2383,14 @@ public class JewishCalendar {
     }
     
     /**
-     Returns a double if the current day has a tekufa event. The double represents the amout of hours and minutes into the day the tekufa event happens at. You will need to minus 6 hours from this double to account for the hebrew date starting at 6 hours into the day. See the ``getTekufaAsDate(shouldMinus21Minutes:)`` method for more details.
-     - Returns a double representing the hours and minutes of the tekufa with 6 hours added
+     * returns a <code>Double</code> that represents the hours for when the Tekufa (season) changes. There are 4 tekufas
+     * a year: Nissan/Spring, Tammuz/Summer, Tishri/Fall, and Tevet/Winter. This calculation is according to Shmuel
+     * in Eruvin 56a, which is a more rounded up version of Rav Adda's calculation. The Rama writes in Yoreh De'ah 116:5
+     * that one should not drink water during the tekufa change. Rabbi Ovadia Yosef (Halichot Olam, Chelek 7, Page 183) recommends to abstain from drinking water for a range of 1 hour. (30 minutes before and after the tekufa event)
+     *
+     * @return the number of hours into the hebrew day that the tekufa (season) change takes place, or nil if the
+     * tekufa does not occur on current day. For example: 19.5 would mean that the tekufa occurs 19 hours and a half into
+     * the hebrew date, or 13 and a half hours (-6 hours) into the Gregorian date. This is calculated for GMT+2, Jerusalem Standard Time and will need to be adjusted for timezone differences as well.
      */
     public func getTekufa() -> Double? {
         let INITIAL_TEKUFA_OFFSET = 12.625 // the number of days Tekufas Tishrei occurs before JEWISH_EPOCH
@@ -2454,38 +2407,24 @@ public class JewishCalendar {
     }
     
     /**
-     Returns a string if the current day has a tekufa event. The string will contain the name of the tekufa/season that is arriving. If this method is called on a day without the tekufa event, it will return an empty string.
-     - Returns a string with the tekufa name or an empty string on a day with no tekufa change
-     */
-    public func getTekufaName() -> String {
-        let tekufaNames = ["Tishri", "Tevet", "Nissan", "Tammuz"]
-        let INITIAL_TEKUFA_OFFSET = 12.625 // the number of days Tekufas Tishrei occurs before JEWISH_EPOCH
-        
-        let days = Double(getJewishCalendarElapsedDays(year: getJewishYear()) + getDaysSinceStartOfJewishYear()) + INITIAL_TEKUFA_OFFSET - 1 // total days since first Tekufas Tishrei event
-        
-        let solarDaysElapsed = days.truncatingRemainder(dividingBy: 365.25) // total days elapsed since start of solar year
-        let currentTekufaNumber = Int(solarDaysElapsed / 91.3125)
-        let tekufaDaysElapsed = solarDaysElapsed.truncatingRemainder(dividingBy: 91.3125) // the number of days that have passed since a tekufa event
-        
-        if (tekufaDaysElapsed > 0 && tekufaDaysElapsed <= 1) {//if the tekufa happens in the upcoming 24 hours
-            return tekufaNames[currentTekufaNumber]
-        } else {
-            return ""
-        }
-    }
-    
-    /**
-     Returns a Date if the current day has a tekufa event. The Date will contain the time of the tekufa/season that is arriving. If this method is called on a day without the tekufa event, it will return a nil. The default implementation of this method will return the Tekufa event according to the calculations of Rabbi Tulchinsky calendar. However, there is also the opinion of Rabbi Yonah Mertzbach, who says to calculate the tekufa based on local midday in Israel which causes a 21-minute difference. There is a third opinion as well to use seasonal mid-day but that is not an opinion commonly favored.
-     - Returns a Date with the tekufa time or a nil on a day with no tekufa change
-     - Parameter shouldMinus21Minutes a bool that, if true, removes 21 minutes from the time of Rabbi Tulchinsky's tekufa which is the opinion of Rabbi Yonah Mertzbach.
-     */
+    Returns a Date if the current day has a tekufa (season) change. The Date will contain the time that the tekufa (season)
+    is arriving. If this method is called on a day without a tekufa change, it will return a nil.
+    The default implementation of this method will return the Tekufa change according to the calculations of Rabbi
+    Tulchinsky in his calendar <a href="https://zmanim.online/">Luach Itim
+    Lebinah</a>. However, there is also the opinion of Rabbi Yonah Boron, who says to calculate
+    the tekufa based on local midday in Israel which causes a 21-minute difference. There is a third opinion as well
+    to use seasonal midday but that is not a generally followed opinion, so it has not been implemented.
+    @param shouldMinus21Minutes if true, removes 21 minutes from the time of Rabbi Tulchinsky's tekufa which will result to the opinion of Rabbi Yonah Boron.
+    @return a Date with the time that the tekufa (season) changes or a nil on a day with no tekufa change.
+    */
     public func getTekufaAsDate(shouldMinus21Minutes:Bool = false) -> Date? {
-        let yerushalayimStandardTZ = TimeZone(identifier: "GMT+2")!
-        let cal = Calendar(identifier: .gregorian)
-        let workingDateComponents = cal.dateComponents([.year, .month, .day], from: workingDate)
         guard let tekufa = getTekufa() else {
             return nil
         }
+        let yerushalayimStandardTZ = TimeZone(identifier: "GMT+2")!
+        let cal = Calendar(identifier: .gregorian)
+        let workingDateComponents = cal.dateComponents([.year, .month, .day], from: workingDate)
+        
         let hours = tekufa - 6
         var minutes = Int((hours - Double(Int(hours))) * 60)
         if shouldMinus21Minutes {
@@ -2495,7 +2434,7 @@ public class JewishCalendar {
     }
     
     /**
-     * returns true if the current hebrew year is a shmita year. Note that according to Rashi and other Rishonim, the year before is the year of shmita.
+     * - Returns: true if the current hebrew year is a shmita year. Note that according to Rashi and other Rishonim, the year before is the year of shmita.
      */
     public func isShmitaYear() -> Bool {
         return (getJewishYear() % 7) == 0
@@ -2522,6 +2461,34 @@ public class JewishCalendar {
         new.timeZone = self.timeZone
         
         return new
+    }
+    
+    public static func == (lhs: JewishCalendar, rhs: JewishCalendar) -> Bool {
+        return lhs.moladHours == rhs.moladHours &&
+        lhs.moladMinutes == rhs.moladMinutes &&
+        lhs.moladChalakim == rhs.moladChalakim &&
+        lhs.inIsrael == rhs.inIsrael &&
+        lhs.useModernHolidays == rhs.useModernHolidays &&
+        lhs.isMukafChoma == rhs.isMukafChoma &&
+        lhs.isSafekMukafChoma == rhs.isSafekMukafChoma &&
+        lhs.workingDate == rhs.workingDate &&
+        lhs.timeZone == rhs.timeZone
+    }
+    
+    /// Compares this object with another instance for equality.
+    ///
+    /// - Parameter other: Another JewishCalendar instance to compare against.
+    /// - Returns: `true` if all relevant properties match; otherwise `false`.
+    public func equals(_ other: JewishCalendar) -> Bool {
+        return self.moladHours == other.moladHours &&
+        self.moladMinutes == other.moladMinutes &&
+        self.moladChalakim == other.moladChalakim &&
+        self.inIsrael == other.inIsrael &&
+        self.useModernHolidays == other.useModernHolidays &&
+        self.isMukafChoma == other.isMukafChoma &&
+        self.isSafekMukafChoma == other.isSafekMukafChoma &&
+        self.workingDate == other.workingDate &&
+        self.timeZone == other.timeZone
     }
     
     /**

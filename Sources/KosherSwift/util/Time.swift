@@ -14,7 +14,7 @@ import Foundation
  *
  * @author &copy; Eliyahu Hershfeld 2004 - 2020
  */
-public class Time {
+public class Time: Equatable {
     
     /** milliseconds in a second. */
     private static let SECOND_MILLIS = 1000;
@@ -59,11 +59,19 @@ public class Time {
      * @param seconds the seconds to set
      * @param milliseconds the milliseconds to set
      */
-    public init(hours: Int = 0, minutes: Int = 0, seconds: Int = 0, milliseconds: Int = 0) {
-        self.hours = hours
-        self.minutes = minutes
-        self.seconds = seconds
-        self.milliseconds = milliseconds
+    public convenience init(
+        hours: Int = 0,
+        minutes: Int = 0,
+        seconds: Int = 0,
+        milliseconds: Int = 0
+    ) {
+        let totalMillis =
+        hours * Self.HOUR_MILLIS +
+        minutes * Self.MINUTE_MILLIS +
+        seconds * Self.SECOND_MILLIS +
+        milliseconds
+        
+        self.init(millis: totalMillis)
     }
 
     /**
@@ -182,13 +190,48 @@ public class Time {
         let hours = self.hours * Time.HOUR_MILLIS
         let minutes = self.minutes * Time.MINUTE_MILLIS
         let seconds = self.seconds * Time.SECOND_MILLIS
-        return Double(hours + minutes + seconds + self.milliseconds);
+
+        let total = hours + minutes + seconds + self.milliseconds
+        return Double(isNegative ? -total : total)
+    }
+    
+    public static func == (lhs: Time, rhs: Time) -> Bool {
+        return lhs.hours == rhs.hours &&
+        lhs.minutes == rhs.minutes &&
+        lhs.seconds == rhs.seconds &&
+        lhs.milliseconds == rhs.milliseconds &&
+        lhs.isNegative == rhs.isNegative
+    }
+    
+    /// Compares this object with another instance for equality.
+    ///
+    /// - Parameter other: Another Time instance to compare against.
+    /// - Returns: `true` if all relevant properties match; otherwise `false`.
+    public func equals(_ other: Time) -> Bool {
+        return self.hours == other.hours &&
+        self.minutes == other.minutes &&
+        self.seconds == other.seconds &&
+        self.milliseconds == other.milliseconds &&
+        self.isNegative == other.isNegative
     }
 
     /**
      * @see java.lang.Object#toString()
      */
-//    public func toString() -> String {
-//        return ZmanimFormatter(TimeZone.getTimeZone("UTC")).format(this);
-//    }
+    public func toString() -> String {
+        let formatter = ZmanimFormatter(
+            timeZone: TimeZone(secondsFromGMT: 0)!,
+            prependZeroHours: true,
+            useSeconds: true,
+            useMillis: milliseconds != 0
+        )
+        
+        var formatted = formatter.format(milliseconds: getTime())
+        
+        if isNegative {
+            formatted = "-" + formatted
+        }
+        
+        return formatted
+    }
 }

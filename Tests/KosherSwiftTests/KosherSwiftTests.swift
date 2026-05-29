@@ -468,15 +468,15 @@ class KosherSwiftTests: XCTestCase {
     }
     
     func testZmanim() {
-        let geoLocation = GeoLocation(locationName: "CO", latitude: 39.6240, longitude: -104.8709, timeZone: TimeZone.current)
-        let calculator = ComplexZmanimCalendar(location: geoLocation)
-        let format = DateFormatter()
-        format.timeStyle = .full
+        //let geoLocation = GeoLocation(locationName: "CO", latitude: 39.6240, longitude: -104.8709, timeZone: TimeZone.current)
+        //let calculator = ComplexZmanimCalendar(location: geoLocation)
+        //let format = DateFormatter()
+        //format.timeStyle = .full
         //print(format.string(from: calculator.getTzais72ZmanisAmudeiHoraah()!))
         //print(format.string(from: calculator.getTzaisShabbatAmudeiHoraah()!))
         
-        let geoLocationFL = GeoLocation(locationName: "FL", latitude: 37.32495943, longitude: -122.01973712, timeZone: TimeZone(identifier: "America/New_York")!)
-        let calculatorFL = ComplexZmanimCalendar(location: geoLocation)
+        //let geoLocationFL = GeoLocation(locationName: "FL", latitude: 37.32495943, longitude: -122.01973712, timeZone: TimeZone(identifier: "America/New_York")!)
+        //let calculatorFL = ComplexZmanimCalendar(location: geoLocation)
 
         //print(format.string(from: calculatorFL.getFixedLocalChatzos()!))
     }
@@ -496,6 +496,67 @@ class KosherSwiftTests: XCTestCase {
         hdf.hebrewParshaMap.updateValue("Changed", forKey: JewishCalendar.Parsha.BERESHIS)
         
         XCTAssertNotEqual(hdf.hebrewParshaMap[JewishCalendar.Parsha.BERESHIS], "בראשית")
+        XCTAssertEqual(hdf.hebrewParshaMap[JewishCalendar.Parsha.BERESHIS], "Changed")
+    }
+    
+    func testZmanimFormatter() {
+        let formatter = ZmanimFormatter(timeZone: TimeZone(identifier: "America/New_York")!)
+        formatter.prependZeroHours = true
+
+        // Format a duration (e.g., a 72-minute temporal hour)
+        let temporalHourMs = 72.5 * 60 * 1000
+        XCTAssertEqual(formatter.format(milliseconds: temporalHourMs), "01:12:30")
+        XCTAssertEqual(formatter.formatXSDDuration(milliseconds: temporalHourMs), "PT1H12M30S")
+        XCTAssertEqual(formatter.format(date: Date(timeIntervalSince1970: 0)), "7:00:00 PM")
+    }
+    
+    func testTimeClass() {
+        let time = Time(
+            hours: 1,
+            minutes: 2,
+            seconds: 3,
+            milliseconds: 456
+        )
+        
+        XCTAssertEqual(time.getTime(), 3_723_456)
+        XCTAssertEqual(Time().getTime(), 0)// default 0 value
+        let lhs = Time(hours: 1, minutes: 2, seconds: 3, milliseconds: 4)
+        let rhs = Time(hours: 1, minutes: 2, seconds: 3, milliseconds: 4)
+        XCTAssertEqual(lhs, rhs)
+        let lhs2 = Time(hours: 1)
+        XCTAssertNotEqual(lhs2, rhs)
+        XCTAssertEqual(time.toString(), "01:02:03.456")
+        XCTAssertEqual(Time(millis: -100000).toString(), "-00:01:40")
+    }
+    
+    func testZmanClass() {
+        let date = Date()
+        let zman = Zman(label: "Sunrise", zman: date)
+        
+        XCTAssertEqual(zman.label, "Sunrise")
+        XCTAssertEqual(zman.zman, date)
+        XCTAssertEqual(zman.duration, 0)
+        XCTAssertEqual(zman.description, "")
+        
+        let zmanAsDur = Zman(label: "Shaah Zmanis", duration: 3_600_000)
+        
+        XCTAssertEqual(zmanAsDur.label, "Shaah Zmanis")
+        XCTAssertNil(zmanAsDur.zman)
+        XCTAssertEqual(zmanAsDur.duration, 3_600_000)
+        XCTAssertEqual(zmanAsDur.description, "")
+        
+        XCTAssertNotEqual(zman, zmanAsDur)
+        
+        let early = Date()
+        let later = early.addingTimeInterval(3600)
+        
+        let z1 = Zman(label: "Later", zman: later)
+        let z2 = Zman(label: "Earlier", zman: early)
+        
+        let sorted = [z1, z2].sorted(by: Zman.dateOrder)
+        
+        XCTAssertEqual(sorted[0]?.label, "Earlier")
+        XCTAssertEqual(sorted[1]?.label, "Later")
     }
 
 //    func testPerformanceExample() throws {

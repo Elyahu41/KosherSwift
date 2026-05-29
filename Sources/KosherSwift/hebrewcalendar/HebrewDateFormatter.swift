@@ -437,7 +437,7 @@ public class HebrewDateFormatter {
      * "&#x05DC;&#x05F4;&#x05D2; &#x05D1;&#x05E2;&#x05D5;&#x05DE;&#x05E8;",
      * "&#x05E4;&#x05D5;&#x05E8;&#x05D9;&#x05DD; &#x05E9;&#x05D5;&#x05E9;&#x05DF; &#x05E7;&#x05D8;&#x05DF;"]</code>
      */
-    public final let hebrewHolidays = [
+    public final var hebrewHolidays = [
         "ערב פסח", "פסח", "חול המועד פסח", "פסח שני", "ערב שבועות", "שבועות",
         "שבעה עשר בתמוז", "תשעה באב", "ט\"ו באב", "ערב ראש השנה", "ראש השנה",
         "צום גדליה", "ערב יום כיפור", "יום כיפור", "ערב סוכות", "סוכות",
@@ -447,6 +447,8 @@ public class HebrewDateFormatter {
         "יום העצמאות", "יום ירושלים", "ל\"ג בעומר", "שושן פורים קטן", "אסרו חג"
     ];
     
+    public final var tekufaNames = ["Tishri", "Tevet", "Nissan", "Tammuz"]
+    public final var hebrewTekufaNames = ["תשרי", "טבת", "ניסן", "תמוז"]
     
     /**
      * Formats the Yom Tov (holiday) in Hebrew or transliterated Latin characters.
@@ -1108,5 +1110,27 @@ public class HebrewDateFormatter {
     public func formatSpecialParsha(jewishCalendar:JewishCalendar) -> String {
         let specialParsha =  jewishCalendar.getSpecialShabbos();
         return hebrewFormat ? hebrewParshaMap[specialParsha]! : transliteratedParshaMap[specialParsha]!;
+    }
+    
+    /**
+     Returns a string if the current day has a tekufa event. The string will contain the name of the tekufa/season that is arriving. If this method is called on a day without a tekufa event, it will return an empty string.
+     - Returns a string with the tekufa name or an empty string on a day with no tekufa change
+     */
+    public func formatTekufaName(jewishCalendar:JewishCalendar) -> String {
+        let INITIAL_TEKUFA_OFFSET = 12.625 // the number of days Tekufas Tishrei occurs before JEWISH_EPOCH
+        
+        let days = Double(jewishCalendar.getJewishCalendarElapsedDays(year: jewishCalendar.getJewishYear()) + jewishCalendar.getDaysSinceStartOfJewishYear()) + INITIAL_TEKUFA_OFFSET - 1 // total days since first Tekufas Tishrei event
+        
+        let solarDaysElapsed = days.truncatingRemainder(dividingBy: 365.25) // total days elapsed since start of solar year
+        let currentTekufaNumber = Int(solarDaysElapsed / 91.3125)
+        let tekufaDaysElapsed = solarDaysElapsed.truncatingRemainder(dividingBy: 91.3125) // the number of days that have passed since a tekufa event
+        
+        if (tekufaDaysElapsed > 0 && tekufaDaysElapsed <= 1) {//if the tekufa happens in the upcoming 24 hours
+            return isHebrewFormat() ?
+            "תקופת ".appending(hebrewTekufaNames[currentTekufaNumber]) :
+            "Tekufas ".appending(tekufaNames[currentTekufaNumber])
+        } else {
+            return ""
+        }
     }
 }
