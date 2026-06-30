@@ -82,17 +82,12 @@ public class NOAACalculator : AstronomicalCalculator {
     public override func getUTCSunrise(date: Date, geoLocation: GeoLocation, zenith: Double, adjustForElevation: Bool) -> Double {
         let elevation = adjustForElevation ? geoLocation.getElevation() : 0;
         let adjustedZenith = adjustZenith(zenith: zenith, elevation: elevation);
-        var sunrise = NOAACalculator.getSunRiseSetUTC(julianDay: NOAACalculator.getJulianDay(date: date), latitude: geoLocation.getLatitude(), longitude: -geoLocation.getLongitude(), zenith: adjustedZenith, solarEvent: SolarEvent.SUNRISE);
+        var sunrise = NOAACalculator.getSunRiseSetUTC(julianDay: NOAACalculator.getJulianDay(date: date, timeZone: geoLocation.timeZone), latitude: geoLocation.getLatitude(), longitude: -geoLocation.getLongitude(), zenith: adjustedZenith, solarEvent: SolarEvent.SUNRISE);
         sunrise = sunrise / 60;
 
         // ensure that the time is >= 0 and < 24
-        while (sunrise < 0.0) {
-            sunrise += 24.0;
-        }
-        while (sunrise >= 24.0) {
-            sunrise -= 24.0;
-        }
-        return sunrise;
+        let normalized = sunrise.truncatingRemainder(dividingBy: 24)  
+        return normalized < 0 ? normalized + 24 : normalized
     }
 
     /**
@@ -120,17 +115,10 @@ public class NOAACalculator : AstronomicalCalculator {
         let elevation = adjustForElevation ? geoLocation.getElevation() : 0;
         let adjustedZenith = adjustZenith(zenith: zenith, elevation: elevation);
 
-        var sunset = NOAACalculator.getSunRiseSetUTC(julianDay: NOAACalculator.getJulianDay(date: date), latitude: geoLocation.getLatitude(), longitude: -geoLocation.getLongitude(),zenith: adjustedZenith, solarEvent: SolarEvent.SUNSET);
+        var sunset = NOAACalculator.getSunRiseSetUTC(julianDay: NOAACalculator.getJulianDay(date: date, timeZone: geoLocation.timeZone), latitude: geoLocation.getLatitude(), longitude: -geoLocation.getLongitude(),zenith: adjustedZenith, solarEvent: SolarEvent.SUNSET);
         sunset = sunset / 60;
 
-        // ensure that the time is >= 0 and < 24
-        while (sunset < 0.0) {
-            sunset += 24.0;
-        }
-        while (sunset >= 24.0) {
-            sunset -= 24.0;
-        }
-        return sunset;
+        return sunset > 0 ? sunset.truncatingRemainder(dividingBy: 24) : sunset.truncatingRemainder(dividingBy: 24) + 24
     }
 
     /**
@@ -141,22 +129,24 @@ public class NOAACalculator : AstronomicalCalculator {
      * @return the Julian day corresponding to the date Note: Number is returned for start of day. Fractional days
      *         should be added later.
      */
-    private static func getJulianDay(date: Date) -> Double {
+
+    static func getJulianDay(date: Date, timeZone: TimeZone) -> Double {
         var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = geoLocation.getTimeZone()
-        var year = calendar.component(.year, from: date)
-        var month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        if (month <= 2) {
-            year -= 1;
-            month += 12;
+        calendar.timeZone = timeZone
+        let components = calendar.dateComponents([.year, .month, .day], from: date)
+        var year = components.year!
+        // KosherJava adds 1 to this, but it seems to be due to an effect of java's Calendar implementation
+        var month = components.month!
+        let day = components.day!
+        if month <= 2 {
+            year -= 1
+            month += 12
         }
-        let a = year / 100;
-        let b = 2 - a + a / 4;
-        let c = floor(365.25 * (Double(year) + 4716))
-        let d = floor(30.6001 * Double(month + 1))
-        let e = Double(day) + Double(b) - 1524.5
-        return Double(c + d + e);
+        let a = year / 100
+        let b = 2 - a + a / 4
+        return floor(365.25 * (Double(year) + 4716)) + floor(30.6001 * (Double(month) + 1))
+            + Double(day) + Double(b) - 1524.5
+
     }
 
     /**
@@ -193,15 +183,10 @@ public class NOAACalculator : AstronomicalCalculator {
      * @return the Geometric Mean Longitude of the Sun in degrees
      */
     private static func getSunGeometricMeanLongitude(julianCenturies: Double) -> Double {
-        var longitude = 280.46646 + julianCenturies * (36000.76983 + 0.0003032 * julianCenturies);
-        while (longitude > 360.0) {
-            longitude -= 360.0;
-        }
-        while (longitude < 0.0) {
-            longitude += 360.0;
-        }
-
-        return longitude; // in degrees
+        let longitude = 280.46646 + julianCenturies * (36000.76983 + 0.0003032 * julianCenturies);
+        return longitude > 0
+            ? longitude.truncatingRemainder(dividingBy: 360)
+            : longitude.truncatingRemainder(dividingBy: 360) + 360
     }
 
     /**
@@ -410,7 +395,7 @@ public class NOAACalculator : AstronomicalCalculator {
      */
 
     public static func getSolarElevation(date: Date, lat: Double, lon: Double) -> Double {
-        let julianDay = getJulianDay(date: date);
+        let julianDay = getJulianDay(date: date, timeZone: geoLocation.getTimeZone());
         let julianCenturies = getJulianCenturiesFromJulianDay(julianDay: julianDay);
 
         let eot = getEquationOfTime(julianCenturies: julianCenturies);
@@ -447,7 +432,7 @@ public class NOAACalculator : AstronomicalCalculator {
      */
 
     public static func getSolarAzimuth(date: Date, lat: Double, lon: Double) -> Double {
-        let julianDay = getJulianDay(date: date);
+        let julianDay = getJulianDay(date: date, timeZone: geoLocation.getTimeZone());
         let julianCenturies = getJulianCenturiesFromJulianDay(julianDay: julianDay);
 
         let eot = getEquationOfTime(julianCenturies: julianCenturies);
@@ -488,7 +473,7 @@ public class NOAACalculator : AstronomicalCalculator {
      * @return the time in minutes from zero UTC
      */
     public override func getUTCNoon(date: Date, geoLocation: GeoLocation) -> Double {
-        let julianDay = NOAACalculator.getJulianDay(date: date);
+        let julianDay = NOAACalculator.getJulianDay(date: date, timeZone: geoLocation.getTimeZone());
         let julianCenturies = NOAACalculator.getJulianCenturiesFromJulianDay(julianDay: julianDay);
         
         var noon = NOAACalculator.getSolarNoonUTC(julianCenturies: julianCenturies, longitude: -geoLocation.getLongitude());
