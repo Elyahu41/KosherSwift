@@ -22,6 +22,10 @@
 		CE4E71202B34F913007D6BC6 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E711F2B34F913007D6BC6 /* Time.swift */; };
 		CE4E71222B34F91D007D6BC6 /* Zman.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E71212B34F91D007D6BC6 /* Zman.swift */; };
 		CE4E71242B34F930007D6BC6 /* ZmanimFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4E71232B34F930007D6BC6 /* ZmanimFormatter.swift */; };
+		CE8DFE7D2FCE3A03001BBB7E /* MishnaYomi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8DFE7C2FCE3A03001BBB7E /* MishnaYomi.swift */; };
+		CE8DFE7F2FCE3A70001BBB7E /* DailyMishnehTorah.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8DFE7E2FCE3A70001BBB7E /* DailyMishnehTorah.swift */; };
+		CE8DFE812FCE3AA9001BBB7E /* DailyHalacha.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8DFE802FCE3AA9001BBB7E /* DailyHalacha.swift */; };
+		CE8DFE832FCE3C9E001BBB7E /* ChafetzChayimYomi.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8DFE822FCE3C9E001BBB7E /* ChafetzChayimYomi.swift */; };
 		CEDE8FB32B3272B700D74115 /* KosherSwift.docc in Sources */ = {isa = PBXBuildFile; fileRef = CEDE8FB22B3272B700D74115 /* KosherSwift.docc */; };
 		CEDE8FB92B3272B700D74115 /* KosherSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDE8FAE2B3272B700D74115 /* KosherSwift.framework */; };
 		CEDE8FBE2B3272B700D74115 /* KosherSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDE8FBD2B3272B700D74115 /* KosherSwiftTests.swift */; };
@@ -55,6 +59,10 @@
 		CE4E711F2B34F913007D6BC6 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		CE4E71212B34F91D007D6BC6 /* Zman.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zman.swift; sourceTree = "<group>"; };
 		CE4E71232B34F930007D6BC6 /* ZmanimFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZmanimFormatter.swift; sourceTree = "<group>"; };
+		CE8DFE7C2FCE3A03001BBB7E /* MishnaYomi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MishnaYomi.swift; sourceTree = "<group>"; };
+		CE8DFE7E2FCE3A70001BBB7E /* DailyMishnehTorah.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyMishnehTorah.swift; sourceTree = "<group>"; };
+		CE8DFE802FCE3AA9001BBB7E /* DailyHalacha.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHalacha.swift; sourceTree = "<group>"; };
+		CE8DFE822FCE3C9E001BBB7E /* ChafetzChayimYomi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChafetzChayimYomi.swift; sourceTree = "<group>"; };
 		CEDE8FAE2B3272B700D74115 /* KosherSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KosherSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDE8FB12B3272B700D74115 /* KosherSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KosherSwift.h; sourceTree = "<group>"; };
 		CEDE8FB22B3272B700D74115 /* KosherSwift.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = KosherSwift.docc; sourceTree = "<group>"; };
@@ -87,9 +95,6 @@
 			children = (
 				CEDE8FCE2B327BED00D74115 /* JewishCalendar.swift */,
 				CE278A242B338BFE00A692AC /* HebrewDateFormatter.swift */,
-				CE278A262B338C6200A692AC /* Daf.swift */,
-				CE278A282B338C8900A692AC /* YomiCalculator.swift */,
-				CE278A2A2B338C9E00A692AC /* YerushalmiYomiCalculator.swift */,
 				CE278A2C2B339C5900A692AC /* TefilaRules.swift */,
 			);
 			path = hebrewcalendar;
@@ -125,6 +130,20 @@
 			path = Tests;
 			sourceTree = "<group>";
 		};
+		CE8DFE512FCE3875001BBB7E /* limudim */ = {
+			isa = PBXGroup;
+			children = (
+				CE278A262B338C6200A692AC /* Daf.swift */,
+				CE278A282B338C8900A692AC /* YomiCalculator.swift */,
+				CE278A2A2B338C9E00A692AC /* YerushalmiYomiCalculator.swift */,
+				CE8DFE7C2FCE3A03001BBB7E /* MishnaYomi.swift */,
+				CE8DFE7E2FCE3A70001BBB7E /* DailyMishnehTorah.swift */,
+				CE8DFE802FCE3AA9001BBB7E /* DailyHalacha.swift */,
+				CE8DFE822FCE3C9E001BBB7E /* ChafetzChayimYomi.swift */,
+			);
+			path = limudim;
+			sourceTree = "<group>";
+		};
 		CEDE8FA42B3272B700D74115 = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +165,7 @@
 		CEDE8FB02B3272B700D74115 /* KosherSwift */ = {
 			isa = PBXGroup;
 			children = (
+				CE8DFE512FCE3875001BBB7E /* limudim */,
 				CE278A232B338A4C00A692AC /* hebrewcalendar */,
 				CE4E71162B34F804007D6BC6 /* util */,
 				CEDE8FB12B3272B700D74115 /* KosherSwift.h */,
@@ -283,9 +303,13 @@
 				CE4E711E2B34F8E4007D6BC6 /* SunTimesCalculator.swift in Sources */,
 				CE4E71132B34F7CA007D6BC6 /* ZmanimCalendar.swift in Sources */,
 				CEDE8FB32B3272B700D74115 /* KosherSwift.docc in Sources */,
+				CE8DFE7F2FCE3A70001BBB7E /* DailyMishnehTorah.swift in Sources */,
+				CE8DFE832FCE3C9E001BBB7E /* ChafetzChayimYomi.swift in Sources */,
 				CE278A2D2B339C5900A692AC /* TefilaRules.swift in Sources */,
 				CE4E711C2B34F855007D6BC6 /* GeoLocation.swift in Sources */,
+				CE8DFE7D2FCE3A03001BBB7E /* MishnaYomi.swift in Sources */,
 				CE4E711A2B34F839007D6BC6 /* NOAACalculator.swift in Sources */,
+				CE8DFE812FCE3AA9001BBB7E /* DailyHalacha.swift in Sources */,
 				CE4E71222B34F91D007D6BC6 /* Zman.swift in Sources */,
 				CEDE8FCF2B327BED00D74115 /* JewishCalendar.swift in Sources */,
 				CE4E71202B34F913007D6BC6 /* Time.swift in Sources */,

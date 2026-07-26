@@ -2383,16 +2383,25 @@ public class JewishCalendar: Equatable {
     }
     
     /**
-     * returns a <code>Double</code> that represents the hours for when the Tekufa (season) changes. There are 4 tekufas
-     * a year: Nissan/Spring, Tammuz/Summer, Tishri/Fall, and Tevet/Winter. This calculation is according to Shmuel
-     * in Eruvin 56a, which is a more rounded up version of Rav Adda's calculation. The Rama writes in Yoreh De'ah 116:5
-     * that one should not drink water during the tekufa change. Rabbi Ovadia Yosef (Halichot Olam, Chelek 7, Page 183) recommends to abstain from drinking water for a range of 1 hour. (30 minutes before and after the tekufa event)
+     * Calculates the hours for when the <a href="https://en.wikipedia.org/wiki/Tekufah"><em>Tekufa</em></a> (season) changes.
+     * There are 4 <em>tekufos</em> a year: Nissan/Spring, Tammuz/Summer, Tishri/Fall, and Teves/Winter. This calculation is
+     * according to <a href="https://en.wikipedia.org/wiki/Samuel_of_Nehardea">Shmuel</a> in <a href=
+     * "https://hebrewbooks.org/shas.aspx?mesechta=3&daf=56">Eruvin 56a</a>, which is a more rounded up version of <a href=
+     * "https://en.wikipedia.org/wiki/Adda_bar_Ahavah">Rav Adda's</a> calculation. This calculation follows the Levush in the end of Siman 428,
+     * who writes that the hours to calculate the tekufa are based on regular clock hours and not proportional hours, and that the time
+     * for the tekufa are based on 6 hours after the previous day's Midday. The <a href=
+     * "https://en.wikipedia.org/wiki/Moses_Isserles">Rama</a> writes in <a href=
+     * "https://hebrewbooks.org/pdfpager.aspx?req=67715&st=&pgnum=218">Yoreh De'ah 116:5</a> that one should not drink water during
+     * the <em>tekufa</em> change. <a href="https://en.wikipedia.org/wiki/Ovadia_Yosef">Rabbi Ovadia Yosef</a> (Halichot Olam,
+     * Chelek 7, Page 183) recommends to abstain from drinking water for a range of 1 hour (30 minutes before and after the
+     * <em>tekufa</em> event).
      *
-     * @return the number of hours into the hebrew day that the tekufa (season) change takes place, or nil if the
-     * tekufa does not occur on current day. For example: 19.5 would mean that the tekufa occurs 19 hours and a half into
-     * the hebrew date, or 13 and a half hours (-6 hours) into the Gregorian date. This is calculated for GMT+2, Jerusalem Standard Time and will need to be adjusted for timezone differences as well.
+     * @return the number of hours into the Hebrew day that the <em>tekufa</em> (season) change takes place as a Double, or
+     *         nil if the <em>tekufa</em> does not occur on current day. For example: 19.5 would mean that the
+     *         <em>tekufa</em> occurs 19 hours and a half into the Hebrew date, or 13 and a half hours (-6 hours) into the Gregorian
+     *         date.
      */
-    public func getTekufa() -> Double? {
+    private func getTekufa() -> Double? {
         let INITIAL_TEKUFA_OFFSET = 12.625 // the number of days Tekufas Tishrei occurs before JEWISH_EPOCH
         
         let days = Double(getJewishCalendarElapsedDays(year: getJewishYear()) + getDaysSinceStartOfJewishYear()) + INITIAL_TEKUFA_OFFSET - 1 // total days since first Tekufas Tishrei event
@@ -2407,16 +2416,27 @@ public class JewishCalendar: Equatable {
     }
     
     /**
-    Returns a Date if the current day has a tekufa (season) change. The Date will contain the time that the tekufa (season)
-    is arriving. If this method is called on a day without a tekufa change, it will return a nil.
-    The default implementation of this method will return the Tekufa change according to the calculations of Rabbi
-    Tulchinsky in his calendar <a href="https://zmanim.online/">Luach Itim
-    Lebinah</a>. However, there is also the opinion of Rabbi Yonah Boron, who says to calculate
-    the tekufa based on local midday in Israel which causes a 21-minute difference. There is a third opinion as well
-    to use seasonal midday but that is not a generally followed opinion, so it has not been implemented.
-    @param shouldMinus21Minutes if true, removes 21 minutes from the time of Rabbi Tulchinsky's tekufa which will result to the opinion of Rabbi Yonah Boron.
-    @return a Date with the time that the tekufa (season) changes or a nil on a day with no tekufa change.
-    */
+     * Returns a Date if the current day has a <a href="https://en.wikipedia.org/wiki/Tekufah"><em>Tekufa</em></a>
+     * (season) change. The Date will contain the time that the <em>tekufa</em> (season) is arriving. If this method is
+     * called on a day without a <em>tekufa</em> change, it will return a nil. The default implementation of this method
+     * will return the <em>tekufa</em> change according to the calculations of the <a href="https://zmanim.online/">Luach Itim
+     * Lebinah</a> following <a href="https://en.wikipedia.org/wiki/Yechiel_Michel_Tucazinsky">Rabbi Yechiel Michel Tucazinsky</a>.
+     * However, there is also the opinion of <a href=
+     * "https://he.wikipedia.org/wiki/%D7%99%D7%95%D7%A0%D7%94_%D7%9E%D7%A8%D7%A6%D7%91%D7%9A">Rabbi Yonah Merzbach</a>, who
+     * calculates the <em>tekufa</em> based on Local Mean Time (LMT) in Israel which causes a ~21-minute difference. It should be
+     * noted that this method only covers two opinions of how to calculate the tekufa (based on 6 hours after Midday of the day
+     * before the tekufa). The <a href="https://en.wikipedia.org/wiki/Asher_ben_Jehiel">Rosh</a> (Tosafos HaRosh <a href=
+     * "https://www.sefaria.org/Tosafot_HaRosh_on_Berakhot.3b.6?lang=he">Berachos 3b</a>) is of the opinion that the calculation
+     * starts at sunset and to use proportional hours. While the <a href="https://en.wikipedia.org/wiki/Simeon_ben_Zemah_Duran">Tashbetz</a> (Shut Tashbetz <a href="https://hebrewbooks.org/pdfpager.aspx?req=1381&st=&pgnum=91">Chelek 1, Siman 109</a>)
+     * is also of the opinion that the calculation starts at sunset, however, his opinion is to use regular hours.
+     *
+     * See the last essay at the end of the 4th Chelek of the Amudei Horaah Mishnah Berurah where Rabbi Dahan writes that Rav Tucazinsky eventually agreed to Rav Merzbach.
+     * @param useLocalMeanTime if true, removes ~21 minutes from the time of the <em>tekufa</em> calculated by Rabbi Yechiel Michel
+     *         Tucazinsky, and will follow the opinion of Rabbi Yonah Merzbach.
+     * @return a Date with the time that the <em>tekufa</em> (season) changes or a nil on a day with no <em>tekufa</em>
+     *         change.
+     * @see #getTekufa()
+     */
     public func getTekufaAsDate(shouldMinus21Minutes:Bool = false) -> Date? {
         guard let tekufa = getTekufa() else {
             return nil

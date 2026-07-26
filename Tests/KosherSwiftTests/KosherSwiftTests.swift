@@ -216,6 +216,26 @@ class KosherSwiftTests: XCTestCase {
         XCTAssertEqual(bearing, 93.9525489160192)
     }
     
+    func testGeodiscBearing() {
+        let denver = GeoLocation(locationName: "Denver", latitude: 39.6272082, longitude: -104.8800718, timeZone: TimeZone.current)
+        let jer = GeoLocation(locationName: "Jerusalem", latitude: 31.778015, longitude: 35.235413, timeZone: TimeZone.current)
+
+        let bearingInit = denver.getGeodesicInitialBearing(location: jer)
+        let bearingFinal = denver.getGeodesicFinalBearing(location: jer)
+        XCTAssertEqual(bearingInit, 33.50820371562615)
+        XCTAssertEqual(bearingFinal, 149.97377985851242) // Not exactly the same output as KosherJava, but extremely close. Needs to be refined
+    }
+    
+    func testLocalMeanTimeOffset() {
+        let denver = GeoLocation(locationName: "Denver", latitude: 39.6272082, longitude: -104.8800718, timeZone: TimeZone(identifier: "America/Denver")!)
+        let jer = GeoLocation(locationName: "Jerusalem", latitude: 31.778015, longitude: 35.235413, timeZone: TimeZone(identifier: "Asia/Jerusalem")!)
+
+        let denverLMT = denver.getLocalMeanTimeOffset()
+        let jerLMT = jer.getLocalMeanTimeOffset()
+        XCTAssertEqual(denverLMT, -3571217.232000001)
+        XCTAssertEqual(jerLMT, -2343500.879999999)
+    }
+    
     func testDafYomis() {
         jewishCalendar.setGregorianDate(year: 2023, month: 12, dayOfMonth: 21)
         var dafYomi = jewishCalendar.getDafYomiBavli()
@@ -557,6 +577,25 @@ class KosherSwiftTests: XCTestCase {
         
         XCTAssertEqual(sorted[0]?.label, "Earlier")
         XCTAssertEqual(sorted[1]?.label, "Later")
+    }
+    
+    func testMishnaYomiClass() {
+        jewishCalendar.setJewishDate(year: 5785, month: JewishCalendar.AV, dayOfMonth: 5)
+        XCTAssertEqual(MishnaYomi().getMishnaYomi(jewishCalendar: jewishCalendar, useHebrewText: false)!, "Zevachim 5:5-6")
+    }
+    
+    func testDailyHalachaClass() {
+        let date = Date(timeIntervalSince1970: 1780353891.3084102)
+        let array = HalachaYomi.getDailyLearning(date: date)
+        XCTAssertEqual(array![0].bookName, "שו\"ע - או\"ח")
+        XCTAssertEqual(array![0].siman, 202)
+        XCTAssertEqual(array![0].seifim, "יג-טו")
+    }
+    
+    func testChafetzChaimClass() {
+        jewishCalendar.setGregorianDate(year: 2026, month: JewishCalendar.AV, dayOfMonth: 5)
+        let string = ChafetzChayimYomi.getChafetzChayimYomi(jewishCalendar: jewishCalendar)
+        XCTAssertEqual(string, "הלכות ל\"ה: 10.13")
     }
 
 //    func testPerformanceExample() throws {

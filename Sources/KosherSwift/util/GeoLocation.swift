@@ -286,26 +286,24 @@ public class GeoLocation: Equatable {
     }
     
     /**
-     * This method is not tested at all. If you want to use this method or fix it, please submit an issue on the KosherSwift github.
-     * A method that will return the location's local mean time offset in milliseconds from local <a
-     * href="https://en.wikipedia.org/wiki/Standard_time">standard time</a>. The globe is split into 360&deg;, with
-     * 15&deg; per hour of the day. For a local that is at a longitude that is evenly divisible by 15 (longitude % 15 ==
-     * 0), at solar ``AstronomicalCalendar.getSunTransit()`` noon (with adjustment for the <a
-     * href="https://en.wikipedia.org/wiki/Equation_of_time">equation of time</a>) the sun should be directly overhead,
-     * so a user who is 1&deg; west of this will have noon at 4 minutes after standard time noon, and conversely, a user
-     * who is 1&deg; east of the 15&deg; longitude will have noon at 11:56 AM. Lakewood, N.J., whose longitude is
-     * -74.2094, is 0.7906 away from the closest multiple of 15 at -75&deg;. This is multiplied by 4 to yield 3 minutes
-     * and 10 seconds earlier than standard time. The offset returned does not account for the <a
-     * href="https://en.wikipedia.org/wiki/Daylight_saving_time">Daylight saving time</a> offset since this class is
-     * unaware of dates.
+     * A method that will return the location's local mean time offset in milliseconds from the local clock time defined by the time
+     * zone offset in effect for the supplied Date. The globe is split into 360°, with 15° per hour of the day. For
+     * a local that is at a longitude that is evenly divisible by 15 (longitude % 15 == 0), at solar noon (with adjustment for the <a
+     * href="https://en.wikipedia.org/wiki/Equation_of_time">equation of time</a>) the sun should be directly overhead, so a user who
+     * is 1° west of this will have noon at 4 minutes after local clock noon, and conversely, a user who is 1° east of the 15°
+     * longitude will have noon at 11:56 AM local clock time. Lakewood, N.J., whose longitude is -74.222, is 0.778 away from the
+     * closest multiple of 15 at -75°. This is multiplied by 4 to yield 3 minutes and 10 seconds earlier than the local clock time
+     *  derived from the zone offset in effect for the supplied date, including any applicable <a href=
+     *  "https://en.wikipedia.org/wiki/Daylight_saving_time">Daylight saving time</a> adjustment.
+     *
+     * @param date the date used to calculate the local mean offset for the date in question.
      *
      * @return the offset in milliseconds not accounting for Daylight saving time. A positive value will be returned
      *         East of the 15&deg; timezone line, and a negative value West of it.
      * @since 1.1
      */
-    public func getLocalMeanTimeOffset() -> Double {
-        //This method might not work properly. I did not test it at all as it is not currently used anywhere in the codebase
-        return Double(Int(getLongitude()) * 4 * GeoLocation.MINUTE_MILLIS - getTimeZone().secondsFromGMT());
+    public func getLocalMeanTimeOffset(date: Date = Date()) -> Double {
+        return getLongitude() * 4 * Double(GeoLocation.MINUTE_MILLIS) - (Double(getTimeZone().secondsFromGMT(for: date)) * 1000)
     }
     
     /**
@@ -350,7 +348,7 @@ public class GeoLocation: Equatable {
      * @return the initial bearing
      */
     public func getGeodesicInitialBearing(location:GeoLocation) -> Double {
-        return vincentyFormula(location: location, formula: GeoLocation.INITIAL_BEARING);
+        return vincentyInverseFormula(location: location, formula: GeoLocation.INITIAL_BEARING);
     }
     
     /**
@@ -365,7 +363,7 @@ public class GeoLocation: Equatable {
      * @return the final bearing
      */
     public func getGeodesicFinalBearing(location:GeoLocation) -> Double {
-        return vincentyFormula(location: location, formula: GeoLocation.FINAL_BEARING);
+        return vincentyInverseFormula(location: location, formula: GeoLocation.FINAL_BEARING);
     }
     
     /**
@@ -381,7 +379,7 @@ public class GeoLocation: Equatable {
      * @return the geodesic distance in Meters
      */
     public func getGeodesicDistance(location:GeoLocation) -> Double {
-        return vincentyFormula(location: location, formula: GeoLocation.DISTANCE);
+        return vincentyInverseFormula(location: location, formula: GeoLocation.DISTANCE);
     }
     
     /**
@@ -398,29 +396,51 @@ public class GeoLocation: Equatable {
      *            ``FINAL_BEARING``) and distance (``DISTANCE``).
      * @return geodesic distance in Meters
      */
-    private func vincentyFormula(location: GeoLocation, formula: Int) -> Double {
-        let a = 6378137.0
-        let b = 6356752.3142
-        let f = 1 / 298.257223563 // WGS-84 ellipsoid
-        let L = toRadians(degrees: location.longitude) - toRadians(degrees: longitude)
-        let U1 = atan((1 - f) * tan(toRadians(degrees: latitude)))
-        let U2 = atan((1 - f) * tan(toRadians(degrees: location.latitude)))
+    private func vincentyInverseFormula(location: GeoLocation, formula: Int) -> Double {
+        let majorSemiAxis: Double = 6378137
+        let minorSemiAxis: Double = 6356752.3142
+        let f: Double = 1 / 298.257223563 // WGS-84 ellipsoid
+        
+        // Helper closures for degrees/radians conversion
+        let toRadians: (Double) -> Double = { $0 * .pi / 180.0 }
+        let toDegrees: (Double) -> Double = { $0 * 180.0 / .pi }
+        
+        let L = toRadians(location.longitude - self.longitude)
+        let U1 = atan((1 - f) * tan(toRadians(self.latitude)))
+        let U2 = atan((1 - f) * tan(toRadians(location.latitude)))
+        
         let sinU1 = sin(U1), cosU1 = cos(U1)
         let sinU2 = sin(U2), cosU2 = cos(U2)
         
         var lambda = L
         var lambdaP = 2 * Double.pi
         var iterLimit = 20
-        var sinLambda = 0.0, cosLambda = 0.0, sinSigma = 0.0, cosSigma = 0.0, sigma = 0.0
-        var sinAlpha = 0.0, cosSqAlpha = 0.0, cos2SigmaM = 0.0, C = 0.0
         
-        while abs(lambda - lambdaP) > 1e-12, iterLimit > 0 {
+        var sinLambda: Double = 0
+        var cosLambda: Double = 0
+        var sinSigma: Double = 0
+        var cosSigma: Double = 0
+        var sigma: Double = 0
+        var sinAlpha: Double = 0
+        var cosSqAlpha: Double = 0
+        var cos2SigmaM: Double = 0
+        var C: Double = 0
+        
+        // Swift doesn't have the inline `--iterLimit` decrement,
+        // so we evaluate it in the loop condition and subtract inside.
+        while abs(lambda - lambdaP) > 1e-12 && iterLimit > 0 {
+            iterLimit -= 1
+            
             sinLambda = sin(lambda)
             cosLambda = cos(lambda)
-            sinSigma = sqrt((cosU2 * sinLambda) * (cosU2 * sinLambda)
-                            + (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda) * (cosU1 * sinU2 - sinU1 * cosU2 * cosLambda))
             
-            if sinSigma == 0 { return 0 } // co-incident points
+            let part1 = cosU2 * sinLambda
+            let part2 = cosU1 * sinU2 - sinU1 * cosU2 * cosLambda
+            sinSigma = sqrt((part1 * part1) + (part2 * part2))
+            
+            if sinSigma == 0 {
+                return 0 // co-incident points
+            }
             
             cosSigma = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda
             sigma = atan2(sinSigma, cosSigma)
@@ -428,39 +448,30 @@ public class GeoLocation: Equatable {
             cosSqAlpha = 1 - sinAlpha * sinAlpha
             cos2SigmaM = cosSigma - 2 * sinU1 * sinU2 / cosSqAlpha
             
-            if cos2SigmaM.isNaN { cos2SigmaM = 0 } // equatorial line: cosSqAlpha=0 (§6)
+            if cos2SigmaM.isNaN {
+                cos2SigmaM = 0 // equatorial line: cosSqAlpha=0 (§6)
+            }
             
             C = f / 16 * cosSqAlpha * (4 + f * (4 - 3 * cosSqAlpha))
             lambdaP = lambda
-            lambda = L + (1 - C) * f * sinAlpha
-            * (sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)))
-            
-            iterLimit -= 1
+            lambda = L + (1 - C) * f * sinAlpha * (sigma + C * sinSigma * (cos2SigmaM + C * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)))
         }
         
-        if iterLimit == 0 { return Double.nan } // formula failed to converge
+        if iterLimit == 0 {
+            return Double.nan // formula failed to converge
+        }
         
-        let uSq = cosSqAlpha * (a * a - b * b) / (b * b)
+        let uSq = cosSqAlpha * (majorSemiAxis * majorSemiAxis - minorSemiAxis * minorSemiAxis) / (minorSemiAxis * minorSemiAxis)
         let A = 1 + uSq / 16384 * (4096 + uSq * (-768 + uSq * (320 - 175 * uSq)))
         let B = uSq / 1024 * (256 + uSq * (-128 + uSq * (74 - 47 * uSq)))
-        let deltaSigma = B
-        * sinSigma
-        * (cos2SigmaM + B
-           / 4
-           * (cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) - B / 6 * cos2SigmaM
-              * (-3 + 4 * sinSigma * sinSigma) * (-3 + 4 * cos2SigmaM * cos2SigmaM)))
         
-        let distance = b * A * (sigma - deltaSigma)
+        let deltaSigma = B * sinSigma * (cos2SigmaM + B / 4 * (cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM) - B / 6 * cos2SigmaM * (-3 + 4 * sinSigma * sinSigma) * (-3 + 4 * cos2SigmaM * cos2SigmaM)))
+        let distance = minorSemiAxis * A * (sigma - deltaSigma)
         
-        let atanPart1 = cosU1 * sinU2 - sinU1 * cosU2 * cosLambda
-        let atanPart2 = -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda
-        
-        let atanResult1 = atan2(atanPart1, Double(sinLambda))
-        let atanResult2 = atan2(atanPart2, Double(sinLambda))
-        
-        let fwdAz = toDegrees(radians: cosU2 * atanResult1)
-        let revAz = toDegrees(radians: cosU1 * atanResult2)
-        
+        // initial bearing
+        let fwdAz = toDegrees(atan2(cosU2 * sinLambda, cosU1 * sinU2 - sinU1 * cosU2 * cosLambda))
+        // final bearing
+        let revAz = toDegrees(atan2(cosU1 * sinLambda, -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda))
         
         switch formula {
         case GeoLocation.DISTANCE:
@@ -469,7 +480,7 @@ public class GeoLocation: Equatable {
             return fwdAz
         case GeoLocation.FINAL_BEARING:
             return revAz
-        default: // should never happen
+        default:
             return Double.nan
         }
     }
@@ -539,7 +550,6 @@ public class GeoLocation: Equatable {
         let tz = getTimeZone()
         
         return """
-        
         Location Name:\t\t\t\(getLocationName())
         Latitude:\t\t\t\(getLatitude())°
         Longitude:\t\t\t\(getLongitude())°

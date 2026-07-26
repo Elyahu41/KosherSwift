@@ -13,14 +13,12 @@ import Foundation
  * <em>zman</em>.
  *
  * Here is an example of various ways of sorting <em>zmanim</em>.
- * <p>First create the Calendar for the location you would like to calculate:
- *
- * <pre style="background: #FEF0C9; display: inline-block;">
+ * First create the Calendar for the location you would like to calculate:
+ * ```
  * let locationName = &quot;Lakewood, NJ&quot;;
  * let latitude = 40.0828; // Lakewood, NJ
  * let longitude = -74.2094; // Lakewood, NJ
  * let elevation = 20; // optional elevation correction in Meters
- * // the String parameter in getTimeZone() has to be a valid timezone listed in {@link java.util.TimeZone#getAvailableIDs()}
  * let timeZone = TimeZone.getTimeZone(&quot;America/New_York&quot;);
  * let location = GeoLocation(locationName, latitude, longitude, elevation, timeZone);
  * let czc = ComplexZmanimCalendar(location);
@@ -35,18 +33,15 @@ import Foundation
  * zl.add(shaah);
  * //will sort sunset, shaah 16, sunrise, shaah GRA
  * print(zl);
- * Collections.sort(zl, Zman.DATE_ORDER);
+ * let sorted = zl.sorted(by: Zman.dateOrder)
  * // will sort sunrise, sunset, shaah, shaah 1.6 (the last 2 are not in any specific order)
- * Collections.sort(zl, Zman.DURATION_ORDER);
+ * let sorted = zl.sorted(by: Zman.durationOrder)
  * // will sort sunrise, sunset (the first 2 are not in any specific order), shaah GRA, shaah 1.6
- * Collections.sort(zl, Zman.NAME_ORDER);
+ * let sorted = zl.sorted(by: Zman.nameOrder)
  * // will sort shaah 1.6, shaah GRA, sunrise, sunset
- * </pre>
+ *
  *
  * @author &copy; Eliyahu Hershfeld 2007-2020
- * @todo Add secondary sorting. As of now the {@code Comparator}s in this class do not sort by secondary order. This means that when sorting a
- * {@link java.util.Collection} of <em>zmanim</em> and using the {@link #DATE_ORDER} {@code Comparator} will have the duration based <em>zmanim</em>
- * at the end, but they will not be sorted by duration. This should be N/A for label based sorting.
  */
 public class Zman: Equatable {
     /**
@@ -77,11 +72,11 @@ public class Zman: Equatable {
      * @param label the label of the  <em>zman</em> such as "<em>Sof Zman Krias Shema GRA</em>".
      * @see #Zman(long, String)
      */
-    public init(label: String, zman: Date?) {
+    public init(label: String, zman: Date?, duration: Int64 = 0, description: String = "") {
         self.label = label
         self.zman = zman
-        self.duration = 0
-        self.description = ""
+        self.duration = duration
+        self.description = description
     }
 
     /**
@@ -93,7 +88,7 @@ public class Zman: Equatable {
      * @param label the label of the  <em>zman</em> such as "<em>Shaah Zmanis GRA</em>".
      * @see #Zman(Date, String)
      */
-    public init(label: String, duration: Int64) {
+    public init(label: String, duration: Int64, description: String = "") {
         self.label = label
         self.duration = duration
         self.description = ""
