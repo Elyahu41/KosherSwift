@@ -580,6 +580,7 @@ class KosherSwiftTests: XCTestCase {
     }
     
     func testMishnaYomiClass() {
+        jewishCalendar.timeZone = .init(identifier: "America/New_York")!
         jewishCalendar.setJewishDate(year: 5785, month: JewishCalendar.AV, dayOfMonth: 5)
         XCTAssertEqual(MishnaYomi().getMishnaYomi(jewishCalendar: jewishCalendar, useHebrewText: false)!, "Zevachim 5:5-6")
     }
