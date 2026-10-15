@@ -8,7 +8,7 @@
 import Foundation
 
 /// A representation of a daily Mishneh Torah (Rambam) reading assignment.
-struct RambamReading {
+public struct RambamReading {
     /// The Hebrew name of the book or section (e.g., "הלכות יסודי התורה").
     let bookName: String
     /// The chapter or range of chapters assigned for the day.
@@ -23,7 +23,7 @@ struct RambamReading {
 ///
 /// This enum provides static methods to calculate both the 1-chapter-a-day and
 /// 3-chapters-a-day study cycles, tracking from the historical start date of April 29, 1984.
-enum DailyMishnehTorah {
+public enum DailyMishnehTorah {
     
     /// The total number of chapters/units in the entire Mishneh Torah cycle.
     private static let cycleLength = 1017
@@ -47,13 +47,13 @@ enum DailyMishnehTorah {
     ]
 
     /// Internal structure to map a book's name to its total number of chapters.
-    private struct Book {
+    public struct Book {
         let name: String
         let chapterCount: Int
     }
     
     /// The sequential list of all books in the Mishneh Torah and their respective chapter counts.
-    private static let books: [Book] = [
+    public static let books: [Book] = [
         Book(name: "הקדמת הרמב\"ם", chapterCount: 3),
         Book(name: "מצוות עשה", chapterCount: 3),
         Book(name: "מצוות לא תעשה", chapterCount: 3),
@@ -150,7 +150,7 @@ enum DailyMishnehTorah {
     ///
     /// - Parameter date: The target `Date` for which to calculate the reading.
     /// - Returns: A `RambamReading` containing the book and chapter, or `nil` if the date is prior to the April 29, 1984 start date.
-    static func getDailyLearning(date: Date) -> RambamReading? {
+    public static func getDailyLearning(date: Date) -> RambamReading? {
         guard date >= startDate else { return nil }
 
         let calendar = Calendar(identifier: .gregorian)
@@ -172,7 +172,7 @@ enum DailyMishnehTorah {
     ///
     /// - Parameter date: The target `Date` for which to calculate the reading.
     /// - Returns: An array of `RambamReading` objects representing the day's study schedule, or `nil` if the date is invalid.
-    static func getDailyLearning3(date: Date) -> [RambamReading]? {
+    public static func getDailyLearning3(date: Date) -> [RambamReading]? {
         guard date >= startDate else { return nil }
 
         let calendar = Calendar(identifier: .gregorian)

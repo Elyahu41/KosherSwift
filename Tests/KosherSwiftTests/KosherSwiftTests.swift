@@ -230,8 +230,9 @@ class KosherSwiftTests: XCTestCase {
         let denver = GeoLocation(locationName: "Denver", latitude: 39.6272082, longitude: -104.8800718, timeZone: TimeZone(identifier: "America/Denver")!)
         let jer = GeoLocation(locationName: "Jerusalem", latitude: 31.778015, longitude: 35.235413, timeZone: TimeZone(identifier: "Asia/Jerusalem")!)
 
-        let denverLMT = denver.getLocalMeanTimeOffset()
-        let jerLMT = jer.getLocalMeanTimeOffset()
+        let testDate = Date(timeIntervalSince1970: 1785310117.780254)
+        let denverLMT = denver.getLocalMeanTimeOffset(date: testDate)
+        let jerLMT = jer.getLocalMeanTimeOffset(date: testDate)
         XCTAssertEqual(denverLMT, -3571217.232000001)
         XCTAssertEqual(jerLMT, -2343500.879999999)
     }

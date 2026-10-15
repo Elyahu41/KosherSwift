@@ -82,14 +82,23 @@ public class GeoLocation: Equatable {
     }
     
     /**
-     * Method to set the elevation in Meters <b>above</b> sea level.
-     *
-     * @param elevation
-     *            The elevation to set in Meters. Nothing will happen the number is negative.
+     * Method to set the elevation in Meters <b>above</b> sea level. Locations with an elevation below sea level should use a sea level
+     * value, since this delay is due to obstructions (natural in this case) on the horizon that should be discounted. Natural obstructions
+     * such as the walls of the Grand Canyon that block visibility to the sun to a person at the bottom of the canyon (that is actually
+     * above sea level) for 3 to 4 hours after sunrise would not mean that <em>halachic</em> sunrise would be 3 hours after sea level sunrise
+     * and sunset 3 hours before sea level sunset at that location.
+     * @param elevation The elevation to set in Meters. If the elevation is negative, not a number, or infinite, it will be set to 0.
      */
     public func setElevation(elevation: Double) {
         if (elevation < 0) {
-            return // do nothing
+            self.elevation = 0
+            print("Elevation cannot be negative")
+            return
+        }
+        if elevation.isNaN || elevation.isInfinite {
+            self.elevation = 0
+            print("Elevation cannot be NaN or infinite")
+            return
         }
         self.elevation = elevation;
     }
