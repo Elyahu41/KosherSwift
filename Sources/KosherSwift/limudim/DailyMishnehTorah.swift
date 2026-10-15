@@ -10,13 +10,13 @@ import Foundation
 /// A representation of a daily Mishneh Torah (Rambam) reading assignment.
 public struct RambamReading {
     /// The Hebrew name of the book or section (e.g., "הלכות יסודי התורה").
-    let bookName: String
+    public let bookName: String
     /// The chapter or range of chapters assigned for the day.
     ///
     /// This is stored as a `String` rather than an `Int` because the first four introductory
     /// sections of the Mishneh Torah are tracked by specific verse ranges (e.g., "1-21")
     /// or complex chapter/verse bounds (e.g., "1:1-4:8").
-    let chapter: String // String because it can be a number ("1") or a range ("1-21")
+    public let chapter: String // String because it can be a number ("1") or a range ("1-21")
 }
 
 /// A utility for calculating the daily study schedules for Maimonides' Mishneh Torah.

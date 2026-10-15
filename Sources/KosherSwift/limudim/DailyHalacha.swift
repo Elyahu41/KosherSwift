@@ -12,25 +12,25 @@ import Foundation
 /// Represents a specific segment of Halacha assigned for daily study.
 public struct HalachaSegment {
     /// The name of the book being studied (e.g., "שו"ע - או"ח" or "קיצשו"ע").
-    let bookName: String
+    public let bookName: String
     
     /// The Siman (chapter) number in the text.
-    let siman: Int
+    public let siman: Int
     
     /// The starting Seif (section) number for this specific segment.
-    let firstSeif: Int
+    public let firstSeif: Int
     
     /// A formatted string representing the range of Seifim (sections) to read (e.g., "א-ג" or simply "א").
-    let seifim: String
+    public let seifim: String
 }
 
 /// A lightweight model representing the structure of a single Siman (chapter).
 public struct SimanInfo {
     /// The chapter number.
-    let simanNumber: Int
+    public let simanNumber: Int
     
     /// The total number of Seifim (sections) contained within this chapter.
-    let seifCount: Int
+    public let seifCount: Int
 }
 
 // MARK: - Halacha Yomi Logic
