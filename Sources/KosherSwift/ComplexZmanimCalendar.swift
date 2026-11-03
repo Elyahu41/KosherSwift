@@ -4256,6 +4256,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
 
         let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 16.04, sunset: false)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
+            workingDate = temp // reset before returning too, or every later zman uses March 17
             return nil;
         }
         workingDate = temp//reset
@@ -4278,6 +4279,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
 
         let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 16.04, sunset: false)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
+            workingDate = temp // reset before returning too, or every later zman uses March 17
             return nil;
         }
         workingDate = temp//reset
@@ -4299,6 +4301,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
 
         let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 16.04, sunset: false)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
+            workingDate = temp // reset before returning too, or every later zman uses March 17
             return nil;
         }
         workingDate = temp//reset
@@ -4333,6 +4336,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
 
         let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 3.7, sunset: true)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
+            workingDate = temp // reset before returning too, or every later zman uses March 17
             return nil;
         }
         workingDate = temp//reset
@@ -4349,6 +4353,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
 
         let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 5.075, sunset: true)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
+            workingDate = temp // reset before returning too, or every later zman uses March 17
             return nil;
         }
         workingDate = temp//reset
@@ -4365,6 +4370,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
 
         let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 16.04, sunset: true)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
+            workingDate = temp // reset before returning too, or every later zman uses March 17
             return nil;
         }
         workingDate = temp//reset
