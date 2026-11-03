@@ -797,7 +797,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getShaahZmanis60Minutes()
      */
     public func getAlos60() -> Date? {
-        return ComplexZmanimCalendar.getTimeOffset(time: getSunrise(), offset: -60 * ComplexZmanimCalendar.MINUTE_MILLIS);
+        return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunrise(), offset: -60 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
     
     /**
