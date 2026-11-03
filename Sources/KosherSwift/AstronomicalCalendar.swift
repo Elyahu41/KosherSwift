@@ -675,7 +675,8 @@ public class AstronomicalCalendar {
         if (hours < 0 || hours >= 24) {
             print("Hours must between 0 and 23.9999...");
         }
-        return AstronomicalCalendar.getTimeOffset(time: getDateFromTime(date: workingDate, time: hours - Double(getGeoLocation().getTimeZone().secondsFromGMT()) / AstronomicalCalendar.HOUR_MILLIS, isSunrise: true), offset: -getGeoLocation().getLocalMeanTimeOffset());
+        // Local mean time is UTC shifted by exactly longitude / 15 hours.
+        return getDateFromTime(date: workingDate, time: hours - getGeoLocation().getLongitude() / 15, isSunrise: true);
     }
     
     /**
