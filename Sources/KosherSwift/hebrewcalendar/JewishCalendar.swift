@@ -1100,14 +1100,12 @@ public class JewishCalendar: Equatable {
      */
     public func getDaysSinceStartOfJewishYear(year:Int, month:Int, dayOfMonth:Int) -> Int {
         var elapsedDays = dayOfMonth
-        var hebrewMonth = month
-        
-        if !isJewishLeapYear(year: year) && hebrewMonth >= 7 {
-            hebrewMonth = hebrewMonth - 1// for Nissan and above because swift is weird
-        }
-        
-        for month in 1..<hebrewMonth {
-            elapsedDays += getDaysInJewishMonth(month: month, year: year)
+        let leapYear = isJewishLeapYear(year: year)
+        // Months are numbered from Tishrei, and a common year has no month 6 (Adar I): its Adar is month 7,
+        // like Adar II. Walk the months that actually precede this one. (Shifting the month number down by one in a
+        // common year counted month 7 as Nissan, 8 as Iyar and so on, which put Sivan and Av a day late.)
+        for m in 1..<month where m != JewishCalendar.ADAR || leapYear {
+            elapsedDays += m == JewishCalendar.ADAR_II ? 29 : getDaysInJewishMonth(month: m, year: year)
         }
         
         return elapsedDays
@@ -2246,9 +2244,11 @@ public class JewishCalendar: Equatable {
         // The raw molad Date (point in time) must be generated using standard time. Using "Asia/Jerusalem" timezone will result in the time
         // being incorrectly off by an hour in the summer due to DST. Proper adjustment for the actual time in DST will be done by the date
         // formatter class used to display the Date.
-        var moladDay = DateComponents(calendar: calendar, timeZone: TimeZone(identifier: "GMT+2")!, year: Int(year), month: Int(month), day: Int(dayOfMonth), hour: Int(moladHours), minute: Int(moladMinutes), second: Int(moladSeconds)-1)
+        let wholeSeconds = moladSeconds.rounded(.down)
+        var moladDay = DateComponents(calendar: calendar, timeZone: TimeZone(identifier: "GMT+2")!, year: Int(year), month: Int(month), day: Int(dayOfMonth), hour: Int(moladHours), minute: Int(moladMinutes), second: Int(wholeSeconds), nanosecond: Int((moladSeconds - wholeSeconds) * 1_000_000_000))
         
-        if moladHours > 6 {
+        // The Jewish day starts at 18:00: from hour 6 of it (midnight) on, the molad is on the next civil day.
+        if moladHours >= 6 {
             moladDay.day! += 1
         }
         moladDay.setValue((Int(moladHours) + 18) % 24, for: .hour)
@@ -2308,7 +2308,7 @@ public class JewishCalendar: Equatable {
     public func getSofZmanKidushLevanaBetweenMoldos() -> Date {
         let molad = getMoladAsDate();
         // add half the time between molad and molad (half of 29 days, 12 hours and 793 chalakim (44 minutes, 3.3 seconds), or 14 days, 18 hours, 22 minutes and 666 milliseconds). Add it as a TimeInterval to avoid timezone changes
-        return Date(timeInterval: 1276720.666, since: molad)
+        return Date(timeInterval: 1275721.667, since: molad) // 14 * 86400 + 18 * 3600 + 22 * 60 + 1.667
     }
     
     /**

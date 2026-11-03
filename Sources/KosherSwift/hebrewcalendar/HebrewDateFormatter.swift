@@ -480,19 +480,14 @@ public class HebrewDateFormatter {
         if (!jewishCalendar.isRoshChodesh()) {
             return "";
         }
-        var formattedRoshChodesh = "";
-        var month = jewishCalendar.getJewishMonth();
-        if (jewishCalendar.getJewishDayOfMonth() == 30) {
-            if (month < JewishCalendar.ADAR || (month == JewishCalendar.ADAR && jewishCalendar.isJewishLeapYear())) {
-                month+=1;
-            } else { // roll to Nissan
-                month = JewishCalendar.NISSAN;
-            }
-        }
-        let tempJewishCalendar = JewishCalendar(workingDate: jewishCalendar.workingDate, inIsrael: jewishCalendar.getInIsrael(), useModernHolidays: jewishCalendar.isUseModernHolidays())
-        
-        tempJewishCalendar.setJewishMonth(month: month);
-        formattedRoshChodesh = hebrewFormat ? hebrewHolidays[JewishCalendar.ROSH_CHODESH]
+        // On the 30th, Rosh Chodesh is of the month that starts tomorrow. (The month arithmetic used here before came
+        // from KosherJava, where months count from Nissan; in this port they count from Tishrei (NISSAN == 8), so
+        // 30 Nissan, Sivan and Av all rolled over to "Nissan" and 30 Shevat of a common year to "Adar I".)
+        let workingDate = jewishCalendar.getJewishDayOfMonth() == 30
+            ? jewishCalendar.workingDate.addingTimeInterval(86400) : jewishCalendar.workingDate
+        let tempJewishCalendar = JewishCalendar(workingDate: workingDate, timezone: jewishCalendar.timeZone,
+                                                inIsrael: jewishCalendar.getInIsrael(), useModernHolidays: jewishCalendar.isUseModernHolidays())
+        let formattedRoshChodesh = hebrewFormat ? hebrewHolidays[JewishCalendar.ROSH_CHODESH]
         : transliteratedHolidays[JewishCalendar.ROSH_CHODESH];
         return formattedRoshChodesh.appending(" ").appending(formatMonth(jewishCalendar: tempJewishCalendar));
     }

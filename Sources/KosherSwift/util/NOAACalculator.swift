@@ -548,6 +548,17 @@ public class NOAACalculator : AstronomicalCalculator {
         var eqTime = getEquationOfTime(julianCenturies: tnoon);
         var solarDec = getSunDeclination(julianCenturies: tnoon);
         var hourAngle = getSunHourAngle(latitude: latitude, solarDeclination: solarDec, zenith: zenith, solarEvent: solarEvent);
+        if hourAngle.isNaN {
+            // With noon's declination the Sun never reaches this zenith today, but the declination moves up to about
+            // 0.2 degrees in half a day, so it may still just reach it around midnight, when it is lowest. Before
+            // reporting no event, retry with the declination and equation of time at that solar midnight: the one
+            // before sunrise, or the one after sunset. (Port of KosherJava ac7b4fb.)
+            let midnight = noonmin + (solarEvent == .SUNRISE ? -720 : 720)
+            let tmidnight = getJulianCenturiesFromJulianDay(julianDay: julianDay + midnight / 1440.0)
+            eqTime = getEquationOfTime(julianCenturies: tmidnight)
+            solarDec = getSunDeclination(julianCenturies: tmidnight)
+            hourAngle = getSunHourAngle(latitude: latitude, solarDeclination: solarDec, zenith: zenith, solarEvent: solarEvent)
+        }
 
         var delta = longitude - toDegrees(radians: hourAngle);
         var timeDiff = 4 * delta;

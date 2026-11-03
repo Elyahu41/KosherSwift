@@ -797,7 +797,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @see getShaahZmanis60Minutes()
      */
     public func getAlos60() -> Date? {
-        return ComplexZmanimCalendar.getTimeOffset(time: getSunrise(), offset: -60 * ComplexZmanimCalendar.MINUTE_MILLIS);
+        return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunrise(), offset: -60 * ComplexZmanimCalendar.MINUTE_MILLIS);
     }
     
     /**
@@ -1170,6 +1170,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getMisheyakir66MinutesZmanis() -> Date? {
         let shaahZmanit = getShaahZmanisGra()
+        guard shaahZmanit != Int64.min else { return nil } // incalculable (e.g. no sunrise in the Arctic)
         let dakahZmanit = shaahZmanit / 60
         return ComplexZmanimCalendar.getTimeOffset(time: getAlos72Zmanis(), offset: 6 * Double(dakahZmanit))
     }
@@ -1185,6 +1186,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getMisheyakir60MinutesZmanis() -> Date? {
         let shaahZmanit = getShaahZmanisGra()
+        guard shaahZmanit != Int64.min else { return nil } // incalculable (e.g. no sunrise in the Arctic)
         let dakahZmanit = shaahZmanit / 60
         return ComplexZmanimCalendar.getTimeOffset(time: getAlos72Zmanis(), offset: 12 * Double(dakahZmanit))
     }
@@ -2888,6 +2890,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getTzais13Point5MinutesZmanis() -> Date?  {
         let shaahZmanit = getShaahZmanisGra()
+        guard shaahZmanit != Int64.min else { return nil } // incalculable (e.g. no sunrise in the Arctic)
         let dakahZmanit = shaahZmanit / 60
         return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: (13 * dakahZmanit) + (dakahZmanit / 2))
         //return getZmanisBasedOffset(hours: 0.225);
@@ -3591,7 +3594,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanBiurChametzGRA() -> Date? {
         let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunrise(), offset: getShaahZmanisGra() * 5);
+            return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunrise(), offset: Double(getShaahZmanisGra()) * 5);
         } else {
             return nil;
         }
@@ -3616,7 +3619,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanBiurChametzMGA72Minutes() -> Date? {
         let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return ComplexZmanimCalendar.getTimeOffset(time: getAlos72(), offset: getShaahZmanisMGA() * 5);
+            return ComplexZmanimCalendar.getTimeOffset(time: getAlos72(), offset: Double(getShaahZmanisMGA()) * 5);
         } else {
             return nil;
         }
@@ -3641,7 +3644,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanBiurChametzMGA72MinutesZmanis() -> Date? {
         let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return ComplexZmanimCalendar.getTimeOffset(time: getAlos72Zmanis(), offset: getShaahZmanisMGA() * 5);
+            return ComplexZmanimCalendar.getTimeOffset(time: getAlos72Zmanis(), offset: Double(getShaahZmanis72MinutesZmanis()) * 5);
         } else {
             return nil;
         }
@@ -3668,7 +3671,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanBiurChametzMGA16Point1Degrees() -> Date? {
         let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return ComplexZmanimCalendar.getTimeOffset(time: getAlos16Point1Degrees(), offset: getShaahZmanis16Point1Degrees() * 5);
+            return ComplexZmanimCalendar.getTimeOffset(time: getAlos16Point1Degrees(), offset: Double(getShaahZmanis16Point1Degrees()) * 5);
         } else {
             return nil;
         }
@@ -3852,7 +3855,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanBiurChametzBaalHatanya() -> Date? {
         let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return ComplexZmanimCalendar.getTimeOffset(time: getSunriseBaalHatanya(), offset: getShaahZmanisBaalHatanya() * 5);
+            return ComplexZmanimCalendar.getTimeOffset(time: getSunriseBaalHatanya(), offset: Double(getShaahZmanisBaalHatanya()) * 5);
         } else {
             return nil;
         }
@@ -4214,6 +4217,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getPlagHaminchaYalkutYosef() -> Date? {
         let shaahZmanit = getShaahZmanisGra()
+        guard shaahZmanit != Int64.min else { return nil } // incalculable (e.g. no sunrise in the Arctic)
         let dakahZmanit = shaahZmanit / 60
         return ComplexZmanimCalendar.getTimeOffset(time: getTzais13Point5MinutesZmanis(), offset: -(shaahZmanit + (15 * dakahZmanit)))
     }
@@ -4225,6 +4229,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      */
     public func getPlagHaminchaYalkutYosefAmudeiHoraah() -> Date? {
         let shaahZmanit = getTemporalHour(startOfDay: getElevationAdjustedSunrise(), endOfDay: getElevationAdjustedSunset())
+        guard shaahZmanit != Int64.min else { return nil } // incalculable (e.g. no sunrise in the Arctic)
         let dakahZmanit = shaahZmanit / 60
         return ComplexZmanimCalendar.getTimeOffset(time: getTzaisAmudeiHoraah(), offset: -(shaahZmanit + (15 * dakahZmanit)));
     }
@@ -4251,6 +4256,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
 
         let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 16.04, sunset: false)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
+            workingDate = temp // reset before returning too, or every later zman uses March 17
             return nil;
         }
         workingDate = temp//reset
@@ -4273,6 +4279,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
 
         let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 16.04, sunset: false)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
+            workingDate = temp // reset before returning too, or every later zman uses March 17
             return nil;
         }
         workingDate = temp//reset
@@ -4294,6 +4301,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
 
         let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 16.04, sunset: false)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
+            workingDate = temp // reset before returning too, or every later zman uses March 17
             return nil;
         }
         workingDate = temp//reset
@@ -4312,7 +4320,8 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
 
     public func getSofZmanBiurChametzMGAAmudeiHoraah() -> Date? {
         let shaahZmanit = getTemporalHour(startOfDay: getAlosAmudeiHoraah(), endOfDay: getTzais72ZmanisAmudeiHoraah());
-        return ComplexZmanimCalendar.getTimeOffset(time: getAlosAmudeiHoraah(), offset: shaahZmanit * 5);
+        guard shaahZmanit != Int64.min else { return nil } // incalculable (e.g. no sunrise in the Arctic)
+        return ComplexZmanimCalendar.getTimeOffset(time: getAlosAmudeiHoraah(), offset: Double(shaahZmanit) * 5);
     }
     
     /**
@@ -4327,6 +4336,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
 
         let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 3.7, sunset: true)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
+            workingDate = temp // reset before returning too, or every later zman uses March 17
             return nil;
         }
         workingDate = temp//reset
@@ -4343,6 +4353,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
 
         let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 5.075, sunset: true)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
+            workingDate = temp // reset before returning too, or every later zman uses March 17
             return nil;
         }
         workingDate = temp//reset
@@ -4359,6 +4370,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
 
         let percentage = getPercentOfShaahZmanisFromDegrees(degrees: 16.04, sunset: true)
         if (percentage == (-Double.greatestFiniteMagnitude)) {
+            workingDate = temp // reset before returning too, or every later zman uses March 17
             return nil;
         }
         workingDate = temp//reset
