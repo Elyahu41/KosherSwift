@@ -574,14 +574,13 @@ public class AstronomicalCalendar {
         
         var returnDate = gregorianCalendar.date(from: components)
         
-        let offsetFromGMT = Double(geoLocation.getTimeZone().secondsFromGMT(for: date)/3600);
-        
-        if (time + offsetFromGMT > 24)
-        {
+        // As in KosherJava: decide whether the event belongs to the previous or next UTC day from the solar time at
+        // the longitude and whether it's a morning or an evening event. (Deciding by the time zone offset put an
+        // evening event that falls after local midnight - e.g. tzais 26 degrees in a London summer - a day early.)
+        let localTimeHours = Double(Int(geoLocation.getLongitude() / 15))
+        if (isSunrise && localTimeHours + time > 18) {
             returnDate = returnDate?.addingTimeInterval(-86400)
-        }
-        else if (time + offsetFromGMT < 0)
-        {
+        } else if (!isSunrise && localTimeHours + time < 6) {
             returnDate = returnDate?.addingTimeInterval(86400)
         }
         
