@@ -3644,7 +3644,7 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
     public func getSofZmanBiurChametzMGA72MinutesZmanis() -> Date? {
         let jewishCalendar = JewishCalendar(workingDate: workingDate, timezone: geoLocation.timeZone)
         if (jewishCalendar.getJewishMonth() == JewishCalendar.NISSAN && jewishCalendar.getJewishDayOfMonth() == 14) {
-            return ComplexZmanimCalendar.getTimeOffset(time: getAlos72Zmanis(), offset: Double(getShaahZmanisMGA()) * 5);
+            return ComplexZmanimCalendar.getTimeOffset(time: getAlos72Zmanis(), offset: Double(getShaahZmanis72MinutesZmanis()) * 5);
         } else {
             return nil;
         }
