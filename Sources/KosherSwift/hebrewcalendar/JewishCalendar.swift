@@ -2246,9 +2246,11 @@ public class JewishCalendar: Equatable {
         // The raw molad Date (point in time) must be generated using standard time. Using "Asia/Jerusalem" timezone will result in the time
         // being incorrectly off by an hour in the summer due to DST. Proper adjustment for the actual time in DST will be done by the date
         // formatter class used to display the Date.
-        var moladDay = DateComponents(calendar: calendar, timeZone: TimeZone(identifier: "GMT+2")!, year: Int(year), month: Int(month), day: Int(dayOfMonth), hour: Int(moladHours), minute: Int(moladMinutes), second: Int(moladSeconds)-1)
+        let wholeSeconds = moladSeconds.rounded(.down)
+        var moladDay = DateComponents(calendar: calendar, timeZone: TimeZone(identifier: "GMT+2")!, year: Int(year), month: Int(month), day: Int(dayOfMonth), hour: Int(moladHours), minute: Int(moladMinutes), second: Int(wholeSeconds), nanosecond: Int((moladSeconds - wholeSeconds) * 1_000_000_000))
         
-        if moladHours > 6 {
+        // The Jewish day starts at 18:00: from hour 6 of it (midnight) on, the molad is on the next civil day.
+        if moladHours >= 6 {
             moladDay.day! += 1
         }
         moladDay.setValue((Int(moladHours) + 18) % 24, for: .hour)
