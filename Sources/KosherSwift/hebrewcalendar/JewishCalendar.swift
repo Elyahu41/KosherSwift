@@ -2308,7 +2308,7 @@ public class JewishCalendar: Equatable {
     public func getSofZmanKidushLevanaBetweenMoldos() -> Date {
         let molad = getMoladAsDate();
         // add half the time between molad and molad (half of 29 days, 12 hours and 793 chalakim (44 minutes, 3.3 seconds), or 14 days, 18 hours, 22 minutes and 666 milliseconds). Add it as a TimeInterval to avoid timezone changes
-        return Date(timeInterval: 1276720.666, since: molad)
+        return Date(timeInterval: 1275721.667, since: molad) // 14 * 86400 + 18 * 3600 + 22 * 60 + 1.667
     }
     
     /**
