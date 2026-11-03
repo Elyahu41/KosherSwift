@@ -1100,14 +1100,12 @@ public class JewishCalendar: Equatable {
      */
     public func getDaysSinceStartOfJewishYear(year:Int, month:Int, dayOfMonth:Int) -> Int {
         var elapsedDays = dayOfMonth
-        var hebrewMonth = month
-        
-        if !isJewishLeapYear(year: year) && hebrewMonth >= 7 {
-            hebrewMonth = hebrewMonth - 1// for Nissan and above because swift is weird
-        }
-        
-        for month in 1..<hebrewMonth {
-            elapsedDays += getDaysInJewishMonth(month: month, year: year)
+        let leapYear = isJewishLeapYear(year: year)
+        // Months are numbered from Tishrei, and a common year has no month 6 (Adar I): its Adar is month 7,
+        // like Adar II. Walk the months that actually precede this one. (Shifting the month number down by one in a
+        // common year counted month 7 as Nissan, 8 as Iyar and so on, which put Sivan and Av a day late.)
+        for m in 1..<month where m != JewishCalendar.ADAR || leapYear {
+            elapsedDays += m == JewishCalendar.ADAR_II ? 29 : getDaysInJewishMonth(month: m, year: year)
         }
         
         return elapsedDays
