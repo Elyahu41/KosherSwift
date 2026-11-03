@@ -151,6 +151,7 @@ public class TefilaRules {
             || (month == JewishCalendar.SIVAN && (tachanunRecitedWeekAfterShavuos && day < 7
                                                   || !tachanunRecitedWeekAfterShavuos && day < (!jewishCalendar.getInIsrael()
                                                                                                 && !tachanunRecited13SivanOutOfIsrael ? 14: 13)))
+            || jewishCalendar.isErevYomTov() // includes Erev Rosh Hashana, which isYomTov() doesn't (KosherJava 0b6b95c)
             || (jewishCalendar.isYomTov() && (!jewishCalendar.isTaanis()
                                               || (!tachanunRecitedPesachSheni && holidayIndex == JewishCalendar.PESACH_SHENI))) // Erev YT is included in isYomTov()
             || (!jewishCalendar.getInIsrael() && !tachanunRecitedPesachSheni && !tachanunRecited15IyarOutOfIsrael
