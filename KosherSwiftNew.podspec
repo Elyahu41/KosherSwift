@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "KosherSwiftNew"
-  spec.version      = "1.10.9"
+  spec.version      = "1.10.11"
   spec.summary      = "KosherJava Zmanim API / Library ported to Swift."
 
   spec.description  = "This Zmanim library is an API for a specialized calendar that can calculate different astronomical times including sunrise and sunset and Jewish zmanim or religious times for prayers and other Jewish religious duties.
@@ -13,9 +13,9 @@ The ZmanimCalendar contains the most common zmanim or religious time calculation
   spec.homepage     = "https://github.com/Elyahu41/KosherSwift"
   spec.license      = "LGPL 2.1"
   spec.author       = { "Elyahu" => "ElyahuJacobi@gmail.com" }
-  spec.ios.deployment_target = "13.0"
-  spec.osx.deployment_target = "13.0"
-  spec.watchos.deployment_target = "4.0"
+  spec.ios.deployment_target = "15.0"
+  spec.osx.deployment_target = "15.0"
+  spec.watchos.deployment_target = "9.0"
 
   spec.source       = { :git => "https://github.com/Elyahu41/KosherSwift.git", :tag => spec.version.to_s }
 

@@ -103,7 +103,7 @@ class KosherSwiftTests: XCTestCase {
     func testMolad() {
         jewishCalendar.setGregorianDate(year: 2023, month: 12, dayOfMonth: 20)//the day this test was made
         let molad = jewishCalendar.getMoladAsDate()
-        let moladFromKosherJava = Date(timeIntervalSince1970: 1702402813.0)//had to go up or down a few intervals to make it work
+        let moladFromKosherJava = Date(timeIntervalSince1970: 1702402813.5039999)
         XCTAssertEqual(molad, moladFromKosherJava)
         XCTAssertEqual(jewishCalendar.getMoladAsString(), "The molad is at 20 hours, 1 minutes and 3 Chalakim")
     }
@@ -129,6 +129,18 @@ class KosherSwiftTests: XCTestCase {
         let tekufa = jewishCalendar.getTekufaAsDate()
         let tekufaActualDate = Date(timeIntervalSince1970: 1744041600.0)
         XCTAssertEqual(tekufa, tekufaActualDate)
+    }
+    
+    func testDaysSinceStartOfJewishYearCheshvan() {
+        jewishCalendar.setGregorianDate(year: 2026, month: 11, dayOfMonth: 3)//the day this test was made
+        let days = jewishCalendar.getDaysSinceStartOfJewishYear()
+        XCTAssertEqual(days, 53)
+    }
+    
+    func testDaysSinceStartOfJewishYearElul() {
+        jewishCalendar.setGregorianDate(year: 2027, month: 9, dayOfMonth: 25)
+        let days = jewishCalendar.getDaysSinceStartOfJewishYear()
+        XCTAssertEqual(days, 379)
     }
     
     func testToString() {

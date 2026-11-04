@@ -14,8 +14,15 @@ import Foundation
 /// start date of May 20, 1947.
 public class MishnaYomi {
     
+    private static func dayNumber(year: Int, month: Int, day: Int) -> Int {
+        var utc = Calendar(identifier: .gregorian)
+        utc.timeZone = TimeZone(secondsFromGMT: 0)!
+        let date = utc.date(from: DateComponents(year: year, month: month, day: day))!
+        return Int(date.timeIntervalSince1970) / 86400 // midnight UTC is an exact multiple of 86400
+    }
+    
     /** The start date of the Mishna Yomi Cycle. */
-    private static let CYCLE_START_DATE = gregorianDate(forYear: 1947, month: 5, andDay: 20)
+    private static let CYCLE_START_DAY = dayNumber(year: 1947, month: 5, day: 20)
     /// The number of mishnayot studied per day.
     private static let MISHNAS_PER_DAY = 2;
     /// The total number of mishnayot in the entire Talmud.
@@ -126,26 +133,21 @@ public class MishnaYomi {
     ///   - useHebrewText: Set to `true` to return the Masechta and numbers formatted in Hebrew, or `false` for English/Numerals.
     /// - Returns: A formatted string containing the daily study assignment (e.g., "Berachot 1:1-2"), or `nil` if the date is prior to the start of the first cycle.
     public func getMishnaYomi(jewishCalendar: JewishCalendar, useHebrewText:Bool) -> String? {
-        let dateCreator = Calendar(identifier: .gregorian)
-        var nextCycle = DateComponents()
-        var prevCycle = DateComponents()
-        
-        if jewishCalendar.workingDate.compare(MishnaYomi.CYCLE_START_DATE!) == .orderedAscending {
+        // The civil date in the calendar's own time zone, as a plain day count
+        let today = MishnaYomi.dayNumber(year: jewishCalendar.getGregorianYear(),
+                                         month: jewishCalendar.getGregorianMonth(),
+                                         day: jewishCalendar.getGregorianDayOfMonth())
+        if today < MishnaYomi.CYCLE_START_DAY {
             return nil
         }
-        
-        nextCycle.year = 1947
-        nextCycle.month = 5
-        nextCycle.day = 20
 
-        // Go cycle by cycle, until we get the next cycle
-        while jewishCalendar.workingDate.compare(dateCreator.date(from: nextCycle)!) == .orderedDescending {
-            prevCycle = nextCycle
-            nextCycle.day! += MishnaYomi.CYCLE_LENGTH
-        }
-        
-        // Get the number of days from cycle start until request.
-        let numberOfMishnasRead = MishnaYomi.getDiffBetweenDays(start: dateCreator.date(from: prevCycle)!, end: jewishCalendar.workingDate) * MishnaYomi.MISHNAS_PER_DAY
+        // Clear the previous result in case this instance is reused
+        sFirstMasechta = ""; sFirstPerek = 0; sFirstMishna = 0
+        sSecondMasechta = ""; sSecondPerek = 0; sSecondMishna = 0
+
+        // Day within the current cycle (0 on the first day of a cycle)
+        let dayInCycle = (today - MishnaYomi.CYCLE_START_DAY) % MishnaYomi.CYCLE_LENGTH
+        let numberOfMishnasRead = dayInCycle * MishnaYomi.MISHNAS_PER_DAY
         
         // Finally find the mishna.
         findFirstMishna(numberOfMishnasRead: numberOfMishnasRead);
@@ -234,28 +236,6 @@ public class MishnaYomi {
                 return
             }
         }
-    }
-    
-    /**
-     * Return the number of days between the dates passed in
-     * @param start the start date
-     * @param end the end date
-     * @return the number of days between the start and end dates
-     */
-    private static func getDiffBetweenDays(start: Date, end: Date) -> Int {
-        let DAY_MILIS: Double = 24 * 60 * 60
-        let s = Int(end.timeIntervalSince1970 - start.timeIntervalSince1970)
-        return s / Int(DAY_MILIS)
-    }
-    
-    /// A helper method to construct a generic Gregorian date safely.
-    private static func gregorianDate(forYear year: Int, month: Int, andDay day: Int) -> Date? {
-        var components = DateComponents()
-        components.year = year
-        components.month = month
-        components.day = day
-        components.calendar = Calendar(identifier: .gregorian)
-        return components.date
     }
     
     /// Translates the English phonetic spelling of a Masechta into Hebrew characters.

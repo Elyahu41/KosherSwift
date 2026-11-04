@@ -544,7 +544,9 @@ public class JewishCalendar: Equatable {
         let clone = copy()
         let daysToShabbos = (7 - getDayOfWeek() + 7) % 7;
         if (getDayOfWeek() != 7) {
-            clone.workingDate.addTimeInterval(TimeInterval(86400 * daysToShabbos))
+            var cal = Calendar(identifier: .gregorian)
+            cal.timeZone = timeZone
+            clone.workingDate = cal.date(byAdding: .day, value: daysToShabbos, to: clone.workingDate) ?? clone.workingDate
         } else {
             clone.forward()
         }
@@ -729,14 +731,18 @@ public class JewishCalendar: Equatable {
      * Forwards the internal date of the jewish calendar by one day
      */
     public func forward() {
-        workingDate = Date(timeIntervalSince1970: workingDate.timeIntervalSince1970 + 86400)
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = timeZone
+        workingDate = cal.date(byAdding: .day, value: 1, to: workingDate) ?? workingDate
     }
     
     /**
      * Backtracks the internal date of the jewish calendar by one day
      */
     public func back() {
-        workingDate = Date(timeIntervalSince1970: workingDate.timeIntervalSince1970 + (-86400))
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = timeZone
+        workingDate = cal.date(byAdding: .day, value: -1, to: workingDate) ?? workingDate
     }
     
     /// Initializes a calendar instance with a specific date, time zone, and holiday settings.
@@ -773,13 +779,15 @@ public class JewishCalendar: Equatable {
     public init(jewishYear: Int,
                 jewishMonth: Int,
                 jewishDayOfMonth: Int,
+                timezone: TimeZone = TimeZone.current,
                 inIsrael: Bool = false,
                 useModernHolidays: Bool = false) {
-        var hebrewCalendar = Calendar(identifier: .hebrew)
-        hebrewCalendar.timeZone = timeZone
-        workingDate = hebrewCalendar.date(from: DateComponents(calendar: hebrewCalendar, year: jewishYear, month: jewishMonth, day: jewishDayOfMonth))!
+        self.timeZone = timezone
         self.inIsrael = inIsrael
         self.useModernHolidays = useModernHolidays
+        var hebrewCalendar = Calendar(identifier: .hebrew)
+        hebrewCalendar.timeZone = timezone
+        self.workingDate = hebrewCalendar.date(from: DateComponents(timeZone: timezone, year: jewishYear, month: jewishMonth, day: jewishDayOfMonth, hour: 12))!
     }
     
     /// Initializes a new instance by copying another `JewishCalendar`.
