@@ -4248,20 +4248,6 @@ public class ComplexZmanimCalendar : ZmanimCalendar {
      * @return the time of alot hashachar (dawn) calculated by the Amudei Horaah calendar by adjusting the zman based off of degrees. This zman
      * should NOT be used in Israel.
      */
-    /**
-     * This method returns the time of alot hashachar (dawn) calculated by the Amudei Horaah calendar. While normally this is calculated as 72 zmaniyot
-     * minutes before sunrise, Rabbi Leeor Dahan says that the zmanim need to be adjusted for more northern/southern locations. He calculates the time as
-     * zmaniyot minutes/seconds, however, he adjusts it based on the location's distance from the equator at 16.04 degrees (72 zmaniyot minutes in Israel).
-     * <p>
-     * For example: If you wanted to calculate when alot is for NY, USA, you would first calculate the amount of regular minutes there are in an equinox
-     * day between sunrise and 16.04 degrees before sunrise. In NY, this would lead you to around 80 minutes. You would then minus 80 zmaniyot minutes to
-     * the time of sunrise to get the time of alot.
-     * <p>
-     * This is how Rabbi Leeor Dahan calculates the zmanim for alot and tzait in the Amudei Horaah calendar.
-     *
-     * @return the time of alot hashachar (dawn) calculated by the Amudei Horaah calendar by adjusting the zman based off of degrees. This zman
-     * should NOT be used in Israel.
-     */
     public func getAlosAmudeiHoraah() -> Date? {
         return getAmudeiHoraahBeforeSunrise(degrees: 16.04, fraction: 1)
     }
