@@ -219,14 +219,10 @@ public class Time: Equatable {
      * @see java.lang.Object#toString()
      */
     public func toString() -> String {
-        let formatter = ZmanimFormatter(
-            timeZone: TimeZone(secondsFromGMT: 0)!,
-            prependZeroHours: true,
-            useSeconds: true,
-            useMillis: milliseconds != 0
-        )
-        
-        var formatted = formatter.format(milliseconds: getTime())
+        var formatted = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        if milliseconds != 0 {
+            formatted += String(format: ".%03d", milliseconds)
+        }
         
         if isNegative {
             formatted = "-" + formatted

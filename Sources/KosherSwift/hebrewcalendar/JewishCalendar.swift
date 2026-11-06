@@ -765,6 +765,18 @@ public class JewishCalendar: Equatable {
         self.timeZone = timezone
     }
     
+    /// Initializes a calendar instance for a Gregorian ``LocalDate``, like KosherJava's `JewishCalendar(LocalDate)`. The
+    /// calendar uses UTC, so the date never shifts with a time zone.
+    ///
+    /// - Parameters:
+    ///   - localDate: The Gregorian date.
+    ///   - inIsrael: Set to `true` to use holiday calculations for the Land of Israel. Defaults to `false`.
+    ///   - useModernHolidays: Set to `true` to include modern national holidays in calculations. Defaults to `false`.
+    public convenience init(localDate: LocalDate, inIsrael: Bool = false, useModernHolidays: Bool = false) {
+        self.init(workingDate: localDate.startOfDayUTC.addingTimeInterval(12 * 3600), timezone: TimeZone(identifier: "UTC")!,
+                  inIsrael: inIsrael, useModernHolidays: useModernHolidays)
+    }
+
     /// Initializes a calendar instance using specific Hebrew date components.
     ///
     /// This initializer calculates a standard `Date` based on the provided Hebrew year, month,
@@ -928,6 +940,23 @@ public class JewishCalendar: Equatable {
         var hebrewCalendar = Calendar(identifier: .hebrew)
         hebrewCalendar.timeZone = timeZone
         workingDate = hebrewCalendar.date(byAdding: .month, value: amount, to: workingDate)!
+    }
+
+    /**
+     * Adds Jewish months to the date, like KosherJava's `JewishDate.plusMonths(long)`. A day of the month that the new
+     * month doesn't have (the 30th of a 29-day month) becomes its last day.
+     * @param months the number of months to add (negative to go back)
+     */
+    public func plusMonths(months: Int) {
+        forwardJewishMonth(amount: months)
+    }
+
+    /**
+     * Subtracts Jewish months from the date, like KosherJava's `JewishDate.minusMonths(long)`.
+     * @param months the number of months to subtract
+     */
+    public func minusMonths(months: Int) {
+        forwardJewishMonth(amount: -months)
     }
     
     /**
@@ -2315,8 +2344,10 @@ public class JewishCalendar: Equatable {
      */
     public func getSofZmanKidushLevanaBetweenMoldos() -> Date {
         let molad = getMoladAsDate();
-        // add half the time between molad and molad (half of 29 days, 12 hours and 793 chalakim (44 minutes, 3.3 seconds), or 14 days, 18 hours, 22 minutes and 666 milliseconds). Add it as a TimeInterval to avoid timezone changes
-        return Date(timeInterval: 1275721.667, since: molad) // 14 * 86400 + 18 * 3600 + 22 * 60 + 1.667
+        // add half the time between molad and molad (half of 29 days, 12 hours and 793 chalakim (44 minutes, 3.3 seconds), or
+        // 14 days, 18 hours, 22 minutes, 1 second and 666 milliseconds, as KosherJava truncates it). Add it as a TimeInterval
+        // to avoid timezone changes
+        return Date(timeInterval: 1275721.666, since: molad) // 14 * 86400 + 18 * 3600 + 22 * 60 + 1.666
     }
     
     /**
