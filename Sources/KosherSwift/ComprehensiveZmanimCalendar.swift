@@ -97,19 +97,19 @@ public class ComprehensiveZmanimCalendar: ZmanimCalendar {
      * The zenith of 3.7° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getTzaisGeonim3Point7Degrees()
      */
-    static let ZENITH_3_POINT_7 = AstronomicalCalendar.GEOMETRIC_ZENITH + 3.7
+    public static let ZENITH_3_POINT_7 = AstronomicalCalendar.GEOMETRIC_ZENITH + 3.7
 
     /**
      * The zenith of 3.8° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getTzaisGeonim3Point8Degrees()
      */
-    static let ZENITH_3_POINT_8 = AstronomicalCalendar.GEOMETRIC_ZENITH + 3.8
+    public static let ZENITH_3_POINT_8 = AstronomicalCalendar.GEOMETRIC_ZENITH + 3.8
 
     /**
      * The zenith of 5.95° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getTzaisGeonim5Point95Degrees()
      */
-    static let ZENITH_5_POINT_95 = AstronomicalCalendar.GEOMETRIC_ZENITH + 5.95
+    public static let ZENITH_5_POINT_95 = AstronomicalCalendar.GEOMETRIC_ZENITH + 5.95
 
     /**
      * The zenith of 7.083° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°). This is often referred to as
@@ -118,44 +118,44 @@ public class ComprehensiveZmanimCalendar: ZmanimCalendar {
      * @see getTzaisGeonim7Point083Degrees()
      * @see getBainHashmashosRT13Point5MinutesBefore7Point083Degrees()
      */
-    static let ZENITH_7_POINT_083 = AstronomicalCalendar.GEOMETRIC_ZENITH + 7 + (5.0 / 60)
+    public static let ZENITH_7_POINT_083 = AstronomicalCalendar.GEOMETRIC_ZENITH + 7 + (5.0 / 60)
 
     /**
      * The zenith of 10.2° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getMisheyakir10Point2Degrees()
      */
-    static let ZENITH_10_POINT_2 = AstronomicalCalendar.GEOMETRIC_ZENITH + 10.2
+    public static let ZENITH_10_POINT_2 = AstronomicalCalendar.GEOMETRIC_ZENITH + 10.2
 
     /**
      * The zenith of 11° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getMisheyakir11Degrees()
      */
-    static let ZENITH_11_DEGREES = AstronomicalCalendar.GEOMETRIC_ZENITH + 11
+    public static let ZENITH_11_DEGREES = AstronomicalCalendar.GEOMETRIC_ZENITH + 11
 
     /**
      * The zenith of 11.5° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getMisheyakir11Point5Degrees()
      */
-    static let ZENITH_11_POINT_5 = AstronomicalCalendar.GEOMETRIC_ZENITH + 11.5
+    public static let ZENITH_11_POINT_5 = AstronomicalCalendar.GEOMETRIC_ZENITH + 11.5
 
     /**
      * The zenith of 12.85° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getMisheyakir12Point85Degrees()
      */
-    static let ZENITH_12_POINT_85 = AstronomicalCalendar.GEOMETRIC_ZENITH + 12.85
+    public static let ZENITH_12_POINT_85 = AstronomicalCalendar.GEOMETRIC_ZENITH + 12.85
 
     /**
      * The zenith of 13.24° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getBainHashmashosRT13Point24Degrees
      */
-    static let ZENITH_13_POINT_24 = AstronomicalCalendar.GEOMETRIC_ZENITH + 13.24
+    public static let ZENITH_13_POINT_24 = AstronomicalCalendar.GEOMETRIC_ZENITH + 13.24
 
     /**
      * The zenith of 19° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getAlos19Degrees()
      * @see ZENITH_19_POINT_8
      */
-    static let ZENITH_19_DEGREES = AstronomicalCalendar.GEOMETRIC_ZENITH + 19
+    public static let ZENITH_19_DEGREES = AstronomicalCalendar.GEOMETRIC_ZENITH + 19
 
     /**
      * The zenith of 19.8° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
@@ -163,7 +163,7 @@ public class ComprehensiveZmanimCalendar: ZmanimCalendar {
      * @see getAlos19Point8Degrees()
      * @see ZENITH_19_DEGREES
      */
-    static let ZENITH_19_POINT_8 = AstronomicalCalendar.GEOMETRIC_ZENITH + 19.8
+    public static let ZENITH_19_POINT_8 = AstronomicalCalendar.GEOMETRIC_ZENITH + 19.8
 
     /**
      * The zenith of 26° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
@@ -172,68 +172,68 @@ public class ComprehensiveZmanimCalendar: ZmanimCalendar {
      * @see getAlos120Minutes()
      * @see getTzais120Minutes()
      */
-    static let ZENITH_26_DEGREES = AstronomicalCalendar.GEOMETRIC_ZENITH + 26.0
+    public static let ZENITH_26_DEGREES = AstronomicalCalendar.GEOMETRIC_ZENITH + 26.0
 
     /**
      * The zenith of 4.42° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getTzaisGeonim4Point42Degrees()
      */
-    static let ZENITH_4_POINT_42 = AstronomicalCalendar.GEOMETRIC_ZENITH + 4.42
+    public static let ZENITH_4_POINT_42 = AstronomicalCalendar.GEOMETRIC_ZENITH + 4.42
 
     /**
      * The zenith of 4.66° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getTzaisGeonim4Point66Degrees()
      */
-    static let ZENITH_4_POINT_66 = AstronomicalCalendar.GEOMETRIC_ZENITH + 4.66
+    public static let ZENITH_4_POINT_66 = AstronomicalCalendar.GEOMETRIC_ZENITH + 4.66
 
     /**
      * The zenith of 4.8° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getTzaisGeonim4Point8Degrees()
      */
-    static let ZENITH_4_POINT_8 = AstronomicalCalendar.GEOMETRIC_ZENITH + 4.8
+    public static let ZENITH_4_POINT_8 = AstronomicalCalendar.GEOMETRIC_ZENITH + 4.8
 
     /**
      * The zenith of 16.9° below geometric zenith (90°).
      *
      * @see getAlosBaalHatanya()
      */
-    static let ZENITH_16_POINT_9 = AstronomicalCalendar.GEOMETRIC_ZENITH + 16.9
+    public static let ZENITH_16_POINT_9 = AstronomicalCalendar.GEOMETRIC_ZENITH + 16.9
 
     /**
      * The zenith of 6° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getTzaisBaalHatanya()
      */
-    static let ZENITH_6_DEGREES = AstronomicalCalendar.GEOMETRIC_ZENITH + 6
+    public static let ZENITH_6_DEGREES = AstronomicalCalendar.GEOMETRIC_ZENITH + 6
 
     /**
      * The zenith of 6.45° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getTzaisGeonim6Point45Degrees()
      */
-    static let ZENITH_6_POINT_45 = AstronomicalCalendar.GEOMETRIC_ZENITH + 6.45
+    public static let ZENITH_6_POINT_45 = AstronomicalCalendar.GEOMETRIC_ZENITH + 6.45
 
     /**
      * The zenith of 7.65° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getMisheyakir7Point65Degrees()
      */
-    static let ZENITH_7_POINT_65 = AstronomicalCalendar.GEOMETRIC_ZENITH + 7.65
+    public static let ZENITH_7_POINT_65 = AstronomicalCalendar.GEOMETRIC_ZENITH + 7.65
 
     /**
      * The zenith of 7.67° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getTzaisGeonim7Point67Degrees()
      */
-    static let ZENITH_7_POINT_67 = AstronomicalCalendar.GEOMETRIC_ZENITH + 7.67
+    public static let ZENITH_7_POINT_67 = AstronomicalCalendar.GEOMETRIC_ZENITH + 7.67
 
     /**
      * The zenith of 9.3° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getTzaisGeonim9Point3Degrees()
      */
-    static let ZENITH_9_POINT_3 = AstronomicalCalendar.GEOMETRIC_ZENITH + 9.3
+    public static let ZENITH_9_POINT_3 = AstronomicalCalendar.GEOMETRIC_ZENITH + 9.3
 
     /**
      * The zenith of 9.5° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getMisheyakir9Point5Degrees()
      */
-    static let ZENITH_9_POINT_5 = AstronomicalCalendar.GEOMETRIC_ZENITH + 9.5
+    public static let ZENITH_9_POINT_5 = AstronomicalCalendar.GEOMETRIC_ZENITH + 9.5
 
     /**
      * The zenith of 9.75° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°). This calculation is used for
@@ -241,7 +241,7 @@ public class ComprehensiveZmanimCalendar: ZmanimCalendar {
      *
      * @see getTzaisGeonim9Point75Degrees()
      */
-    static let ZENITH_9_POINT_75 = AstronomicalCalendar.GEOMETRIC_ZENITH + 9.75
+    public static let ZENITH_9_POINT_75 = AstronomicalCalendar.GEOMETRIC_ZENITH + 9.75
 
     /**
      * The zenith of 2.1° <b>above</b> ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°). This calculation is used for calculating
@@ -251,7 +251,7 @@ public class ComprehensiveZmanimCalendar: ZmanimCalendar {
      *
      * @see getBainHashmashosYereim2Point1Degrees()
      */
-    static let ZENITH_MINUS_2_POINT_1 = AstronomicalCalendar.GEOMETRIC_ZENITH - 2.1
+    public static let ZENITH_MINUS_2_POINT_1 = AstronomicalCalendar.GEOMETRIC_ZENITH - 2.1
 
     /**
      * The zenith of 2.8° above ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°). This calculation is used for
@@ -261,7 +261,7 @@ public class ComprehensiveZmanimCalendar: ZmanimCalendar {
      *
      * @see getBainHashmashosYereim2Point8Degrees()
      */
-    static let ZENITH_MINUS_2_POINT_8 = AstronomicalCalendar.GEOMETRIC_ZENITH - 2.8
+    public static let ZENITH_MINUS_2_POINT_8 = AstronomicalCalendar.GEOMETRIC_ZENITH - 2.8
 
     /**
      * The zenith of 3.05° above ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°). This calculation is used for
@@ -271,7 +271,7 @@ public class ComprehensiveZmanimCalendar: ZmanimCalendar {
      *
      * @see getBainHashmashosYereim3Point05Degrees()
      */
-    static let ZENITH_MINUS_3_POINT_05 = AstronomicalCalendar.GEOMETRIC_ZENITH - 3.05
+    public static let ZENITH_MINUS_3_POINT_05 = AstronomicalCalendar.GEOMETRIC_ZENITH - 3.05
 
     /**
      * The offset in minutes (defaults to 40) after sunset used for <em>tzeit</em> based on calculations of
@@ -1928,12 +1928,12 @@ public class ComprehensiveZmanimCalendar: ZmanimCalendar {
      * @see getMinchaKetanaAhavatShalom()
      */
     public func getPlagAhavatShalom() -> Date? {
-    let shaahZmanis: TimeInterval? = getShaahZmanisAlos16Point1DegreesToTzaisGeonim3Point8Degrees()
-    if shaahZmanis == nil {
-        return nil
-    }
-    let totalNanos = JavaMath.toLong(-(shaahZmanis! * 1_000_000_000) * 1.25)
-    return nullIfAfterSunset(zman: AstronomicalCalendar.getTimeOffset(time: getTzaisGeonim3Point8Degrees(), offset: Double(totalNanos) / 1_000_000_000))
+        let shaahZmanis: TimeInterval? = getShaahZmanisAlos16Point1DegreesToTzaisGeonim3Point8Degrees()
+        if shaahZmanis == nil {
+            return nil
+        }
+        let totalNanos = JavaMath.toLong(-(shaahZmanis! * 1_000_000_000) * 1.25)
+        return nullIfAfterSunset(zman: AstronomicalCalendar.getTimeOffset(time: getTzaisGeonim3Point8Degrees(), offset: Double(totalNanos) / 1_000_000_000))
     }
 
     /**

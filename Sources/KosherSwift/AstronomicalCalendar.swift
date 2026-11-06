@@ -529,7 +529,7 @@ public class AstronomicalCalendar {
      * @param solarEvent the type of `SolarEvent`, used to resolve the day of the UTC time.
      * @return The `Date` object representation of the time double, or `nil` if the time is NaN.
      */
-    func getDateFromTime(time: Double, solarEvent: SolarEvent) -> Date? {
+    public func getDateFromTime(time: Double, solarEvent: SolarEvent) -> Date? {
         if time.isNaN {
             return nil
         }
@@ -703,7 +703,7 @@ public class AstronomicalCalendar {
      * @see GeoLocation/getAntimeridianAdjustment(date:)
      * @return the adjusted ``LocalDate``
      */
-    func getAdjustedLocalDate() -> LocalDate {
+    public func getAdjustedLocalDate() -> LocalDate {
         let offset = getGeoLocation().getAntimeridianAdjustment(date: getMidnightLastNight())
         return offset == 0 ? localDate : localDate.plusDays(offset)
     }
@@ -712,7 +712,7 @@ public class AstronomicalCalendar {
      * Used by Molad based <em>zmanim</em> to determine if <em>zmanim</em> occur during the current day.
      * @return midnight at the start of the current day in the location's time zone
      */
-    func getMidnightLastNight() -> Date {
+    public func getMidnightLastNight() -> Date {
         return localDate.atStartOfDay(timeZone: getGeoLocation().getTimeZone())
     }
 
@@ -720,7 +720,7 @@ public class AstronomicalCalendar {
      * Used by Molad based <em>zmanim</em> to determine if <em>zmanim</em> occur during the current day.
      * @return midnight at the end of the current day (the start of the next day) in the location's time zone
      */
-    func getMidnightTonight() -> Date {
+    public func getMidnightTonight() -> Date {
         return localDate.plusDays(1).atStartOfDay(timeZone: getGeoLocation().getTimeZone())
     }
 

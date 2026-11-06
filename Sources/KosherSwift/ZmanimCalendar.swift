@@ -209,20 +209,20 @@ public class ZmanimCalendar: AstronomicalCalendar {
      * @see ComprehensiveZmanimCalendar/getShaahZmanisAlos16Point1DegreesToTzaisGeonim7Point083Degrees()
      *
      */
-    static let ZENITH_16_POINT_1 = AstronomicalCalendar.GEOMETRIC_ZENITH + 16.1
+    public static let ZENITH_16_POINT_1 = AstronomicalCalendar.GEOMETRIC_ZENITH + 16.1
 
     /**
      * The zenith of 8.5° below geometric zenith (90°).
      * @see getTzaisGeonim8Point5Degrees()
      */
-    static let ZENITH_8_POINT_5 = AstronomicalCalendar.GEOMETRIC_ZENITH + 8.5
+    public static let ZENITH_8_POINT_5 = AstronomicalCalendar.GEOMETRIC_ZENITH + 8.5
 
     /**
      * The zenith of 1.583° below ``AstronomicalCalendar/GEOMETRIC_ZENITH`` (90°).
      * @see getSunriseBaalHatanya()
      * @see getSunsetBaalHatanya()
      */
-    static let ZENITH_1_POINT_583 = AstronomicalCalendar.GEOMETRIC_ZENITH + 1.583
+    public static let ZENITH_1_POINT_583 = AstronomicalCalendar.GEOMETRIC_ZENITH + 1.583
 
     /**
      * The default <em>Shabbos</em> candle lighting offset is 18 minutes. This can be changed via the
@@ -239,7 +239,7 @@ public class ZmanimCalendar: AstronomicalCalendar {
      *         ``getSunrise()`` if it is true.
      * @see getSunrise()
      */
-    func getSunriseBasedOnElevationSetting() -> Date? {
+    public func getSunriseBasedOnElevationSetting() -> Date? {
         if isUseElevation() {
             return super.getSunrise()
         }
@@ -255,7 +255,7 @@ public class ZmanimCalendar: AstronomicalCalendar {
      *         ``getSunset()`` if it is true.
      * @see getSunset()
      */
-    func getSunsetBasedOnElevationSetting() -> Date? {
+    public func getSunsetBasedOnElevationSetting() -> Date? {
         if isUseElevation() {
             return super.getSunset()
         }
@@ -1248,7 +1248,7 @@ public class ZmanimCalendar: AstronomicalCalendar {
      * @see getSunsetBaalHatanya()
      * @see ZENITH_1_POINT_583
      */
-    func getSunriseBaalHatanya() -> Date? {
+    public func getSunriseBaalHatanya() -> Date? {
         return getSunriseOffsetByDegrees(offsetZenith: ZmanimCalendar.ZENITH_1_POINT_583)
     }
 
@@ -1274,7 +1274,7 @@ public class ZmanimCalendar: AstronomicalCalendar {
      * @see getSunriseBaalHatanya()
      * @see ZENITH_1_POINT_583
      */
-    func getSunsetBaalHatanya() -> Date? {
+    public func getSunsetBaalHatanya() -> Date? {
         return getSunsetOffsetByDegrees(offsetZenith: ZmanimCalendar.ZENITH_1_POINT_583)
     }
 

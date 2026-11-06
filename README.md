@@ -9,7 +9,7 @@ For non religious astronomical / solar
 calculations use the [AstronomicalCalendar](./Sources/KosherSwift/AstronomicalCalendar.swift).
 
 The ZmanimCalendar contains the most common zmanim or religious time calculations. For a much more
-extensive list of _zmanim_ use the ComplexZmanimCalendar.
+extensive list of _zmanim_ use the ComprehensiveZmanimCalendar (called ComplexZmanimCalendar before KosherSwift was updated to KosherJava 3.1).
 This class contains the main functionality of the Zmanim library.
 
 For a basic set of instructions on the use of the API, see [How to Use the Zmanim API](https://kosherjava.com/zmanim-project/how-to-use-the-zmanim-api/), [zmanim code samples](https://kosherjava.com/tag/code-sample/) and the [KosherJava FAQ](https://kosherjava.com/tag/faq/). See the <a href="https://kosherjava.com">KosherJava Zmanim site</a> for additional information.
@@ -57,33 +57,28 @@ For sunrise and sunset times, you will need a GeoLocation object. Then, you will
 ```Swift
 let geoLocation = GeoLocation(locationName: "Lakewood, NJ", latitude: 40.08213, longitude: -74.20970, timeZone: TimeZone(identifier: "America/New_York")!)
 // The locationName string can be left empty if you'd like. There is also a constructor for elevation to be added.
-// There are two Sunrise/Sunset calculators in this API, the NOAA Calculator and the SunTimes Calculator. By default, the NOAA calculator is used as it is more accurate than the SunTimes calculator as it takes into account leap years and other things.
-let cal = AstronomicalCalendar(location: geoLocation)
-// To use the SunTimesCalculator:
-// cal.astronomicalCalculator = SunTimesCalculator()
+// There are four Sunrise/Sunset calculators in this API: the NOAACalculator (the default), the SPACalculator (NREL's Solar Position Algorithm), the MeeusCalculator and the legacy SunTimesCalculator.
+let cal = AstronomicalCalendar(geoLocation: geoLocation)
+// To use the SPACalculator:
+// cal.setAstronomicalCalculator(astronomicalCalculator: SPACalculator())
 let sunrise = cal.getSunrise() // This will return a nullable Date? object
 ```
-For zmanim, you will do the same thing, just use the ComplexZmanimCalendar or ZmanimCalendar classes:
+For zmanim, you will do the same thing, just use the ComprehensiveZmanimCalendar or ZmanimCalendar classes:
 ```Swift
 let geoLocation = GeoLocation(locationName: "Lakewood, NJ", latitude: 40.08213, longitude: -74.20970, timeZone: TimeZone(identifier: "America/New_York")!)
-let cal = ComplexZmanimCalendar(location: geoLocation)
+let cal = ComprehensiveZmanimCalendar(geoLocation: geoLocation)
 let sofZmanShmaGra = cal.getSofZmanShmaGRA() // This will return a nullable Date? object
 ```
-If you want to calculate a zman for a certain date:
+If you want to calculate a zman for a certain date, set the date as a `LocalDate` (a date without a time or time zone, like
+KosherJava's `java.time.LocalDate`):
 ```Swift
-var gregorianCalendar = Calendar(identifier: .gregorian)
-gregorianCalendar.timeZone = TimeZone(identifier: "America/New_York")! // It is important to set the Timezone as the date can change in Swift
-        
 let geoLocation = GeoLocation(locationName: "", latitude: 40.08213, longitude: -74.20970, timeZone: TimeZone(identifier: "America/New_York")!)
-let calendar = ComplexZmanimCalendar(geoLocation: geoLocation) // Timezone is kept track of inside these classes with the geolocation
-
-var januaryFirst = DateComponents()
-januaryFirst.year = 2023
-januaryFirst.month = 1
-januaryFirst.day = 1
-        
-calendar.workingDate = gregorianCalendar.date(from: januaryFirst)!
-var sunrise = calendar.getSunrise()        
+let calendar = ComprehensiveZmanimCalendar(geoLocation: geoLocation) // Timezone is kept track of inside these classes with the geolocation
+calendar.setLocalDate(localDate: LocalDate(year: 2023, month: 1, day: 1))
+let sunrise = calendar.getSunrise()
+// Setting workingDate to a Date still works: the calendar uses the day it falls on in the location's time zone
+calendar.workingDate = Date()
+let shaahZmanis = calendar.getShaahZmanisGRA() // the length of a sha'ah zmanis in seconds, as a TimeInterval? (nil if it can't be calculated)
 ```
 For converting any of the data in this API to hebrew, look at the HebrewDateFormatter class:
 ```Swift
@@ -101,15 +96,12 @@ tefilaRules.isVeseinTalUmatarRecited(jewishCalendar: jewishCalendar) // returns 
 ```
 There are also convenience Classes brought over from KosherJava but updated for Swift:
 ```Swift
-let formatter = ZmanimFormatter() // This class can format Date, Double, and TimeInterval classes. The default time zone is the system's timezone. 
-formatter.format(date: Date()) // By default, AM/PM is used, so the result will be similar to: "7:30:00 PM". To customize the output see the ZmanimFormatter class.
+let formatter = ZmanimFormatter(timeZone: TimeZone(identifier: "America/New_York")!) // Formats Dates and durations (TimeInterval)
+formatter.formatDate(date: Date()) // "h:mm:ss" by default; see setDateTimeFormat(dateTimeFormat:)
+formatter.format(duration: calendar.getShaahZmanisGRA()) // a duration such as "1:06:07"
+ZmanimFormatter.toXML(astronomicalCalendar: calendar) // all of the calendar's zmanim as XML (or toJSON)
 
-var time = Time(hours: 1, minutes: 2, seconds: 3, milliseconds: 456)// This class represents a numeric time
-time.getTime() // will output 3_723_456
-// You can also pass in milliseconds and they can even be negative:
-time = Time(millis: -100000).toString() // will output "-00:01:40"
-
-let zman = Zman(label: "Sunrise", zman: Date()) // A wrapper class for zmanim that is mostly intended to allow sorting collections of astronomical times.
+let zman = Zman(zman: Date(), label: "Sunrise") // A wrapper class for zmanim that is mostly intended to allow sorting collections of astronomical times.
 zman.description = "This is the time for sunrise."
 
 // or use it sort your list of zmanim like so:
@@ -117,7 +109,7 @@ zman.description = "This is the time for sunrise."
 let early = Date()
 let later = early.addingTimeInterval(3600)
         
-let array = [Zman(label: "Later", zman: later), Zman(label: "Earlier", zman: early)]        
+let array = [Zman(zman: later, label: "Later"), Zman(zman: early, label: "Earlier")]        
 let sorted = array.sorted(by: Zman.dateOrder)
 ```
 Making Your Own Methods
@@ -135,23 +127,23 @@ public extension JewishCalendar {
 ```
 The same goes for zmanim! If you want to create your own zmanim, it would look like this:
 ```Swift
-public extension ComplexZmanimCalendar {
+public extension ComprehensiveZmanimCalendar {
 
-    // for regular minutes (note the need to convert to milliseconds)
+    // for regular minutes (offsets are TimeIntervals in seconds)
     func getTzais45() -> Date?  {
-        return ComplexZmanimCalendar.getTimeOffset(time: getElevationAdjustedSunset(), offset: 45 * ComplexZmanimCalendar.MINUTE_MILLIS);
+        return AstronomicalCalendar.getTimeOffset(time: getSunsetBasedOnElevationSetting(), offset: 45 * AstronomicalCalendar.MINUTE_SECONDS)
     }
     
     // for degrees
     func getTzais8PointSevenDegrees() -> Date? {
-        return getSunsetOffsetByDegrees(offsetZenith: ComplexZmanimCalendar.GEOMETRIC_ZENITH + 8.7);
+        return getSunsetOffsetByDegrees(offsetZenith: AstronomicalCalendar.GEOMETRIC_ZENITH + 8.7)
     }
     
     // for seasonal times
     func getTwoSeasonalHoursIntoTheDay() -> Date? {
-        let seasonalHour = getTemporalHour()
+        guard let seasonalHour = getTemporalHour() else { return nil }
         // it is preferred to use getTimeOffset because it will handle nil values
-        return AstronomicalCalendar.getTimeOffset(time: getElevationAdjustedSunrise(), offset: seasonalHour * 2)
+        return AstronomicalCalendar.getTimeOffset(time: getSunriseBasedOnElevationSetting(), offset: seasonalHour * 2)
     }
 }
 ```
@@ -161,6 +153,10 @@ Things To Keep In Mind
 KosherSwift is very similar to KosherJava as it has brought over almost all of it's methods to Swift. I have tried to keep the code as similar as possible to the original repository, because I personally wanted to bring over my Java code from my android project to iOS without having to refactor almost all of the code. However, as much as I tried to keep them similar, there are still big differences in the inner workings of the classes. For starters, the Calendar class in Swift does not contain a time in milliseconds to keep track of time, it only contains functions that can create a date. So everywhere there would be a need to use a Calendar has been replaced with a Date. If you look inside the code of the classes, there is a workingDate variable that can be changed instead of a calendar class.
 
 Timezone issues are a big deal in Swift since Date objects are set to UTC by default and only afterwards are timezones taken into account, this leads to the date changing if the timezone for the Calendar class in Swift is not set to the same as timezone as the system. All objects that have a GeoLocation object take this into account, however, if you are using the JewishCalendar class in another timezone, use the JewishCalendar(workingDate: <Date>, timezone: <TimeZone>) constructor.
+
+The zmanim calendars work on a `LocalDate` like KosherJava 3.1, so the day calculated never depends on the time of day of a `Date`. Durations such as a sha'ah zmanis are `TimeInterval?` seconds instead of milliseconds, and are nil when they can't be calculated.
+
+KosherSwift is tested against values generated by KosherJava itself (see `tools/golden`): over 400,000 zmanim for 12 locations agree with KosherJava to within a microsecond, the raw sunrise, sunset and solar position values of all four calculators to within 1e-11, and about 3 million Hebrew calendar, tefila rules and formatter values exactly.
 
 Otherwise, most methods have been tried and tested, however, if you come accross a method that is not working correctly, please create a issue or (more preferably) a pull request.
 
