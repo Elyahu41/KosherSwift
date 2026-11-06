@@ -252,7 +252,8 @@ public class HebrewDateFormatter {
      * Default constructor sets the Dictionaries of Hebrew and default transliterated parshiyos.
      */
     public init() {
-        weekFormat.dateFormat = "EEE";
+        weekFormat.locale = Locale(identifier: "en_US_POSIX")
+        weekFormat.dateFormat = longWeekFormat ? "EEEE" : "EEE";
     }
     
     public init(useHebrewFormat:Bool = false,
@@ -260,7 +261,8 @@ public class HebrewDateFormatter {
                 useGershGershayim:Bool = true,
                 longWeekFormat:Bool = true,
                 useFinalFormLetters:Bool = false) {
-        weekFormat.dateFormat = "EEE";
+        weekFormat.locale = Locale(identifier: "en_US_POSIX")
+        weekFormat.dateFormat = longWeekFormat ? "EEEE" : "EEE";
         self.hebrewFormat = useHebrewFormat;
         self.useLonghebrewYears = useLonghebrewYears;
         self.useGershGershayim = useGershGershayim;
@@ -439,12 +441,12 @@ public class HebrewDateFormatter {
      */
     public final var hebrewHolidays = [
         "ערב פסח", "פסח", "חול המועד פסח", "פסח שני", "ערב שבועות", "שבועות",
-        "שבעה עשר בתמוז", "תשעה באב", "ט\"ו באב", "ערב ראש השנה", "ראש השנה",
+        "שבעה עשר בתמוז", "תשעה באב", "ט״ו באב", "ערב ראש השנה", "ראש השנה",
         "צום גדליה", "ערב יום כיפור", "יום כיפור", "ערב סוכות", "סוכות",
         "חול המועד סוכות", "הושענא רבה", "שמיני עצרת", "שמחת תורה", "ערב חנוכה",
-        "חנוכה", "עשרה בטבת", "ט\"ו בשבט", "תענית אסתר", "פורים",
+        "חנוכה", "עשרה בטבת", "ט״ו בשבט", "תענית אסתר", "פורים",
         "שושן פורים", "פורים קטן", "ראש חודש", "יום השואה", "יום הזיכרון",
-        "יום העצמאות", "יום ירושלים", "ל\"ג בעומר", "שושן פורים קטן", "אסרו חג"
+        "יום העצמאות", "יום ירושלים", "ל״ג בעומר", "שושן פורים קטן", "אסרו חג"
     ];
     
     public final var tekufaNames = ["Tishri", "Tevet", "Nissan", "Tammuz"]
@@ -623,7 +625,7 @@ public class HebrewDateFormatter {
      * "&#x05D7;&#x05DE;&#x05D9;&#x05E9;&#x05D9;","&#x05E9;&#x05E9;&#x05D9;","&#x05E9;&#x05D1;&#x05EA;"]</code>
      */
     private static let hebrewDaysOfWeek = [
-        "ראשון", "שני", "שלישי", "רביעי", "חמישי", "שישי", "שבת"
+        "ראשון", "שני", "שלישי", "רביעי", "חמישי", "ששי", "שבת"
     ];
     
     /**
@@ -655,6 +657,7 @@ public class HebrewDateFormatter {
                     return String(getTransliteratedShabbosDayOfWeek().prefix(upTo: .init(utf16Offset: 3, in: getTransliteratedShabbosDayOfWeek())));
                 }
             } else {
+                weekFormat.timeZone = jewishCalendar.timeZone
                 return weekFormat.string(from: jewishCalendar.workingDate);
             }
         }

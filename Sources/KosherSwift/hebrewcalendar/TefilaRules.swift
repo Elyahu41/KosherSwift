@@ -180,9 +180,8 @@ public class TefilaRules {
      * @see #isTachanunRecitedShacharis(JewishCalendar)
      */
     public func isTachanunRecitedMincha(jewishCalendar:JewishCalendar) -> Bool {
-        let tomorrow = JewishCalendar();
-        tomorrow.workingDate = jewishCalendar.workingDate
-        tomorrow.forward()
+        let tomorrow = JewishCalendar(copy: jewishCalendar) // keeps the in Israel and other settings
+        tomorrow.plusDays(days: 1)
         
         if (!tachanunRecitedMinchaAllYear
             || jewishCalendar.getDayOfWeek() == 6
@@ -342,9 +341,13 @@ public class TefilaRules {
      * @see #isMashivHaruachEndDate(JewishCalendar)
      */
     public func isMashivHaruachRecited(jewishCalendar:JewishCalendar) -> Bool {
-        let startDate = JewishCalendar(jewishYear: jewishCalendar.getJewishYear(), jewishMonth: JewishCalendar.TISHREI, jewishDayOfMonth: 22);
-        let endDate = JewishCalendar(jewishYear: jewishCalendar.getJewishYear(), jewishMonth: JewishCalendar.NISSAN, jewishDayOfMonth: 15);
-        return jewishCalendar.workingDate.compare(startDate.workingDate) == .orderedDescending && jewishCalendar.workingDate.compare(endDate.workingDate) == .orderedAscending;
+        // compare the dates, not the times of day, in the calendar's own time zone
+        let startDate = JewishCalendar(copy: jewishCalendar)
+        startDate.setJewishDate(year: jewishCalendar.getJewishYear(), month: JewishCalendar.TISHREI, dayOfMonth: 22)
+        let endDate = JewishCalendar(copy: jewishCalendar)
+        endDate.setJewishDate(year: jewishCalendar.getJewishYear(), month: JewishCalendar.NISSAN, dayOfMonth: 15)
+        let date = jewishCalendar.getLocalDate()
+        return startDate.getLocalDate() < date && date < endDate.getLocalDate()
     }
     
     /**

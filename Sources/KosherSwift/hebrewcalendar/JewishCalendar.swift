@@ -1326,7 +1326,7 @@ public class JewishCalendar: Equatable {
             || (month == JewishCalendar.KISLEV && isKislevShort(year: year))
             || month == JewishCalendar.TEVES
             || (month == JewishCalendar.ADAR && !isJewishLeapYear(year: year)) // Adar in a leap year has 30 days
-            || (month == JewishCalendar.ADAR_II && isJewishLeapYear(year: year))) {
+            || month == JewishCalendar.ADAR_II) { // Adar II, or Adar of a regular year (the same month in Foundation's Hebrew calendar)
             return 29;
         } else {
             return 30;

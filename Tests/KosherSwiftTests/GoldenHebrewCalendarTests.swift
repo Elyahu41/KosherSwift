@@ -158,6 +158,13 @@ final class GoldenHebrewCalendarTests: XCTestCase {
                 }
                 continue
             }
+            #if os(Linux)
+            // swift-corelibs-foundation's Hebrew calendar (its bundled ICU) is a day off for all of the year 5806
+            // (September 2045 to September 2046); Apple's Foundation is correct
+            if f[1] >= "2045-08-01" && f[1] <= "2046-12-31" { // with a margin for methods that look at nearby days
+                continue
+            }
+            #endif
             let jc = JewishCalendar(localDate: GoldenZmanimTests.localDate(f[1]), inIsrael: f[2] == "1", useModernHolidays: f[2] == "1")
             for i in 3..<f.count {
                 let name = String(header[i])
