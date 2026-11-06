@@ -543,6 +543,51 @@ class KosherSwiftTests: XCTestCase {
         XCTAssertEqual(formatter.format(date: Date(timeIntervalSince1970: 0)), "7:00:00 PM")
     }
     
+    func testCandleLightingIsNeverBeforePlagHamincha() {
+        // on a very short day near the Arctic Circle, 18 minutes before sunset is before plag hamincha
+        let oslo = TimeZone(identifier: "Europe/Oslo")!
+        let calendar = ZmanimCalendar(location: GeoLocation(locationName: "Bodo area", latitude: 66.2, longitude: 14.4, timeZone: oslo))
+        var gregorian = Calendar(identifier: .gregorian)
+        gregorian.timeZone = oslo
+        calendar.workingDate = gregorian.date(from: DateComponents(year: 2026, month: 12, day: 21, hour: 12))!
+        let plag = calendar.getPlagHamincha()!
+        let sunsetMinusOffset = calendar.getSeaLevelSunset()!.addingTimeInterval(-Double(calendar.getCandleLightingOffset()) * 60)
+        XCTAssertLessThan(sunsetMinusOffset, plag, "precondition: the test day must be short enough")
+        XCTAssertEqual(calendar.getCandleLighting(), plag)
+
+        // on a normal day it is still the offset before sea level sunset
+        let newYork = TimeZone(identifier: "America/New_York")!
+        let lakewood = ZmanimCalendar(location: GeoLocation(locationName: "Lakewood", latitude: 40.0828, longitude: -74.2094, timeZone: newYork))
+        gregorian.timeZone = newYork
+        lakewood.workingDate = gregorian.date(from: DateComponents(year: 2026, month: 12, day: 21, hour: 12))!
+        XCTAssertEqual(lakewood.getCandleLighting(), lakewood.getSeaLevelSunset()!.addingTimeInterval(-Double(lakewood.getCandleLightingOffset()) * 60))
+    }
+
+    func testXSDDurationEdgeCases() {
+        let formatter = ZmanimFormatter(timeZone: TimeZone(identifier: "America/New_York")!)
+        XCTAssertEqual(formatter.formatXSDDuration(milliseconds: 90 * 60 * 1000), "PT1H30M")
+        XCTAssertEqual(formatter.formatXSDDuration(milliseconds: -(75 * 60 + 3) * 1000), "-PT1H15M3S")
+        XCTAssertEqual(formatter.formatXSDDuration(milliseconds: -400), "PT0S")
+        XCTAssertEqual(formatter.formatXSDDuration(milliseconds: .nan), "")
+        XCTAssertEqual(formatter.formatXSDDuration(milliseconds: .infinity), "")
+        XCTAssertEqual(formatter.format(milliseconds: .nan), "")
+    }
+
+    func testHebrewNumbersAbove9999() {
+        let formatter = HebrewDateFormatter()
+        XCTAssertEqual(formatter.formatHebrewNumber(number: 5000), "ה׳ אלפים")
+        XCTAssertEqual(formatter.formatHebrewNumber(number: 5786), "תשפ״ו")
+        XCTAssertEqual(formatter.formatHebrewNumber(number: 10_000), "י׳ אלפים")
+        XCTAssertEqual(formatter.formatHebrewNumber(number: 12_345), "שמ״ה")
+        formatter.useLonghebrewYears = true
+        XCTAssertEqual(formatter.formatHebrewNumber(number: 5786), "ה׳ תשפ״ו")
+        XCTAssertEqual(formatter.formatHebrewNumber(number: 9999), "ט׳ תתקצ״ט")
+        XCTAssertEqual(formatter.formatHebrewNumber(number: 12_345), "יב׳ שמ״ה")
+        XCTAssertEqual(formatter.formatHebrewNumber(number: 15_001), "טו׳ א׳")
+        XCTAssertEqual(formatter.formatHebrewNumber(number: 999_999), "תתקצט׳ תתקצ״ט")
+        XCTAssertEqual(formatter.formatHebrewNumber(number: 1_000_000), "numbers > 999,999 can't be formatted")
+    }
+
     func testTimeClass() {
         let time = Time(
             hours: 1,

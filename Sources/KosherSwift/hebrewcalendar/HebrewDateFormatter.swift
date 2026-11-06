@@ -918,7 +918,7 @@ public class HebrewDateFormatter {
     }
     
     /**
-     * Returns a Hebrew formatted string of a number. The method can calculate from 0 to 9999.
+     * Returns a Hebrew formatted string of a number. The method can calculate from 0 to 999,999.
      * <ul>
      * <li>Single digit numbers such as 3, 30 and 100 will be returned with a &#x5F3; (<a
      * href="http://en.wikipedia.org/wiki/Geresh">Geresh</a>) appended as at the end. For example &#x5D2;&#x5F3;,
@@ -929,22 +929,40 @@ public class HebrewDateFormatter {
      * <li>15 and 16 will be returned as &#x5D8;&#x5F4;&#x5D5; and &#x5D8;&#x5F4;&#x5D6;</li>
      * <li>Single digit numbers (years assumed) such as 6000 (%1000=0) will be returned as &#x5D5;&#x5F3;
      * &#x5D0;&#x5DC;&#x5E4;&#x5D9;&#x5DD;</li>
+     * <li>From 10,000 the thousands are written with the same letters as other numbers, for example י׳ אלפים for 10,000 and
+     * (with long years) יב׳ שמ״ה for 12,345, so the Jewish years of dates past the Gregorian year 6239 can be formatted.</li>
      * <li>0 will return &#x5D0;&#x5E4;&#x05E1;</li>
      * </ul>
      *
      * @param number
-     *            the number to be formatted. It will return a string containing an error if the number is &lt; 0 or &gt; 9999.
+     *            the number to be formatted. It will return a string containing an error if the number is &lt; 0 or &gt; 999,999.
      * @return the Hebrew formatted number such as &#x5EA;&#x5E9;&#x5DB;&#x5F4;&#x5D8;
      * @see #isUseFinalFormLetters()
      * @see #isUseGershGershayim()
      * @see #isHebrewFormat()
      *
      */
+    /// Returns the thousands of a number as Hebrew letters, without a geresh: a single letter for 1 to 9 thousand (for example ה
+    /// for 5,000), and the same letters as for other numbers from 10 thousand on (for example יב for 12,000, with טו / טז for 15
+    /// and 16).
+    private static func formatThousands(_ thousands: Int, _ jHundreds: [String], _ jTens: [String], _ jOnes: [String], _ tavTaz: [String]) -> String {
+        var sb = jHundreds[thousands / 100]
+        let rest = thousands % 100
+        if rest == 15 {
+            sb += tavTaz[0]
+        } else if rest == 16 {
+            sb += tavTaz[1]
+        } else {
+            sb += jTens[rest / 10] + jOnes[rest % 10]
+        }
+        return sb
+    }
+
     public func formatHebrewNumber(number:Int) -> String {
         if (number < 0) {
             return "negative numbers can't be formatted"
-        } else if (number > 9999) {
-            return "numbers > 9999 can't be formatted"
+        } else if (number > 999_999) {
+            return "numbers > 999,999 can't be formatted"
         }
         
         let ALAFIM = "אלפים";
@@ -967,7 +985,7 @@ public class HebrewDateFormatter {
         var sb = "";
         // append thousands to String
         if (number % 1000 == 0) { // in year is 5000, 4000 etc
-            sb.append(jOnes[thousands]);
+            sb.append(HebrewDateFormatter.formatThousands(thousands, jHundreds, jTens, jOnes, tavTaz));
             if (isUseGershGershayim()) {
                 sb.append(HebrewDateFormatter.GERESH);
             }
@@ -975,7 +993,7 @@ public class HebrewDateFormatter {
             sb.append(ALAFIM); // add # of thousands plus the word "thousand" (override alafim boolean)
             return sb;
         } else if (useLonghebrewYears && number >= 1000) { // if alafim boolean display thousands
-            sb.append(jOnes[thousands]);
+            sb.append(HebrewDateFormatter.formatThousands(thousands, jHundreds, jTens, jOnes, tavTaz));
             if (isUseGershGershayim()) {
                 sb.append(HebrewDateFormatter.GERESH); // append thousands quote
             }

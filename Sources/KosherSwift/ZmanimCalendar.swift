@@ -500,18 +500,24 @@ public class ZmanimCalendar : AstronomicalCalendar {
      * ``getSeaLevelSunset()``. This will return the time for any day of the week, since it can be
      * used to calculate candle lighting time for <em>Yom Tov</em> (mid-week holidays) as well. Elevation adjustments
      * are intentionally not performed by this method, but you can calculate it by passing the elevation adjusted sunset
-     * to ``getTimeOffset(Date, Int64)``.
+     * to ``getTimeOffset(Date, Int64)``. Candles can't be lit before ``getPlagHamincha()`` <em>plag hamincha</em>, so if the
+     * calculated time is before it (on very short winter days), <em>plag hamincha</em> is returned instead.
      *
-     * @return candle lighting time. If the calculation can't be computed such as in the Arctic Circle where there is at
-     *         least one day a year where the sun does not rise, and one where it does not set, a <code>nil</code> will
-     *         be returned. See detailed explanation on top of the ``AstronomicalCalendar`` documentation.
+     * @return candle lighting time, or ``getPlagHamincha()`` <em>plag hamincha</em> if that is later. If the calculation can't
+     *         be computed such as in the Arctic Circle where there is at least one day a year where the sun does not rise,
+     *         and one where it does not set, a <code>nil</code> will be returned. See detailed explanation on top of the
+     *         ``AstronomicalCalendar`` documentation.
      *
      * @see #getSeaLevelSunset()
      * @see #getCandleLightingOffset()
      * @see #setCandleLightingOffset(double)
      */
     public func getCandleLighting() -> Date? {
-        return ZmanimCalendar.getTimeOffset(time: getSeaLevelSunset(), offset: -Double(getCandleLightingOffset()) * ZmanimCalendar.MINUTE_MILLIS);
+        let candleLighting = ZmanimCalendar.getTimeOffset(time: getSeaLevelSunset(), offset: -Double(getCandleLightingOffset()) * ZmanimCalendar.MINUTE_MILLIS)
+        if let candleLighting = candleLighting, let plagHamincha = getPlagHamincha(), candleLighting < plagHamincha {
+            return plagHamincha // very short winter day: candles can't be lit before plag hamincha
+        }
+        return candleLighting
     }
 
     /**

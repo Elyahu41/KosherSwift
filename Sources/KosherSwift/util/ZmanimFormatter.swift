@@ -81,8 +81,9 @@ public class ZmanimFormatter {
     
     // MARK: - Duration Formatting (Milliseconds)
     
-    /// Formats milliseconds into a readable string like "01:30:00"
+    /// Formats milliseconds into a readable string like "01:30:00". Returns an empty string for a NaN or infinite value.
     public func format(milliseconds: Double) -> String {
+        guard milliseconds.isFinite else { return "" } // Int(NaN) would crash below
         let seconds = milliseconds / 1000.0
         
         // Adjust padding based on prependZeroHours
@@ -102,9 +103,14 @@ public class ZmanimFormatter {
         return formattedString
     }
     
-    /// Formats milliseconds into XSD Duration format (e.g., PT1H30M)
+    /// Formats milliseconds into XSD Duration format (e.g., PT1H30M, or -PT1H30M for a negative duration). Returns an empty
+    /// string for a NaN, infinite or out of range value.
     public func formatXSDDuration(milliseconds: Double) -> String {
-        let totalSeconds = Int(milliseconds / 1000)
+        // Int(_:) traps on NaN, infinity and values outside Int's range
+        guard milliseconds.isFinite, abs(milliseconds) / 1000 < Double(Int.max) else { return "" }
+        let totalSeconds = Int(abs(milliseconds) / 1000)
+        // XSD puts a single sign in front of the whole value; the fields themselves are never negative
+        let sign = milliseconds < 0 && totalSeconds > 0 ? "-" : ""
         let hours = totalSeconds / 3600
         let minutes = (totalSeconds % 3600) / 60
         let seconds = totalSeconds % 60
@@ -114,7 +120,7 @@ public class ZmanimFormatter {
         if minutes > 0 { result += "\(minutes)M" }
         if seconds > 0 || result == "PT" { result += "\(seconds)S" }
         
-        return result
+        return sign + result
     }
     
     // MARK: - TimeInterval Formatting
