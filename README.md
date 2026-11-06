@@ -174,7 +174,7 @@ The KosherJava Zmanim API has been ported to:
 * Java (original repo) - https://github.com/KosherJava/zmanim/
 * Swift - https://github.com/Elyahu41/KosherSwift (You are here)
 * Objective-C - https://github.com/MosheBerman/KosherCocoa
-* .NET - https://github.com/Yitzchok/Zmanim
+* .NET - https://github.com/Elyahu41/Kosher.Zmanim.NET (the original out of date port can be seen at https://github.com/Yitzchok/Zmanim)
 * TypeScript - https://github.com/BehindTheMath/KosherZmanim
 * JavaScript - https://github.com/yparitcher/zmanJS
 * Kotlin - https://github.com/Sternbach-Software/KosherKotlin
