@@ -60,7 +60,7 @@ public class HebrewDateFormatter {
     /**
      * List of transliterated parshiyos using the default <em>Ashkenazi</em> pronunciation. The formatParsha method
      * uses this for transliterated <em>parsha</em> formatting. This list can be overridden (for <em>Sephardi</em>
-     * English transliteration for example) by setting the ``setTransliteratedParshiosList(transliteratedParshaMap:)``.&nbsp; The list
+     * English transliteration for example) by setting the ``setTransliteratedParshiyosList(transliteratedParshaMap:)``.&nbsp; The list
      * includes double and special <em>parshiyos</em> and is set as "<em>Bereshis, Noach, Lech Lecha, Vayera, Chayei Sara,
      * Toldos, Vayetzei, Vayishlach, Vayeshev, Miketz, Vayigash, Vayechi, Shemos, Vaera, Bo, Beshalach, Yisro, Mishpatim,
      * Terumah, Tetzaveh, Ki Sisa, Vayakhel, Pekudei, Vayikra, Tzav, Shmini, Tazria, Metzora, Achrei Mos, Kedoshim, Emor,
@@ -69,80 +69,80 @@ public class HebrewDateFormatter {
      * Vayakhel Pekudei, Tazria Metzora, Achrei Mos Kedoshim, Behar Bechukosai, Chukas Balak, Matos Masei, Nitzavim Vayeilech,
      * Shekalim, Zachor, Parah, Hachodesh,Shuva, Shira, Hagadol, Chazon, Nachamu</em>".
      *
-     * @see #formatParsha(JewishCalendar)
+     * @see #formatParshah(JewishCalendar)
      */
-    public var transliteratedParshaMap:[JewishCalendar.Parsha: String] = [
-        JewishCalendar.Parsha.NONE: "",
-        JewishCalendar.Parsha.BERESHIS: "Bereshis",
-        JewishCalendar.Parsha.NOACH: "Noach",
-        JewishCalendar.Parsha.LECH_LECHA: "Lech Lecha",
-        JewishCalendar.Parsha.VAYERA: "Vayera",
-        JewishCalendar.Parsha.CHAYEI_SARA: "Chayei Sara",
-        JewishCalendar.Parsha.TOLDOS: "Toldos",
-        JewishCalendar.Parsha.VAYETZEI: "Vayetzei",
-        JewishCalendar.Parsha.VAYISHLACH: "Vayishlach",
-        JewishCalendar.Parsha.VAYESHEV: "Vayeshev",
-        JewishCalendar.Parsha.MIKETZ: "Miketz",
-        JewishCalendar.Parsha.VAYIGASH: "Vayigash",
-        JewishCalendar.Parsha.VAYECHI: "Vayechi",
-        JewishCalendar.Parsha.SHEMOS: "Shemos",
-        JewishCalendar.Parsha.VAERA: "Vaera",
-        JewishCalendar.Parsha.BO: "Bo",
-        JewishCalendar.Parsha.BESHALACH: "Beshalach",
-        JewishCalendar.Parsha.YISRO: "Yisro",
-        JewishCalendar.Parsha.MISHPATIM: "Mishpatim",
-        JewishCalendar.Parsha.TERUMAH: "Terumah",
-        JewishCalendar.Parsha.TETZAVEH: "Tetzaveh",
-        JewishCalendar.Parsha.KI_SISA: "Ki Sisa",
-        JewishCalendar.Parsha.VAYAKHEL: "Vayakhel",
-        JewishCalendar.Parsha.PEKUDEI: "Pekudei",
-        JewishCalendar.Parsha.VAYIKRA: "Vayikra",
-        JewishCalendar.Parsha.TZAV: "Tzav",
-        JewishCalendar.Parsha.SHMINI: "Shmini",
-        JewishCalendar.Parsha.TAZRIA: "Tazria",
-        JewishCalendar.Parsha.METZORA: "Metzora",
-        JewishCalendar.Parsha.ACHREI_MOS: "Achrei Mos",
-        JewishCalendar.Parsha.KEDOSHIM: "Kedoshim",
-        JewishCalendar.Parsha.EMOR: "Emor",
-        JewishCalendar.Parsha.BEHAR: "Behar",
-        JewishCalendar.Parsha.BECHUKOSAI: "Bechukosai",
-        JewishCalendar.Parsha.BAMIDBAR: "Bamidbar",
-        JewishCalendar.Parsha.NASSO: "Nasso",
-        JewishCalendar.Parsha.BEHAALOSCHA: "Beha'aloscha",
-        JewishCalendar.Parsha.SHLACH: "Sh'lach",
-        JewishCalendar.Parsha.KORACH: "Korach",
-        JewishCalendar.Parsha.CHUKAS: "Chukas",
-        JewishCalendar.Parsha.BALAK: "Balak",
-        JewishCalendar.Parsha.PINCHAS: "Pinchas",
-        JewishCalendar.Parsha.MATOS: "Matos",
-        JewishCalendar.Parsha.MASEI: "Masei",
-        JewishCalendar.Parsha.DEVARIM: "Devarim",
-        JewishCalendar.Parsha.VAESCHANAN: "Vaeschanan",
-        JewishCalendar.Parsha.EIKEV: "Eikev",
-        JewishCalendar.Parsha.REEH: "Re'eh",
-        JewishCalendar.Parsha.SHOFTIM: "Shoftim",
-        JewishCalendar.Parsha.KI_SEITZEI: "Ki Seitzei",
-        JewishCalendar.Parsha.KI_SAVO: "Ki Savo",
-        JewishCalendar.Parsha.NITZAVIM: "Nitzavim",
-        JewishCalendar.Parsha.VAYEILECH: "Vayeilech",
-        JewishCalendar.Parsha.HAAZINU: "Ha'Azinu",
-        JewishCalendar.Parsha.VZOS_HABERACHA: "Vezos Habracha",
-        JewishCalendar.Parsha.VAYAKHEL_PEKUDEI: "Vayakhel Pekudei",
-        JewishCalendar.Parsha.TAZRIA_METZORA: "Tazria Metzora",
-        JewishCalendar.Parsha.ACHREI_MOS_KEDOSHIM: "Achrei Mos Kedoshim",
-        JewishCalendar.Parsha.BEHAR_BECHUKOSAI: "Behar Bechukosai",
-        JewishCalendar.Parsha.CHUKAS_BALAK: "Chukas Balak",
-        JewishCalendar.Parsha.MATOS_MASEI: "Matos Masei",
-        JewishCalendar.Parsha.NITZAVIM_VAYEILECH: "Nitzavim Vayeilech",
-        JewishCalendar.Parsha.SHKALIM: "Shekalim",
-        JewishCalendar.Parsha.ZACHOR: "Zachor",
-        JewishCalendar.Parsha.PARA: "Parah",
-        JewishCalendar.Parsha.HACHODESH: "Hachodesh",
-        JewishCalendar.Parsha.SHUVA: "Shuva",
-        JewishCalendar.Parsha.SHIRA: "Shira",
-        JewishCalendar.Parsha.HAGADOL: "Hagadol",
-        JewishCalendar.Parsha.CHAZON: "Chazon",
-        JewishCalendar.Parsha.NACHAMU: "Nachamu",
+    public var transliteratedParshaMap:[JewishCalendar.Parshah: String] = [
+        JewishCalendar.Parshah.NONE: "",
+        JewishCalendar.Parshah.BERESHIS: "Bereshis",
+        JewishCalendar.Parshah.NOACH: "Noach",
+        JewishCalendar.Parshah.LECH_LECHA: "Lech Lecha",
+        JewishCalendar.Parshah.VAYERA: "Vayera",
+        JewishCalendar.Parshah.CHAYEI_SARA: "Chayei Sara",
+        JewishCalendar.Parshah.TOLDOS: "Toldos",
+        JewishCalendar.Parshah.VAYETZEI: "Vayetzei",
+        JewishCalendar.Parshah.VAYISHLACH: "Vayishlach",
+        JewishCalendar.Parshah.VAYESHEV: "Vayeshev",
+        JewishCalendar.Parshah.MIKETZ: "Miketz",
+        JewishCalendar.Parshah.VAYIGASH: "Vayigash",
+        JewishCalendar.Parshah.VAYECHI: "Vayechi",
+        JewishCalendar.Parshah.SHEMOS: "Shemos",
+        JewishCalendar.Parshah.VAERA: "Vaera",
+        JewishCalendar.Parshah.BO: "Bo",
+        JewishCalendar.Parshah.BESHALACH: "Beshalach",
+        JewishCalendar.Parshah.YISRO: "Yisro",
+        JewishCalendar.Parshah.MISHPATIM: "Mishpatim",
+        JewishCalendar.Parshah.TERUMAH: "Terumah",
+        JewishCalendar.Parshah.TETZAVEH: "Tetzaveh",
+        JewishCalendar.Parshah.KI_SISA: "Ki Sisa",
+        JewishCalendar.Parshah.VAYAKHEL: "Vayakhel",
+        JewishCalendar.Parshah.PEKUDEI: "Pekudei",
+        JewishCalendar.Parshah.VAYIKRA: "Vayikra",
+        JewishCalendar.Parshah.TZAV: "Tzav",
+        JewishCalendar.Parshah.SHMINI: "Shmini",
+        JewishCalendar.Parshah.TAZRIA: "Tazria",
+        JewishCalendar.Parshah.METZORA: "Metzora",
+        JewishCalendar.Parshah.ACHREI_MOS: "Achrei Mos",
+        JewishCalendar.Parshah.KEDOSHIM: "Kedoshim",
+        JewishCalendar.Parshah.EMOR: "Emor",
+        JewishCalendar.Parshah.BEHAR: "Behar",
+        JewishCalendar.Parshah.BECHUKOSAI: "Bechukosai",
+        JewishCalendar.Parshah.BAMIDBAR: "Bamidbar",
+        JewishCalendar.Parshah.NASSO: "Nasso",
+        JewishCalendar.Parshah.BEHAALOSCHA: "Beha'aloscha",
+        JewishCalendar.Parshah.SHLACH: "Sh'lach",
+        JewishCalendar.Parshah.KORACH: "Korach",
+        JewishCalendar.Parshah.CHUKAS: "Chukas",
+        JewishCalendar.Parshah.BALAK: "Balak",
+        JewishCalendar.Parshah.PINCHAS: "Pinchas",
+        JewishCalendar.Parshah.MATOS: "Matos",
+        JewishCalendar.Parshah.MASEI: "Masei",
+        JewishCalendar.Parshah.DEVARIM: "Devarim",
+        JewishCalendar.Parshah.VAESCHANAN: "Vaeschanan",
+        JewishCalendar.Parshah.EIKEV: "Eikev",
+        JewishCalendar.Parshah.REEH: "Re'eh",
+        JewishCalendar.Parshah.SHOFTIM: "Shoftim",
+        JewishCalendar.Parshah.KI_SEITZEI: "Ki Seitzei",
+        JewishCalendar.Parshah.KI_SAVO: "Ki Savo",
+        JewishCalendar.Parshah.NITZAVIM: "Nitzavim",
+        JewishCalendar.Parshah.VAYEILECH: "Vayeilech",
+        JewishCalendar.Parshah.HAAZINU: "Ha'Azinu",
+        JewishCalendar.Parshah.VZOS_HABERACHA: "Vezos Habracha",
+        JewishCalendar.Parshah.VAYAKHEL_PEKUDEI: "Vayakhel Pekudei",
+        JewishCalendar.Parshah.TAZRIA_METZORA: "Tazria Metzora",
+        JewishCalendar.Parshah.ACHREI_MOS_KEDOSHIM: "Achrei Mos Kedoshim",
+        JewishCalendar.Parshah.BEHAR_BECHUKOSAI: "Behar Bechukosai",
+        JewishCalendar.Parshah.CHUKAS_BALAK: "Chukas Balak",
+        JewishCalendar.Parshah.MATOS_MASEI: "Matos Masei",
+        JewishCalendar.Parshah.NITZAVIM_VAYEILECH: "Nitzavim Vayeilech",
+        JewishCalendar.Parshah.SHKALIM: "Shekalim",
+        JewishCalendar.Parshah.ZACHOR: "Zachor",
+        JewishCalendar.Parshah.PARA: "Parah",
+        JewishCalendar.Parshah.HACHODESH: "Hachodesh",
+        JewishCalendar.Parshah.SHUVA: "Shuva",
+        JewishCalendar.Parshah.SHIRA: "Shira",
+        JewishCalendar.Parshah.HAGADOL: "Hagadol",
+        JewishCalendar.Parshah.CHAZON: "Chazon",
+        JewishCalendar.Parshah.NACHAMU: "Nachamu",
     ]
     
     /**
@@ -174,78 +174,78 @@ public class HebrewDateFormatter {
      * &#x05E9;&#x05D5;&#x05D1;&#x05D4;,&#x05E9;&#x05D9;&#x05E8;&#x05D4;,&#x05D4;&#x05D2;&#x05D3;&#x05D5;&#x05DC;,
      *  &#x05D7;&#x05D6;&#x05D5;&#x05DF;,&#x05E0;&#x05D7;&#x05DE;&#x05D5;"</code>
      */
-    public var hebrewParshaMap:[JewishCalendar.Parsha: String] = [
-        JewishCalendar.Parsha.NONE: "",
-        JewishCalendar.Parsha.BERESHIS: "בראשית",
-        JewishCalendar.Parsha.NOACH: "נח",
-        JewishCalendar.Parsha.LECH_LECHA: "לך לך",
-        JewishCalendar.Parsha.VAYERA: "וירא",
-        JewishCalendar.Parsha.CHAYEI_SARA: "חיי שרה",
-        JewishCalendar.Parsha.TOLDOS: "תולדות",
-        JewishCalendar.Parsha.VAYETZEI: "ויצא",
-        JewishCalendar.Parsha.VAYISHLACH: "וישלח",
-        JewishCalendar.Parsha.VAYESHEV: "וישב",
-        JewishCalendar.Parsha.MIKETZ: "מקץ",
-        JewishCalendar.Parsha.VAYIGASH: "ויגש",
-        JewishCalendar.Parsha.VAYECHI: "ויחי",
-        JewishCalendar.Parsha.SHEMOS: "שמות",
-        JewishCalendar.Parsha.VAERA: "וארא",
-        JewishCalendar.Parsha.BO: "בא",
-        JewishCalendar.Parsha.BESHALACH: "בשלח",
-        JewishCalendar.Parsha.YISRO: "יתרו",
-        JewishCalendar.Parsha.MISHPATIM: "משפטים",
-        JewishCalendar.Parsha.TERUMAH: "תרומה",
-        JewishCalendar.Parsha.TETZAVEH: "תצוה",
-        JewishCalendar.Parsha.KI_SISA: "כי תשא",
-        JewishCalendar.Parsha.VAYAKHEL: "ויקהל",
-        JewishCalendar.Parsha.PEKUDEI: "פקודי",
-        JewishCalendar.Parsha.VAYIKRA: "ויקרא",
-        JewishCalendar.Parsha.TZAV: "צו",
-        JewishCalendar.Parsha.SHMINI: "שמיני",
-        JewishCalendar.Parsha.TAZRIA: "תזריע",
-        JewishCalendar.Parsha.METZORA: "מצרע",
-        JewishCalendar.Parsha.ACHREI_MOS: "אחרי מות",
-        JewishCalendar.Parsha.KEDOSHIM: "קדושים",
-        JewishCalendar.Parsha.EMOR: "אמור",
-        JewishCalendar.Parsha.BEHAR: "בהר",
-        JewishCalendar.Parsha.BECHUKOSAI: "בחקתי",
-        JewishCalendar.Parsha.BAMIDBAR: "במדבר",
-        JewishCalendar.Parsha.NASSO: "נשא",
-        JewishCalendar.Parsha.BEHAALOSCHA: "בהעלתך",
-        JewishCalendar.Parsha.SHLACH: "שלח לך",
-        JewishCalendar.Parsha.KORACH: "קרח",
-        JewishCalendar.Parsha.CHUKAS: "חוקת",
-        JewishCalendar.Parsha.BALAK: "בלק",
-        JewishCalendar.Parsha.PINCHAS: "פינחס",
-        JewishCalendar.Parsha.MATOS: "מטות",
-        JewishCalendar.Parsha.MASEI: "מסעי",
-        JewishCalendar.Parsha.DEVARIM: "דברים",
-        JewishCalendar.Parsha.VAESCHANAN: "ואתחנן",
-        JewishCalendar.Parsha.EIKEV: "עקב",
-        JewishCalendar.Parsha.REEH: "ראה",
-        JewishCalendar.Parsha.SHOFTIM: "שופטים",
-        JewishCalendar.Parsha.KI_SEITZEI: "כי תצא",
-        JewishCalendar.Parsha.KI_SAVO: "כי תבוא",
-        JewishCalendar.Parsha.NITZAVIM: "נצבים",
-        JewishCalendar.Parsha.VAYEILECH: "וילך",
-        JewishCalendar.Parsha.HAAZINU: "האזינו",
-        JewishCalendar.Parsha.VZOS_HABERACHA: "וזאת הברכה",
-        JewishCalendar.Parsha.VAYAKHEL_PEKUDEI: "ויקהל פקודי",
-        JewishCalendar.Parsha.TAZRIA_METZORA: "תזריע מצרע",
-        JewishCalendar.Parsha.ACHREI_MOS_KEDOSHIM: "אחרי מות קדושים",
-        JewishCalendar.Parsha.BEHAR_BECHUKOSAI: "בהר בחקתי",
-        JewishCalendar.Parsha.CHUKAS_BALAK: "חוקת בלק",
-        JewishCalendar.Parsha.MATOS_MASEI: "מטות מסעי",
-        JewishCalendar.Parsha.NITZAVIM_VAYEILECH: "נצבים וילך",
-        JewishCalendar.Parsha.SHKALIM: "שקלים",
-        JewishCalendar.Parsha.ZACHOR: "זכור",
-        JewishCalendar.Parsha.PARA: "פרה",
-        JewishCalendar.Parsha.HACHODESH: "החדש",
-        JewishCalendar.Parsha.SHUVA: "שובה",
-        JewishCalendar.Parsha.SHIRA: "שירה",
-        JewishCalendar.Parsha.HAGADOL: "הגדול",
-        JewishCalendar.Parsha.CHAZON: "חזון",
-        JewishCalendar.Parsha.NACHAMU: "נחמו"
+    public var hebrewParshaMap:[JewishCalendar.Parshah: String] = [
+        JewishCalendar.Parshah.NONE: "",
+        JewishCalendar.Parshah.BERESHIS: "בראשית",
+        JewishCalendar.Parshah.NOACH: "נח",
+        JewishCalendar.Parshah.LECH_LECHA: "לך לך",
+        JewishCalendar.Parshah.VAYERA: "וירא",
+        JewishCalendar.Parshah.CHAYEI_SARA: "חיי שרה",
+        JewishCalendar.Parshah.TOLDOS: "תולדות",
+        JewishCalendar.Parshah.VAYETZEI: "ויצא",
+        JewishCalendar.Parshah.VAYISHLACH: "וישלח",
+        JewishCalendar.Parshah.VAYESHEV: "וישב",
+        JewishCalendar.Parshah.MIKETZ: "מקץ",
+        JewishCalendar.Parshah.VAYIGASH: "ויגש",
+        JewishCalendar.Parshah.VAYECHI: "ויחי",
+        JewishCalendar.Parshah.SHEMOS: "שמות",
+        JewishCalendar.Parshah.VAERA: "וארא",
+        JewishCalendar.Parshah.BO: "בא",
+        JewishCalendar.Parshah.BESHALACH: "בשלח",
+        JewishCalendar.Parshah.YISRO: "יתרו",
+        JewishCalendar.Parshah.MISHPATIM: "משפטים",
+        JewishCalendar.Parshah.TERUMAH: "תרומה",
+        JewishCalendar.Parshah.TETZAVEH: "תצוה",
+        JewishCalendar.Parshah.KI_SISA: "כי תשא",
+        JewishCalendar.Parshah.VAYAKHEL: "ויקהל",
+        JewishCalendar.Parshah.PEKUDEI: "פקודי",
+        JewishCalendar.Parshah.VAYIKRA: "ויקרא",
+        JewishCalendar.Parshah.TZAV: "צו",
+        JewishCalendar.Parshah.SHMINI: "שמיני",
+        JewishCalendar.Parshah.TAZRIA: "תזריע",
+        JewishCalendar.Parshah.METZORA: "מצרע",
+        JewishCalendar.Parshah.ACHREI_MOS: "אחרי מות",
+        JewishCalendar.Parshah.KEDOSHIM: "קדושים",
+        JewishCalendar.Parshah.EMOR: "אמור",
+        JewishCalendar.Parshah.BEHAR: "בהר",
+        JewishCalendar.Parshah.BECHUKOSAI: "בחקתי",
+        JewishCalendar.Parshah.BAMIDBAR: "במדבר",
+        JewishCalendar.Parshah.NASSO: "נשא",
+        JewishCalendar.Parshah.BEHAALOSCHA: "בהעלתך",
+        JewishCalendar.Parshah.SHLACH: "שלח לך",
+        JewishCalendar.Parshah.KORACH: "קרח",
+        JewishCalendar.Parshah.CHUKAS: "חוקת",
+        JewishCalendar.Parshah.BALAK: "בלק",
+        JewishCalendar.Parshah.PINCHAS: "פינחס",
+        JewishCalendar.Parshah.MATOS: "מטות",
+        JewishCalendar.Parshah.MASEI: "מסעי",
+        JewishCalendar.Parshah.DEVARIM: "דברים",
+        JewishCalendar.Parshah.VAESCHANAN: "ואתחנן",
+        JewishCalendar.Parshah.EIKEV: "עקב",
+        JewishCalendar.Parshah.REEH: "ראה",
+        JewishCalendar.Parshah.SHOFTIM: "שופטים",
+        JewishCalendar.Parshah.KI_SEITZEI: "כי תצא",
+        JewishCalendar.Parshah.KI_SAVO: "כי תבוא",
+        JewishCalendar.Parshah.NITZAVIM: "נצבים",
+        JewishCalendar.Parshah.VAYEILECH: "וילך",
+        JewishCalendar.Parshah.HAAZINU: "האזינו",
+        JewishCalendar.Parshah.VZOS_HABERACHA: "וזאת הברכה",
+        JewishCalendar.Parshah.VAYAKHEL_PEKUDEI: "ויקהל פקודי",
+        JewishCalendar.Parshah.TAZRIA_METZORA: "תזריע מצרע",
+        JewishCalendar.Parshah.ACHREI_MOS_KEDOSHIM: "אחרי מות קדושים",
+        JewishCalendar.Parshah.BEHAR_BECHUKOSAI: "בהר בחקתי",
+        JewishCalendar.Parshah.CHUKAS_BALAK: "חוקת בלק",
+        JewishCalendar.Parshah.MATOS_MASEI: "מטות מסעי",
+        JewishCalendar.Parshah.NITZAVIM_VAYEILECH: "נצבים וילך",
+        JewishCalendar.Parshah.SHKALIM: "שקלים",
+        JewishCalendar.Parshah.ZACHOR: "זכור",
+        JewishCalendar.Parshah.PARA: "פרה",
+        JewishCalendar.Parshah.HACHODESH: "החדש",
+        JewishCalendar.Parshah.SHUVA: "שובה",
+        JewishCalendar.Parshah.SHIRA: "שירה",
+        JewishCalendar.Parshah.HAGADOL: "הגדול",
+        JewishCalendar.Parshah.CHAZON: "חזון",
+        JewishCalendar.Parshah.NACHAMU: "נחמו"
     ]
     
     /**
@@ -599,7 +599,7 @@ public class HebrewDateFormatter {
      *
      * @see #formatMonth(JewishCalendar)
      */
-    private static let hebrewMonths = [
+    private var hebrewMonths = [
         "תשרי",
         "חשון",
         "כסלו",
@@ -772,14 +772,14 @@ public class HebrewDateFormatter {
         let month = jewishCalendar.getJewishMonth();
         if (isHebrewFormat()) {
             if (jewishCalendar.isJewishLeapYear() && month == JewishCalendar.ADAR) {
-                return HebrewDateFormatter.hebrewMonths[13] + (useGershGershayim ? HebrewDateFormatter.GERESH : ""); // return Adar I, not Adar in a leap year
+                return hebrewMonths[13] + (useGershGershayim ? HebrewDateFormatter.GERESH : ""); // return Adar I, not Adar in a leap year
             } else if (jewishCalendar.isJewishLeapYear() && month == JewishCalendar.ADAR_II) {
-                return HebrewDateFormatter.hebrewMonths[6] + (useGershGershayim ? HebrewDateFormatter.GERESH : "");
+                return hebrewMonths[6] + (useGershGershayim ? HebrewDateFormatter.GERESH : "");
             } else {
                 if month == JewishCalendar.ADAR_II {
-                    return HebrewDateFormatter.hebrewMonths[month - 2];
+                    return hebrewMonths[month - 2];
                 }
-                return HebrewDateFormatter.hebrewMonths[month - 1];
+                return hebrewMonths[month - 1];
             }
         } else {
             if (jewishCalendar.isJewishLeapYear() && month == JewishCalendar.ADAR) {
@@ -1037,11 +1037,31 @@ public class HebrewDateFormatter {
     }
     
     /**
+     * Returns the list of months in Hebrew used by this formatter, in this class's order (Tishrei first, then Adar II
+     * and Adar I last), like KosherJava's `getHebrewMonthList()`.
+     *
+     * @return the list of Hebrew month names
+     */
+    public func getHebrewMonthList() -> [String] {
+        return hebrewMonths
+    }
+
+    /**
+     * Sets the list of months in Hebrew used by this formatter, like KosherJava's `setHebrewMonthList(String[])`, for
+     * example to use alternate spellings. The list must be in the same order as ``getHebrewMonthList()``.
+     *
+     * @param hebrewMonths the list of Hebrew month names
+     */
+    public func setHebrewMonthList(hebrewMonths: [String]) {
+        self.hebrewMonths = hebrewMonths
+    }
+
+    /**
      * Returns the list of transliterated parshiyos used by this formatter.
      *
      * @return the list of transliterated Parshios
      */
-    public func getTransliteratedParshiosList() -> [JewishCalendar.Parsha: String] {
+    public func getTransliteratedParshiyosList() -> [JewishCalendar.Parshah: String] {
         return transliteratedParshaMap;
     }
     
@@ -1051,9 +1071,9 @@ public class HebrewDateFormatter {
      *
      * @param transliteratedParshaMap
      *            the transliterated Parshios as a Dictionary to set
-     * @see #getTransliteratedParshiosList()
+     * @see #getTransliteratedParshiyosList()
      */
-    public func setTransliteratedParshiosList(transliteratedParshaMap:[JewishCalendar.Parsha: String]) {
+    public func setTransliteratedParshiyosList(transliteratedParshaMap:[JewishCalendar.Parshah: String]) {
         self.transliteratedParshaMap = transliteratedParshaMap;
     }
     
@@ -1075,31 +1095,31 @@ public class HebrewDateFormatter {
      *         there are none. If not set to Hebrew, it returns a string of the parsha(ios) transliterated into Latin
      *         chars. The default uses Ashkenazi pronunciation in typical American English spelling, for example
      *         Bereshis or Nitzavim Vayeilech or an empty string if there are none.
-     * @see #formatParsha(JewishCalendar)
+     * @see #formatParshah(JewishCalendar)
      * @see #isHebrewFormat()
      * @see JewishCalendar#getParshah()
      */
-    public func formatParsha(jewishCalendar:JewishCalendar) -> String {
+    public func formatParshah(jewishCalendar:JewishCalendar) -> String {
         let parsha =  jewishCalendar.getParshah();
-        return formatParsha(parsha: parsha);
+        return formatParshah(parsha: parsha);
     }
     
     /**
-     * Returns a String with the name of the current parsha(ios). This method overloads ``formatParsha(jewishCalendar:)`` and unlike that method, it will format the <em>parsha</em> passed
+     * Returns a String with the name of the current parsha(ios). This method overloads ``formatParshah(jewishCalendar:)`` and unlike that method, it will format the <em>parsha</em> passed
      * to this method regardless of the day of week. This is the way to format a <em>parsha</em> retrieved from calling
      * ``JewishCalendar.getUpcomingParshah()``.
      *
-     * @param parsha a ``JewishCalendar.Parsha`` object
+     * @param parsha a ``JewishCalendar.Parshah`` object
      * @return today's parsha(ios) in Hebrew for example, if the formatter is set to format in Hebrew, returns a string
      *         of the current parsha(ios) in Hebrew for example &#x05D1;&#x05E8;&#x05D0;&#x05E9;&#x05D9;&#x05EA; or
      *         &#x05E0;&#x05E6;&#x05D1;&#x05D9;&#x05DD; &#x05D5;&#x05D9;&#x05DC;&#x05DA; or an empty string if
      *         there are none. If not set to Hebrew, it returns a string of the parsha(ios) transliterated into Latin
      *         chars. The default uses Ashkenazi pronunciation in typical American English spelling, for example
      *         Bereshis or Nitzavim Vayeilech or an empty string if there are none.
-     * @see #formatParsha(JewishCalendar)
+     * @see #formatParshah(JewishCalendar)
      *
      */
-    public func formatParsha(parsha:JewishCalendar.Parsha) -> String {
+    public func formatParshah(parsha:JewishCalendar.Parshah) -> String {
         return hebrewFormat ? hebrewParshaMap[parsha]! : transliteratedParshaMap[parsha]!;
     }
     
@@ -1120,7 +1140,7 @@ public class HebrewDateFormatter {
      *         into Latin chars. The default uses Ashkenazi pronunciation in typical American English spelling of Shekalim,
      *         Zachor, Parah or Hachodesh. An empty string if there are none.
      */
-    public func formatSpecialParsha(jewishCalendar:JewishCalendar) -> String {
+    public func formatSpecialParshah(jewishCalendar:JewishCalendar) -> String {
         let specialParsha =  jewishCalendar.getSpecialShabbos();
         return hebrewFormat ? hebrewParshaMap[specialParsha]! : transliteratedParshaMap[specialParsha]!;
     }

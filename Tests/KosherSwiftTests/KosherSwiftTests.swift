@@ -204,7 +204,7 @@ class KosherSwiftTests: XCTestCase {
     func testParshahString() {
         jewishCalendar.setGregorianDate(year: 2023, month: 12, dayOfMonth: 23)
         let hebrewDateFormatter = HebrewDateFormatter()
-        XCTAssertEqual(hebrewDateFormatter.formatParsha(jewishCalendar: jewishCalendar), "Vayigash")
+        XCTAssertEqual(hebrewDateFormatter.formatParshah(jewishCalendar: jewishCalendar), "Vayigash")
     }
     
     func testYomTovString() {
@@ -372,12 +372,12 @@ class KosherSwiftTests: XCTestCase {
     
     func testHebrewDateFormatterMapsWithUpdatedValues() {
         let hdf = HebrewDateFormatter()
-        XCTAssertEqual(hdf.hebrewParshaMap[JewishCalendar.Parsha.BERESHIS], "בראשית")
+        XCTAssertEqual(hdf.hebrewParshaMap[JewishCalendar.Parshah.BERESHIS], "בראשית")
         
-        hdf.hebrewParshaMap.updateValue("Changed", forKey: JewishCalendar.Parsha.BERESHIS)
+        hdf.hebrewParshaMap.updateValue("Changed", forKey: JewishCalendar.Parshah.BERESHIS)
         
-        XCTAssertNotEqual(hdf.hebrewParshaMap[JewishCalendar.Parsha.BERESHIS], "בראשית")
-        XCTAssertEqual(hdf.hebrewParshaMap[JewishCalendar.Parsha.BERESHIS], "Changed")
+        XCTAssertNotEqual(hdf.hebrewParshaMap[JewishCalendar.Parshah.BERESHIS], "בראשית")
+        XCTAssertEqual(hdf.hebrewParshaMap[JewishCalendar.Parshah.BERESHIS], "Changed")
     }
     
     func testZmanimFormatter() {
