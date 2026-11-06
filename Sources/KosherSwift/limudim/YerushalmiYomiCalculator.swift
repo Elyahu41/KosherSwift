@@ -12,17 +12,14 @@ import Foundation
  * "https://en.wikipedia.org/wiki/Daf_Yomi">Daf Yomi</a> page (``Daf``) for the given date.
  *
  * @author &copy; elihaidv
- * @author &copy; Eliyahu Hershfeld 2017 - 2023
+ * @author &copy; Eliyahu Hershfeld 2017 - 2026
  */
 public class YerushalmiYomiCalculator {
     
     /**
      * The start date of the first Daf Yomi Yerushalmi cycle of February 2, 1980 / 15 Shevat, 5740.
      */
-    private static let DAF_YOMI_START_DAY = gregorianDate(forYear: 1980, month: 2, andDay: 2)
-    
-    /** The number of milliseconds in a day. */
-    private static let DAY_MILIS = 1000 * 60 * 60 * 24
+    private static let DAF_YOMI_START_DAY = LocalDate(year: 1980, month: 2, day: 2)
     
     /** The number of pages in the Talmud Yerushalmi.*/
     private static let WHOLE_SHAS_DAFS = 1554
@@ -45,125 +42,95 @@ public class YerushalmiYomiCalculator {
      *
      */
     public static func getDafYomiYerushalmi(jewishCalendar:JewishCalendar) -> Daf? {
-        let dateCreator = Calendar(identifier: .gregorian)
-        var nextCycle = DateComponents()
-        var prevCycle = DateComponents()
+        let requested = jewishCalendar.getLocalDate()
         var masechta = 0
         var dafYomi: Daf?
-        
+
         // There isn't Daf Yomi on Yom Kippur or Tisha B'Av.
         if jewishCalendar.getYomTovIndex() == JewishCalendar.YOM_KIPPUR || jewishCalendar.getYomTovIndex() == JewishCalendar.TISHA_BEAV {
             return nil
         }
-        
-        if jewishCalendar.workingDate.compare(DAF_YOMI_START_DAY!) == .orderedAscending {
-            return nil
-        }
-        
-        nextCycle.year = 1980
-        nextCycle.month = 2
-        nextCycle.day = 2
 
-        // Go cycle by cycle, until we get the next cycle
-        while jewishCalendar.workingDate.compare(dateCreator.date(from: nextCycle)!) == .orderedDescending {
-            prevCycle = nextCycle
-            
-            nextCycle.day! += WHOLE_SHAS_DAFS
-            nextCycle.day! += getNumOfSpecialDays(startDate: dateCreator.date(from: prevCycle)!, endDate: dateCreator.date(from: nextCycle)!)
+        if requested < DAF_YOMI_START_DAY {
+            return nil // KosherJava throws an IllegalArgumentException
         }
-        
+
+        // Go cycle by cycle, until we get the cycle of the date
+        var prevCycle = DAF_YOMI_START_DAY
+        var nextCycle = getNextCycleStart(prevCycle)
+        while !(requested < nextCycle) {
+            prevCycle = nextCycle
+            nextCycle = getNextCycleStart(prevCycle)
+        }
+
         // Get the number of days from cycle start until request.
-        let dafNo = getDiffBetweenDays(start: dateCreator.date(from: prevCycle)!, end: jewishCalendar.workingDate)
-        
-        // Get the number of special day to subtract
-        let specialDays = getNumOfSpecialDays(startDate: dateCreator.date(from: prevCycle)!, endDate: jewishCalendar.workingDate)
+        let dafNo = requested.epochDay - prevCycle.epochDay
+
+        // Get the number of special days to subtract
+        let specialDays = getNumOfSpecialDays(start: prevCycle, end: requested)
         var total = dafNo - specialDays
-        
+
         // Finally find the daf.
-        for j in 0..<BLATT_PER_MASECHTA.count {
-            if total < BLATT_PER_MASECHTA[j] {
+        for blatt in BLATT_PER_MASECHTA {
+            if total < blatt {
                 dafYomi = Daf(masechtaNumber: masechta, daf: total + 1)
                 break
             }
-            total -= BLATT_PER_MASECHTA[j]
+            total -= blatt
             masechta += 1
         }
-        
+
         return dafYomi
     }
-    
+
+    /**
+     * The start of the cycle after the one starting on `cycleStart`: 1,554 days of learning, plus a day for each Yom Kippur
+     * and Tisha B'Av in the cycle (including those in the added days).
+     */
+    private static func getNextCycleStart(_ cycleStart: LocalDate) -> LocalDate {
+        var endDate = cycleStart.plusDays(WHOLE_SHAS_DAFS - 1)
+        var specialDays = getNumOfSpecialDays(start: cycleStart, end: endDate)
+        while specialDays > 0 {
+            let newStart = endDate.plusDays(1)
+            endDate = endDate.plusDays(specialDays)
+            specialDays = getNumOfSpecialDays(start: newStart, end: endDate)
+        }
+        return endDate.plusDays(1)
+    }
+
     /**
      * Return the number of special days (Yom Kippur and Tisha Beav, where there are no dafim on these days),
-     * from the start date given until the given end date.
+     * from the start date given until the given end date, both included.
      *
      * @param start date to start calculating from
      * @param end date to finish calculating at
      * @return the number of special days between the start time and end time
      */
-    private static func getNumOfSpecialDays(startDate: Date, endDate: Date) -> Int {
-        let startCalendar = JewishCalendar()
-        startCalendar.workingDate = startDate
-        let endCalendar = JewishCalendar()
-        endCalendar.workingDate = endDate
-        
-        var startYear = startCalendar.getJewishYear()
-        let endYear = endCalendar.getJewishYear()
-        
+    private static func getNumOfSpecialDays(start: LocalDate, end: LocalDate) -> Int {
+        let startYear = JewishCalendar(localDate: start).getJewishYear()
+        let endYear = JewishCalendar(localDate: end).getJewishYear()
         var specialDays = 0
-        
-        //create a jewish calendar set to the date Tishrei/10/5770
-        let yom_kippur = JewishCalendar(jewishYear: 5770, jewishMonth: JewishCalendar.TISHREI, jewishDayOfMonth: 10)
-        
-        let tisha_beav = JewishCalendar(jewishYear: 5770, jewishMonth: JewishCalendar.AV, jewishDayOfMonth: 9)
-        
-        while startYear <= endYear {
-            yom_kippur.setJewishYear(year: startYear)
-            tisha_beav.setJewishYear(year: startYear)
-            
-            if isBetween(start: startDate, date: yom_kippur.workingDate, end: endDate) {
+        for year in startYear...max(startYear, endYear) where year <= endYear {
+            let yomKippur = JewishCalendar(localDate: start)
+            yomKippur.setJewishDate(year: year, month: JewishCalendar.TISHREI, dayOfMonth: 10)
+            let tishaBeav = JewishCalendar(localDate: start)
+            tishaBeav.setJewishDate(year: year, month: JewishCalendar.AV, dayOfMonth: 9)
+            // a Tisha B'Av that falls on Shabbos is pushed off to Sunday
+            if tishaBeav.getDayOfWeek() == 7 {
+                tishaBeav.plusDays(days: 1)
+            }
+            if isBetween(start, yomKippur.getLocalDate(), end) {
                 specialDays += 1
             }
-            
-            if isBetween(start: startDate, date: tisha_beav.workingDate, end: endDate) {
+            if isBetween(start, tishaBeav.getLocalDate(), end) {
                 specialDays += 1
             }
-            
-            startYear += 1
         }
-
         return specialDays
     }
 
-    /**
-     * Return if the date is between two dates
-     *
-     * @param start the start date
-     * @param date the date being compared
-     * @param end the end date
-     * @return if the date is between the start and end dates
-     */
-    private static func isBetween(start: Date, date: Date, end: Date) -> Bool {
-        return (start.compare(date) == .orderedAscending) && (end.compare(date) == .orderedDescending)
-    }
-    
-    /**
-     * Return the number of days between the dates passed in
-     * @param start the start date
-     * @param end the end date
-     * @return the number of days between the start and end dates
-     */
-    private static func getDiffBetweenDays(start: Date, end: Date) -> Int {
-        let DAY_MILIS: Double = 24 * 60 * 60
-        let s = Int(end.timeIntervalSince1970 - start.timeIntervalSince1970)
-        return s / Int(DAY_MILIS)
-    }
-    
-    private static func gregorianDate(forYear year: Int, month: Int, andDay day: Int) -> Date? {
-        var components = DateComponents()
-        components.year = year
-        components.month = month
-        components.day = day
-        components.calendar = Calendar(identifier: .gregorian)
-        return components.date
+    /// True if the date is from the start date to the end date, both included.
+    private static func isBetween(_ start: LocalDate, _ date: LocalDate, _ end: LocalDate) -> Bool {
+        return !(date < start) && !(end < date)
     }
 }

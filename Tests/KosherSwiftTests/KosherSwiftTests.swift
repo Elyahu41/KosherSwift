@@ -204,7 +204,7 @@ class KosherSwiftTests: XCTestCase {
     func testParshahString() {
         jewishCalendar.setGregorianDate(year: 2023, month: 12, dayOfMonth: 23)
         let hebrewDateFormatter = HebrewDateFormatter()
-        XCTAssertEqual(hebrewDateFormatter.formatParsha(jewishCalendar: jewishCalendar), "Vayigash")
+        XCTAssertEqual(hebrewDateFormatter.formatParshah(jewishCalendar: jewishCalendar), "Vayigash")
     }
     
     func testYomTovString() {
@@ -225,7 +225,8 @@ class KosherSwiftTests: XCTestCase {
         let jer = GeoLocation(locationName: "Jerusalem", latitude: 31.778015, longitude: 35.235413, timeZone: TimeZone.current)
 
         let bearing = denver.getRhumbLineBearing(location: jer)        
-        XCTAssertEqual(bearing, 93.9525489160192)
+        XCTAssertEqual(bearing, 93.95254891601921, accuracy: 1e-12) // KosherJava's values
+        XCTAssertEqual(denver.getRhumbLineDistance(location: jer), 1.2676113714176698E7, accuracy: 1e-6)
     }
     
     func testGeodiscBearing() {
@@ -234,8 +235,9 @@ class KosherSwiftTests: XCTestCase {
 
         let bearingInit = denver.getGeodesicInitialBearing(location: jer)
         let bearingFinal = denver.getGeodesicFinalBearing(location: jer)
-        XCTAssertEqual(bearingInit, 33.50820371562615)
-        XCTAssertEqual(bearingFinal, 149.97377985851242) // Not exactly the same output as KosherJava, but extremely close. Needs to be refined
+        XCTAssertEqual(bearingInit, 33.50820371562616, accuracy: 1e-12) // KosherJava's values
+        XCTAssertEqual(bearingFinal, 149.97377985851242, accuracy: 1e-12)
+        XCTAssertEqual(denver.getGeodesicDistance(location: jer), 1.1096260525658436E7, accuracy: 1e-6)
     }
     
     func testLocalMeanTimeOffset() {
@@ -245,8 +247,9 @@ class KosherSwiftTests: XCTestCase {
         let testDate = Date(timeIntervalSince1970: 1785310117.780254)
         let denverLMT = denver.getLocalMeanTimeOffset(date: testDate)
         let jerLMT = jer.getLocalMeanTimeOffset(date: testDate)
-        XCTAssertEqual(denverLMT, -3571217.232000001)
-        XCTAssertEqual(jerLMT, -2343500.879999999)
+        // in seconds, truncated to whole milliseconds like KosherJava's -3571217 and -2343500 milliseconds
+        XCTAssertEqual(denverLMT, -3571.217)
+        XCTAssertEqual(jerLMT, -2343.5)
     }
     
     func testDafYomis() {
@@ -275,229 +278,74 @@ class KosherSwiftTests: XCTestCase {
         XCTAssertEqual(dafYomiYeru?.getDaf(), 17)
     }
     
+    /// The local time of a Date in a time zone, as "HH:mm:ss" plus the fraction of the second in nanoseconds.
+    private func assertTime(_ date: Date?, _ year: Int, _ month: Int, _ day: Int, _ time: String, _ timeZone: TimeZone,
+                            file: StaticString = #filePath, line: UInt = #line) {
+        guard let date = date else {
+            XCTFail("nil time", file: file, line: line)
+            return
+        }
+        let parts = time.split(separator: ":")
+        let seconds = Double(parts[2])!
+        let expected = LocalDate(year: year, month: month, day: day)
+            .atTime(seconds: Double(Int(parts[0])! * 3600 + Int(parts[1])! * 60) + seconds, timeZone: timeZone)
+        XCTAssertEqual(date.timeIntervalSince1970, expected.timeIntervalSince1970, accuracy: 1e-6, file: file, line: line)
+    }
+
     func testCalculatorSunrise() throws {
-        var gregorianCalendar = Calendar(identifier: .gregorian)
-        gregorianCalendar.timeZone = TimeZone(identifier: "America/New_York")!
-        
-        let geoLocation = GeoLocation(locationName: "", latitude: 40.08213, longitude: -74.20970, timeZone: TimeZone(identifier: "America/New_York")!)
-        let lakewoodCalculator = NOAACalculator(geoLocation: geoLocation)
-        
-        var januaryFirst = DateComponents()
-        januaryFirst.year = 2023
-        januaryFirst.month = 1
-        januaryFirst.day = 1
-        
+        // the expected values are KosherJava's
+        let newYork = TimeZone(identifier: "America/New_York")!
+        let geoLocation = GeoLocation(locationName: "", latitude: 40.08213, longitude: -74.20970, timeZone: newYork)
         let calendar = AstronomicalCalendar(geoLocation: geoLocation)
-        calendar.setAstronomicalCalculator(astronomicalCalculator: lakewoodCalculator)
-        calendar.workingDate = gregorianCalendar.date(from: januaryFirst)!
-        var sunrise = calendar.getSunrise()
-        
-        januaryFirst.hour = 7
-        januaryFirst.minute = 18
-        januaryFirst.second = 57
-        januaryFirst.nanosecond = 246436953
-        
-        XCTAssertEqual(sunrise, gregorianCalendar.date(from: januaryFirst))
-        
-        var mayFirst = DateComponents()
-        mayFirst.year = 2023
-        mayFirst.month = 5
-        mayFirst.day = 1
-        
-        calendar.workingDate = gregorianCalendar.date(from: mayFirst)!
-        sunrise = calendar.getSunrise()
-        
-        mayFirst.hour = 5
-        mayFirst.minute = 56
-        mayFirst.second = 59
-        mayFirst.nanosecond = 569128274
-
-        XCTAssertEqual(sunrise, gregorianCalendar.date(from: mayFirst))
-        
-        var augustFirst = DateComponents()
-        augustFirst.year = 2023
-        augustFirst.month = 8
-        augustFirst.day = 1
-        
-        calendar.workingDate = gregorianCalendar.date(from: augustFirst)!
-        sunrise = calendar.getSunrise()
-        
-        augustFirst.hour = 5
-        augustFirst.minute = 54
-        augustFirst.second = 51
-        augustFirst.nanosecond = 389472365
-
-        XCTAssertEqual(sunrise, gregorianCalendar.date(from: augustFirst))
-        
-        var decFirst = DateComponents()
-        decFirst.year = 2023
-        decFirst.month = 12
-        decFirst.day = 1
-        
-        calendar.workingDate = gregorianCalendar.date(from: decFirst)!
-        sunrise = calendar.getSunrise()
-        
-        decFirst.hour = 6
-        decFirst.minute = 59
-        decFirst.second = 29
-        decFirst.nanosecond = 396646857
-
-        XCTAssertEqual(sunrise, gregorianCalendar.date(from: decFirst))
+        calendar.setAstronomicalCalculator(astronomicalCalculator: NOAACalculator())
+        calendar.setLocalDate(localDate: LocalDate(year: 2023, month: 1, day: 1))
+        assertTime(calendar.getSunrise(), 2023, 1, 1, "07:18:55.649376427", newYork)
+        calendar.setLocalDate(localDate: LocalDate(year: 2023, month: 5, day: 1))
+        assertTime(calendar.getSunrise(), 2023, 5, 1, "05:57:00.265101273", newYork)
+        calendar.setLocalDate(localDate: LocalDate(year: 2023, month: 8, day: 1))
+        assertTime(calendar.getSunrise(), 2023, 8, 1, "05:54:52.779346857", newYork)
+        // setting a Date still works: the calendar uses the day it falls on in the location's time zone
+        var gregorianCalendar = Calendar(identifier: .gregorian)
+        gregorianCalendar.timeZone = newYork
+        calendar.workingDate = gregorianCalendar.date(from: DateComponents(year: 2023, month: 12, day: 1, hour: 23, minute: 30))!
+        XCTAssertEqual(calendar.getLocalDate(), LocalDate(year: 2023, month: 12, day: 1))
+        assertTime(calendar.getSunrise(), 2023, 12, 1, "06:59:28.096772523", newYork)
     }
     
     func testCalculatorSunset() throws {
-        var gregorianCalendar = Calendar(identifier: .gregorian)
-        gregorianCalendar.timeZone = TimeZone(identifier: "America/New_York")!
-        
-        let geoLocation = GeoLocation(locationName: "", latitude: 40.08213, longitude: -74.20970, timeZone: TimeZone(identifier: "America/New_York")!)
-        let lakewoodCalculator = NOAACalculator(geoLocation: geoLocation)
-
-        var januaryFirst = DateComponents()
-        januaryFirst.year = 2023
-        januaryFirst.month = 1
-        januaryFirst.day = 1
-        
+        // the expected values are KosherJava's
+        let newYork = TimeZone(identifier: "America/New_York")!
+        let geoLocation = GeoLocation(locationName: "", latitude: 40.08213, longitude: -74.20970, timeZone: newYork)
         let calendar = AstronomicalCalendar(geoLocation: geoLocation)
-        calendar.setAstronomicalCalculator(astronomicalCalculator: lakewoodCalculator)
-        calendar.workingDate = gregorianCalendar.date(from: januaryFirst)!
-        var sunset = calendar.getSunset()
-        
-        januaryFirst.hour = 16
-        januaryFirst.minute = 41
-        januaryFirst.second = 56
-        januaryFirst.nanosecond = 964607357
-        
-        XCTAssertEqual(sunset, gregorianCalendar.date(from: januaryFirst))
-        
-        var mayFirst = DateComponents()
-        mayFirst.year = 2023
-        mayFirst.month = 5
-        mayFirst.day = 1
-        
-        calendar.workingDate = gregorianCalendar.date(from: mayFirst)!
-        sunset = calendar.getSunset()
-        
-        mayFirst.hour = 19
-        mayFirst.minute = 51
-        mayFirst.second = 33
-        mayFirst.nanosecond = 476900577
-        
-        XCTAssertEqual(sunset, gregorianCalendar.date(from: mayFirst))
-        
-        var augustFirst = DateComponents()
-        augustFirst.year = 2023
-        augustFirst.month = 8
-        augustFirst.day = 1
-        
-        calendar.workingDate = gregorianCalendar.date(from: augustFirst)!
-        sunset = calendar.getSunset()
-        
-        augustFirst.hour = 20
-        augustFirst.minute = 10
-        augustFirst.second = 57
-        augustFirst.nanosecond = 91935396
-        
-        XCTAssertEqual(sunset, gregorianCalendar.date(from: augustFirst))
-        
-        var decFirst = DateComponents()
-        decFirst.year = 2023
-        decFirst.month = 12
-        decFirst.day = 1
-        
-        calendar.workingDate = gregorianCalendar.date(from: decFirst)!
-        sunset = calendar.getSunset()
-        
-        decFirst.hour = 16
-        decFirst.minute = 31
-        decFirst.second = 56
-        decFirst.nanosecond = 779208540
-        
-        XCTAssertEqual(sunset, gregorianCalendar.date(from: decFirst))
+        for (month, time) in [(1, "16:41:58.561719738"), (5, "19:51:32.778739961"), (8, "20:10:55.706244291"), (12, "16:31:58.078986594")] {
+            calendar.setLocalDate(localDate: LocalDate(year: 2023, month: month, day: 1))
+            assertTime(calendar.getSunset(), 2023, month, 1, time, newYork)
+        }
     }
     
     func testZmanimCalendar() {
-        var gregorianCalendar = Calendar(identifier: .gregorian)
-        gregorianCalendar.timeZone = TimeZone(identifier: "America/New_York")!
-        
-        let geoLocation = GeoLocation(locationName: "", latitude: 40.08213, longitude: -74.20970, timeZone: TimeZone(identifier: "America/New_York")!)
-        let lakewoodCalculator = ZmanimCalendar(location: geoLocation)
-
-        var januaryFirst = DateComponents()
-        januaryFirst.timeZone = gregorianCalendar.timeZone
-        januaryFirst.year = 2023
-        januaryFirst.month = 12
-        januaryFirst.day = 24
-        
-        januaryFirst.hour = 6
-        januaryFirst.minute = 04
-        januaryFirst.second = 42
-        januaryFirst.nanosecond = 81163167
-        
-        lakewoodCalculator.workingDate = gregorianCalendar.date(from: januaryFirst)!
-        var alot = lakewoodCalculator.getAlos72()
-
-        XCTAssertEqual(alot, gregorianCalendar.date(from: januaryFirst))
-        
-        var mayFirst = DateComponents()
-        mayFirst.year = 2023
-        mayFirst.month = 5
-        mayFirst.day = 1
-        
-        lakewoodCalculator.workingDate = gregorianCalendar.date(from: mayFirst)!
-        alot = lakewoodCalculator.getAlos72()
-        
-        mayFirst.hour = 4
-        mayFirst.minute = 44
-        mayFirst.second = 59
-        mayFirst.nanosecond = 569128274
-
-        XCTAssertEqual(alot, gregorianCalendar.date(from: mayFirst))
-        
-        var augustFirst = DateComponents()
-        augustFirst.year = 2024
-        augustFirst.month = 8
-        augustFirst.day = 1
-        
-        lakewoodCalculator.workingDate = gregorianCalendar.date(from: augustFirst)!
-        alot = lakewoodCalculator.getAlos72()
-        
-        augustFirst.hour = 4
-        augustFirst.minute = 43
-        augustFirst.second = 33
-        augustFirst.nanosecond = 827379941
-
-        XCTAssertEqual(alot, gregorianCalendar.date(from: augustFirst))
-        
-        var decFirst = DateComponents()
-        decFirst.year = 2024
-        decFirst.month = 12
-        decFirst.day = 1
-        
-        lakewoodCalculator.workingDate = gregorianCalendar.date(from: decFirst)!
-        alot = lakewoodCalculator.getAlos72()
-        
-        decFirst.hour = 5
-        decFirst.minute = 48
-        decFirst.second = 14
-        decFirst.nanosecond = 928505659
-
-        XCTAssertEqual(alot, gregorianCalendar.date(from: decFirst))
+        // the expected values are KosherJava's
+        let newYork = TimeZone(identifier: "America/New_York")!
+        let calendar = ZmanimCalendar(geoLocation: GeoLocation(locationName: "", latitude: 40.08213, longitude: -74.20970, timeZone: newYork))
+        for (year, month, day, time) in [(2023, 12, 24, "06:04:40.499647789"), (2023, 5, 1, "04:45:00.265101273"),
+                                         (2024, 8, 1, "04:43:35.214353737"), (2024, 12, 1, "05:48:13.626684808")] {
+            calendar.setLocalDate(localDate: LocalDate(year: year, month: month, day: day))
+            assertTime(calendar.getAlos72Minutes(), year, month, day, time, newYork)
+        }
     }
     
     func testNilZman() {
-        var gregorianCalendar = Calendar(identifier: .gregorian)
-        gregorianCalendar.timeZone = TimeZone(identifier: "America/New_York")!
-        
-        let geoLocation = GeoLocation(locationName: "NY", latitude: 40.73114, longitude: -73.79993, timeZone: TimeZone.init(identifier: "America/New_York")!)
-        let calculator = ComplexZmanimCalendar(location: geoLocation)
-        
-        var decFirst = DateComponents()
-        decFirst.year = 2024
-        decFirst.month = 6
-        decFirst.day = 16
-        
-        calculator.workingDate = gregorianCalendar.date(from: decFirst)!
-        XCTAssertEqual(calculator.getTzais26Degrees(), nil)
+        let geoLocation = GeoLocation(locationName: "NY", latitude: 40.73114, longitude: -73.79993, timeZone: TimeZone(identifier: "America/New_York")!)
+        let calculator = ComprehensiveZmanimCalendar(geoLocation: geoLocation)
+        calculator.setLocalDate(localDate: LocalDate(year: 2024, month: 6, day: 16))
+        XCTAssertNil(calculator.getTzais26Degrees())
+        XCTAssertNil(calculator.getShaahZmanis26Degrees())
+        XCTAssertNotNil(calculator.getShaahZmanisGRA())
+        // the chametz zmanim are only calculated on Erev Pesach
+        XCTAssertNil(calculator.getSofZmanAchilasChametzGRA())
+        calculator.setLocalDate(localDate: LocalDate(year: 2025, month: 4, day: 12)) // 14 Nissan 5785
+        XCTAssertNotNil(calculator.getSofZmanAchilasChametzGRA())
+        XCTAssertNotNil(calculator.getSofZmanBiurChametzGRA())
     }
     
     func testZmanim() {
@@ -524,33 +372,34 @@ class KosherSwiftTests: XCTestCase {
     
     func testHebrewDateFormatterMapsWithUpdatedValues() {
         let hdf = HebrewDateFormatter()
-        XCTAssertEqual(hdf.hebrewParshaMap[JewishCalendar.Parsha.BERESHIS], "בראשית")
+        XCTAssertEqual(hdf.hebrewParshaMap[JewishCalendar.Parshah.BERESHIS], "בראשית")
         
-        hdf.hebrewParshaMap.updateValue("Changed", forKey: JewishCalendar.Parsha.BERESHIS)
+        hdf.hebrewParshaMap.updateValue("Changed", forKey: JewishCalendar.Parshah.BERESHIS)
         
-        XCTAssertNotEqual(hdf.hebrewParshaMap[JewishCalendar.Parsha.BERESHIS], "בראשית")
-        XCTAssertEqual(hdf.hebrewParshaMap[JewishCalendar.Parsha.BERESHIS], "Changed")
+        XCTAssertNotEqual(hdf.hebrewParshaMap[JewishCalendar.Parshah.BERESHIS], "בראשית")
+        XCTAssertEqual(hdf.hebrewParshaMap[JewishCalendar.Parshah.BERESHIS], "Changed")
     }
     
     func testZmanimFormatter() {
         let formatter = ZmanimFormatter(timeZone: TimeZone(identifier: "America/New_York")!)
-        formatter.prependZeroHours = true
-
-        // Format a duration (e.g., a 72-minute temporal hour)
-        let temporalHourMs = 72.5 * 60 * 1000
-        XCTAssertEqual(formatter.format(milliseconds: temporalHourMs), "01:12:30")
-        XCTAssertEqual(formatter.formatXSDDuration(milliseconds: temporalHourMs), "PT1H12M30S")
-        XCTAssertEqual(formatter.format(date: Date(timeIntervalSince1970: 0)), "7:00:00 PM")
+        let temporalHour: TimeInterval = 72.5 * 60
+        XCTAssertEqual(formatter.format(duration: temporalHour), "1:12:30")
+        formatter.setTimeFormat(format: ZmanimFormatter.SEXAGESIMAL_XSD_FORMAT)
+        XCTAssertEqual(formatter.format(duration: temporalHour), "01:12:30.000")
+        formatter.setTimeFormat(format: ZmanimFormatter.XSD_DURATION_FORMAT)
+        XCTAssertEqual(formatter.format(duration: temporalHour), "PT1H12M30S")
+        XCTAssertEqual(formatter.formatDate(date: Date(timeIntervalSince1970: 0)), "7:00:00")
+        XCTAssertEqual(formatter.formatXSDateTime(date: Date(timeIntervalSince1970: 0)), "1969-12-31T19:00:00-05:00")
+        XCTAssertEqual(ZmanimFormatter(timeZone: TimeZone(identifier: "UTC")!).formatXSDateTime(date: Date(timeIntervalSince1970: 0)),
+                       "1970-01-01T00:00:00Z")
     }
     
     func testCandleLightingIsNeverBeforePlagHamincha() {
         // on a very short day near the Arctic Circle, 18 minutes before sunset is before plag hamincha
         let oslo = TimeZone(identifier: "Europe/Oslo")!
         let calendar = ZmanimCalendar(location: GeoLocation(locationName: "Bodo area", latitude: 66.2, longitude: 14.4, timeZone: oslo))
-        var gregorian = Calendar(identifier: .gregorian)
-        gregorian.timeZone = oslo
-        calendar.workingDate = gregorian.date(from: DateComponents(year: 2026, month: 12, day: 21, hour: 12))!
-        let plag = calendar.getPlagHamincha()!
+        calendar.setLocalDate(localDate: LocalDate(year: 2026, month: 12, day: 21))
+        let plag = calendar.getPlagHaminchaGRA()!
         let sunsetMinusOffset = calendar.getSeaLevelSunset()!.addingTimeInterval(-Double(calendar.getCandleLightingOffset()) * 60)
         XCTAssertLessThan(sunsetMinusOffset, plag, "precondition: the test day must be short enough")
         XCTAssertEqual(calendar.getCandleLighting(), plag)
@@ -558,21 +407,25 @@ class KosherSwiftTests: XCTestCase {
         // on a normal day it is still the offset before sea level sunset
         let newYork = TimeZone(identifier: "America/New_York")!
         let lakewood = ZmanimCalendar(location: GeoLocation(locationName: "Lakewood", latitude: 40.0828, longitude: -74.2094, timeZone: newYork))
-        gregorian.timeZone = newYork
-        lakewood.workingDate = gregorian.date(from: DateComponents(year: 2026, month: 12, day: 21, hour: 12))!
+        lakewood.setLocalDate(localDate: LocalDate(year: 2026, month: 12, day: 21))
         XCTAssertEqual(lakewood.getCandleLighting(), lakewood.getSeaLevelSunset()!.addingTimeInterval(-Double(lakewood.getCandleLightingOffset()) * 60))
     }
 
     func testXSDDurationEdgeCases() {
         let formatter = ZmanimFormatter(timeZone: TimeZone(identifier: "America/New_York")!)
-        XCTAssertEqual(formatter.formatXSDDuration(milliseconds: 90 * 60 * 1000), "PT1H30M")
-        XCTAssertEqual(formatter.formatXSDDuration(milliseconds: -(75 * 60 + 3) * 1000), "-PT1H15M3S")
-        XCTAssertEqual(formatter.formatXSDDuration(milliseconds: -400), "PT0S")
-        XCTAssertEqual(formatter.formatXSDDuration(milliseconds: .nan), "")
-        XCTAssertEqual(formatter.formatXSDDuration(milliseconds: .infinity), "")
-        XCTAssertEqual(formatter.format(milliseconds: .nan), "")
+        XCTAssertEqual(formatter.formatXSDDurationTime(duration: 90 * 60), "PT1H30M")
+        XCTAssertEqual(formatter.formatXSDDurationTime(duration: -(75 * 60 + 3)), "-PT1H15M3S")
+        XCTAssertEqual(formatter.formatXSDDurationTime(duration: -0.4), "-PT0.4S") // KosherJava writes the invalid PT-0.4S
+        XCTAssertEqual(formatter.formatXSDDurationTime(duration: 0), "PT0S")
+        XCTAssertEqual(formatter.formatXSDDurationTime(duration: 3023.259), "PT50M23.259S")
+        XCTAssertEqual(formatter.formatXSDDurationTime(duration: 0.000001), "PT0.000001S")
+        XCTAssertEqual(formatter.formatXSDDurationTime(duration: nil), "")
+        XCTAssertEqual(formatter.formatXSDDurationTime(duration: .nan), "")
+        XCTAssertEqual(formatter.formatXSDDurationTime(duration: .infinity), "")
+        XCTAssertEqual(formatter.format(duration: .nan), "0:00:00")
+        XCTAssertEqual(formatter.format(duration: -90), "-0:01:30")
     }
-
+    
     func testHebrewNumbersAbove9999() {
         let formatter = HebrewDateFormatter()
         XCTAssertEqual(formatter.formatHebrewNumber(number: 5000), "ה׳ אלפים")
@@ -609,32 +462,32 @@ class KosherSwiftTests: XCTestCase {
     
     func testZmanClass() {
         let date = Date()
-        let zman = Zman(label: "Sunrise", zman: date)
-        
+        let zman = Zman(zman: date, label: "Sunrise")
         XCTAssertEqual(zman.label, "Sunrise")
         XCTAssertEqual(zman.zman, date)
-        XCTAssertEqual(zman.duration, 0)
-        XCTAssertEqual(zman.description, "")
-        
-        let zmanAsDur = Zman(label: "Shaah Zmanis", duration: 3_600_000)
-        
+        XCTAssertNil(zman.duration)
+        XCTAssertNil(zman.description)
+
+        let zmanAsDur = Zman(duration: 3600, label: "Shaah Zmanis")
         XCTAssertEqual(zmanAsDur.label, "Shaah Zmanis")
         XCTAssertNil(zmanAsDur.zman)
-        XCTAssertEqual(zmanAsDur.duration, 3_600_000)
-        XCTAssertEqual(zmanAsDur.description, "")
-        
+        XCTAssertEqual(zmanAsDur.duration, 3600)
         XCTAssertNotEqual(zman, zmanAsDur)
-        
+
         let early = Date()
         let later = early.addingTimeInterval(3600)
-        
-        let z1 = Zman(label: "Later", zman: later)
-        let z2 = Zman(label: "Earlier", zman: early)
-        
-        let sorted = [z1, z2].sorted(by: Zman.dateOrder)
-        
-        XCTAssertEqual(sorted[0]?.label, "Earlier")
-        XCTAssertEqual(sorted[1]?.label, "Later")
+        let z1 = Zman(zman: later, label: "Later")
+        let z2 = Zman(zman: early, label: "Earlier")
+        let sorted = [z1, z2, zmanAsDur].sorted(by: Zman.dateOrder)
+        XCTAssertEqual(sorted.map { $0.label }, ["Earlier", "Later", "Shaah Zmanis"])
+        XCTAssertEqual([z1, z2, zmanAsDur].sorted(by: Zman.nameOrder).map { $0.label }, ["Earlier", "Later", "Shaah Zmanis"])
+        XCTAssertEqual([z1, z2, zmanAsDur].sorted(by: Zman.durationOrder).map { $0.label }, ["Shaah Zmanis", "Earlier", "Later"])
+
+        let geo = GeoLocation(locationName: "Lakewood & <NJ>", latitude: 40.0828, longitude: -74.2094, timeZone: TimeZone(identifier: "America/New_York")!)
+        let xml = Zman(zman: Date(timeIntervalSince1970: 0), geoLocation: geo, label: "A & B").toXML()
+        XCTAssertTrue(xml.contains("<Label>A &amp; B</Label>"))
+        XCTAssertTrue(xml.contains("<Zman>1969-12-31T19:00:00.000</Zman>"))
+        XCTAssertTrue(xml.contains("<LocationName>Lakewood &amp; &lt;NJ&gt;</LocationName>"))
     }
     
     func testMishnaYomiClass() {
