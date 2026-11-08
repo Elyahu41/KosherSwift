@@ -376,7 +376,7 @@ public class ZmanimCalendar: AstronomicalCalendar {
         if isUseAstronomicalChatzos() {
             return getSolarMidnight() // can be null if the calculator does not support astronomical chatzos
         } else {
-            let clonedCalendar = (self.copy() as! ZmanimCalendar)
+            let clonedCalendar = self.copy()
             clonedCalendar.setLocalDate(localDate: getLocalDate().plusDays(1))
             let halfNightChatzos: Date? = getChatzos(begin: getSeaLevelSunset(), end: clonedCalendar.getSeaLevelSunrise())
             if halfNightChatzos == nil {

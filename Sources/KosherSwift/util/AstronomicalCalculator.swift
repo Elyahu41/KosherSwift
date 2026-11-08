@@ -496,7 +496,7 @@ public class AstronomicalCalculator {
     }
 
     /** Creates a copy of this calculator with the same settings (and an empty result cache). */
-    public func copy() -> AstronomicalCalculator {
+    public func copy() -> Self {
         let copy = type(of: self).init()
         copy.refraction = refraction
         copy.solarRadius = solarRadius
