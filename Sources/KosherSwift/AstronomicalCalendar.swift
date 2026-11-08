@@ -845,7 +845,7 @@ public class AstronomicalCalendar {
      *
      * @return a copy of the calendar
      */
-    public func copy() -> AstronomicalCalendar {
+    public func copy() -> Self {
         let copy = type(of: self).init(geoLocation: geoLocation.copy())
         copyState(to: copy)
         return copy

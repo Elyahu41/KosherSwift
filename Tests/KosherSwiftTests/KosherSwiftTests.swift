@@ -491,13 +491,6 @@ class KosherSwiftTests: XCTestCase {
         XCTAssertEqual(string, "הלכות ל\"ה: 10.13")
     }
 
-//    func testPerformanceExample() throws {
-//        // This is an example of a performance test case.
-//        self.measure {
-//            // Put the code you want to measure the time of here.
-//        }
-//    }
-
     func testWarningsAreReportedInsteadOfCrashing() {
         var warnings: [KosherSwiftWarnings.Warning] = []
         let original = KosherSwiftWarnings.handler
@@ -519,4 +512,11 @@ class KosherSwiftTests: XCTestCase {
         geo.setLongitude(longitude: 200)
         XCTAssertEqual(warnings.count, 3)
     }
+    
+    //    func testPerformanceExample() throws {
+    //        // This is an example of a performance test case.
+    //        self.measure {
+    //            // Put the code you want to measure the time of here.
+    //        }
+    //    }
 }
