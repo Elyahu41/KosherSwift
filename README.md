@@ -23,21 +23,11 @@ https://github.com/Elyahu41/KosherSwift.git
 ```
 Go to [Package Dependencies](https://developer.apple.com/documentation/xcode/adding-package-dependencies-to-your-app) in Xcode and search for this repository and add it!
 
-If you want to use CocoaPods add this line to your podfile:
-```ruby
-pod "KosherSwiftNew"
-```
-KosherSwift was already taken on CocoaPods, hence the "New"
-
 How To Use This API
 -------
 Once you have added this project, you can go to any file/viewcontroller and import the framework:
 ```Swift
 import KosherSwift
-```
-If you used CocoaPods:
-```Swift
-import KosherSwiftNew
 ```
 Then, it is as simple as instantiating a class and calling it's methods:
 ```Swift
@@ -76,13 +66,18 @@ let geoLocation = GeoLocation(locationName: "", latitude: 40.08213, longitude: -
 let calendar = ComprehensiveZmanimCalendar(geoLocation: geoLocation) // Timezone is kept track of inside these classes with the geolocation
 calendar.setLocalDate(localDate: LocalDate(year: 2023, month: 1, day: 1))
 let sunrise = calendar.getSunrise()
-// Setting workingDate to a Date still works: the calendar uses the day it falls on in the location's time zone
-calendar.workingDate = Date()
+// Setting workingDate to a Date still works: the calendar uses the day it falls on in the location's time zone. For example:
+var januaryFirst = DateComponents()
+januaryFirst.year = 2023
+januaryFirst.month = 1
+januaryFirst.day = 1
+        
+calendar.workingDate = gregorianCalendar.date(from: januaryFirst)!
 let shaahZmanis = calendar.getShaahZmanisGRA() // the length of a sha'ah zmanis in seconds, as a TimeInterval? (nil if it can't be calculated)
 ```
 For converting any of the data in this API to hebrew, look at the HebrewDateFormatter class:
 ```Swift
-let jewishCalendar = JewishCalendar() // by default it is set to today's date
+let jewishCalendar = JewishCalendar()
 let hebrewDateFormatter = HebrewDateFormatter()
 print(hebrewDateFormatter.formatMonth(jewishCalendar: jewishCalendar)) // prints "Nissan"
 hebrewDateFormatter.hebrewFormat = true
@@ -151,8 +146,6 @@ public extension ComprehensiveZmanimCalendar {
 Things To Keep In Mind
 -------
 KosherSwift is very similar to KosherJava as it has brought over almost all of it's methods to Swift. I have tried to keep the code as similar as possible to the original repository, because I personally wanted to bring over my Java code from my android project to iOS without having to refactor almost all of the code. However, as much as I tried to keep them similar, there are still big differences in the inner workings of the classes. For starters, the Calendar class in Swift does not contain a time in milliseconds to keep track of time, it only contains functions that can create a date. So everywhere there would be a need to use a Calendar has been replaced with a Date. If you look inside the code of the classes, there is a workingDate variable that can be changed instead of a calendar class.
-
-Timezone issues are a big deal in Swift since Date objects are set to UTC by default and only afterwards are timezones taken into account, this leads to the date changing if the timezone for the Calendar class in Swift is not set to the same as timezone as the system. All objects that have a GeoLocation object take this into account, however, if you are using the JewishCalendar class in another timezone, use the JewishCalendar(workingDate: <Date>, timezone: <TimeZone>) constructor.
 
 The zmanim calendars work on a `LocalDate` like KosherJava 3.1, so the day calculated never depends on the time of day of a `Date`. Durations such as a sha'ah zmanis are `TimeInterval?` seconds instead of milliseconds, and are nil when they can't be calculated.
 
