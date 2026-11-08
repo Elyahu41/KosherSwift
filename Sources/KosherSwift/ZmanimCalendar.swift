@@ -57,7 +57,7 @@ public class ZmanimCalendar: AstronomicalCalendar {
      * @see isUseElevation()
      * @see setUseElevation(boolean)
      */
-    private var useElevation = false
+    public var useElevation = false
 
     /**
      * Is elevation above sea level calculated for times besides sunrise and sunset. According to Rabbi Dovid Yehuda Bursztyn in
@@ -105,7 +105,7 @@ public class ZmanimCalendar: AstronomicalCalendar {
      * @see getSunTransit()
      * @see getChatzosHayomAsHalfDay()
      */
-    private var useAstronomicalChatzos = true
+    public var useAstronomicalChatzos = true
 
     /**
      * Is astronomical <em>chatzos</em> used for ``getChatzosHayom()`` and ``getChatzosHalayla()``
@@ -157,7 +157,7 @@ public class ZmanimCalendar: AstronomicalCalendar {
      * @see getChatzosHayom()
      * @see getChatzosHalayla()
      */
-    private var useAstronomicalChatzosForOtherZmanim = false
+    public var useAstronomicalChatzosForOtherZmanim = false
 
     /**
      * Is astronomical <em>chatzos</em> used for <em>zmanim</em> calculations besides <em>chatzos</em> itself for enhanced
@@ -228,7 +228,7 @@ public class ZmanimCalendar: AstronomicalCalendar {
      * The default <em>Shabbos</em> candle lighting offset is 18 minutes. This can be changed via the
      * ``setCandleLightingOffset()`` and retrieved by the ``getCandleLightingOffset()``.
      */
-    private var candleLightingOffset = 18.0
+    public var candleLightingOffset = 18.0
 
     /**
      * This method will return sea level sunrise if ``isUseElevation()`` is false (the default),

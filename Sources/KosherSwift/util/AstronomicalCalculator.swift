@@ -24,7 +24,7 @@ public class AstronomicalCalculator {
      *
      * @see #getRefraction()
      */
-    private var refraction = 34.0 / 60.0
+    public var refraction = 34.0 / 60.0
 
     /**
      * The commonly used average solar radius in minutes of a degree. It is only used if ``isUseApparentSolarRadius()``
@@ -32,10 +32,10 @@ public class AstronomicalCalculator {
      *
      * @see #getSolarRadius()
      */
-    private var solarRadius = 16.0 / 60.0
+    public var solarRadius = 16.0 / 60.0
 
     /** If true (the default), the sun's apparent radius for the date is used instead of ``getSolarRadius()``. */
-    private var useApparentSolarRadius = true
+    public var useApparentSolarRadius = true
 
     /**
      * The commonly used average earth radius in KM. At this time, this only affects elevation adjustment and not the
@@ -43,10 +43,10 @@ public class AstronomicalCalculator {
      *
      * @see #getEarthRadius()
      */
-    private var earthRadius = 6371.0088 // in KM
+    public var earthRadius = 6371.0088 // in KM
 
     /** If the results of the calculations are cached. */
-    private var useResultCache = true
+    public var useResultCache = true
 
     /** The most recently used dates' caches (most recent first). */
     private var resultCaches: [(date: LocalDate, values: [ResultKey: Double])] = []
@@ -87,12 +87,12 @@ public class AstronomicalCalculator {
      * If this calculator can cache its results. Calculators whose results only depend on the date, the location and the
      * zenith return true.
      */
-    func isResultCacheable() -> Bool {
+    public func isResultCacheable() -> Bool {
         return false
     }
 
     /** Clears the cached results, for example after a setting that affects them changes. */
-    func clearResultCache() {
+    public func clearResultCache() {
         resultCacheLock.lock()
         resultCaches = []
         resultCacheLock.unlock()

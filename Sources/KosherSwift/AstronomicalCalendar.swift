@@ -75,7 +75,7 @@ public class AstronomicalCalendar {
     public static let HOUR_SECONDS: TimeInterval = 3600
 
     /** The ``LocalDate`` encapsulated by this class to track the current date used by the class. */
-    private var localDate: LocalDate
+    public var localDate: LocalDate
 
     /** the ``GeoLocation`` used for calculations. */
     public var geoLocation: GeoLocation

@@ -280,7 +280,7 @@ public class ComprehensiveZmanimCalendar: ZmanimCalendar {
      * @see getAteretTorahSunsetOffset()
      * @see setAteretTorahSunsetOffset(double)
      */
-    private var ateretTorahSunsetOffset = 40.0
+    public var ateretTorahSunsetOffset = 40.0
 
     /**
      * A constructor that takes a ``GeoLocation`` as a parameter.

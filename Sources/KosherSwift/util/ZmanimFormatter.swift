@@ -17,22 +17,22 @@ import Foundation
 public class ZmanimFormatter {
 
     /** Setting to prepend a zero to single digit hours. */
-    private var prependZeroHours = false
+    public var prependZeroHours = false
 
     /** Whether seconds are included in the formatted duration. */
-    private var useSeconds = false
+    public var useSeconds = false
 
     /** Whether milliseconds are included in the formatted duration. */
-    private var useMillis = false
+    public var useMillis = false
 
     /** The `DateFormatter` pattern used by `formatDate(date:)`, such as "h:mm:ss" (the default). */
-    private var dateTimeFormat = "h:mm:ss"
+    public var dateTimeFormat = "h:mm:ss"
 
     /** The time zone used to format dates. */
-    private var timeZone: TimeZone
+    public var timeZone: TimeZone
 
     /** The time format; one of the format constants such as `SEXAGESIMAL_SECONDS_FORMAT`. */
-    private var timeFormat = ZmanimFormatter.SEXAGESIMAL_SECONDS_FORMAT
+    public var timeFormat = ZmanimFormatter.SEXAGESIMAL_SECONDS_FORMAT
 
     /** Format using hours, minutes, seconds and milliseconds using the xsd:time format. This format will return 00.00.00.0. */
     public static let SEXAGESIMAL_XSD_FORMAT = 0

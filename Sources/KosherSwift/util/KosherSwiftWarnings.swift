@@ -49,7 +49,7 @@ public enum KosherSwiftWarnings {
 
     private static let lock = NSLock()
     private static var currentHandler: ((Warning) -> Void)? = defaultHandler
-    private static var currentStopInDebugBuilds = false
+    public static var currentStopInDebugBuilds = false
 
     /// Called with every warning. The default logs it (see ``KosherSwiftWarnings``); `nil` silences the warnings.
     public static var handler: ((Warning) -> Void)? {

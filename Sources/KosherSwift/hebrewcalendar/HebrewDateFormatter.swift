@@ -828,31 +828,6 @@ public class HebrewDateFormatter {
     }
     
     /**
-     * Formats a molad.
-     * @todo Experimental and incomplete.
-     *
-     * @param moladChalakim the chalakim of the molad
-     * @return the formatted molad. FIXME: define proper format in English and Hebrew.
-     */
-    private static func formatMolad(moladChalakim:Int64) -> String{
-        var adjustedChalakim:Int64 = moladChalakim;
-        let MINUTE_CHALAKIM = 18;
-        let HOUR_CHALAKIM = 1080;
-        let DAY_CHALAKIM = 24 * HOUR_CHALAKIM;
-        
-        var days:Int64 = adjustedChalakim / Int64(DAY_CHALAKIM);
-        adjustedChalakim = adjustedChalakim - (days * Int64(DAY_CHALAKIM));
-        let hours = ((adjustedChalakim / Int64(HOUR_CHALAKIM)));
-        if (hours >= 6) {
-            days += 1;
-        }
-        adjustedChalakim = adjustedChalakim - (hours * Int64(HOUR_CHALAKIM));
-        let minutes = (adjustedChalakim / Int64(MINUTE_CHALAKIM));
-        adjustedChalakim = adjustedChalakim - minutes * Int64(MINUTE_CHALAKIM);
-        return "Day: ".appending(String(days % 7)).appending(" hours: ").appending(String(hours)).appending(", minutes ").appending(String(minutes)).appending(", chalakim: ").appending(String(adjustedChalakim));
-    }
-    
-    /**
      * Returns the kviah in the traditional 3 letter Hebrew format where the first letter represents the day of week of
      * Rosh Hashana, the second letter represents the lengths of Cheshvan and Kislev (``JewishCalendar.SHELAIMIM``
      *  , ``JewishCalendar.KESIDRAN`` or ``JewishCalendar.CHASERIM``) and the 3rd letter

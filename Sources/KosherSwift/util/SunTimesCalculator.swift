@@ -22,7 +22,7 @@ import Foundation
 public class SunTimesCalculator: AstronomicalCalculator {
 
     /** Results are cached; see `AstronomicalCalculator.isResultCacheable()`. */
-    override func isResultCacheable() -> Bool {
+    public override func isResultCacheable() -> Bool {
         return true
     }
 

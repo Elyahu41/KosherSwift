@@ -23,7 +23,7 @@ import Foundation
 public class NOAACalculator: AstronomicalCalculator {
 
     /** NOAA results are cached; see `AstronomicalCalculator.isResultCacheable()`. */
-    override func isResultCacheable() -> Bool {
+    public override func isResultCacheable() -> Bool {
         return true
     }
 

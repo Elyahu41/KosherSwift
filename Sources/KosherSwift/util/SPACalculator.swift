@@ -60,7 +60,7 @@ import Foundation
 public class SPACalculator: AstronomicalCalculator {
 
     /** This calculator's results depend only on the arguments and on settings whose setters clear the cache. */
-    override func isResultCacheable() -> Bool {
+    public override func isResultCacheable() -> Bool {
         return true
     }
 
