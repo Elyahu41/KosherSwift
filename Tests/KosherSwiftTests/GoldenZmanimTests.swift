@@ -16,6 +16,18 @@ import XCTest
 
 final class GoldenZmanimTests: XCTestCase {
 
+    private var originalWarningHandler: ((KosherSwiftWarnings.Warning) -> Void)?
+
+    override func setUp() {
+        // the SunTimesCalculator can't calculate the solar elevation some polar zmanim need, which reports a warning each time
+        originalWarningHandler = KosherSwiftWarnings.handler
+        KosherSwiftWarnings.handler = nil
+    }
+
+    override func tearDown() {
+        KosherSwiftWarnings.handler = originalWarningHandler
+    }
+
     /// The largest allowed difference between a KosherJava time and a KosherSwift time, in seconds (2 microseconds). A Swift
     /// `Date` is a `Double` of seconds since 2001, so around 2026 it resolves about a quarter of a microsecond, and the two
     /// runtimes' trigonometric functions can differ in the last bit.

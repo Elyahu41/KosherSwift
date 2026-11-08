@@ -1184,8 +1184,8 @@ public class ZmanimCalendar: AstronomicalCalendar {
      * class. Sunset is the classes current day's elevation adjusted sunset that observes the
      * ``isUseElevation()`` settings. The ``JewishCalendar/getInIsrael()`` will be set by the inIsrael parameter. Since there
      * is no consensus on the day boundaries in polar regions, if a boundary needed for the date (sunset on <em>erev Shabbos</em> or
-     * <em>Yom Tov</em>, <em>tzais</em> on <em>Shabbos</em> or <em>Yom Tov</em>) can't be determined, an ``IllegalStateException``
-     * is thrown rather than guessing.
+     * <em>Yom Tov</em>, <em>tzais</em> on <em>Shabbos</em> or <em>Yom Tov</em>) can't be determined, `nil` is returned rather
+     * than guessing, and a ``KosherSwiftWarnings`` warning is reported (KosherJava throws an IllegalStateException).
      *
      * @param currentTime the current time
      * @param tzais the time of tzais
@@ -1209,7 +1209,10 @@ public class ZmanimCalendar: AstronomicalCalendar {
         let noSunset = needsSunset && sunset == nil
         let noTzais = needsTzais && tzais == nil
         if noSunset || (noTzais && (sunset == nil || currentTime.isBefore(sunset!))) { // tzais is irrelevant once past shkiah on erev Shabbos/Yom Tov
-            return nil // whether melacha is prohibited can't be determined
+            let missing = noSunset && noTzais ? "sunset and tzais" : noSunset ? "sunset" : "tzais"
+            KosherSwiftWarnings.report("\(missing) can't be determined for \(getLocalDate()) at \(getGeoLocation().getLocationName()), "
+                                       + "so whether melacha is prohibited can't be determined; returning nil")
+            return nil
         }
 
         if needsSunset && !currentTime.isBefore(sunset!) { // after shkiah

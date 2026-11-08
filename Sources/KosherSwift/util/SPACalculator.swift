@@ -608,11 +608,13 @@ public class SPACalculator: AstronomicalCalculator {
      * Returns the UTC time (in hours) on the given day when the sun is due east (90°) or due west (270°), or NaN where it never
      * is.
      *
-     * - Precondition: `azimuth` must be 90 or 270; other values are not supported.
+     * `azimuth` must be 90 or 270; other values return NaN and report a ``KosherSwiftWarnings`` warning (KosherJava throws an
+     * IllegalArgumentException).
      */
     public override func getTimeAtAzimuth(localDate: LocalDate, geoLocation: GeoLocation, azimuth targetAzimuth: Double) -> Double {
         if targetAzimuth != 90.0 && targetAzimuth != 270.0 {
-            preconditionFailure("The targetAzimuth must be 90 or 270. Other azimuth values are not supported")
+            KosherSwiftWarnings.report("The azimuth \(targetAzimuth) must be 90 or 270, the only azimuths supported; returning NaN")
+            return Double.nan
         }
         let julianDay = SPACalculator.getJulianDay(localDate)
         let solarNoonBase = 0.5 - (geoLocation.getLongitude() / 360.0)

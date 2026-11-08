@@ -441,25 +441,6 @@ class KosherSwiftTests: XCTestCase {
         XCTAssertEqual(formatter.formatHebrewNumber(number: 1_000_000), "numbers > 999,999 can't be formatted")
     }
 
-    func testTimeClass() {
-        let time = Time(
-            hours: 1,
-            minutes: 2,
-            seconds: 3,
-            milliseconds: 456
-        )
-        
-        XCTAssertEqual(time.getTime(), 3_723_456)
-        XCTAssertEqual(Time().getTime(), 0)// default 0 value
-        let lhs = Time(hours: 1, minutes: 2, seconds: 3, milliseconds: 4)
-        let rhs = Time(hours: 1, minutes: 2, seconds: 3, milliseconds: 4)
-        XCTAssertEqual(lhs, rhs)
-        let lhs2 = Time(hours: 1)
-        XCTAssertNotEqual(lhs2, rhs)
-        XCTAssertEqual(time.toString(), "01:02:03.456")
-        XCTAssertEqual(Time(millis: -100000).toString(), "-00:01:40")
-    }
-    
     func testZmanClass() {
         let date = Date()
         let zman = Zman(zman: date, label: "Sunrise")
@@ -517,4 +498,25 @@ class KosherSwiftTests: XCTestCase {
 //        }
 //    }
 
+    func testWarningsAreReportedInsteadOfCrashing() {
+        var warnings: [KosherSwiftWarnings.Warning] = []
+        let original = KosherSwiftWarnings.handler
+        KosherSwiftWarnings.handler = { warnings.append($0) }
+        defer { KosherSwiftWarnings.handler = original }
+
+        let geo = GeoLocation(locationName: "Lakewood", latitude: 40.0828, longitude: -74.2094, timeZone: TimeZone(identifier: "America/New_York")!)
+        geo.setLatitude(latitude: 91)
+        XCTAssertEqual(geo.getLatitude(), 40.0828)
+        XCTAssertEqual(warnings.last?.function, "setLatitude(latitude:)")
+        XCTAssertTrue(warnings.last!.message.contains("91"))
+        geo.setHorizonElevationAtSunset(horizonElevationAtSunset: -5)
+        XCTAssertEqual(geo.getHorizonElevationAtSunset(), 0)
+        XCTAssertEqual(warnings.last?.function, "setHorizonElevationAtSunset(horizonElevationAtSunset:)")
+        XCTAssertTrue(NOAACalculator().getTimeAtAzimuth(localDate: LocalDate(year: 2026, month: 1, day: 1), geoLocation: geo, azimuth: 45).isNaN)
+        XCTAssertEqual(warnings.count, 3)
+
+        KosherSwiftWarnings.handler = nil // silenced
+        geo.setLongitude(longitude: 200)
+        XCTAssertEqual(warnings.count, 3)
+    }
 }

@@ -687,7 +687,7 @@ public class AstronomicalCalendar {
      */
     public func getLocalMeanTime(hours: Double) -> Date? {
         guard hours >= 0 && hours < 24 else {
-            print("Hours must be between 0 and 23.9999...")
+            KosherSwiftWarnings.report("The hours \(hours) must be at least 0 and less than 24; returning nil")
             return nil
         }
         // a LocalTime holds whole nanoseconds

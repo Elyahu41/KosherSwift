@@ -63,7 +63,7 @@ public class ZmanimFormatter {
      *
      * - Parameters:
      *   - timeFormat: one of the format constants, such as `SEXAGESIMAL_SECONDS_FORMAT`. An invalid format is ignored and
-     *     the default `SEXAGESIMAL_SECONDS_FORMAT` is used (KosherJava throws an IllegalArgumentException).
+     *     the default `SEXAGESIMAL_SECONDS_FORMAT` is used and a ``KosherSwiftWarnings`` warning is reported (KosherJava throws an IllegalArgumentException).
      *   - dateTimeFormat: the `DateFormatter` pattern used to format dates, such as "h:mm:ss a".
      *   - timeZone: the time zone used to format dates.
      */
@@ -94,7 +94,7 @@ public class ZmanimFormatter {
      *
      * - Parameter format: one of `SEXAGESIMAL_XSD_FORMAT`, `SEXAGESIMAL_FORMAT`, `SEXAGESIMAL_SECONDS_FORMAT`,
      *   `SEXAGESIMAL_MILLIS_FORMAT` or `XSD_DURATION_FORMAT`. Any other value is ignored and leaves the format unchanged
-     *   (KosherJava throws an IllegalArgumentException).
+     *   and reported to ``KosherSwiftWarnings`` (KosherJava throws an IllegalArgumentException).
      */
     public func setTimeFormat(format: Int) {
         switch format {
@@ -109,7 +109,7 @@ public class ZmanimFormatter {
         case ZmanimFormatter.XSD_DURATION_FORMAT:
             break // the settings are N/A for this
         default:
-            print("An invalid time format of \(format) was set. Please see the documentation for the list of valid formats.")
+            KosherSwiftWarnings.report("\(format) isn't a time format; use one of the format constants such as SEXAGESIMAL_SECONDS_FORMAT. The format wasn't changed (\(timeFormat))")
             return
         }
         self.timeFormat = format

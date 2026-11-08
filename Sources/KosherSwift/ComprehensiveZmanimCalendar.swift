@@ -4088,22 +4088,6 @@ public class ComprehensiveZmanimCalendar: ZmanimCalendar {
 
     // MARK: - KosherSwift additions that are not in KosherJava
 
-    /**
-     * This is a convenience method that returns the later of ``getMinchaGedolaBaalHatanya()`` and
-     * ``getMinchaGedola30Minutes()``. In the winter when 1/2 of a ``getShaahZmanisBaalHatanya()`` <em>shaah zmanis</em> is
-     * less than 30 minutes ``getMinchaGedola30Minutes()`` will be returned, otherwise ``getMinchaGedolaBaalHatanya()`` will
-     * be returned.
-     * @return the `Date` of the later of ``getMinchaGedolaBaalHatanya()`` and ``getMinchaGedola30Minutes()``. If the
-     *         calculation can't be computed such as in the Arctic Circle where there is at least one day a year where the
-     *         sun does not rise, and one where it does not set, a `nil` will be returned. See detailed explanation on top
-     *         of the ``AstronomicalCalendar`` documentation.
-      */
-    public func getMinchaGedolaBaalHatanyaGreaterThan30() -> Date? {
-        guard let minchaGedola30 = getMinchaGedola30Minutes(), let minchaGedola = getMinchaGedolaBaalHatanya() else {
-            return nil
-        }
-        return minchaGedola30 > minchaGedola ? minchaGedola30 : minchaGedola
-    }
 
     /**
      * This method returns <em>misheyakir</em> as 6 zmaniyot minutes after ``getAlos72Zmanis()``. This is how Rabbi Ovadiah

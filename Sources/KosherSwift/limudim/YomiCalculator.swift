@@ -74,6 +74,7 @@ public class YomiCalculator {
         var cycleNo = 0;
         var dafNo = 0;
         if (calendar.compare(dafYomiStartDay) == .orderedAscending) {
+            KosherSwiftWarnings.report("\(jewishCalendar.getLocalDate()) is before Daf Yomi Bavli started on 1923-09-11; returning nil")
             return nil
         }
         if (calendar.compare(shekalimChangeDay) == .orderedSame || calendar.compare(shekalimChangeDay) == .orderedDescending) {

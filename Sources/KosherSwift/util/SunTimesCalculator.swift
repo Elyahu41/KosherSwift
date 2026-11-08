@@ -144,29 +144,29 @@ public class SunTimesCalculator: AstronomicalCalculator {
     }
 
     /**
-     * Not supported by this calculator; returns NaN (KosherJava throws an UnsupportedOperationException). Use the
+     * Not supported by this calculator; returns NaN and reports a ``KosherSwiftWarnings`` warning (KosherJava throws an UnsupportedOperationException). Use the
      * NOAACalculator instead.
      */
     public override func getSolarAzimuth(date: Date, geoLocation: GeoLocation) -> Double {
-        print("The SunTimesCalculator class does not implement the getSolarAzimuth method. Use the NOAACalculator instead.")
+        KosherSwiftWarnings.report("The SunTimesCalculator can't calculate the solar azimuth; returning NaN. Use the NOAACalculator or SPACalculator instead")
         return Double.nan
     }
 
     /**
-     * Not supported by this calculator; returns NaN (KosherJava throws an UnsupportedOperationException). Use the
+     * Not supported by this calculator; returns NaN and reports a ``KosherSwiftWarnings`` warning (KosherJava throws an UnsupportedOperationException). Use the
      * NOAACalculator instead.
      */
     public override func getSolarElevation(date: Date, geoLocation: GeoLocation) -> Double {
-        print("The SunTimesCalculator class does not implement the getSolarElevation method. Use the NOAACalculator instead.")
+        KosherSwiftWarnings.report("The SunTimesCalculator can't calculate the solar elevation; returning NaN. Use the NOAACalculator or SPACalculator instead")
         return Double.nan
     }
 
     /**
-     * Not supported by this calculator; returns NaN (KosherJava throws an UnsupportedOperationException). Use the
+     * Not supported by this calculator; returns NaN and reports a ``KosherSwiftWarnings`` warning (KosherJava throws an UnsupportedOperationException). Use the
      * NOAACalculator instead.
      */
     public override func getTimeAtAzimuth(localDate: LocalDate, geoLocation: GeoLocation, azimuth: Double) -> Double {
-        print("The SunTimesCalculator class does not implement the getTimeAtAzimuth method. Use the NOAACalculator instead.")
+        KosherSwiftWarnings.report("The SunTimesCalculator can't calculate the time at an azimuth; returning NaN. Use the NOAACalculator or SPACalculator instead")
         return Double.nan
     }
 }

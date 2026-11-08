@@ -104,12 +104,12 @@ public class GeoLocation: Equatable {
     public func setElevation(elevation: Double) {
         if (elevation < 0) {
             self.elevation = 0
-            print("Elevation cannot be negative")
+            KosherSwiftWarnings.report("The elevation \(elevation) can't be negative; using 0 for \(locationName)")
             return
         }
         if elevation.isNaN || elevation.isInfinite {
             self.elevation = 0
-            print("Elevation cannot be NaN or infinite")
+            KosherSwiftWarnings.report("The elevation \(elevation) must be a finite number; using 0 for \(locationName)")
             return
         }
         self.elevation = elevation;
@@ -123,10 +123,11 @@ public class GeoLocation: Equatable {
     /**
      * Sets the elevation in meters of the horizon the sun rises over (for example the height of mountains to the east). When
      * calculating elevation-adjusted sunrise, this is subtracted from the location's elevation. Negative, NaN and infinite
-     * values are ignored (KosherJava throws an IllegalArgumentException).
+     * values are ignored and reported to ``KosherSwiftWarnings``
+     * (KosherJava throws an IllegalArgumentException).
      */
     public func setHorizonElevationAtSunrise(horizonElevationAtSunrise: Double) {
-        if GeoLocation.isValidHorizonElevation(horizonElevationAtSunrise) {
+        if GeoLocation.isValidHorizonElevation(horizonElevationAtSunrise, "horizon elevation at sunrise", locationName) {
             self.horizonElevationAtSunrise = horizonElevationAtSunrise
         }
     }
@@ -139,21 +140,20 @@ public class GeoLocation: Equatable {
     /**
      * Sets the elevation in meters of the horizon the sun sets behind (for example the height of mountains to the west).
      * When calculating elevation-adjusted sunset, this is subtracted from the location's elevation. Negative, NaN and
-     * infinite values are ignored (KosherJava throws an IllegalArgumentException).
+     * infinite values are ignored and reported to ``KosherSwiftWarnings``
+     * (KosherJava throws an IllegalArgumentException).
      */
     public func setHorizonElevationAtSunset(horizonElevationAtSunset: Double) {
-        if GeoLocation.isValidHorizonElevation(horizonElevationAtSunset) {
+        if GeoLocation.isValidHorizonElevation(horizonElevationAtSunset, "horizon elevation at sunset", locationName) {
             self.horizonElevationAtSunset = horizonElevationAtSunset
         }
     }
 
-    private static func isValidHorizonElevation(_ horizonElevation: Double) -> Bool {
-        if horizonElevation < 0 {
-            print("Horizon elevation cannot be negative")
-            return false
-        }
-        if horizonElevation.isNaN || horizonElevation.isInfinite {
-            print("Horizon elevation cannot be NaN or infinite")
+    private static func isValidHorizonElevation(_ horizonElevation: Double, _ name: String, _ locationName: String,
+                                                function: String = #function) -> Bool {
+        if horizonElevation < 0 || horizonElevation.isNaN || horizonElevation.isInfinite {
+            KosherSwiftWarnings.report("The \(name) \(horizonElevation) must be a finite number of at least 0; it wasn't changed for \(locationName)",
+                                       function: function)
             return false
         }
         return true
@@ -251,7 +251,7 @@ public class GeoLocation: Equatable {
      */
     public func setLatitude(latitude:Double) {
         if (latitude > 90 || latitude < -90 || latitude.isNaN) {
-            print("Latitude must be between -90 and  90")
+            KosherSwiftWarnings.report("The latitude \(latitude) must be between -90 and 90; it wasn't changed (\(self.latitude)) for \(locationName)")
             return // do nothing
         }
         self.latitude = latitude;
@@ -272,12 +272,14 @@ public class GeoLocation: Equatable {
      */
     public func setLatitude(degrees: Int, minutes: Int, seconds: Double, direction:String) {
         var tempLat = Double(degrees) + ((Double(minutes) + (seconds / 60.0)) / 60.0);
-        if (tempLat > 90 || tempLat < 0 || tempLat.isNaN) { //FIXME An exception should be thrown if degrees, minutes or seconds are negative
+        if (tempLat > 90 || tempLat < 0 || tempLat.isNaN) {
+            KosherSwiftWarnings.report("The latitude \(degrees)° \(minutes)' \(seconds)\" must be between 0 and 90 degrees; it wasn't changed for \(locationName)")
             return // Do nothing
         }
         if (direction == "S") {
             tempLat *= -1;
         } else if (!(direction == "N")) {
+            KosherSwiftWarnings.report("The latitude direction \"\(direction)\" must be \"N\" or \"S\"; it wasn't changed for \(locationName)")
             return // Do nothing
         }
         self.latitude = tempLat;
@@ -301,7 +303,7 @@ public class GeoLocation: Equatable {
      */
     public func setLongitude(longitude:Double) {
         if (longitude > 180 || longitude < -180 || longitude.isNaN) {
-            print("Longitude must be between -180 and  180")
+            KosherSwiftWarnings.report("The longitude \(longitude) must be between -180 and 180; it wasn't changed (\(self.longitude)) for \(locationName)")
             return // Do nothing
         }
         self.longitude = longitude;
@@ -312,7 +314,7 @@ public class GeoLocation: Equatable {
      *
      * @param degrees
      *            The degrees of longitude to set between 0&deg; and 180&deg;. As an example 74 would be set for Lakewood, NJ.
-     *            An IllegalArgumentException will be thrown if the value exceeds the limits.
+     *            A value outside the limits is ignored and reported to ``KosherSwiftWarnings``.
      * @param minutes
      *            <a href="https://en.wikipedia.org/wiki/Minute_of_arc#Cartography">minutes of arc</a>
      * @param seconds
@@ -322,12 +324,14 @@ public class GeoLocation: Equatable {
      */
     public func setLongitude(degrees: Int, minutes: Int, seconds: Double, direction:String) {
         var longTemp = Double(degrees) + ((Double(minutes) + (seconds / 60.0)) / 60.0);
-        if (longTemp > 180 || longTemp < 0 || longTemp.isNaN) { //FIXME An exception should be thrown if degrees, minutes or seconds are negative
+        if (longTemp > 180 || longTemp < 0 || longTemp.isNaN) {
+            KosherSwiftWarnings.report("The longitude \(degrees)° \(minutes)' \(seconds)\" must be between 0 and 180 degrees; it wasn't changed for \(locationName)")
             return // Do nothing
         }
         if (direction == "W") {
             longTemp *= -1;
         } else if (!(direction == "E")) {
+            KosherSwiftWarnings.report("The longitude direction \"\(direction)\" must be \"E\" or \"W\"; it wasn't changed for \(locationName)")
             return // Do Nothing
         }
         self.longitude = longTemp;

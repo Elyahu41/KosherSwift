@@ -52,7 +52,8 @@ public class YerushalmiYomiCalculator {
         }
 
         if requested < DAF_YOMI_START_DAY {
-            return nil // KosherJava throws an IllegalArgumentException
+            KosherSwiftWarnings.report("\(requested) is before Daf Yomi Yerushalmi started on 1980-02-02; returning nil")
+            return nil
         }
 
         // Go cycle by cycle, until we get the cycle of the date

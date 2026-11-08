@@ -438,7 +438,7 @@ public class AstronomicalCalculator {
      */
     public func setSolarRadius(solarRadius: Double) {
         if solarRadius < 0 || solarRadius.isNaN {
-            print("Solar radius must be a non-negative number") // KosherJava throws an IllegalArgumentException
+            KosherSwiftWarnings.report("The solar radius \(solarRadius) must be a number of at least 0; it wasn't changed (\(self.solarRadius))")
             return
         }
         self.solarRadius = solarRadius

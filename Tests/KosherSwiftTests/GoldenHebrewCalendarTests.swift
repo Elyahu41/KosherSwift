@@ -6,12 +6,29 @@
 //  tools/golden/HebrewGoldenGenerator.java): every day from 2024 to 2027 and every third day from 1981 to 2100, in and out
 //  of Israel.
 //
+//  NOTE: On Linux, swift-corelibs-foundation's Hebrew calendar (from its bundled ICU) is a day off for the whole year 5806
+//  (September 2045 to September 2046), for example it gives 2 Kislev for November 12, 2045 instead of 3 Kislev. KosherJava,
+//  Apple's Foundation and the independent convertdate library all agree on 3 Kislev, so it is a Linux Foundation bug and not a
+//  KosherSwift one. On Linux this test skips August 2045 to December 2046; on Apple platforms it compares every date.
+//
 
 import Foundation
 import XCTest
 @testable import KosherSwift
 
 final class GoldenHebrewCalendarTests: XCTestCase {
+
+    private var originalWarningHandler: ((KosherSwiftWarnings.Warning) -> Void)?
+
+    override func setUp() {
+        // the SunTimesCalculator can't calculate the solar elevation some polar zmanim need, which reports a warning each time
+        originalWarningHandler = KosherSwiftWarnings.handler
+        KosherSwiftWarnings.handler = nil
+    }
+
+    override func tearDown() {
+        KosherSwiftWarnings.handler = originalWarningHandler
+    }
 
     static func string(_ date: Date?) -> String {
         guard let date = date else {
